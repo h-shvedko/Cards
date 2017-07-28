@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="dialect">com.enigmabridge.hibernate.dialect.SQLiteDialect</property>
+        <property name="connection.url">jdbc:sqlite:cards.db</property>
+        <property name="connection.username">tully</property>
+        <property name="connection.password">tully</property>
+        <property name="connection.driver_class">org.sqlite.JDBC</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <mapping class="com.cards.shvedko.Model.CardTypes"/>
+        <mapping class="com.cards.shvedko.Model.CardCategories"/>
+        <mapping class="com.cards.shvedko.Model.SystemConfigs"/>
+        <mapping class="com.cards.shvedko.Model.CardLanguages"/>
+        <mapping class="com.cards.shvedko.Model.CardLanguageDe"/>
+        <mapping class="com.cards.shvedko.Model.CardFiles"/>
+        <mapping class="com.cards.shvedko.Model.CardFilesDe"/>
+        <mapping class="com.cards.shvedko.Model.Cards"/>
+    </session-factory>
+
+</hibernate-configuration>
