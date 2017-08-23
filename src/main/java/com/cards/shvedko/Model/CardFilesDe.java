@@ -65,6 +65,7 @@ public class CardFilesDe {
         this.id = id;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getCardId() {
         return cardId;
     }
@@ -73,6 +74,7 @@ public class CardFilesDe {
         this.cardId = cardId;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getLangId() {
         return langId;
     }
@@ -81,50 +83,62 @@ public class CardFilesDe {
         this.langId = langId;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPathToValueFile() {
         return pathToValueFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPathToValueFile(String pathToValueFile) {
         this.pathToValueFile = pathToValueFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPathToExampleFile() {
         return pathToExampleFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPathToExampleFile(String pathToExampleFile) {
         this.pathToExampleFile = pathToExampleFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPathToVerbInfinitiveFile() {
         return pathToVerbInfinitiveFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPathToVerbInfinitiveFile(String pathToVerbInfinitiveFile) {
         this.pathToVerbInfinitiveFile = pathToVerbInfinitiveFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPathToVerbPresanceFile() {
         return pathToVerbPresanceFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPathToVerbPresanceFile(String pathToVerbPresanceFile) {
         this.pathToVerbPresanceFile = pathToVerbPresanceFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPathToVerbPreteritumFile() {
         return pathToVerbPreteritumFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPathToVerbPreteritumFile(String pathToVerbPreteritumFile) {
         this.pathToVerbPreteritumFile = pathToVerbPreteritumFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPathToVerbPerfectFile() {
         return pathToVerbPerfectFile;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPathToVerbPerfectFile(String pathToVerbPerfectFile) {
         this.pathToVerbPerfectFile = pathToVerbPerfectFile;
     }

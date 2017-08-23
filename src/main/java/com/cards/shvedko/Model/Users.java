@@ -64,6 +64,7 @@ public class Users {
         this.isVisible = isVisible;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPassword() {
         return password;
     }

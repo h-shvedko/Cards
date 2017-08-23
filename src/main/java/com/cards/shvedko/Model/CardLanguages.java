@@ -65,6 +65,7 @@ public class CardLanguages {
         this.name = name;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getAlias() {
         return alias;
     }
@@ -73,6 +74,7 @@ public class CardLanguages {
         this.alias = alias;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getLabel() {
         return label;
     }
@@ -81,6 +83,7 @@ public class CardLanguages {
         this.label = label;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getTableName() {
         return tableName;
     }

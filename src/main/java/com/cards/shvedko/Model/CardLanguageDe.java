@@ -52,6 +52,7 @@ public class CardLanguageDe {
         this.id = id;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getCardId() {
         return cardId;
     }
@@ -60,6 +61,7 @@ public class CardLanguageDe {
         this.cardId = cardId;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getValue() {
         return value;
     }
@@ -68,6 +70,7 @@ public class CardLanguageDe {
         this.value = value;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getFileId() {
         return fileId;
     }

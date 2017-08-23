@@ -38,6 +38,7 @@ public class CardFiles {
         this.name = name;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getLabel() {
         return label;
     }
@@ -46,6 +47,7 @@ public class CardFiles {
         this.label = label;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getTableName() {
         return tableName;
     }

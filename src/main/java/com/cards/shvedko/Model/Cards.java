@@ -76,94 +76,117 @@ public class Cards {
         return value;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setValue(String value) {
         this.value = value;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getExample() {
         return example;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setExample(String example) {
         this.example = example;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getTypeId() {
         return typeId;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getCategoryId() {
         return categoryId;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getKindOfNoun() {
         return kindOfNoun;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setKindOfNoun(int kindOfNoun) {
         this.kindOfNoun = kindOfNoun;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getIsRegularVerb() {
         return isRegularVerb;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setIsRegularVerb(int isRegularVerb) {
         this.isRegularVerb = isRegularVerb;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getIsTrembarePrefixVerb() {
         return isTrembarePrefixVerb;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setIsTrembarePrefixVerb(int isTrembarePrefixVerb) {
         this.isTrembarePrefixVerb = isTrembarePrefixVerb;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getIsPerfectWithHaben() {
         return isPerfectWithHaben;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setIsPerfectWithHaben(int isPerfectWithHaben) {
         this.isPerfectWithHaben = isPerfectWithHaben;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int getIsReflexiveVerb() {
         return isReflexiveVerb;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setIsReflexiveVerb(int isReflexiveVerb) {
         this.isReflexiveVerb = isReflexiveVerb;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPrepositionAkk() {
         return prepositionAkk;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPrepositionAkk(String prepositionAkk) {
         this.prepositionAkk = prepositionAkk;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPrepositionDat() {
         return prepositionDat;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPrepositionDat(String prepositionDat) {
         this.prepositionDat = prepositionDat;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPrepositionGen() {
         return prepositionGen;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPrepositionGen(String prepositionGen) {
         this.prepositionGen = prepositionGen;
     }
