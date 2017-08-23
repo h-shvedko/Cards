@@ -5,13 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 abstract public class A_Controller {
 
-    public void goToPage(String fxml){
+    public void goToPage(String fxml) {
         try {
             Parent page = FXMLLoader.load(getClass().getClassLoader().getResource(fxml), null, new JavaFXBuilderFactory());
             Scene scene = MainApp.stage.getScene();
@@ -26,5 +28,10 @@ abstract public class A_Controller {
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void closeWindow(Button btn) {
+        Stage stage = (Stage) btn.getScene().getWindow();
+        stage.close();
     }
 }

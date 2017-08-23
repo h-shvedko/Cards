@@ -18,8 +18,7 @@ public class AddVerb extends A_Controller {
     @FXML
     private Button cancelButton;
 
-    public void cancelAction(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+    public void handleCancelButton(ActionEvent actionEvent) {
+        this.goToPage("mainPage.fxml");
     }
 }

@@ -234,7 +234,7 @@
                     <children>
                         <Button cancelButton="true" mnemonicParsing="false" prefHeight="53.0" prefWidth="136.0"
                                 style="-fx-background-color: #e53232;" text="Cancel" GridPane.columnIndex="1"
-                                GridPane.halignment="LEFT" GridPane.valignment="CENTER" fx:id="cancelButton" onAction="#cancelAction">
+                                GridPane.halignment="LEFT" GridPane.valignment="CENTER" fx:id="cancelButton" onAction="#handleCancelButton">
                             <font>
                                 <Font size="20.0"/>
                             </font>
