@@ -1,25 +1,26 @@
 package com.cards.shvedko.ModelDAO;
 
+import com.cards.shvedko.Services.DBService;
+import org.hibernate.Session;
+
 /**
  * Created by hennadii.shvedko on 14/07/2017.
  */
 public class ModelsDAO implements I_DAO {
 
+    protected final DBService dbServise;
+    protected final Session session;
+
     public ModelsDAO(){
-
+        dbServise = new DBService();
+        session = dbServise.sessionFactory.openSession();
     }
 
-    public boolean create(String[] record) {
-        return false;
-    }
+    public void save() {}
 
-    public boolean update(int id, String[] record) {
-        return false;
-    }
+    public void update(int id, String[] record){}
 
-    public boolean delete(int id) {
-        return false;
-    }
+    public void delete(int id){}
 
     public boolean validate() {
         return false;

@@ -1,7 +1,9 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
 import com.cards.shvedko.ModelDAO.CardTypesDAO;
+import com.cards.shvedko.ModelDAO.CardsDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -64,6 +66,18 @@ public class AddVerb extends A_Controller {
     }
 
     public void handleAddButton(ActionEvent actionEvent) {
+
+        String name = nativeValue.getText();
+        String value = foreignValue.getText();
+        String nExample = nativeExample.getText();
+        CardsDAO cardsDAO = new CardsDAO();
+        cardsDAO.cards.setName(name);
+        cardsDAO.cards.setValue(value);
+        cardsDAO.cards.setExample(nExample);
+        cardsDAO.cards.setCategoryId(1);
+        cardsDAO.cards.setTypeId(1);
+        cardsDAO.cards.setIsVisible(1);
+        cardsDAO.save();
 
     }
 

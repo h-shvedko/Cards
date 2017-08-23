@@ -16,7 +16,7 @@ public class Cards {
     @Column(name = "value", nullable = false)
     private String value;
 
-    @Column(name = "example", nullable = false)
+    @Column(name = "example")
     private String example;
 
     @Column(name = "type_id", nullable = false, length = 3)

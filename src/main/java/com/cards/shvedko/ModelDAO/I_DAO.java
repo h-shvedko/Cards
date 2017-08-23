@@ -4,11 +4,11 @@ package com.cards.shvedko.ModelDAO;
  * Created by hennadii.shvedko on 14/07/2017.
  */
 public interface I_DAO {
-    boolean create(String[] record);
+    void save();
 
-    boolean update(int id, String[] record);
+    void update(int id, String[] record);
 
-    boolean delete(int id);
+    void delete(int id);
 
     boolean validate();
 
