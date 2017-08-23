@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane maxHeight="800.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="800.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.AddVerb">
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cards.shvedko.Controller.AddVerb">
     <children>
         <GridPane layoutX="-6.0" prefHeight="800.0" prefWidth="608.0">
             <columnConstraints>
@@ -46,8 +47,8 @@
                                 <Font size="20.0"/>
                             </font>
                         </Label>
-                        <ComboBox prefHeight="40.0" prefWidth="252.0" GridPane.columnIndex="2"
-                                  GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+                        <ComboBox prefHeight="40.0" prefWidth="252.0" GridPane.columnIndex="2" style="-fx-font-size: 20px;"
+                                  GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="speechPart"/>
                     </children>
                 </GridPane>
                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="84.0" prefWidth="601.0"
@@ -63,8 +64,8 @@
                                 <Font size="20.0"/>
                             </font>
                         </Label>
-                        <ComboBox prefHeight="40.0" prefWidth="252.0" GridPane.columnIndex="2"
-                                  GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+                        <ComboBox prefHeight="40.0" prefWidth="252.0" GridPane.columnIndex="2" style="-fx-font-size: 20px;"
+                                  GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="topic"/>
                     </children>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="40.0"/>
@@ -78,17 +79,19 @@
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="170.0" style="-fx-background-color: #24b7c1;" GridPane.rowIndex="3">
                     <children>
-                        <Label prefHeight="82.0" prefWidth="298.0" text="Put down russian varian:"
+                        <Label prefHeight="82.0" prefWidth="298.0" text="Put down russian variant:"
                                GridPane.columnIndex="1">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </Label>
-                        <TextField prefHeight="40.0" prefWidth="255.0" GridPane.columnIndex="2"/>
+                        <TextField prefHeight="40.0" prefWidth="255.0" GridPane.columnIndex="2" fx:id="nativeValue"/>
                         <Hyperlink prefHeight="23.0" prefWidth="255.0" text="Found 2 conjunctions" textFill="#d03f3f"
-                                   GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM"/>
+                                   GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM"
+                                   fx:id="nativeConjunctions"/>
                         <ImageView fitHeight="38.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true"
-                                   GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                   GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER"
+                                   fx:id="nativeVoice">
                             <image>
                                 <Image url="@images/voice_recording.jpg"/>
                             </image>
@@ -136,9 +139,10 @@
                         <RowConstraints maxHeight="34.0" minHeight="8.0" prefHeight="17.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <TextArea prefHeight="111.0" prefWidth="522.0" GridPane.columnIndex="1"/>
+                        <TextArea prefHeight="111.0" prefWidth="522.0" GridPane.columnIndex="1" fx:id="nativeExample"/>
                         <ImageView fitHeight="38.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true"
-                                   GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                   GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"
+                                   fx:id="nativeExampleVoice">
                             <cursor>
                                 <Cursor fx:constant="HAND"/>
                             </cursor>
@@ -150,9 +154,10 @@
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="410.0" style="-fx-background-color: #5bf765;" GridPane.rowIndex="8">
                     <children>
-                        <TextArea prefHeight="80.0" prefWidth="509.0" GridPane.columnIndex="1"/>
+                        <TextArea prefHeight="80.0" prefWidth="509.0" GridPane.columnIndex="1" fx:id="foreignExample"/>
                         <ImageView fitHeight="38.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true"
-                                   GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                   GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"
+                                   fx:id="foreignExampleVoice">
                             <cursor>
                                 <Cursor fx:constant="HAND"/>
                             </cursor>
@@ -197,11 +202,12 @@
                                 <Font size="20.0"/>
                             </font>
                         </Label>
-                        <TextField prefHeight="40.0" prefWidth="252.0" GridPane.columnIndex="2"/>
+                        <TextField prefHeight="40.0" prefWidth="252.0" GridPane.columnIndex="2" fx:id="foreignValue"/>
                         <Hyperlink prefHeight="23.0" prefWidth="255.0" text="Found 2 conjunctions" textFill="#d03f3f"
-                                   GridPane.columnIndex="2" GridPane.valignment="BOTTOM"/>
+                                   GridPane.columnIndex="2" GridPane.valignment="BOTTOM" fx:id="foreignConjunctions"/>
                         <ImageView fitHeight="38.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true"
-                                   GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                   GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER"
+                                   fx:id="foreignValueVoice">
                             <cursor>
                                 <Cursor fx:constant="HAND"/>
                             </cursor>
@@ -234,7 +240,8 @@
                     <children>
                         <Button cancelButton="true" mnemonicParsing="false" prefHeight="53.0" prefWidth="136.0"
                                 style="-fx-background-color: #e53232;" text="Cancel" GridPane.columnIndex="1"
-                                GridPane.halignment="LEFT" GridPane.valignment="CENTER" fx:id="cancelButton" onAction="#handleCancelButton">
+                                GridPane.halignment="LEFT" GridPane.valignment="CENTER" fx:id="cancelButton"
+                                onAction="#handleCancelButton">
                             <font>
                                 <Font size="20.0"/>
                             </font>
@@ -244,7 +251,8 @@
                         </Button>
                         <Button layoutX="64.0" layoutY="24.0" mnemonicParsing="false" prefHeight="53.0"
                                 prefWidth="136.0" style="-fx-background-color: #5d97f4;" text="Preview"
-                                GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"
+                                fx:id="previewButton" onAction="#handlePreviewButton">
                             <font>
                                 <Font size="20.0"/>
                             </font>
@@ -254,7 +262,8 @@
                         </Button>
                         <Button layoutX="218.0" layoutY="24.0" mnemonicParsing="false" prefHeight="53.0"
                                 prefWidth="136.0" style="-fx-background-color: #3fa843;" text="Add"
-                                GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                                GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER"
+                                fx:id="addButton" onAction="#handleAddButton">
                             <font>
                                 <Font size="20.0"/>
                             </font>

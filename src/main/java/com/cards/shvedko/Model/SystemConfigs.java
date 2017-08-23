@@ -20,6 +20,24 @@ public class SystemConfigs {
         return id;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
+    public SystemConfigs() {
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public SystemConfigs(Integer id, String name, int isVisible) {
+        this.setId(id);
+        this.setName(name);
+        this.setIsVisible(isVisible);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public SystemConfigs(String name, int isVisible) {
+        this.setId(-1);
+        this.setName(name);
+        this.setIsVisible(isVisible);
+    }
+
     public void setId(int id) {
         this.id = id;
     }

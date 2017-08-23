@@ -25,6 +25,30 @@ public class CardLanguages {
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
 
+    @SuppressWarnings("UnusedDeclaration")
+    public CardLanguages() {
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardLanguages(Integer id, String name, String alias, String label, String tableName, int isVisible) {
+        this.setId(id);
+        this.setName(name);
+        this.setAlias(alias);
+        this.setLabel(label);
+        this.setTableName(tableName);
+        this.setIsVisible(isVisible);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardLanguages(String name, String alias, String label, String tableName, int isVisible) {
+        this.setId(-1);
+        this.setName(name);
+        this.setAlias(alias);
+        this.setLabel(label);
+        this.setTableName(tableName);
+        this.setIsVisible(isVisible);
+    }
+
     public int getId() {
         return id;
     }

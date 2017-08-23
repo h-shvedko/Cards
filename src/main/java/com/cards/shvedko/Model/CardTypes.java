@@ -16,6 +16,24 @@ public class CardTypes {
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
 
+    @SuppressWarnings("UnusedDeclaration")
+    public CardTypes() {
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardTypes(Integer id, String name, int isVisible) {
+        this.setId(id);
+        this.setName(name);
+        this.setIsVisible(isVisible);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardTypes(String name, int isVisible) {
+        this.setId(-1);
+        this.setName(name);
+        this.setIsVisible(isVisible);
+    }
+
     public int getId() {
         return id;
     }

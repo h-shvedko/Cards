@@ -37,6 +37,26 @@ public class CardFilesDe {
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
 
+    @SuppressWarnings("UnusedDeclaration")
+    public CardFilesDe() {
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardFilesDe(Integer id, int cardId, int langId, int isVisible) {
+        this.setId(id);
+        this.setCardId(cardId);
+        this.setLangId(langId);
+        this.setIsVisible(isVisible);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardFilesDe(int cardId, int langId, int isVisible) {
+        this.setId(-1);
+        this.setCardId(cardId);
+        this.setLangId(langId);
+        this.setIsVisible(isVisible);
+    }
+
     public int getId() {
         return id;
     }

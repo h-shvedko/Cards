@@ -2,15 +2,11 @@ package com.cards.shvedko;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.h2.engine.User;
 import org.hibernate.SessionFactory;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class MainApp extends Application {
     private static org.hibernate.service.ServiceRegistry serviceRegistry;

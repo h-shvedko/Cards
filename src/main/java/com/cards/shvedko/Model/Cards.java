@@ -52,6 +52,10 @@ public class Cards {
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
 
+    @SuppressWarnings("UnusedDeclaration")
+    public Cards() {
+    }
+
     public String getName() {
         return name;
     }

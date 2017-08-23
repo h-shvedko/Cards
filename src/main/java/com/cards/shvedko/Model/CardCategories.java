@@ -1,10 +1,11 @@
 package com.cards.shvedko.Model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class CardCategories {
+public class CardCategories implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
@@ -38,5 +39,30 @@ public class CardCategories {
 
     public void setIsVisible(int isVisible) {
         this.isVisible = isVisible;
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardCategories() {
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardCategories(Integer id, String name, int isVisible) {
+        this.setId(id);
+        this.setName(name);
+        this.setIsVisible(isVisible);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardCategories(String name, int isVisible) {
+        this.setId(-1);
+        this.setName(name);
+        this.setIsVisible(isVisible);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardCategories(String name) {
+        this.setId(-1);
+        this.setName(name);
+        this.setIsVisible(1);
     }
 }

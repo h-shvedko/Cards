@@ -2,6 +2,7 @@ package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.MainApp;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-abstract public class A_Controller {
+abstract public class A_Controller implements Initializable {
 
     public void goToPage(String fxml) {
         try {

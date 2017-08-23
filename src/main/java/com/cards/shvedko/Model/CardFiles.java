@@ -61,4 +61,26 @@ public class CardFiles {
     public void setIsVisible(int isVisible) {
         this.isVisible = isVisible;
     }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardFiles() {
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardFiles(Integer id, String name, String label, String tableName, int isVisible) {
+        this.setId(id);
+        this.setName(name);
+        this.setLabel(label);
+        this.setTableName(tableName);
+        this.setIsVisible(isVisible);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardFiles(String name, String label, String tableName, int isVisible) {
+        this.setId(-1);
+        this.setName(name);
+        this.setLabel(label);
+        this.setTableName(tableName);
+        this.setIsVisible(isVisible);
+    }
 }

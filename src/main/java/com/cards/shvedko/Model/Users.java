@@ -19,6 +19,26 @@ public class Users {
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
 
+    @SuppressWarnings("UnusedDeclaration")
+    public Users() {
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public Users(Integer id, String name, String password, int isVisible) {
+        this.setId(id);
+        this.setName(name);
+        this.setPassword(password);
+        this.setIsVisible(isVisible);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public Users(String name, String password, int isVisible) {
+        this.setId(-1);
+        this.setName(name);
+        this.setPassword(password);
+        this.setIsVisible(isVisible);
+    }
+
     public String getName() {
         return name;
     }

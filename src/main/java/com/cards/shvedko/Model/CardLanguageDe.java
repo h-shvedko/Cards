@@ -22,6 +22,28 @@ public class CardLanguageDe {
     @Column(name = "is_visible", length = 1)
     private int isVisible;
 
+    @SuppressWarnings("UnusedDeclaration")
+    public CardLanguageDe() {
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardLanguageDe(Integer id, int cardId, String value, int fileId, int isVisible) {
+        this.setId(id);
+        this.setCardId(cardId);
+        this.setValue(value);
+        this.setFileId(fileId);
+        this.setIsVisible(isVisible);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public CardLanguageDe(int cardId, String value, int fileId, int isVisible) {
+        this.setId(-1);
+        this.setCardId(cardId);
+        this.setValue(value);
+        this.setFileId(fileId);
+        this.setIsVisible(isVisible);
+    }
+
     public int getId() {
         return id;
     }

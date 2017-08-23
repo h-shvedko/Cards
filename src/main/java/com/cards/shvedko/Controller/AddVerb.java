@@ -1,24 +1,70 @@
 package com.cards.shvedko.Controller;
 
-import javafx.application.Application;
+import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
+import com.cards.shvedko.ModelDAO.CardTypesDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class AddVerb extends A_Controller {
 
-
+    @FXML
+    private ComboBox speechPart;
+    @FXML
+    private ComboBox topic;
+    @FXML
+    private TextField nativeValue;
+    @FXML
+    private Hyperlink nativeConjunctions;
+    @FXML
+    private ImageView nativeVoice;
+    @FXML
+    private TextArea nativeExample;
+    @FXML
+    private ImageView nativeExampleVoice;
+    @FXML
+    private TextArea foreignExample;
+    @FXML
+    private ImageView foreignExampleVoice;
+    @FXML
+    private TextField foreignValue;
+    @FXML
+    private Hyperlink foreignConjunctions;
+    @FXML
+    private ImageView foreignValueVoice;
+    @FXML
+    private Button previewButton;
+    @FXML
+    private Button addButton;
     @FXML
     private Button cancelButton;
+
+    public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+        ObservableList<Object> dataSpeech = FXCollections.observableArrayList();
+        dataSpeech = CardTypesDAO.setAllTypes(dataSpeech);
+        speechPart.setItems(dataSpeech);
+
+        ObservableList<Object> dataTopic = FXCollections.observableArrayList();
+        dataTopic = CardCategoriesDAO.setAllTypes(dataTopic);
+        topic.setItems(dataTopic);
+    }
 
     public void handleCancelButton(ActionEvent actionEvent) {
         this.goToPage("mainPage.fxml");
     }
+
+    public void handlePreviewButton(ActionEvent actionEvent) {
+
+    }
+
+    public void handleAddButton(ActionEvent actionEvent) {
+
+    }
+
 }
