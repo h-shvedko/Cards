@@ -1,10 +1,8 @@
 package com.cards.shvedko.ModelDAO;
 
 import com.cards.shvedko.Model.Cards;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 /**
  * Created by hennadii.shvedko on 14/07/2017.
@@ -36,12 +34,13 @@ public class CardsDAO extends ModelsDAO {
 //        return cardsModel;
 //    }
 
-    public void save() throws Exception {
-        if (this.validate(cards)) {
+    public boolean save() throws Exception {
+        if (errorMsg != null) {
             session.persist(cards);
             transaction.commit();
-        } else {
-          throw new Exception(errorMsg);
+        } else{
+            return false;
         }
+        return true;
     }
 }

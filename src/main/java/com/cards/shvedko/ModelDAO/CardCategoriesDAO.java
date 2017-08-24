@@ -3,7 +3,7 @@ package com.cards.shvedko.ModelDAO;
 import javafx.collections.ObservableList;
 
 public class CardCategoriesDAO extends ModelsDAO {
-    public static ObservableList<Object> setAllTypes(ObservableList<Object> dataTopic) {
+    public static ObservableList<String> setAllTypes(ObservableList<String> dataTopic) {
         dataTopic.add("Vehicle");
         dataTopic.add("Education");
         dataTopic.add("Food");

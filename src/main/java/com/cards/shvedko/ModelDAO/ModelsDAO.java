@@ -1,14 +1,12 @@
 package com.cards.shvedko.ModelDAO;
 
-import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Services.DBService;
 import org.hibernate.Session;
 
-import javax.swing.text.html.parser.Entity;
 import javax.validation.*;
+import java.lang.reflect.Array;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by hennadii.shvedko on 14/07/2017.
@@ -27,7 +25,8 @@ public class ModelsDAO implements I_DAO {
 
     protected final DBService dbServise;
     protected final Session session;
-    protected String errorMsg;
+    public String errorMsg;
+    public Set<ConstraintViolation<A_Models>> errorSet;
 
     public ModelsDAO() {
         dbServise = new DBService();
@@ -37,7 +36,8 @@ public class ModelsDAO implements I_DAO {
         validator = factory.getValidator();
     }
 
-    public void save() throws Exception{
+    public boolean save() throws Exception {
+        return false;
     }
 
     public void update(int id, String[] record) {
@@ -56,6 +56,8 @@ public class ModelsDAO implements I_DAO {
             if (constraintViolations.size() == 0) {
                 return true;
             }
+
+            errorSet = constraintViolations;
 
             for (ConstraintViolation violation : constraintViolations) {
                 errorMsg += violation.getMessage() + "\n";

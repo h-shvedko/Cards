@@ -1,61 +1,9 @@
 package com.cards.shvedko.Controller;
 
-import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
-import com.cards.shvedko.ModelDAO.CardTypesDAO;
 import com.cards.shvedko.ModelDAO.CardsDAO;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import org.hibernate.HibernateException;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class AddVerbController extends A_Controller {
-
-    @FXML
-    private ComboBox speechPart;
-    @FXML
-    private ComboBox topic;
-    @FXML
-    private TextField nativeValue;
-    @FXML
-    private Hyperlink nativeConjunctions;
-    @FXML
-    private ImageView nativeVoice;
-    @FXML
-    private TextArea nativeExample;
-    @FXML
-    private ImageView nativeExampleVoice;
-    @FXML
-    private TextArea foreignExample;
-    @FXML
-    private ImageView foreignExampleVoice;
-    @FXML
-    private TextField foreignValue;
-    @FXML
-    private Hyperlink foreignConjunctions;
-    @FXML
-    private ImageView foreignValueVoice;
-    @FXML
-    private Button previewButton;
-    @FXML
-    private Button addButton;
-    @FXML
-    private Button cancelButton;
-
-    public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-        ObservableList<Object> dataSpeech = FXCollections.observableArrayList();
-        dataSpeech = CardTypesDAO.setAllTypes(dataSpeech);
-        speechPart.setItems(dataSpeech);
-
-        ObservableList<Object> dataTopic = FXCollections.observableArrayList();
-        dataTopic = CardCategoriesDAO.setAllTypes(dataTopic);
-        topic.setItems(dataTopic);
-    }
 
     public void handleCancelButton(ActionEvent actionEvent) {
         this.goToPage("mainPage.fxml");
@@ -70,20 +18,26 @@ public class AddVerbController extends A_Controller {
         String name = nativeValue.getText();
         String value = foreignValue.getText();
         String nExample = nativeExample.getText();
+        int type = speechPart.getSelectionModel().getSelectedIndex();
+        int category = topic.getSelectionModel().getSelectedIndex();
 
         CardsDAO cardsDAO = new CardsDAO();
         cardsDAO.cards.setName(name);
         cardsDAO.cards.setValue(value);
         cardsDAO.cards.setExample(nExample);
         cardsDAO.cards.setCategoryId(1);
-        cardsDAO.cards.setTypeId(1);
-        cardsDAO.cards.setIsVisible(1);
+        cardsDAO.cards.setTypeId(type + 1);
+        cardsDAO.cards.setIsVisible(category + 1);
 
-        try{
-            cardsDAO.save();
-        } catch (Exception ex){
-            crashAppeared(ex.getMessage());
+        if (cardsDAO.validate(cardsDAO.cards)) {
+            try {
+                cardsDAO.save();
+                showSuccess();
+            } catch (Exception ex) {
+                crashAppeared(ex.getMessage());
+            }
+        } else {
+            showErrors(cardsDAO);
         }
     }
-
 }

@@ -8,7 +8,7 @@ import javax.validation.ConstraintViolationException;
  * Created by hennadii.shvedko on 14/07/2017.
  */
 public interface I_DAO {
-    void save() throws Exception;
+    boolean save() throws Exception;
 
     void update(int id, String[] record);
 

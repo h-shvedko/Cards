@@ -7,45 +7,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.cards.shvedko.Controller.MainPageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.MainPageController">
     <children>
-        <GridPane alignment="CENTER" layoutY="-3.0" prefHeight="400.0" prefWidth="600.0">
+        <GridPane fx:id="grid" alignment="CENTER" layoutY="-3.0" prefHeight="400.0" prefWidth="600.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button fx:id="addWord" mnemonicParsing="false" onAction="#handleAddWordButton" prefHeight="85.0"
-                        prefWidth="194.0" text="ADD NEW WORD" GridPane.halignment="CENTER" GridPane.rowIndex="1"
-                        GridPane.valignment="CENTER">
+                <Button fx:id="addWord" mnemonicParsing="false" onAction="#handleAddWordButton" prefHeight="85.0" prefWidth="194.0" text="ADD NEW WORD" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="seeAllWords" layoutX="213.0" layoutY="35.0" mnemonicParsing="false"
-                        onAction="#handleSeeAllWordsButton" prefHeight="85.0" prefWidth="194.0" text="SEE ALL WORDS"
-                        GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                <Button fx:id="seeAllWords" layoutX="213.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSeeAllWordsButton" prefHeight="85.0" prefWidth="194.0" text="SEE ALL WORDS" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="close" layoutX="10.0" layoutY="168.0" mnemonicParsing="false"
-                        onAction="#handleCloseButton" prefHeight="85.0" prefWidth="194.0" text="EXIT"
-                        GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                <Button fx:id="close" layoutX="10.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="85.0" prefWidth="194.0" text="EXIT" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="20.0" />
                     </font>
                 </Button>
-                <Label fx:id="errorMessage" alignment="CENTER" prefHeight="68.0" prefWidth="598.0" text=""
-                       textFill="#eb0f0f" visible="false">
+                <Label fx:id="errorMessage" alignment="CENTER" prefHeight="68.0" prefWidth="598.0" text="" textFill="#eb0f0f" visible="false">
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="20.0" />
                     </font>
                 </Label>
             </children>
