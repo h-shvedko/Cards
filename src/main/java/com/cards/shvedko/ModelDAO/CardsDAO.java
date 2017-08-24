@@ -6,6 +6,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.Set;
+
 /**
  * Created by hennadii.shvedko on 14/07/2017.
  */
@@ -14,19 +18,19 @@ public class CardsDAO extends ModelsDAO {
     public Cards cards;
     private Transaction transaction;
 
-    public CardsDAO(){
+    public CardsDAO() {
         super();
         cards = new Cards();
         transaction = session.beginTransaction();
     }
 
-    public CardsDAO(int id){
+    public CardsDAO(int id) {
         super();
         cards = (Cards) session.get(Cards.class, id);
         transaction = session.beginTransaction();
     }
 
-    public Cards getCardById(int id) throws HibernateException{
+    public Cards getCardById(int id) throws HibernateException {
         return (Cards) session.get(Cards.class, id);
     }
 
@@ -37,7 +41,9 @@ public class CardsDAO extends ModelsDAO {
 //    }
 
     public void save() throws HibernateException {
-        session.persist(cards);
-        transaction.commit();
+        if (this.validate(cards)) {
+            session.persist(cards);
+            transaction.commit();
+        }
     }
 }

@@ -10,7 +10,7 @@
 
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.cards.shvedko.Controller.Authentication">
+            fx:controller="com.cards.shvedko.Controller.AuthenticationController">
     <children>
         <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>

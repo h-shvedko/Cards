@@ -1,10 +1,11 @@
 package com.cards.shvedko.Model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "SYSTEM_CONFIGS")
-public class SystemConfigs {
+public class SystemConfigs extends A_Models implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)

@@ -1,14 +1,14 @@
 package com.cards.shvedko.Services;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 public class DBService {
 
-    public static org.hibernate.service.ServiceRegistry serviceRegistry;
     public static SessionFactory sessionFactory;
+    private static StandardServiceRegistry serviceRegistry;
 
     public DBService(){
         Configuration configuration = getSQLiteConfiguration();

@@ -1,6 +1,5 @@
 package com.cards.shvedko.Controller;
 
-import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
 import com.cards.shvedko.ModelDAO.CardTypesDAO;
 import com.cards.shvedko.ModelDAO.CardsDAO;
@@ -10,11 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import org.hibernate.HibernateException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddVerb extends A_Controller {
+public class AddVerbController extends A_Controller {
 
     @FXML
     private ComboBox speechPart;
@@ -70,6 +70,7 @@ public class AddVerb extends A_Controller {
         String name = nativeValue.getText();
         String value = foreignValue.getText();
         String nExample = nativeExample.getText();
+
         CardsDAO cardsDAO = new CardsDAO();
         cardsDAO.cards.setName(name);
         cardsDAO.cards.setValue(value);
@@ -77,8 +78,12 @@ public class AddVerb extends A_Controller {
         cardsDAO.cards.setCategoryId(1);
         cardsDAO.cards.setTypeId(1);
         cardsDAO.cards.setIsVisible(1);
-        cardsDAO.save();
 
+        try{
+            cardsDAO.save();
+        } catch (Exception hEx){
+            crashAppeared(hEx.getMessage());
+        }
     }
 
 }

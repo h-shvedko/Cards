@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainPage extends A_Controller {
+public class MainPageController extends A_Controller {
 
     @FXML
     private Button addWord;

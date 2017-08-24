@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 
 abstract public class A_Controller implements Initializable {
 
+    public static String errorMsg;
+
     public void goToPage(String fxml) {
         try {
             Parent page = FXMLLoader.load(getClass().getClassLoader().getResource(fxml), null, new JavaFXBuilderFactory());
@@ -34,5 +36,10 @@ abstract public class A_Controller implements Initializable {
     public void closeWindow(Button btn) {
         Stage stage = (Stage) btn.getScene().getWindow();
         stage.close();
+    }
+
+    public void crashAppeared(String message){
+        MainPageController.errorMsg = message;
+        goToPage("mainPage.fxml");
     }
 }

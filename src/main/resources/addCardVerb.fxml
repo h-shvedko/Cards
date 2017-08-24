@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="800.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="800.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.cards.shvedko.Controller.AddVerb">
+            fx:controller="com.cards.shvedko.Controller.AddVerbController">
     <children>
         <GridPane layoutX="-6.0" prefHeight="800.0" prefWidth="608.0">
             <columnConstraints>

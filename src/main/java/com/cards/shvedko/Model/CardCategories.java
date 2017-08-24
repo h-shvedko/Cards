@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class CardCategories implements Serializable{
+public class CardCategories extends A_Models implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)

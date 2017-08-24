@@ -33,7 +33,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         MainApp.stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("authentication.fxml"));
-        primaryStage.setTitle("Authentication");
+        primaryStage.setTitle("AuthenticationController");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();
@@ -150,7 +150,7 @@ public class MainApp extends Application {
 //    @Override
 //    public void start(Stage primaryStage) throws Exception{
 //        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("authentication.fxml"));
-//        primaryStage.setTitle("Authentication");
+//        primaryStage.setTitle("AuthenticationController");
 //        primaryStage.setScene(new Scene(root, 600, 400));
 //        primaryStage.setResizable(false);
 //        primaryStage.show();

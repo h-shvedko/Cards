@@ -1,28 +1,40 @@
 package com.cards.shvedko.Model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "CARDS")
-public class Cards {
+public class Cards extends A_Models implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "name")
+    @NotNull(message = "Native word value of Card can't be empty!")
+    @Size(min = 2, message = "Native word value of Card can't be less then 2 symbols!")
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull(message = "Foreign word value of Card can't be empty!")
+    @Size(min = 2, message = "Foreign word value of Card can't be less then 2 symbols!")
     @Column(name = "value", nullable = false)
     private String value;
 
     @Column(name = "example")
     private String example;
 
-    @Column(name = "type_id", nullable = false, length = 3)
+    @NotNull(message = "You have chosen (or even haven't chosen any) wrong type of Card!")
+    @Min(value = 1, message = "Type value of Card can't be less then 1!")
+    @Column(name = "type_id", nullable = false)
     private int typeId;
 
-    @Column(name = "category_id", nullable = false, length = 3)
+    @NotNull(message = "You have chosen (or even haven't chosen any) wrong category of Card!")
+    @Min(value = 1, message = "Category value of Card can't be less then 1!")
+    @Column(name = "category_id", nullable = false)
     private int categoryId;
 
     @Column(name = "kind_of_noun", length = 1)
@@ -49,7 +61,9 @@ public class Cards {
     @Column(name = "preposition_gen")
     private String prepositionGen;
 
-    @Column(name = "is_visible", length = 1, nullable = false)
+    @NotNull(message = "Is Visible field in cards table can't be empty!")
+    @Min(value = 1, message = "Is Visible value of Card can't be less then 1!")
+    @Column(name = "is_visible", nullable = false)
     private int isVisible;
 
     @SuppressWarnings("UnusedDeclaration")
