@@ -9,14 +9,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.validation.ConstraintViolation;
@@ -70,52 +73,108 @@ abstract public class A_Controller implements Initializable {
     protected Button cancelButton;
 
     public static String errorMsg;
+    protected String nativeValueOld;
+    protected String nativeValueNew;
+    protected String foreignValueOld;
+    protected String foreignValueNew;
+    protected boolean answer = true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ObservableList<String> dataSpeech = FXCollections.observableArrayList();
-        dataSpeech = CardTypesDAO.setAllTypes(dataSpeech);
-        speechPart.setItems(dataSpeech);
+        if (speechPart != null) {
+            ObservableList<String> dataSpeech = FXCollections.observableArrayList();
+            dataSpeech = CardTypesDAO.setAllTypes(dataSpeech);
+            speechPart.setItems(dataSpeech);
 
-        ObservableList<String> dataTopic = FXCollections.observableArrayList();
-        dataTopic = CardCategoriesDAO.setAllTypes(dataTopic);
-        topic.setItems(dataTopic);
+            speechPart.valueProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    errorPartOfSpeech.setText("");
+                    errorPartOfSpeech.setVisible(false);
+                }
+            });
+        }
 
-        nativeConjunctions.setVisible(false);
-        foreignConjunctions.setVisible(false);
-        errorNativeValue.setVisible(false);
-        errorForeignValue.setVisible(false);
-        errorPartOfSpeech.setVisible(false);
-        errorTopic.setVisible(false);
 
-        speechPart.valueProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue value, String oldValue, String newValue) {
-                errorPartOfSpeech.setText("");
-                errorPartOfSpeech.setVisible(false);
-            }
-        });
+        if (topic != null) {
+            ObservableList<String> dataTopic = FXCollections.observableArrayList();
+            dataTopic = CardCategoriesDAO.setAllTypes(dataTopic);
+            topic.setItems(dataTopic);
 
-        topic.valueProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue value, String oldValue, String newValue) {
-                errorTopic.setText("");
-                errorTopic.setVisible(false);
-            }
-        });
+            topic.valueProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    errorTopic.setText("");
+                    errorTopic.setVisible(false);
+                }
+            });
+        }
 
-        nativeValue.textProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue value, String oldValue, String newValue) {
-                errorNativeValue.setText("");
-                errorNativeValue.setVisible(false);
-            }
-        });
+        if (nativeValue != null) {
+            nativeValue.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    errorNativeValue.setText("");
+                    errorNativeValue.setVisible(false);
 
-        foreignValue.textProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue value, String oldValue, String newValue) {
-                errorForeignValue.setText("");
-                errorForeignValue.setVisible(false);
-            }
-        });
+                    nativeValueOld = oldValue;
+                    nativeValueNew = newValue;
+                }
+            });
+        }
+        if (foreignValue != null) {
+            foreignValue.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    errorForeignValue.setText("");
+                    errorForeignValue.setVisible(false);
+
+                    foreignValueOld = oldValue;
+                    foreignValueNew = newValue;
+                }
+            });
+        }
+        if (nativeConjunctions != null) {
+            nativeConjunctions.setVisible(false);
+
+        }
+        if (foreignConjunctions != null) {
+            foreignConjunctions.setVisible(false);
+
+        }
+        if (errorNativeValue != null) {
+            errorNativeValue.setVisible(false);
+
+        }
+        if (errorForeignValue != null) {
+            errorForeignValue.setVisible(false);
+
+        }
+        if (errorPartOfSpeech != null) {
+            errorPartOfSpeech.setVisible(false);
+
+        }
+        if (errorTopic != null) {
+            errorTopic.setVisible(false);
+
+        }
+    }
+
+    public boolean compareNativeValue(){
+        if(nativeValueNew.equals(nativeValueOld)){
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean compareForeignValue(){
+        if(foreignValueNew.equals(foreignValueOld)){
+            return true;
+        }
+
+        return false;
     }
 
     public void goToPage(String fxml) {
@@ -140,17 +199,17 @@ abstract public class A_Controller implements Initializable {
         stage.close();
     }
 
-    public void crashAppeared(String message){
+    public void crashAppeared(String message) {
         MainPageController.errorStringMsg = message;
         goToPage("mainPage.fxml");
     }
 
     protected void showErrors(ModelsDAO modelsDAO) {
-        if(modelsDAO.errorSet != null){
+        if (modelsDAO.errorSet != null) {
             for (ConstraintViolation violation : modelsDAO.errorSet) {
                 Path wrongAttribute = violation.getPropertyPath();
                 String message = violation.getMessage();
-                if(wrongAttribute.iterator().hasNext()){
+                if (wrongAttribute.iterator().hasNext()) {
                     for (Iterator<Path.Node> it = wrongAttribute.iterator(); it.hasNext(); ) {
                         Path.Node attribute = it.next();
                         String nameOfAttrib = attribute.getName();
@@ -162,8 +221,8 @@ abstract public class A_Controller implements Initializable {
     }
 
     protected void setErrorMessages(String nameOfAttrib, String message) {
-        if(nameOfAttrib != null){
-            switch (nameOfAttrib){
+        if (nameOfAttrib != null) {
+            switch (nameOfAttrib) {
                 case "name":
                     errorNativeValue.setText(message);
                     errorNativeValue.setVisible(true);
@@ -184,7 +243,43 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
-    protected void showSuccess() {
+    protected void showSuccess(ActionEvent event) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccess.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Success!");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
+    protected void showQuiestion(ActionEvent event, String text) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalQuestion.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Warning!");
+            stage.setUserData(text);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void clear() {
+        nativeValue.setText("");
+        foreignValue.setText("");
+        foreignExample.setText("");
+        nativeExample.setText("");
+        nativeConjunctions.setVisible(false);
+        nativeConjunctions.setText("");
+        foreignConjunctions.setText("");
+        foreignConjunctions.setVisible(false);
     }
 }
