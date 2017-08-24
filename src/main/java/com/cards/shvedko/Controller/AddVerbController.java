@@ -81,8 +81,8 @@ public class AddVerbController extends A_Controller {
 
         try{
             cardsDAO.save();
-        } catch (Exception hEx){
-            crashAppeared(hEx.getMessage());
+        } catch (Exception ex){
+            crashAppeared(ex.getMessage());
         }
     }
 

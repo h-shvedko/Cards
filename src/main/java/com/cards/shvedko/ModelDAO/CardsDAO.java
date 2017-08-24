@@ -6,10 +6,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.util.Set;
-
 /**
  * Created by hennadii.shvedko on 14/07/2017.
  */
@@ -40,10 +36,12 @@ public class CardsDAO extends ModelsDAO {
 //        return cardsModel;
 //    }
 
-    public void save() throws HibernateException {
+    public void save() throws Exception {
         if (this.validate(cards)) {
             session.persist(cards);
             transaction.commit();
+        } else {
+          throw new Exception(errorMsg);
         }
     }
 }

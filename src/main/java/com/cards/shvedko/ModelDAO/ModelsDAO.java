@@ -1,11 +1,14 @@
 package com.cards.shvedko.ModelDAO;
 
+import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Services.DBService;
 import org.hibernate.Session;
 
+import javax.swing.text.html.parser.Entity;
 import javax.validation.*;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by hennadii.shvedko on 14/07/2017.
@@ -34,7 +37,7 @@ public class ModelsDAO implements I_DAO {
         validator = factory.getValidator();
     }
 
-    public void save() {
+    public void save() throws Exception{
     }
 
     public void update(int id, String[] record) {

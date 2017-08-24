@@ -3,7 +3,9 @@ package com.cards.shvedko.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
+import javax.xml.soap.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,6 +17,8 @@ public class MainPageController extends A_Controller {
     private Button seeAllWords;
     @FXML
     private Button close;
+    @FXML
+    private Label errorMessage;
 
     public void handleAddWordButton(ActionEvent actionEvent) {
         goToPage("addCardVerb.fxml");
@@ -29,6 +33,9 @@ public class MainPageController extends A_Controller {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-
+        if (errorMsg != null) {
+            errorMessage.setText(errorMsg);
+            errorMessage.setVisible(true);
+        }
     }
 }
