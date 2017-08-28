@@ -162,7 +162,7 @@ abstract public class A_Controller implements Initializable {
     }
 
     public boolean compareNativeValue(){
-        if(nativeValueNew.equals(nativeValueOld)){
+        if(nativeValueNew != null && nativeValueNew.equals(nativeValueOld)){
             return true;
         }
 
@@ -170,7 +170,7 @@ abstract public class A_Controller implements Initializable {
     }
 
     public boolean compareForeignValue(){
-        if(foreignValueNew.equals(foreignValueOld)){
+        if(foreignValueNew != null && foreignValueNew.equals(foreignValueOld)){
             return true;
         }
 
