@@ -1,7 +1,9 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Model.CardCategories;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import javafx.event.ActionEvent;
+import org.hibernate.Query;
 
 public class AddVerbController extends A_Controller {
 
@@ -26,6 +28,8 @@ public class AddVerbController extends A_Controller {
             int type = speechPart.getSelectionModel().getSelectedIndex();
             int category = topic.getSelectionModel().getSelectedIndex();
 
+            
+            List list = query.list();
             CardsDAO cardsDAO = new CardsDAO();
             cardsDAO.cards.setName(name);
             cardsDAO.cards.setValue(value);

@@ -1,7 +1,10 @@
 package com.cards.shvedko.Model;
 
 import javax.persistence.*;
+import javax.smartcardio.Card;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORIES")
@@ -16,6 +19,18 @@ public class CardCategories extends A_Models implements Serializable{
 
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
+
+    private Set<Cards> cardsRecords = new HashSet<>(
+            0);
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    public Set<Cards> getCards(){
+        return this.cardsRecords;
+    }
+
+    public void setCards(Set<Cards> cardsRecords) {
+        this.cardsRecords = cardsRecords;
+    }
 
     public int getId() {
         return id;

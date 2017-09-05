@@ -2,6 +2,7 @@ package com.cards.shvedko.ModelDAO;
 
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Services.DBService;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.validation.*;
@@ -30,7 +31,7 @@ public class ModelsDAO implements I_DAO {
 
     public ModelsDAO() {
         dbServise = new DBService();
-        session = dbServise.sessionFactory.openSession();
+        session = DBService.sessionFactory.openSession();
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
@@ -69,8 +70,37 @@ public class ModelsDAO implements I_DAO {
         return false;
     }
 
+    @Override
     public I_DAO select(String criteria) {
         return null;
+    }
+
+    @Override
+    public I_DAO selectAll(String criteria) {
+        String table = this.getClassName(this.getClass());
+        Query query = session.createQuery("from " + table + " where stockCode = :code ");
+        query.setParameter("code", "7277");
+
+        return true;
+    }
+
+    @Override
+    public I_DAO selectBy(String criteria) {
+        return null;
+    }
+
+
+    public String getClassName(Class classObject){
+        Class<?> enclosingClass = classObject.getClass().getEnclosingClass();
+        if (enclosingClass != null) {
+            return enclosingClass.getName();
+        } else {
+            return getClass().getName();
+        }
+    }
+
+    public String getTableByClassName(){
+
     }
 
 }

@@ -18,4 +18,8 @@ public interface I_DAO {
 
     I_DAO select(String criteria);
 
+    I_DAO selectAll(String criteria);
+
+    I_DAO selectBy(String criteria);
+
 }
