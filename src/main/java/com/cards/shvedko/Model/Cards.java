@@ -39,7 +39,7 @@ public class Cards extends A_Models implements Serializable {
     private int categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "categoryId", nullable = false)
     private CardCategories category;
 
     @Column(name = "kind_of_noun", length = 1)

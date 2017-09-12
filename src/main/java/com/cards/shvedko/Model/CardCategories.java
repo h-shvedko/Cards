@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class CardCategories extends A_Models implements Serializable{
+public class CardCategories extends A_Models implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
@@ -20,11 +20,11 @@ public class CardCategories extends A_Models implements Serializable{
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", targetEntity = Cards.class)
     private Set<Cards> cardsRecords = new HashSet<>(
             0);
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    public Set<Cards> getCards(){
+    public Set<Cards> getCards() {
         return this.cardsRecords;
     }
 
