@@ -1,9 +1,14 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.Model.CardCategories;
+import com.cards.shvedko.Model.CardTypes;
+import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
+import com.cards.shvedko.ModelDAO.CardTypesDAO;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import javafx.event.ActionEvent;
 import org.hibernate.Query;
+
+import java.util.List;
 
 public class AddVerbController extends A_Controller {
 
@@ -25,18 +30,23 @@ public class AddVerbController extends A_Controller {
             String name = nativeValue.getText();
             String value = foreignValue.getText();
             String nExample = nativeExample.getText();
-            int type = speechPart.getSelectionModel().getSelectedIndex();
-            int category = topic.getSelectionModel().getSelectedIndex();
+            int type = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
+            int category = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex())) + 1;
 
-            
-            List list = query.list();
+
+            CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
+            Object categoryObject = cardCategoriesDAO.select("where id=" + category);
+
+            CardTypesDAO cardTypesDAO = new CardTypesDAO();
+            Object typeObject = cardTypesDAO.select("where id=" + type);
+
             CardsDAO cardsDAO = new CardsDAO();
             cardsDAO.cards.setName(name);
             cardsDAO.cards.setValue(value);
             cardsDAO.cards.setExample(nExample);
-            cardsDAO.cards.setCategoryId(1);
-            cardsDAO.cards.setTypeId(type + 1);
-            cardsDAO.cards.setIsVisible(category + 1);
+            cardsDAO.cards.setCategory((CardCategories) categoryObject);
+            cardsDAO.cards.setType((CardTypes) typeObject);
+            cardsDAO.cards.setIsVisible(1);
 
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {

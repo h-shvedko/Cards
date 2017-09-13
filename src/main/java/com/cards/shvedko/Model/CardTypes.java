@@ -2,6 +2,8 @@ package com.cards.shvedko.Model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "TYPES")
@@ -16,6 +18,10 @@ public class CardTypes extends A_Models implements Serializable {
 
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "type", targetEntity = Cards.class)
+    private Set<Cards> typeRecords = new HashSet<>(
+            0);
 
     @SuppressWarnings("UnusedDeclaration")
     public CardTypes() {
@@ -57,5 +63,13 @@ public class CardTypes extends A_Models implements Serializable {
 
     public void setIsVisible(int isVisible) {
         this.isVisible = isVisible;
+    }
+
+    public Set<Cards> getTypeRecords() {
+        return typeRecords;
+    }
+
+    public void setTypeRecords(Set<Cards> typeRecords) {
+        this.typeRecords = typeRecords;
     }
 }

@@ -3,6 +3,7 @@ package com.cards.shvedko.ModelDAO;
 import com.cards.shvedko.Model.A_Models;
 
 import javax.validation.ConstraintViolationException;
+import java.util.List;
 
 /**
  * Created by hennadii.shvedko on 14/07/2017.
@@ -16,10 +17,10 @@ public interface I_DAO {
 
     boolean validate(A_Models model) throws ConstraintViolationException;
 
-    I_DAO select(String criteria);
+    Object select(String criteria);
 
-    I_DAO selectAll(String criteria);
+    List selectAll();
 
-    I_DAO selectBy(String criteria);
+    List selectAllBy(String criteria);
 
 }

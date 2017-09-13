@@ -42,6 +42,10 @@ public class Cards extends A_Models implements Serializable {
     @JoinColumn(name = "categoryId", nullable = false)
     private CardCategories category;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "typeId", nullable = false)
+    private CardTypes type;
+
     @Column(name = "kind_of_noun", length = 1)
     private int kindOfNoun;
 
@@ -224,5 +228,13 @@ public class Cards extends A_Models implements Serializable {
 
     public void setCategory(CardCategories category) {
         this.category = category;
+    }
+
+    public CardTypes getType() {
+        return type;
+    }
+
+    public void setType(CardTypes type) {
+        this.type = type;
     }
 }

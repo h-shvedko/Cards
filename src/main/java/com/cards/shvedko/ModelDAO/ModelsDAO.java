@@ -6,7 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.validation.*;
-import java.lang.reflect.Array;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -71,22 +71,24 @@ public class ModelsDAO implements I_DAO {
     }
 
     @Override
-    public I_DAO select(String criteria) {
-        return null;
-    }
-
-    @Override
-    public I_DAO selectAll(String criteria) {
+    public Object select(String criteria) {
         String table = this.getClassName(this.getClass());
-        Query query = session.createQuery("from " + table + " where stockCode = :code ");
-        query.setParameter("code", "7277");
-
-        return true;
+        Query result = session.createQuery("from " + table + " " + criteria);
+        return result.list().get(0);
     }
 
     @Override
-    public I_DAO selectBy(String criteria) {
-        return null;
+    public List selectAll() {
+        String table = this.getClassName(this.getClass());
+        Query result = session.createQuery("from " + table);
+        return result.list();
+    }
+
+    @Override
+    public List selectAllBy(String criteria) {
+        String table = this.getClassName(this.getClass());
+        Query result = session.createQuery("from " + table + " " + criteria);
+        return result.list();
     }
 
 
@@ -99,8 +101,8 @@ public class ModelsDAO implements I_DAO {
         }
     }
 
-    public String getTableByClassName(){
-
-    }
+//    public String getTableByClassName(){
+//
+//    }
 
 }
