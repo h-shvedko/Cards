@@ -35,12 +35,12 @@ public class Cards extends A_Models implements Serializable {
     private int categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoryId", nullable = false)
+    @JoinColumn(name = "categoryId", nullable = false, insertable = false, updatable = false)
     @NotNull(message = "You have chosen (or even haven't chosen any) wrong category of Card!")
     private CardCategories category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "typeId", nullable = false)
+    @JoinColumn(name = "typeId", nullable = false, insertable = false, updatable = false)
     @NotNull(message = "You have chosen (or even haven't chosen any) wrong type of Card!")
     private CardTypes type;
 
