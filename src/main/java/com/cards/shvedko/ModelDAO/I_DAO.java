@@ -11,16 +11,16 @@ import java.util.List;
 public interface I_DAO {
     boolean save() throws Exception;
 
-    void update(int id, String[] record);
+    void update(int id, String[] record) throws Exception;
 
-    void delete(int id);
+    void delete(int id) throws Exception;
 
     boolean validate(A_Models model) throws ConstraintViolationException;
 
-    Object select(String criteria);
+    A_Models select(String criteria) throws Exception;
 
-    List selectAll();
+    List selectAll() throws Exception;
 
-    List selectAllBy(String criteria);
+    List selectAllBy(String criteria) throws Exception;
 
 }

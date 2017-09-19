@@ -28,22 +28,20 @@ public class Cards extends A_Models implements Serializable {
     @Column(name = "example")
     private String example;
 
-    @NotNull(message = "You have chosen (or even haven't chosen any) wrong type of Card!")
-    @Min(value = 1, message = "Type value of Card can't be less then 1!")
     @Column(name = "type_id", nullable = false)
     private int typeId;
 
-    @NotNull(message = "You have chosen (or even haven't chosen any) wrong category of Card!")
-    @Min(value = 1, message = "Category value of Card can't be less then 1!")
     @Column(name = "category_id", nullable = false)
     private int categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId", nullable = false)
+    @NotNull(message = "You have chosen (or even haven't chosen any) wrong category of Card!")
     private CardCategories category;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "typeId", nullable = false)
+    @NotNull(message = "You have chosen (or even haven't chosen any) wrong type of Card!")
     private CardTypes type;
 
     @Column(name = "kind_of_noun", length = 1)

@@ -231,11 +231,11 @@ abstract public class A_Controller implements Initializable {
                     errorForeignValue.setText(message);
                     errorForeignValue.setVisible(true);
                     break;
-                case "typeId":
+                case "type":
                     errorPartOfSpeech.setText(message);
                     errorPartOfSpeech.setVisible(true);
                     break;
-                case "categoryId":
+                case "category":
                     errorTopic.setText(message);
                     errorTopic.setVisible(true);
                     break;

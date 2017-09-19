@@ -1,5 +1,6 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.CardCategories;
 import com.cards.shvedko.Model.CardTypes;
 import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
@@ -35,17 +36,34 @@ public class AddVerbController extends A_Controller {
 
 
             CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
-            Object categoryObject = cardCategoriesDAO.select("where id=" + category);
+            A_Models categoryObject = null;
+            try {
+                categoryObject = cardCategoriesDAO.select("where id=" + category);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             CardTypesDAO cardTypesDAO = new CardTypesDAO();
-            Object typeObject = cardTypesDAO.select("where id=" + type);
+            A_Models typeObject = null;
+            try {
+                typeObject = cardTypesDAO.select("where id=" + type);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             CardsDAO cardsDAO = new CardsDAO();
             cardsDAO.cards.setName(name);
             cardsDAO.cards.setValue(value);
             cardsDAO.cards.setExample(nExample);
-            cardsDAO.cards.setCategory((CardCategories) categoryObject);
-            cardsDAO.cards.setType((CardTypes) typeObject);
+
+            if(categoryObject != null){
+                cardsDAO.cards.setCategory((CardCategories) categoryObject);
+            }
+
+            if(typeObject != null){
+                cardsDAO.cards.setType((CardTypes) typeObject);
+            }
+
             cardsDAO.cards.setIsVisible(1);
 
             if (cardsDAO.validate(cardsDAO.cards)) {

@@ -28,6 +28,7 @@ public class ModelsDAO implements I_DAO {
     protected final Session session;
     public String errorMsg;
     public Set<ConstraintViolation<A_Models>> errorSet;
+    private String table;
 
     public ModelsDAO() {
         dbServise = new DBService();
@@ -41,10 +42,10 @@ public class ModelsDAO implements I_DAO {
         return false;
     }
 
-    public void update(int id, String[] record) {
+    public void update(int id, String[] record) throws Exception {
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws Exception{
     }
 
     public boolean validate(A_Models model) throws ConstraintViolationException {
@@ -71,34 +72,69 @@ public class ModelsDAO implements I_DAO {
     }
 
     @Override
-    public Object select(String criteria) {
-        String table = this.getClassName(this.getClass());
+    public A_Models select(String criteria) throws Exception {
+        A_Models object = null;
+        String table = this.getClassName();
+
         Query result = session.createQuery("from " + table + " " + criteria);
-        return result.list().get(0);
+
+        if (result.list().size() > 0) {
+            object = (A_Models) result.list().get(0);
+        }
+
+        return object;
     }
 
     @Override
-    public List selectAll() {
-        String table = this.getClassName(this.getClass());
+    public List selectAll() throws Exception {
+        String table = this.getClassName();
         Query result = session.createQuery("from " + table);
         return result.list();
     }
 
     @Override
-    public List selectAllBy(String criteria) {
-        String table = this.getClassName(this.getClass());
+    public List selectAllBy(String criteria) throws Exception {
+        String table = this.getClassName();
         Query result = session.createQuery("from " + table + " " + criteria);
         return result.list();
     }
 
 
-    public String getClassName(Class classObject){
-        Class<?> enclosingClass = classObject.getClass().getEnclosingClass();
-        if (enclosingClass != null) {
-            return enclosingClass.getName();
-        } else {
-            return getClass().getName();
+    public String getClassName() {
+        String className =  this.getClass().getSimpleName();
+        String table = "";
+
+        switch (className){
+            case "CardCategoriesDAO":
+                table = "CardCategories";
+                break;
+            case "CardFilesDAO":
+                table = "CardFiles";
+                break;
+            case "CardFilesDeDAO":
+                table = "CardFilesDe";
+                break;
+            case "CardLanguageDAO":
+                table = "CardLanguages";
+                break;
+            case "CardLanguageDeDAO":
+                table = "CardLanguageDe";
+                break;
+            case "CardsDAO":
+                table = "Cards";
+                break;
+            case "CardTypesDAO":
+                table = "CardTypes";
+                break;
+            case "SystemConfigsDAO":
+                table = "SystemConfigs";
+                break;
+            case "UsersDAO":
+                table = "Users";
+                break;
         }
+
+        return table;
     }
 
 //    public String getTableByClassName(){
