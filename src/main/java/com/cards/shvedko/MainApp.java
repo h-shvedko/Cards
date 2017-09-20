@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.h2.engine.User;
 import org.hibernate.SessionFactory;
 
 public class MainApp extends Application {
@@ -13,7 +12,6 @@ public class MainApp extends Application {
     private static SessionFactory sessionFactory;
 
     public static Stage stage;
-    private User loggedUser;
 
     private static MainApp instance;
 

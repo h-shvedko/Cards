@@ -9,7 +9,6 @@
     <version>1.0.0</version>
 
     <properties>
-        <com.h2database.h2.version>1.4.187</com.h2database.h2.version>
         <org.xerial.sqlite.version>3.7.2</org.xerial.sqlite.version>
         <org.hibernate.hibernate-core.version>4.3.10.Final</org.hibernate.hibernate-core.version>
         <org.apache.logging.log4j.version>2.2</org.apache.logging.log4j.version>
@@ -53,12 +52,6 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>${org.mockito.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${com.h2database.h2.version}</version>
         </dependency>
 
         <dependency>

@@ -69,7 +69,6 @@
     <org.xerial.sqlite.version>3.7.2</org.xerial.sqlite.version>
     <org.apache.logging.log4j.version>2.2</org.apache.logging.log4j.version>
     <junit.version>4.11</junit.version>
-    <com.h2database.h2.version>1.4.187</com.h2database.h2.version>
   </properties>
 </project>
 
