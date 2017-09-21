@@ -2,8 +2,9 @@ package com.cards.shvedko.ModelDAO;
 
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Services.DBService;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import javax.validation.*;
 import java.util.List;
@@ -29,10 +30,13 @@ public class ModelsDAO implements I_DAO {
     public String errorMsg;
     public Set<ConstraintViolation<A_Models>> errorSet;
     private String table;
+    protected Transaction transaction;
 
     public ModelsDAO() {
         dbServise = new DBService();
-        session = DBService.sessionFactory.openSession();
+
+        session = DBService.sessionFactory.getCurrentSession();
+        transaction = session.beginTransaction();
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
@@ -81,7 +85,7 @@ public class ModelsDAO implements I_DAO {
         if (result.list().size() > 0) {
             object = (A_Models) result.list().get(0);
         }
-
+        session.close();
         return object;
     }
 
@@ -89,6 +93,7 @@ public class ModelsDAO implements I_DAO {
     public List selectAll() throws Exception {
         String table = this.getClassName();
         Query result = session.createQuery("from " + table);
+        session.close();
         return result.list();
     }
 
@@ -96,6 +101,7 @@ public class ModelsDAO implements I_DAO {
     public List selectAllBy(String criteria) throws Exception {
         String table = this.getClassName();
         Query result = session.createQuery("from " + table + " " + criteria);
+        session.close();
         return result.list();
     }
 
@@ -106,31 +112,31 @@ public class ModelsDAO implements I_DAO {
 
         switch (className){
             case "CardCategoriesDAO":
-                table = "CardCategories";
+                table = "com.cards.shvedko.Model.CardCategories";
                 break;
             case "CardFilesDAO":
-                table = "CardFiles";
+                table = "com.cards.shvedko.Model.CardFiles";
                 break;
             case "CardFilesDeDAO":
-                table = "CardFilesDe";
+                table = "com.cards.shvedko.Model.CardFilesDe";
                 break;
             case "CardLanguageDAO":
-                table = "CardLanguages";
+                table = "com.cards.shvedko.Model.CardLanguages";
                 break;
             case "CardLanguageDeDAO":
-                table = "CardLanguageDe";
+                table = "com.cards.shvedko.Model.CardLanguageDe";
                 break;
             case "CardsDAO":
-                table = "Cards";
+                table = "com.cards.shvedko.Model.Cards";
                 break;
             case "CardTypesDAO":
-                table = "CardTypes";
+                table = "com.cards.shvedko.Model.CardTypes";
                 break;
             case "SystemConfigsDAO":
-                table = "SystemConfigs";
+                table = "com.cards.shvedko.Model.SystemConfigs";
                 break;
             case "UsersDAO":
-                table = "Users";
+                table = "com.cards.shvedko.Model.Users";
                 break;
         }
 

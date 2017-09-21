@@ -12,8 +12,10 @@
         <property name="connection.username">tully</property>
         <property name="connection.password">tully</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
+        <property name="hibernate.current_session_context_class">thread</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
+
         <mapping class="com.cards.shvedko.Model.CardTypes"/>
         <mapping class="com.cards.shvedko.Model.CardCategories"/>
         <mapping class="com.cards.shvedko.Model.SystemConfigs"/>
@@ -22,6 +24,7 @@
         <mapping class="com.cards.shvedko.Model.CardFiles"/>
         <mapping class="com.cards.shvedko.Model.CardFilesDe"/>
         <mapping class="com.cards.shvedko.Model.Cards"/>
+        <mapping class="com.cards.shvedko.Model.Users"/>
     </session-factory>
 
 </hibernate-configuration>

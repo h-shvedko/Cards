@@ -2,8 +2,8 @@ package com.cards.shvedko.Model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TYPES")
@@ -19,8 +19,8 @@ public class CardTypes extends A_Models implements Serializable {
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "type", targetEntity = Cards.class)
-    private Set<Cards> typeRecords = new HashSet<>(
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "type", targetEntity = Cards.class)
+    private List<Cards> typeRecords = new ArrayList<>(
             0);
 
     @SuppressWarnings("UnusedDeclaration")
@@ -65,11 +65,13 @@ public class CardTypes extends A_Models implements Serializable {
         this.isVisible = isVisible;
     }
 
-    public Set<Cards> getTypeRecords() {
+    @SuppressWarnings("UnusedDeclaration")
+    public List<Cards> getTypeRecords() {
         return typeRecords;
     }
 
-    public void setTypeRecords(Set<Cards> typeRecords) {
+    @SuppressWarnings("UnusedDeclaration")
+    public void setTypeRecords(List<Cards> typeRecords) {
         this.typeRecords = typeRecords;
     }
 }

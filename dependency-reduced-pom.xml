@@ -65,9 +65,9 @@
   </dependencies>
   <properties>
     <org.mockito.version>1.8.4</org.mockito.version>
-    <org.hibernate.hibernate-core.version>4.3.10.Final</org.hibernate.hibernate-core.version>
+    <org.hibernate.hibernate-core.version>5.2.11.Final</org.hibernate.hibernate-core.version>
     <org.xerial.sqlite.version>3.7.2</org.xerial.sqlite.version>
-    <org.apache.logging.log4j.version>2.2</org.apache.logging.log4j.version>
+    <org.apache.logging.log4j.version>2.7</org.apache.logging.log4j.version>
     <junit.version>4.11</junit.version>
   </properties>
 </project>

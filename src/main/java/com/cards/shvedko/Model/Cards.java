@@ -5,7 +5,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "CARDS")
@@ -28,20 +27,14 @@ public class Cards extends A_Models implements Serializable {
     @Column(name = "example")
     private String example;
 
-    @Column(name = "type_id", nullable = false)
-    private int typeId;
-
-    @Column(name = "category_id", nullable = false)
-    private int categoryId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
-    @NotNull(message = "You have chosen (or even haven't chosen any) wrong category of Card!")
+    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName="id")
+//    @NotNull(message = "You have chosen (or even haven't chosen any) wrong category of Card!")
     private CardCategories category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id", nullable = false, insertable = false, updatable = false)
-    @NotNull(message = "You have chosen (or even haven't chosen any) wrong type of Card!")
+    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id", referencedColumnName="id")
+//    @NotNull(message = "You have chosen (or even haven't chosen any) wrong type of Card!")
     private CardTypes type;
 
     @Column(name = "kind_of_noun", length = 1)
@@ -110,26 +103,6 @@ public class Cards extends A_Models implements Serializable {
     @SuppressWarnings("UnusedDeclaration")
     public void setExample(String example) {
         this.example = example;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public int getTypeId() {
-        return typeId;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
     }
 
     @SuppressWarnings("UnusedDeclaration")

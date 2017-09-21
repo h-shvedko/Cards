@@ -1,5 +1,6 @@
 package com.cards.shvedko.Services;
 
+import com.cards.shvedko.Model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -20,7 +21,18 @@ public class DBService {
         configuration.configure();
         serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                 configuration.getProperties()).build();
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        sessionFactory = configuration
+                .addPackage("com.cards.shvedko.Model")
+                .addAnnotatedClass(Cards.class)
+                .addAnnotatedClass(CardCategories.class)
+                .addAnnotatedClass(CardFiles.class)
+                .addAnnotatedClass(CardFilesDe.class)
+                .addAnnotatedClass(CardLanguageDe.class)
+                .addAnnotatedClass(CardLanguages.class)
+                .addAnnotatedClass(CardTypes.class)
+                .addAnnotatedClass(SystemConfigs.class)
+                .addAnnotatedClass(Users.class)
+                .buildSessionFactory(serviceRegistry);
         return sessionFactory;
     }
 

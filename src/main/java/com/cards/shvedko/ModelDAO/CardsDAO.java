@@ -10,18 +10,15 @@ import org.hibernate.Transaction;
 public class CardsDAO extends ModelsDAO {
 
     public Cards cards;
-    private Transaction transaction;
 
     public CardsDAO() {
         super();
         cards = new Cards();
-        transaction = session.beginTransaction();
     }
 
     public CardsDAO(int id) {
         super();
         cards = (Cards) session.get(Cards.class, id);
-        transaction = session.beginTransaction();
     }
 
     public Cards getCardById(int id) throws HibernateException {
@@ -38,6 +35,7 @@ public class CardsDAO extends ModelsDAO {
         if (errorMsg != null) {
             session.persist(cards);
             transaction.commit();
+            session.close();
         } else{
             return false;
         }
