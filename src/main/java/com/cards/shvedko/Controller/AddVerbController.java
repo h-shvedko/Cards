@@ -7,20 +7,15 @@ import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
 import com.cards.shvedko.ModelDAO.CardTypesDAO;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import javafx.event.ActionEvent;
-import org.hibernate.Query;
-
-import java.util.List;
 
 public class AddVerbController extends A_Controller {
 
-    public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("mainPage.fxml");
-    }
-
+    @Override
     public void handlePreviewButton(ActionEvent actionEvent) {
 
     }
 
+    @Override
     public void handleAddButton(ActionEvent actionEvent) {
 
         if (compareForeignValue() && compareNativeValue()) {
@@ -31,6 +26,7 @@ public class AddVerbController extends A_Controller {
             String name = nativeValue.getText();
             String value = foreignValue.getText();
             String nExample = nativeExample.getText();
+            String fExample = foreignExample.getText();
             int type = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
             int category = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex())) + 1;
 
@@ -55,6 +51,7 @@ public class AddVerbController extends A_Controller {
             cardsDAO.cards.setName(name);
             cardsDAO.cards.setValue(value);
             cardsDAO.cards.setExample(nExample);
+            cardsDAO.cards.setForeignExample(fExample);
 
             if(categoryObject != null){
                 cardsDAO.cards.setCategory((CardCategories) categoryObject);

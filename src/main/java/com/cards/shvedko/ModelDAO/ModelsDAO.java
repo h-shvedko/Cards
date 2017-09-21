@@ -93,16 +93,18 @@ public class ModelsDAO implements I_DAO {
     public List selectAll() throws Exception {
         String table = this.getClassName();
         Query result = session.createQuery("from " + table);
+        List ret = result.list();
         session.close();
-        return result.list();
+        return ret;
     }
 
     @Override
     public List selectAllBy(String criteria) throws Exception {
         String table = this.getClassName();
         Query result = session.createQuery("from " + table + " " + criteria);
+        List ret = result.list();
         session.close();
-        return result.list();
+        return ret;
     }
 
 

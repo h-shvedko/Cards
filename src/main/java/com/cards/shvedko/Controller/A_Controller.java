@@ -1,6 +1,7 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.MainApp;
+import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
 import com.cards.shvedko.ModelDAO.CardTypesDAO;
 import com.cards.shvedko.ModelDAO.CardsDAO;
@@ -71,6 +72,23 @@ abstract public class A_Controller implements Initializable {
     protected Button addButton;
     @FXML
     protected Button cancelButton;
+
+    //*********************TABLE VIEW CARDS DATA *****************************
+    @FXML
+    protected TableView<Cards> cardsTable;
+    @FXML
+    protected TableColumn<Cards, String> tableTopic;
+    @FXML
+    protected TableColumn<Cards, String> tableSpeechPart;
+    @FXML
+    protected TableColumn<Cards, String> tableNativeValue;
+    @FXML
+    protected TableColumn<Cards, String> tableNativeExample;
+    @FXML
+    protected TableColumn<Cards, String> tableForeignExample;
+    @FXML
+    protected TableColumn<Cards, String> tableForeignValue;
+    //************************************************************************
 
     public static String errorMsg;
     protected String nativeValueOld;
@@ -283,4 +301,10 @@ abstract public class A_Controller implements Initializable {
         foreignConjunctions.setText("");
         foreignConjunctions.setVisible(false);
     }
+
+    public void handleCancelButton(ActionEvent actionEvent){this.goToPage("mainPage.fxml");};
+
+    public void handlePreviewButton(ActionEvent actionEvent){}
+
+    public void handleAddButton(ActionEvent actionEvent){}
 }

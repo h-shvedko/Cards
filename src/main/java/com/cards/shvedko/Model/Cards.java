@@ -27,6 +27,9 @@ public class Cards extends A_Models implements Serializable {
     @Column(name = "example")
     private String example;
 
+    @Column(name = "foreign_example")
+    private String foreignExample;
+
     @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName="id")
 //    @NotNull(message = "You have chosen (or even haven't chosen any) wrong category of Card!")
@@ -207,5 +210,13 @@ public class Cards extends A_Models implements Serializable {
 
     public void setType(CardTypes type) {
         this.type = type;
+    }
+
+    public String getForeignExample() {
+        return foreignExample;
+    }
+
+    public void setForeignExample(String foreignExample) {
+        this.foreignExample = foreignExample;
     }
 }
