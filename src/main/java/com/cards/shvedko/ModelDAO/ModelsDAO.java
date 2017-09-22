@@ -140,6 +140,12 @@ public class ModelsDAO implements I_DAO {
             case "UsersDAO":
                 table = "com.cards.shvedko.Model.Users";
                 break;
+            case "CardsPrepositionAkkusativDAO":
+                table = "com.cards.shvedko.Model.CardsPrepositionAkkusativ";
+                break;
+            case "CardsPrepositionDativDAO":
+                table = "com.cards.shvedko.Model.CardsPrepositionDativ";
+                break;
         }
 
         return table;

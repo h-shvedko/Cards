@@ -38,6 +38,14 @@ public class Cards extends A_Models implements Serializable {
     @JoinColumn(name = "type_id", referencedColumnName="id")
     private CardTypes type;
 
+    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "preposition_akk", referencedColumnName="id")
+    private CardsPrepositionAkkusativ prepositionAkk;
+
+    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "preposition_dat", referencedColumnName="id")
+    private CardsPrepositionDativ prepositionDativ;
+
     @Column(name = "kind_of_noun", length = 1)
     private int kindOfNoun;
 
@@ -56,11 +64,11 @@ public class Cards extends A_Models implements Serializable {
     @Column(name = "is_reflexiv_verb", length = 1)
     private int isReflexiveVerb;
 
-    @Column(name = "preposition_akk")
-    private String prepositionAkk;
-
-    @Column(name = "preposition_dat")
-    private String prepositionDat;
+//    @Column(name = "preposition_akk")
+//    private String prepositionAkk;
+//
+//    @Column(name = "preposition_dat")
+//    private String prepositionDat;
 
     @Column(name = "preposition_gen")
     private String prepositionGen;
@@ -159,25 +167,25 @@ public class Cards extends A_Models implements Serializable {
         this.isReflexiveVerb = isReflexiveVerb;
     }
 
-    @SuppressWarnings("UnusedDeclaration")
-    public String getPrepositionAkk() {
-        return prepositionAkk;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void setPrepositionAkk(String prepositionAkk) {
-        this.prepositionAkk = prepositionAkk;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public String getPrepositionDat() {
-        return prepositionDat;
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void setPrepositionDat(String prepositionDat) {
-        this.prepositionDat = prepositionDat;
-    }
+//    @SuppressWarnings("UnusedDeclaration")
+//    public String getPrepositionAkk() {
+//        return prepositionAkk;
+//    }
+//
+//    @SuppressWarnings("UnusedDeclaration")
+//    public void setPrepositionAkk(String prepositionAkk) {
+//        this.prepositionAkk = prepositionAkk;
+//    }
+//
+//    @SuppressWarnings("UnusedDeclaration")
+//    public String getPrepositionDat() {
+//        return prepositionDat;
+//    }
+//
+//    @SuppressWarnings("UnusedDeclaration")
+//    public void setPrepositionDat(String prepositionDat) {
+//        this.prepositionDat = prepositionDat;
+//    }
 
     @SuppressWarnings("UnusedDeclaration")
     public String getPrepositionGen() {

@@ -26,6 +26,8 @@
         <mapping class="com.cards.shvedko.Model.CardFilesDe"/>
         <mapping class="com.cards.shvedko.Model.Cards"/>
         <mapping class="com.cards.shvedko.Model.Users"/>
+        <mapping class="com.cards.shvedko.Model.CardsPrepositionDativ"/>
+        <mapping class="com.cards.shvedko.Model.CardsPrepositionAkkusativ"/>
     </session-factory>
 
 </hibernate-configuration>

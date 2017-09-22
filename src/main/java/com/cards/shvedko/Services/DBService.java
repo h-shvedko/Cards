@@ -32,6 +32,8 @@ public class DBService {
                 .addAnnotatedClass(CardTypes.class)
                 .addAnnotatedClass(SystemConfigs.class)
                 .addAnnotatedClass(Users.class)
+                .addAnnotatedClass(CardsPrepositionDativ.class)
+                .addAnnotatedClass(CardsPrepositionAkkusativ.class)
                 .buildSessionFactory(serviceRegistry);
         return sessionFactory;
     }
