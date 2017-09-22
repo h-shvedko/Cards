@@ -16,14 +16,14 @@ import java.util.Set;
 public class ModelsDAO implements I_DAO {
 
     protected static Validator validator;
-    protected static final String NOUN = "noun";
-    protected static final String VERB = "verb";
-    protected static final String ADJECTIVE = "adjective";
-    protected static final String PRONOUN = "pronoun";
-    protected static final String ADVERB = "adverb";
-    protected static final String NUMERAL = "numeral";
-    protected static final String PARTICIPLE = "participle";
-    protected static final String OTHER_PART_OF_SPEECH = "other";
+    public static final String NOUN = "Noun";
+    public static final String VERB = "Verb";
+    public static final String ADJECTIVE = "Adjective";
+    public static final String PRONOUN = "Pronoun";
+    public static final String ADVERB = "Adverb";
+    public static final String NUMERAL = "Numeral";
+    public static final String PARTICIPLE = "Participle";
+    public static final String OTHER_PART_OF_SPEECH = "Other";
 
     protected final DBService dbServise;
     protected final Session session;

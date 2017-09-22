@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,6 +35,15 @@ import java.util.logging.Logger;
 abstract public class A_Controller implements Initializable {
 
     protected static String errorStringMsg;
+
+    @FXML
+    protected GridPane grid;
+    @FXML
+    protected Button close;
+    @FXML
+    protected Label errorMessage;
+    @FXML
+    protected Label titleOfAddCard;
     @FXML
     protected Label errorNativeValue;
     @FXML
@@ -302,7 +312,7 @@ abstract public class A_Controller implements Initializable {
         foreignConjunctions.setVisible(false);
     }
 
-    public void handleCancelButton(ActionEvent actionEvent){this.goToPage("mainPage.fxml");};
+    public void handleCancelButton(ActionEvent actionEvent){this.goToPage("mainPage.fxml");}
 
     public void handlePreviewButton(ActionEvent actionEvent){}
 

@@ -14,19 +14,8 @@ import java.util.ResourceBundle;
 
 public class MainPageController extends A_Controller {
 
-    @FXML
-    private GridPane grid;
-    @FXML
-    private Button addWord;
-    @FXML
-    private Button seeAllWords;
-    @FXML
-    private Button close;
-    @FXML
-    private Label errorMessage;
-
     public void handleAddWordButton(ActionEvent actionEvent) {
-        goToPage("addCardVerb.fxml");
+        goToPage("addCard.fxml");
     }
 
     public void handleSeeAllWordsButton(ActionEvent actionEvent) {

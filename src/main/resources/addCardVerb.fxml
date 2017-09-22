@@ -49,15 +49,15 @@
                         </Label>
                         <ComboBox fx:id="speechPart" prefHeight="40.0" prefWidth="252.0" style="-fx-font-size: 20px;"
                                   GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
-                        <Label text="Error part of speech" textFill="#e10303" GridPane.columnIndex="2"
-                               GridPane.valignment="BOTTOM" fx:id="errorPartOfSpeech">
+                        <Label fx:id="errorPartOfSpeech" text="Error part of speech" textFill="#e10303"
+                               GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
                             <font>
                                 <Font size="16.0"/>
                             </font>
                         </Label>
                     </children>
                 </GridPane>
-                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="84.0" prefWidth="601.0"
+                <Label fx:id="titleOfAddCard" alignment="CENTER" contentDisplay="CENTER" prefHeight="104.0" prefWidth="605.0"
                        style="-fx-background-color: #deede9;" text="Add new verb:">
                     <font>
                         <Font size="36.0"/>
@@ -72,8 +72,8 @@
                         </Label>
                         <ComboBox fx:id="topic" prefHeight="40.0" prefWidth="252.0" style="-fx-font-size: 20px;"
                                   GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
-                        <Label text="Error topic" textFill="#e10303" GridPane.columnIndex="2" GridPane.halignment="LEFT"
-                               GridPane.valignment="BOTTOM" fx:id="errorTopic">
+                        <Label fx:id="errorTopic" text="Error topic" textFill="#e10303" GridPane.columnIndex="2"
+                               GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                             <font>
                                 <Font size="16.0"/>
                             </font>
@@ -101,8 +101,8 @@
                         <Hyperlink fx:id="nativeConjunctions" prefHeight="23.0" prefWidth="255.0"
                                    text="Found 2 conjunctions" textFill="#d03f3f" GridPane.columnIndex="2"
                                    GridPane.halignment="LEFT" GridPane.valignment="BOTTOM"/>
-                        <Label text="Error native value" textFill="#e10303" GridPane.columnIndex="2"
-                               GridPane.valignment="BOTTOM" fx:id="errorNativeValue">
+                        <Label fx:id="errorNativeValue" text="Error native value" textFill="#e10303"
+                               GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
                             <font>
                                 <Font size="16.0"/>
                             </font>
