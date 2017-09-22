@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="1001.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="1001.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.cards.shvedko.Controller.AddCardVerbController">
+            fx:controller="com.cards.shvedko.Controller.AddCardAdverbController">
     <children>
         <GridPane layoutX="-6.0" prefHeight="1001.0" prefWidth="608.0">
             <columnConstraints>
@@ -58,7 +58,7 @@
                     </children>
                 </GridPane>
                 <Label fx:id="titleOfAddCard" alignment="CENTER" contentDisplay="CENTER" prefHeight="104.0" prefWidth="605.0"
-                       style="-fx-background-color: #deede9;" text="Add new verb:">
+                       style="-fx-background-color: #deede9;" text="Add new other:">
                     <font>
                         <Font size="36.0"/>
                     </font>

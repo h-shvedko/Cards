@@ -16,6 +16,21 @@ public class AddCardController extends A_Controller {
             case ModelsDAO.VERB:
                 goToPage("addCardVerb.fxml");
                 break;
+            case ModelsDAO.ADJECTIVE:
+                goToPage("addCardAdjective.fxml");
+                break;
+            case ModelsDAO.ADVERB:
+                goToPage("addCardAdverb.fxml");
+                break;
+            case ModelsDAO.NUMERAL:
+                goToPage("addCardNumeral.fxml");
+                break;
+            case ModelsDAO.PARTICIPLE:
+                goToPage("addCardParticiple.fxml");
+                break;
+            case ModelsDAO.PRONOUN:
+                goToPage("addCardPronoun.fxml");
+                break;
             default:
                 goToPage("addCardOther.fxml");
                 break;

@@ -11,7 +11,7 @@ import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddVerbController extends A_Controller {
+public class AddCardVerbController extends A_Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -63,7 +63,7 @@ public class AddVerbController extends A_Controller {
 
             CardsDAO cardsDAO = new CardsDAO();
             cardsDAO.cards.setName(name);
-            cardsDAO.cards.setValue(value);
+            cardsDAO.cards.setForeignName(value);
             cardsDAO.cards.setExample(nExample);
             cardsDAO.cards.setForeignExample(fExample);
 

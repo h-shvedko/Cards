@@ -21,8 +21,8 @@ public class Cards extends A_Models implements Serializable {
 
     @NotNull(message = "Foreign word value of Card can't be empty!")
     @Size(min = 2, message = "Foreign word value of Card can't be less then 2 symbols!")
-    @Column(name = "value", nullable = false)
-    private String value;
+    @Column(name = "foreign_name", nullable = false)
+    private String foreignName;
 
     @Column(name = "example")
     private String example;
@@ -32,16 +32,17 @@ public class Cards extends A_Models implements Serializable {
 
     @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName="id")
-//    @NotNull(message = "You have chosen (or even haven't chosen any) wrong category of Card!")
     private CardCategories category;
 
     @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName="id")
-//    @NotNull(message = "You have chosen (or even haven't chosen any) wrong type of Card!")
     private CardTypes type;
 
     @Column(name = "kind_of_noun", length = 1)
     private int kindOfNoun;
+
+    @Column(name = "plural_endung")
+    private String pluralEndung;
 
     @Column(name = "is_regular_verb", length = 1)
     private int isRegularVerb;
@@ -89,13 +90,13 @@ public class Cards extends A_Models implements Serializable {
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getForeignName() {
+        return foreignName;
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void setValue(String value) {
-        this.value = value;
+    public void setForeignName(String value) {
+        this.foreignName = value;
     }
 
     @SuppressWarnings("UnusedDeclaration")
@@ -218,5 +219,13 @@ public class Cards extends A_Models implements Serializable {
 
     public void setForeignExample(String foreignExample) {
         this.foreignExample = foreignExample;
+    }
+
+    public String getPluralEndung() {
+        return pluralEndung;
+    }
+
+    public void setPluralEndung(String pluralEndung) {
+        this.pluralEndung = pluralEndung;
     }
 }

@@ -2,11 +2,21 @@ package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddCardNounController extends A_Controller {
+
+    @FXML
+    public RadioButton maskulinum;
+    @FXML
+    public RadioButton femininum;
+    @FXML
+    public RadioButton neutrum;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -14,6 +24,11 @@ public class AddCardNounController extends A_Controller {
         titleOfAddCard.setText("Add new noun:");
         speechPart.setValue("Noun");
         speechPart.setDisable(true);
+        final ToggleGroup group = new ToggleGroup();
+
+        maskulinum.setToggleGroup(group);
+        femininum.setToggleGroup(group);
+        neutrum.setToggleGroup(group);
     }
 
     @Override
@@ -24,4 +39,3 @@ public class AddCardNounController extends A_Controller {
 
     }
 }
-//Add new verb:

@@ -4,7 +4,6 @@ import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
 import com.cards.shvedko.ModelDAO.CardTypesDAO;
-import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
