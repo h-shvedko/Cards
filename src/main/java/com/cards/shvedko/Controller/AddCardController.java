@@ -1,12 +1,13 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
 
 public class AddCardController extends A_Controller {
 
     @Override
-    public void handleAddButton(ActionEvent actionEvent) {
+    public CardsDAO handleAddButton(ActionEvent actionEvent) {
         String value = speechPart.getValue();
 
         switch (value){
@@ -35,5 +36,6 @@ public class AddCardController extends A_Controller {
                 goToPage("addCardOther.fxml");
                 break;
         }
+        return null;
     }
 }

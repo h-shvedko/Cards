@@ -1,9 +1,13 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.MainApp;
+import com.cards.shvedko.Model.A_Models;
+import com.cards.shvedko.Model.CardCategories;
+import com.cards.shvedko.Model.CardTypes;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
 import com.cards.shvedko.ModelDAO.CardTypesDAO;
+import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -188,16 +192,16 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
-    public boolean compareNativeValue(){
-        if(nativeValueNew != null && nativeValueNew.equals(nativeValueOld)){
+    public boolean compareNativeValue() {
+        if (nativeValueNew != null && nativeValueNew.equals(nativeValueOld)) {
             return true;
         }
 
         return false;
     }
 
-    public boolean compareForeignValue(){
-        if(foreignValueNew != null && foreignValueNew.equals(foreignValueOld)){
+    public boolean compareForeignValue() {
+        if (foreignValueNew != null && foreignValueNew.equals(foreignValueOld)) {
             return true;
         }
 
@@ -311,9 +315,55 @@ abstract public class A_Controller implements Initializable {
         foreignConjunctions.setVisible(false);
     }
 
-    public void handleCancelButton(ActionEvent actionEvent){this.goToPage("mainPage.fxml");}
+    public void handleCancelButton(ActionEvent actionEvent) {
+        this.goToPage("mainPage.fxml");
+    }
 
-    public void handlePreviewButton(ActionEvent actionEvent){}
+    public void handlePreviewButton(ActionEvent actionEvent) {
+    }
 
-    public void handleAddButton(ActionEvent actionEvent){}
+    public CardsDAO handleAddButton(ActionEvent actionEvent) {
+
+        String name = nativeValue.getText();
+        String value = foreignValue.getText();
+        String nExample = nativeExample.getText();
+        String fExample = foreignExample.getText();
+        int type = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
+        int category = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex())) + 1;
+
+        CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
+        A_Models categoryObject = null;
+        try {
+            categoryObject = cardCategoriesDAO.select("where id=" + category);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CardTypesDAO cardTypesDAO = new CardTypesDAO();
+        A_Models typeObject = null;
+        try {
+            typeObject = cardTypesDAO.select("where id=" + type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CardsDAO cardsDAO = new CardsDAO();
+        cardsDAO.cards.setName(name);
+        cardsDAO.cards.setForeignName(value);
+        cardsDAO.cards.setExample(nExample);
+        cardsDAO.cards.setForeignExample(fExample);
+
+        if (categoryObject != null) {
+            cardsDAO.cards.setCategory((CardCategories) categoryObject);
+        }
+
+        if (typeObject != null) {
+            cardsDAO.cards.setType((CardTypes) typeObject);
+        }
+
+        cardsDAO.cards.setIsVisible(1);
+
+        return cardsDAO;
+
+    }
 }

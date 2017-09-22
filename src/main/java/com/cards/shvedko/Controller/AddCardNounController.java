@@ -1,6 +1,6 @@
 package com.cards.shvedko.Controller;
 
-import com.cards.shvedko.ModelDAO.ModelsDAO;
+import com.cards.shvedko.ModelDAO.CardsDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
@@ -35,7 +35,8 @@ public class AddCardNounController extends A_Controller {
     public void handleCancelButton(ActionEvent actionEvent){this.goToPage("addCard.fxml");}
 
     @Override
-    public void handleAddButton(ActionEvent actionEvent) {
+    public CardsDAO handleAddButton(ActionEvent actionEvent) {
 
+        return null;
     }
 }

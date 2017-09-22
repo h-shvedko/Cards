@@ -71,7 +71,7 @@ public class ListOfCardsController extends A_Controller {
         });
         tableNativeValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("name"));
         tableNativeExample.setCellValueFactory(new PropertyValueFactory<Cards, String>("example"));
-        tableForeignValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("value"));
+        tableForeignValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("foreignName"));
         tableForeignExample.setCellValueFactory(new PropertyValueFactory<Cards, String>("foreignExample"));
     }
 
