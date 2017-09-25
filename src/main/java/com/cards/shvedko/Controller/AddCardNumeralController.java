@@ -12,7 +12,7 @@ public class AddCardNumeralController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         titleOfAddCard.setText("Add new numerical:");
-        speechPart.setValue("Numerical");
+        speechPart.setValue("Numeral");
         speechPart.setDisable(true);
     }
 
@@ -22,6 +22,26 @@ public class AddCardNumeralController extends A_Controller {
     @Override
     public CardsDAO handleAddButton(ActionEvent actionEvent) {
 
-        return null;
+        if (compareForeignValue() && compareNativeValue()) {
+            showQuiestion(actionEvent, "Do really want to save this card? You haven't changed anything in native and foreign words!");
+        }
+
+        CardsDAO cardsDAO = null;
+        if (answer) {
+            cardsDAO = super.handleAddButton(actionEvent);
+
+            if (cardsDAO.validate(cardsDAO.cards)) {
+                try {
+                    cardsDAO.save();
+                    showSuccess(actionEvent);
+                } catch (Exception ex) {
+                    crashAppeared(ex.getMessage());
+                }
+            } else {
+                showErrors(cardsDAO);
+            }
+        }
+
+        return cardsDAO;
     }
 }
