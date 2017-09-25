@@ -24,6 +24,13 @@ public class ModelsDAO implements I_DAO {
     public static final String NUMERAL = "Numeral";
     public static final String PARTICIPLE = "Participle";
     public static final String OTHER_PART_OF_SPEECH = "Other";
+    public static final String MUSKULINUM = "maskulinum";
+    public static final String FEMININUM = "femininum";
+    public static final String NEUTRUM = "neutrum";
+    public static final int MUSKULINUM_INTO_DB = 1;
+    public static final int FEMININUM_INTO_DB= 2;
+    public static final int NEUTRUM_INTO_DB = 3;
+
 
     protected final DBService dbServise;
     protected final Session session;

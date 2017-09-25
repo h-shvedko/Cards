@@ -1,6 +1,8 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.ModelDAO.CardsDAO;
+import com.cards.shvedko.ModelDAO.ModelsDAO;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
@@ -18,16 +20,22 @@ public class AddCardNounController extends A_Controller {
     @FXML
     public RadioButton neutrum;
 
+    private final ToggleGroup group = new ToggleGroup();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         titleOfAddCard.setText("Add new noun:");
         speechPart.setValue("Noun");
         speechPart.setDisable(true);
-        final ToggleGroup group = new ToggleGroup();
 
+        maskulinum.setUserData(ModelsDAO.MUSKULINUM);
         maskulinum.setToggleGroup(group);
+
+        femininum.setUserData(ModelsDAO.FEMININUM);
         femininum.setToggleGroup(group);
+
+        neutrum.setUserData(ModelsDAO.NEUTRUM);
         neutrum.setToggleGroup(group);
     }
 
@@ -37,6 +45,45 @@ public class AddCardNounController extends A_Controller {
     @Override
     public CardsDAO handleAddButton(ActionEvent actionEvent) {
 
-        return null;
+        if (compareForeignValue() && compareNativeValue()) {
+            showQuiestion(actionEvent, "Do really want to save this card? You haven't changed anything in native and foreign words!");
+        }
+
+        CardsDAO cardsDAO = null;
+        if (answer) {
+            cardsDAO = super.handleAddButton(actionEvent);
+
+            String typeOfNoun = group.getSelectedToggle().getUserData().toString();
+            int typeOfNounIntoDB = 1;
+            switch(typeOfNoun){
+                case ModelsDAO.FEMININUM:
+                    typeOfNounIntoDB = ModelsDAO.FEMININUM_INTO_DB;
+                    break;
+                case ModelsDAO.MUSKULINUM:
+                    typeOfNounIntoDB = ModelsDAO.MUSKULINUM_INTO_DB;
+                    break;
+                case ModelsDAO.NEUTRUM:
+                    typeOfNounIntoDB = ModelsDAO.NEUTRUM_INTO_DB;
+                    break;
+                default:
+                    typeOfNounIntoDB = ModelsDAO.MUSKULINUM_INTO_DB;
+                    break;
+            }
+
+            cardsDAO.cards.setKindOfNoun(typeOfNounIntoDB);
+
+            if (cardsDAO.validate(cardsDAO.cards)) {
+                try {
+                    cardsDAO.save();
+                    showSuccess(actionEvent);
+                } catch (Exception ex) {
+                    crashAppeared(ex.getMessage());
+                }
+            } else {
+                showErrors(cardsDAO);
+            }
+        }
+
+        return cardsDAO;
     }
 }
