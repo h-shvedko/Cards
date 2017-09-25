@@ -31,6 +31,21 @@ public class ModelsDAO implements I_DAO {
     public static final int FEMININUM_INTO_DB= 2;
     public static final int NEUTRUM_INTO_DB = 3;
 
+    public static final String HABEN_PERFECT = "haben";
+    public static final int HABEN_PERFECT_TO_DB = 1;
+    public static final String SEIN_PERFECT = "sein";
+    public static final int SEIN_PERFECT_TO_DB = 0;
+
+    public static final String REGELMESSIG_VERB = "regelmessig";
+    public static final int REGELMESSIG_VERB_TO_DB = 1;
+    public static final String UNREGELMESSIG_VERB = "unregelmessig";
+    public static final int UNREGELMESSIG_VERB_TO_DB = 0;
+
+    public static final String TREMBARE_PREFIX_VERB = "trembare";
+    public static final int TREMBARE_PREFIX_VERB_TO_DB = 1;
+    public static final String UMTREMBARE_PREFIX_VERB_VERB = "umtrembare";
+    public static final int UMTREMBARE_PREFIX_VERB_VERB_TO_DB = 0;
+
 
     protected final DBService dbServise;
     protected final Session session;

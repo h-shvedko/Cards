@@ -1,6 +1,7 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.ModelDAO.CardsDAO;
+import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -69,13 +70,19 @@ public class AddCardVerbController extends A_Controller {
         speechPart.setValue("Verb");
         speechPart.setDisable(true);
 
+        regelmassigVerb.setUserData(ModelsDAO.REGELMESSIG_VERB);
         regelmassigVerb.setToggleGroup(verbType);
+        unregelmassigVerb.setUserData(ModelsDAO.UNREGELMESSIG_VERB);
         unregelmassigVerb.setToggleGroup(verbType);
 
+        hasNotTermbarePrefix.setUserData(ModelsDAO.TREMBARE_PREFIX_VERB);
         hasNotTermbarePrefix.setToggleGroup(trembareGroup);
+        hasTermbarePrefix.setUserData(ModelsDAO.UMTREMBARE_PREFIX_VERB_VERB);
         hasTermbarePrefix.setToggleGroup(trembareGroup);
 
+        seinPerfect.setUserData(ModelsDAO.SEIN_PERFECT);
         seinPerfect.setToggleGroup(perfectGroup);
+        habenPerfect.setUserData(ModelsDAO.HABEN_PERFECT);
         habenPerfect.setToggleGroup(perfectGroup);
 
 
@@ -100,6 +107,10 @@ public class AddCardVerbController extends A_Controller {
         if (answer) {
             cardsDAO = super.handleAddButton(actionEvent);
 
+            cardsDAO.cards.setIsPerfectWithHaben(getPerfectType());
+            cardsDAO.cards.setIsRegularVerb(getVerbType());
+            cardsDAO.cards.setIsTrembarePrefixVerb(getPrefixType());
+
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {
                     cardsDAO.save();
@@ -114,4 +125,59 @@ public class AddCardVerbController extends A_Controller {
 
         return cardsDAO;
     }
+
+    private int getPerfectType(){
+        String typeOfPerfect = perfectGroup.getSelectedToggle().getUserData().toString();
+        int typeOfPerfectIntoDB;
+        switch(typeOfPerfect){
+            case ModelsDAO.HABEN_PERFECT:
+                typeOfPerfectIntoDB = ModelsDAO.HABEN_PERFECT_TO_DB;
+                break;
+            case ModelsDAO.SEIN_PERFECT:
+                typeOfPerfectIntoDB = ModelsDAO.SEIN_PERFECT_TO_DB;
+                break;
+            default:
+                typeOfPerfectIntoDB = ModelsDAO.HABEN_PERFECT_TO_DB;
+                break;
+        }
+
+        return typeOfPerfectIntoDB;
+    }
+
+    private int getVerbType(){
+        String typeOfVerb = verbType.getSelectedToggle().getUserData().toString();
+        int typeOfVerbIntoDB;
+        switch(typeOfVerb){
+            case ModelsDAO.REGELMESSIG_VERB:
+                typeOfVerbIntoDB = ModelsDAO.REGELMESSIG_VERB_TO_DB;
+                break;
+            case ModelsDAO.UNREGELMESSIG_VERB:
+                typeOfVerbIntoDB = ModelsDAO.UNREGELMESSIG_VERB_TO_DB;
+                break;
+            default:
+                typeOfVerbIntoDB = ModelsDAO.REGELMESSIG_VERB_TO_DB;
+                break;
+        }
+
+        return typeOfVerbIntoDB;
+    }
+
+    private int getPrefixType(){
+        String typeOfPrefix = trembareGroup.getSelectedToggle().getUserData().toString();
+        int typeOfPrefixIntoDB;
+        switch(typeOfPrefix){
+            case ModelsDAO.TREMBARE_PREFIX_VERB:
+                typeOfPrefixIntoDB = ModelsDAO.TREMBARE_PREFIX_VERB_TO_DB;
+                break;
+            case ModelsDAO.UMTREMBARE_PREFIX_VERB_VERB:
+                typeOfPrefixIntoDB = ModelsDAO.UMTREMBARE_PREFIX_VERB_VERB_TO_DB;
+                break;
+            default:
+                typeOfPrefixIntoDB = ModelsDAO.TREMBARE_PREFIX_VERB_TO_DB;
+                break;
+        }
+
+        return typeOfPrefixIntoDB;
+    }
+
 }
