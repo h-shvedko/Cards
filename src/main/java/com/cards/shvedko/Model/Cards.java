@@ -236,4 +236,20 @@ public class Cards extends A_Models implements Serializable {
     public void setPluralEndung(String pluralEndung) {
         this.pluralEndung = pluralEndung;
     }
+
+    public CardsPrepositionDativ getPrepositionDativ() {
+        return prepositionDativ;
+    }
+
+    public void setPrepositionDativ(CardsPrepositionDativ prepositionDativ) {
+        this.prepositionDativ = prepositionDativ;
+    }
+
+    public CardsPrepositionAkkusativ getPrepositionAkk() {
+        return prepositionAkk;
+    }
+
+    public void setPrepositionAkk(CardsPrepositionAkkusativ prepositionAkk) {
+        this.prepositionAkk = prepositionAkk;
+    }
 }

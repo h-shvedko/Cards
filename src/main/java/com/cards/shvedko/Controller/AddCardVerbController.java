@@ -1,7 +1,13 @@
 package com.cards.shvedko.Controller;
 
-import com.cards.shvedko.ModelDAO.CardsDAO;
-import com.cards.shvedko.ModelDAO.ModelsDAO;
+import com.cards.shvedko.Model.A_Models;
+import com.cards.shvedko.Model.CardsPrepositionAkkusativ;
+import com.cards.shvedko.Model.CardsPrepositionDativ;
+import com.cards.shvedko.ModelDAO.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -19,9 +25,9 @@ public class AddCardVerbController extends A_Controller {
     @FXML
     public RadioButton seinPerfect;
     @FXML
-    public ComboBox pronomenAkk;
+    public ComboBox<String> pronomenAkk;
     @FXML
-    public ComboBox pronomenDat;
+    public ComboBox<String> pronomenDat;
     @FXML
     public TextField pronomenGen;
     @FXML
@@ -84,6 +90,34 @@ public class AddCardVerbController extends A_Controller {
         seinPerfect.setToggleGroup(perfectGroup);
         habenPerfect.setUserData(ModelsDAO.HABEN_PERFECT);
         habenPerfect.setToggleGroup(perfectGroup);
+
+        if (pronomenAkk != null) {
+            ObservableList<String> dataAkk = FXCollections.observableArrayList();
+            dataAkk = CardsPrepositionAkkusativDAO.setAllPrepositions(dataAkk);
+            pronomenAkk.setItems(dataAkk);
+
+            pronomenAkk.valueProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    errorTopic.setText("");
+                    errorTopic.setVisible(false);
+                }
+            });
+        }
+
+        if (pronomenDat != null) {
+            ObservableList<String> dataDat = FXCollections.observableArrayList();
+            dataDat = CardsPrepositionDativDAO.setAllPrepositions(dataDat);
+            pronomenDat.setItems(dataDat);
+
+            pronomenDat.valueProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    errorTopic.setText("");
+                    errorTopic.setVisible(false);
+                }
+            });
+        }
     }
 
     @Override
@@ -111,6 +145,36 @@ public class AddCardVerbController extends A_Controller {
             cardsDAO.cards.setIsRegularVerb(getVerbType());
             cardsDAO.cards.setIsTrembarePrefixVerb(getPrefixType());
             cardsDAO.cards.setIsReflexiveVerb(getIsReflexive());
+
+            //setting dative preposition
+            int prepositionDat = Integer.parseInt(String.valueOf(pronomenDat.getSelectionModel().getSelectedIndex())) + 1;
+            CardsPrepositionDativDAO cardsPrepositionDativDAO = new CardsPrepositionDativDAO();
+            A_Models dativObject = null;
+            try {
+                dativObject = cardsPrepositionDativDAO.select("where id=" + prepositionDat);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (dativObject != null) {
+                cardsDAO.cards.setPrepositionDativ((CardsPrepositionDativ) dativObject);
+            }
+
+            //setting akkusative preposition
+            int prepositionAkk = Integer.parseInt(String.valueOf(pronomenAkk.getSelectionModel().getSelectedIndex())) + 1;
+            CardsPrepositionAkkusativDAO cardsPrepositionAkkusativDAO = new CardsPrepositionAkkusativDAO();
+            A_Models akkObject = null;
+            try {
+                akkObject = cardsPrepositionAkkusativDAO.select("where id=" + prepositionAkk);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (akkObject != null) {
+                cardsDAO.cards.setPrepositionAkk((CardsPrepositionAkkusativ) akkObject);
+            }
+
+            //setting genetive preposition
+            String genPronomenValue = pronomenGen.getText();
+            cardsDAO.cards.setPrepositionGen(genPronomenValue);
 
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {
