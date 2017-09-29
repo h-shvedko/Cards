@@ -84,12 +84,12 @@ public class AddCardVerbController extends A_Controller {
         seinPerfect.setToggleGroup(perfectGroup);
         habenPerfect.setUserData(ModelsDAO.HABEN_PERFECT);
         habenPerfect.setToggleGroup(perfectGroup);
-
-
     }
 
     @Override
-    public void handleCancelButton(ActionEvent actionEvent){this.goToPage("addCard.fxml");}
+    public void handleCancelButton(ActionEvent actionEvent) {
+        this.goToPage("addCard.fxml");
+    }
 
     @Override
     public void handlePreviewButton(ActionEvent actionEvent) {
@@ -110,6 +110,7 @@ public class AddCardVerbController extends A_Controller {
             cardsDAO.cards.setIsPerfectWithHaben(getPerfectType());
             cardsDAO.cards.setIsRegularVerb(getVerbType());
             cardsDAO.cards.setIsTrembarePrefixVerb(getPrefixType());
+            cardsDAO.cards.setIsReflexiveVerb(getIsReflexive());
 
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {
@@ -126,10 +127,20 @@ public class AddCardVerbController extends A_Controller {
         return cardsDAO;
     }
 
-    private int getPerfectType(){
+    private int getIsReflexive() {
+
+        int ret = 0;
+
+        if (reflexiveVerb.isSelected()) {
+            ret = 1;
+        }
+        return ret;
+    }
+
+    private int getPerfectType() {
         String typeOfPerfect = perfectGroup.getSelectedToggle().getUserData().toString();
         int typeOfPerfectIntoDB;
-        switch(typeOfPerfect){
+        switch (typeOfPerfect) {
             case ModelsDAO.HABEN_PERFECT:
                 typeOfPerfectIntoDB = ModelsDAO.HABEN_PERFECT_TO_DB;
                 break;
@@ -144,10 +155,10 @@ public class AddCardVerbController extends A_Controller {
         return typeOfPerfectIntoDB;
     }
 
-    private int getVerbType(){
+    private int getVerbType() {
         String typeOfVerb = verbType.getSelectedToggle().getUserData().toString();
         int typeOfVerbIntoDB;
-        switch(typeOfVerb){
+        switch (typeOfVerb) {
             case ModelsDAO.REGELMESSIG_VERB:
                 typeOfVerbIntoDB = ModelsDAO.REGELMESSIG_VERB_TO_DB;
                 break;
@@ -162,10 +173,10 @@ public class AddCardVerbController extends A_Controller {
         return typeOfVerbIntoDB;
     }
 
-    private int getPrefixType(){
+    private int getPrefixType() {
         String typeOfPrefix = trembareGroup.getSelectedToggle().getUserData().toString();
         int typeOfPrefixIntoDB;
-        switch(typeOfPrefix){
+        switch (typeOfPrefix) {
             case ModelsDAO.TREMBARE_PREFIX_VERB:
                 typeOfPrefixIntoDB = ModelsDAO.TREMBARE_PREFIX_VERB_TO_DB;
                 break;

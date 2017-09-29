@@ -46,6 +46,8 @@ public class ModelsDAO implements I_DAO {
     public static final String UMTREMBARE_PREFIX_VERB_VERB = "umtrembare";
     public static final int UMTREMBARE_PREFIX_VERB_VERB_TO_DB = 0;
 
+    public static final int IS_REFLEXIVE = 1;
+
 
     protected final DBService dbServise;
     protected final Session session;
