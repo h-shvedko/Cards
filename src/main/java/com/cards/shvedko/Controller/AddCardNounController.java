@@ -6,7 +6,9 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +21,10 @@ public class AddCardNounController extends A_Controller {
     public RadioButton femininum;
     @FXML
     public RadioButton neutrum;
+    @FXML
+    public TextField foreignValuePlural;
+    @FXML
+    public ImageView foreignValueVoicePlural;
 
     private final ToggleGroup group = new ToggleGroup();
 
@@ -71,6 +77,9 @@ public class AddCardNounController extends A_Controller {
             }
 
             cardsDAO.cards.setKindOfNoun(typeOfNounIntoDB);
+
+            String foreignPlural = foreignValuePlural.getText();
+            cardsDAO.cards.setPluralEndung(foreignPlural);
 
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {
