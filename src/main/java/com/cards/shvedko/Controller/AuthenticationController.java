@@ -38,6 +38,7 @@ public class AuthenticationController extends A_Controller{
     }
 
     public void createAccount(ActionEvent actionEvent) throws Exception {
+        this.goToPage("registration.fxml");
     }
 
     public void initialize(URL location, ResourceBundle resources) {
