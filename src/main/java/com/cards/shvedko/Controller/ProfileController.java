@@ -1,15 +1,16 @@
 package com.cards.shvedko.Controller;
 
-import com.cards.shvedko.ModelDAO.UsersDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegistrationController extends A_Controller{
+public class ProfileController extends A_Controller{
 
     @FXML
     public Button close;
@@ -25,8 +26,6 @@ public class RegistrationController extends A_Controller{
     public Button save;
     @FXML
     public Label lastNameError;
-    @FXML
-    public Label userNameError;
     @FXML
     public Label passwordError;
     @FXML

@@ -12,14 +12,16 @@
     <children>
         <GridPane fx:id="grid" alignment="CENTER" layoutY="-3.0" prefHeight="400.0" prefWidth="600.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="25.0" prefHeight="30.0"
+                                valignment="CENTER" vgrow="SOMETIMES"/>
                 <RowConstraints maxHeight="100.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER"
                                 vgrow="SOMETIMES"/>
-                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+                <RowConstraints percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
                 <Button fx:id="addWord" mnemonicParsing="false" onAction="#handleAddWordButton" prefHeight="85.0"
@@ -31,22 +33,51 @@
                 </Button>
                 <Button fx:id="seeAllWords" layoutX="213.0" layoutY="35.0" mnemonicParsing="false"
                         onAction="#handleSeeAllWordsButton" prefHeight="85.0" prefWidth="194.0" text="SEE ALL WORDS"
-                        GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                        GridPane.valignment="CENTER">
                     <font>
                         <Font size="20.0"/>
                     </font>
                 </Button>
                 <Button fx:id="close" layoutX="10.0" layoutY="168.0" mnemonicParsing="false"
                         onAction="#handleCloseButton" prefHeight="85.0" prefWidth="194.0" text="EXIT"
-                        GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3"
+                        GridPane.valignment="CENTER">
                     <font>
                         <Font size="20.0"/>
                     </font>
                 </Button>
-                <Label fx:id="errorMessage" alignment="CENTER" prefHeight="68.0" prefWidth="598.0" text=""
-                       textFill="#eb0f0f" visible="false">
+                <Button fx:id="learnCards" alignment="CENTER" layoutX="363.0" layoutY="118.0" mnemonicParsing="false"
+                        onAction="#handleLearnCardsButton" prefHeight="85.0" prefWidth="194.0" text="LEARN CARDS"
+                        GridPane.rowIndex="2">
                     <font>
                         <Font size="20.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="profile" alignment="CENTER" layoutX="63.0" layoutY="218.0" mnemonicParsing="false"
+                        onAction="#handleProfileButton" prefHeight="85.0" prefWidth="194.0" text="PROFILE"
+                        GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="settings" alignment="CENTER" layoutX="363.0" layoutY="218.0" mnemonicParsing="false"
+                        onAction="#handleSettingsButton" prefHeight="85.0" prefWidth="194.0" text="SETTINGS"
+                        GridPane.rowIndex="3">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Button>
+                <Label contentDisplay="RIGHT" text="Hello " textAlignment="RIGHT" GridPane.halignment="RIGHT"
+                       GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="30.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="greeting" contentDisplay="RIGHT" layoutX="232.0" layoutY="38.0" text="USer!" textAlignment="RIGHT"
+                       GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="30.0"/>
                     </font>
                 </Label>
             </children>

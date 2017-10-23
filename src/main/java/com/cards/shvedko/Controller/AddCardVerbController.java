@@ -122,7 +122,7 @@ public class AddCardVerbController extends A_Controller {
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("addCard.fxml");
+        this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
     }
 
     @Override

@@ -17,6 +17,6 @@ public class ModalSuccessController extends A_Controller {
 
     public void handleCloseButton(ActionEvent actionEvent) {
         closeWindow(createNew);
-        goToPage("mainPage.fxml");
+        this.goToPage("mainPage.fxml", A_Controller.MAIN_PAGE_TITLE, "");
     }
 }

@@ -46,7 +46,9 @@ public class AddCardNounController extends A_Controller {
     }
 
     @Override
-    public void handleCancelButton(ActionEvent actionEvent){this.goToPage("addCard.fxml");}
+    public void handleCancelButton(ActionEvent actionEvent) {
+        this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
+    }
 
     @Override
     public CardsDAO handleAddButton(ActionEvent actionEvent) {
@@ -61,7 +63,7 @@ public class AddCardNounController extends A_Controller {
 
             String typeOfNoun = group.getSelectedToggle().getUserData().toString();
             int typeOfNounIntoDB = 1;
-            switch(typeOfNoun){
+            switch (typeOfNoun) {
                 case ModelsDAO.FEMININUM:
                     typeOfNounIntoDB = ModelsDAO.FEMININUM_INTO_DB;
                     break;

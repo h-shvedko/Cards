@@ -12,28 +12,28 @@ public class AddCardController extends A_Controller {
 
         switch (value){
             case ModelsDAO.NOUN:
-                goToPage("addCardNoun.fxml");
+                goToPage("addCardNoun.fxml", A_Controller.ADD_NOUN_PAGE, "");
                 break;
             case ModelsDAO.VERB:
-                goToPage("addCardVerb.fxml");
+                goToPage("addCardVerb.fxml", A_Controller.ADD_VERB_PAGE, "");
                 break;
             case ModelsDAO.ADJECTIVE:
-                goToPage("addCardAdjective.fxml");
+                goToPage("addCardAdjective.fxml", A_Controller.ADD_ADJECTIVE_PAGE, "");
                 break;
             case ModelsDAO.ADVERB:
-                goToPage("addCardAdverb.fxml");
+                goToPage("addCardAdverb.fxml", A_Controller.ADD_ADVERB_PAGE, "");
                 break;
             case ModelsDAO.NUMERAL:
-                goToPage("addCardNumeral.fxml");
+                goToPage("addCardNumeral.fxml", A_Controller.ADD_NUMERAL_PAGE, "");
                 break;
             case ModelsDAO.PARTICIPLE:
-                goToPage("addCardParticiple.fxml");
+                goToPage("addCardParticiple.fxml", A_Controller.ADD_PARTICIPLE_PAGE, "");
                 break;
             case ModelsDAO.PRONOUN:
-                goToPage("addCardPronoun.fxml");
+                goToPage("addCardPronoun.fxml", A_Controller.ADD_PRONOUN_PAGE, "");
                 break;
             default:
-                goToPage("addCardOther.fxml");
+                goToPage("addCardOther.fxml", A_Controller.ADD_OTHER_PAGE, "");
                 break;
         }
         return null;

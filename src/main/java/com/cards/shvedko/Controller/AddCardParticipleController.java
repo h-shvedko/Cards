@@ -17,7 +17,9 @@ public class AddCardParticipleController extends A_Controller {
     }
 
     @Override
-    public void handleCancelButton(ActionEvent actionEvent){this.goToPage("addCard.fxml");}
+    public void handleCancelButton(ActionEvent actionEvent) {
+        this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
+    }
 
     @Override
     public CardsDAO handleAddButton(ActionEvent actionEvent) {

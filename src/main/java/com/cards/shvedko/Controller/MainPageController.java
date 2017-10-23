@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 import javax.xml.soap.Text;
 import java.net.URL;
@@ -15,24 +16,31 @@ import java.util.ResourceBundle;
 public class MainPageController extends A_Controller {
 
     public void handleAddWordButton(ActionEvent actionEvent) {
-        goToPage("addCard.fxml");
+        this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
     }
 
     public void handleSeeAllWordsButton(ActionEvent actionEvent) {
-        goToPage("listOfCards.fxml");
+        this.goToPage("listOfCards.fxml", A_Controller.LIST_OF_CARDS_TITLE, "");
     }
 
     public void handleCloseButton(ActionEvent actionEvent) {
-        this.closeWindow(close);
+        Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        RowConstraints rowConstraint = grid.getRowConstraints().get(0);
-        rowConstraint.setPercentHeight(0);
-        if (errorMsg != null) {
-            rowConstraint.setPercentHeight(25);
-            errorMessage.setText(errorMsg);
-            errorMessage.setVisible(true);
-        }
+        greeting.setText((String) globalUserData);
+    }
+
+    public void handleLearnCardsButton(ActionEvent actionEvent) {
+        this.goToPage("chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
+    }
+
+    public void handleProfileButton(ActionEvent actionEvent) {
+        this.goToPage("profile.fxml", A_Controller.PROFILE_PAGE_TITLE, "");
+    }
+
+    public void handleSettingsButton(ActionEvent actionEvent) {
+        this.goToPage("settings.fxml", A_Controller.SETTINGS_PAGE_TITLE, "");
     }
 }

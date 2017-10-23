@@ -37,6 +37,26 @@ import java.util.logging.Logger;
 
 abstract public class A_Controller implements Initializable {
 
+    /**
+     *  Titles for pages
+     */
+    public static final String MAIN_PAGE_TITLE = "Cards learning application. Main page";
+    public static final String LOGIN_PAGE_TITLE = "Cards learning application. Login page.";
+    public static final String REGISTRATION_PAGE_TITLE = "Cards learning application. Registration page.";
+    public static final String PROFILE_PAGE_TITLE = "Cards learning application. Profile page.";
+    public static final String SETTINGS_PAGE_TITLE = "Cards learning application. Settings page.";
+    public static final String CHOOSE_TYPE_OF_CARD_PAGE_TITLE = "Cards learning application. Choose type of card.";
+    public static final String ADD_NOUN_PAGE = "Cards learning application. Add noun.";
+    public static final String ADD_VERB_PAGE = "Cards learning application. Add verb.";
+    public static final String ADD_ADJECTIVE_PAGE = "Cards learning application. Add adjective.";
+    public static final String ADD_ADVERB_PAGE = "Cards learning application. Add adverb.";
+    public static final String ADD_NUMERAL_PAGE = "Cards learning application. Add numeral.";
+    public static final String ADD_PARTICIPLE_PAGE = "Cards learning application. Add participle.";
+    public static final String ADD_PRONOUN_PAGE = "Cards learning application. Add pronoun.";
+    public static final String ADD_OTHER_PAGE = "Cards learning application. Add another type.";
+    public static final String CHOOSE_DECKS_TITLE = "Cards learning application. Lets start learning cards!";
+    public static final String LIST_OF_CARDS_TITLE = "Cards learning application. List of cards.";
+
     protected static String errorStringMsg;
 
     @FXML
@@ -85,6 +105,8 @@ abstract public class A_Controller implements Initializable {
     protected Button addButton;
     @FXML
     protected Button cancelButton;
+    @FXML
+    public Label greeting;
 
     //*********************TABLE VIEW CARDS DATA *****************************
     @FXML
@@ -109,6 +131,8 @@ abstract public class A_Controller implements Initializable {
     protected String foreignValueOld;
     protected String foreignValueNew;
     protected boolean answer = true;
+    protected static String greetingValue = "";
+    protected static Object globalUserData;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -208,8 +232,9 @@ abstract public class A_Controller implements Initializable {
         return false;
     }
 
-    public void goToPage(String fxml) {
+    public void goToPage(String fxml, String title, Object userData) {
         try {
+            globalUserData = userData;
             Parent page = FXMLLoader.load(getClass().getClassLoader().getResource(fxml), null, new JavaFXBuilderFactory());
             Scene scene = MainApp.stage.getScene();
             if (scene == null) {
@@ -218,6 +243,7 @@ abstract public class A_Controller implements Initializable {
             } else {
                 MainApp.stage.getScene().setRoot(page);
             }
+            MainApp.stage.setTitle(title);
             MainApp.stage.sizeToScene();
             MainApp.stage.setResizable(false);
         } catch (Exception ex) {
@@ -233,7 +259,7 @@ abstract public class A_Controller implements Initializable {
     public void crashAppeared(String message) {
         MainPageController.errorStringMsg = message;
         System.out.println(message);
-        goToPage("mainPage.fxml");
+        goToPage("mainPage.fxml", "Main page", "");
     }
 
     protected void showErrors(ModelsDAO modelsDAO) {
@@ -316,7 +342,7 @@ abstract public class A_Controller implements Initializable {
     }
 
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("mainPage.fxml");
+        this.goToPage("mainPage.fxml", A_Controller.MAIN_PAGE_TITLE, "");
     }
 
     public void handlePreviewButton(ActionEvent actionEvent) {
