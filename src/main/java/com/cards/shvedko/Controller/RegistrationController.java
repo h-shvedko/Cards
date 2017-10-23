@@ -41,6 +41,7 @@ public class RegistrationController extends A_Controller {
         boolean isError = false;
 
         if (!isError && (name == null || name.isEmpty())) {
+            username.setStyle("-fx-border-color: red");
             userNameError.setText("You have put empty username! Please, fill username field.");
             isError = true;
         }
@@ -66,10 +67,13 @@ public class RegistrationController extends A_Controller {
     }
 
     public void handleCancelButtonAction(ActionEvent actionEvent) {
-        this.goToPage("mainPage.fxml", A_Controller.MAIN_PAGE_TITLE, "");
+        this.goToPage("authentication.fxml", A_Controller.LOGIN_PAGE_TITLE, "");
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-
+        userNameError.setText("");
+        passwordError.setText("");
+        firstNameError.setText("");
+        lastNameError.setText("");
     }
 }

@@ -23,6 +23,8 @@ public class AuthenticationController extends A_Controller{
     private Hyperlink createAccount;
 
     public void handleSubmitButtonAction(ActionEvent actionEvent) {
+        login.setStyle("-fx-border-color: inherit");
+        password.setStyle("-fx-border-color: inherit");
         String loginValue = login.getText();
         String passwordValue = password.getText();
         String validUser = UsersDAO.authenticator(loginValue, passwordValue);
@@ -32,15 +34,18 @@ public class AuthenticationController extends A_Controller{
                 break;
             case UsersDAO.USERNAME_EMPTY:
                 errorAuth.setText("Authentication error! Username is empty.");
+                login.setStyle("-fx-border-color: red");
                 break;
             case UsersDAO.AUTHENTICATION_OK:
                 this.goToPage("mainPage.fxml", A_Controller.MAIN_PAGE_TITLE, A_Controller.globalUserModel);
                 break;
             case UsersDAO.PASSWORD_ERROR:
                 errorAuth.setText("Authentication error! Incorrect password.");
+                password.setStyle("-fx-border-color: red");
                 break;
             case UsersDAO.USERNAME_ERROR:
                 errorAuth.setText("Authentication error! There is no such user with given username");
+                login.setStyle("-fx-border-color: red");
                 break;
         }
     }
@@ -55,6 +60,8 @@ public class AuthenticationController extends A_Controller{
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        login.setStyle("-fx-border-color: inherit");
+        password.setStyle("-fx-border-color: inherit");
         errorAuth.setText("");
     }
 }
