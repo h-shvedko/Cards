@@ -6,4 +6,8 @@ abstract public class A_Models {
     public String getPassword() {
         return "";
     }
+
+    public String getName() {
+        return "";
+    }
 }

@@ -1,5 +1,6 @@
 package com.cards.shvedko.ModelDAO;
 
+import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Users;
 import org.hibernate.HibernateException;
@@ -59,6 +60,18 @@ public class UsersDAO extends ModelsDAO {
             return PASSWORD_ERROR;
         }
 
+        A_Controller.globalUserModel = userObject;
         return AUTHENTICATION_OK;
+    }
+
+    public boolean save() throws Exception {
+        if (errorMsg != null) {
+            session.persist(user);
+            transaction.commit();
+            session.close();
+        } else{
+            return false;
+        }
+        return true;
     }
 }

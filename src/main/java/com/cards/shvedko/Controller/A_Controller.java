@@ -1,14 +1,8 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.MainApp;
-import com.cards.shvedko.Model.A_Models;
-import com.cards.shvedko.Model.CardCategories;
-import com.cards.shvedko.Model.CardTypes;
-import com.cards.shvedko.Model.Cards;
-import com.cards.shvedko.ModelDAO.CardCategoriesDAO;
-import com.cards.shvedko.ModelDAO.CardTypesDAO;
-import com.cards.shvedko.ModelDAO.CardsDAO;
-import com.cards.shvedko.ModelDAO.ModelsDAO;
+import com.cards.shvedko.Model.*;
+import com.cards.shvedko.ModelDAO.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -132,7 +126,13 @@ abstract public class A_Controller implements Initializable {
     protected String foreignValueNew;
     protected boolean answer = true;
     protected static String greetingValue = "";
+
+    /**
+     * Global data
+     */
     protected static Object globalUserData;
+    public static A_Models globalUserModel;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -315,6 +315,21 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    protected void showSuccessRegistration(ActionEvent event, Users user) {
+        try {
+            globalUserData = user;
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccessRegistration.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Registration is success!");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     protected void showQuiestion(ActionEvent event, String text) {
         try {
             Stage stage = new Stage();
@@ -365,6 +380,8 @@ abstract public class A_Controller implements Initializable {
             e.printStackTrace();
         }
 
+        A_Models userObject = globalUserModel;
+
         CardTypesDAO cardTypesDAO = new CardTypesDAO();
         A_Models typeObject = null;
         try {
@@ -385,6 +402,10 @@ abstract public class A_Controller implements Initializable {
 
         if (typeObject != null) {
             cardsDAO.cards.setType((CardTypes) typeObject);
+        }
+
+        if(userObject != null){
+            cardsDAO.cards.setUser((Users) userObject);
         }
 
         cardsDAO.cards.setIsVisible(1);

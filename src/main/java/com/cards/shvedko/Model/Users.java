@@ -2,6 +2,8 @@ package com.cards.shvedko.Model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS")
@@ -25,6 +27,11 @@ public class Users extends A_Models implements Serializable {
 
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", targetEntity = Cards.class)
+    private List<Cards> user = new ArrayList<>(
+            0);
+
 
     @SuppressWarnings("UnusedDeclaration")
     public Users() {

@@ -28,13 +28,13 @@ public class AuthenticationController extends A_Controller{
         String validUser = UsersDAO.authenticator(loginValue, passwordValue);
         switch (validUser){
             case UsersDAO.AUTHENTICATION_FAILED:
-                errorAuth.setText("Authentication error!!!");
+                errorAuth.setText("Authentication error!");
                 break;
             case UsersDAO.USERNAME_EMPTY:
                 errorAuth.setText("Authentication error! Username is empty.");
                 break;
             case UsersDAO.AUTHENTICATION_OK:
-                this.goToPage("mainPage.fxml", A_Controller.MAIN_PAGE_TITLE, loginValue);
+                this.goToPage("mainPage.fxml", A_Controller.MAIN_PAGE_TITLE, A_Controller.globalUserModel);
                 break;
             case UsersDAO.PASSWORD_ERROR:
                 errorAuth.setText("Authentication error! Incorrect password.");

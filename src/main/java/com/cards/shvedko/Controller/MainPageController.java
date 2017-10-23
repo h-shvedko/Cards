@@ -1,6 +1,7 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.MainApp;
+import com.cards.shvedko.Model.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,7 +30,7 @@ public class MainPageController extends A_Controller {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        greeting.setText((String) globalUserData);
+        greeting.setText(globalUserModel.getName());
     }
 
     public void handleLearnCardsButton(ActionEvent actionEvent) {

@@ -46,6 +46,10 @@ public class Cards extends A_Models implements Serializable {
     @JoinColumn(name = "preposition_dat", referencedColumnName="id")
     private CardsPrepositionDativ prepositionDativ;
 
+    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName="id")
+    private Users user;
+
     @Column(name = "kind_of_noun", length = 1)
     private int kindOfNoun;
 
@@ -251,5 +255,13 @@ public class Cards extends A_Models implements Serializable {
 
     public void setPrepositionAkk(CardsPrepositionAkkusativ prepositionAkk) {
         this.prepositionAkk = prepositionAkk;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }
