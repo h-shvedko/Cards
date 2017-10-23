@@ -72,7 +72,7 @@
                 <GridPane layoutX="109.0" layoutY="130.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <children>
                         <Label fx:id="passwordError" alignment="BOTTOM_LEFT" prefHeight="83.0" prefWidth="418.0"
-                               text="Error message for password!!" GridPane.rowIndex="1"/>
+                               text="Error message for password!!" textFill="#ee0909" GridPane.rowIndex="1"/>
                         <PasswordField fx:id="password" prefHeight="43.0" prefWidth="411.0"/>
                     </children>
                     <columnConstraints>
@@ -87,7 +87,7 @@
                     <children>
                         <TextField fx:id="first_name" prefHeight="44.0" prefWidth="411.0"/>
                         <Label fx:id="firstNameError" alignment="BOTTOM_LEFT" prefHeight="83.0" prefWidth="418.0"
-                               text="Error message for first name!!" GridPane.rowIndex="1"/>
+                               text="Error message for first name!!" textFill="#ee0909" GridPane.rowIndex="1"/>
                     </children>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -101,7 +101,7 @@
                     <children>
                         <TextField fx:id="last_name" prefHeight="44.0" prefWidth="411.0"/>
                         <Label fx:id="lastNameError" alignment="BOTTOM_LEFT" prefHeight="83.0" prefWidth="418.0"
-                               text="Error message for last name!!" GridPane.rowIndex="1"/>
+                               text="Error message for last name!!" GridPane.rowIndex="1" textFill="#ee0909"/>
                     </children>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>

@@ -10,4 +10,12 @@ abstract public class A_Models {
     public String getName() {
         return "";
     }
+
+    public String getFirstName() {
+        return "";
+    }
+
+    public String getLastName() {
+        return "";
+    }
 }

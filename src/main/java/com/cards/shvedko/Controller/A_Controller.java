@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 abstract public class A_Controller implements Initializable {
 
     /**
-     *  Titles for pages
+     * Titles for pages
      */
     public static final String MAIN_PAGE_TITLE = "Cards learning application. Main page";
     public static final String LOGIN_PAGE_TITLE = "Cards learning application. Login page.";
@@ -315,6 +315,20 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    protected void showSuccessProfile(ActionEvent event) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccessProfile.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Success!");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     protected void showSuccessRegistration(ActionEvent event, Users user) {
         try {
             globalUserData = user;
@@ -404,7 +418,7 @@ abstract public class A_Controller implements Initializable {
             cardsDAO.cards.setType((CardTypes) typeObject);
         }
 
-        if(userObject != null){
+        if (userObject != null) {
             cardsDAO.cards.setUser((Users) userObject);
         }
 

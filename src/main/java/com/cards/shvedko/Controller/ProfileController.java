@@ -1,5 +1,6 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.ModelDAO.UsersDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProfileController extends A_Controller{
+public class ProfileController extends A_Controller {
 
     @FXML
     public Button close;
@@ -32,7 +33,25 @@ public class ProfileController extends A_Controller{
     public Label firstNameError;
 
     public void handleSubmitButtonAction(ActionEvent actionEvent) {
+        String pass = password.getText();
+        String firstName = first_name.getText();
+        String lastName = last_name.getText();
 
+        UsersDAO usersDAO = new UsersDAO(globalUserModel.getId());
+        usersDAO.user.setPassword(pass);
+        usersDAO.user.setFirstName(firstName);
+        usersDAO.user.setLastName(lastName);
+        if (usersDAO.validate(usersDAO.user)) {
+            try {
+                usersDAO.save();
+                A_Controller.globalUserModel = usersDAO.user;
+                showSuccessProfile(actionEvent);
+            } catch (Exception e) {
+                crashAppeared(e.getMessage());
+            }
+        } else {
+            showErrors(usersDAO);
+        }
     }
 
     public void handleCancelButtonAction(ActionEvent actionEvent) {
@@ -40,6 +59,12 @@ public class ProfileController extends A_Controller{
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-
+        username.setText(globalUserModel.getName());
+        password.setText(globalUserModel.getPassword());
+        first_name.setText(globalUserModel.getFirstName());
+        last_name.setText(globalUserModel.getLastName());
+        firstNameError.setText("");
+        lastNameError.setText("");
+        passwordError.setText("");
     }
 }
