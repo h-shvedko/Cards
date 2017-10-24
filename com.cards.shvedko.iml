@@ -46,5 +46,6 @@
     <orderEntry type="library" name="Maven: org.hibernate.validator:hibernate-validator:6.0.2.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:2.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:javax.el:3.0.1-b08" level="project" />
+    <orderEntry type="library" name="Maven: com.cathive.fonts:fonts-fontawesome:3.2.1.0" level="project" />
   </component>
 </module>

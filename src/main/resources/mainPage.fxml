@@ -7,75 +7,114 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
+
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.cards.shvedko.Controller.MainPageController">
     <children>
         <GridPane fx:id="grid" alignment="CENTER" layoutY="-3.0" prefHeight="400.0" prefWidth="600.0">
             <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="25.0" prefHeight="30.0"
+                <RowConstraints maxHeight="154.0" minHeight="10.0" percentHeight="25.0" prefHeight="154.0"
                                 valignment="CENTER" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="100.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER"
-                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="100.0" minHeight="46.0" percentHeight="25.0" prefHeight="46.0"
+                                valignment="CENTER" vgrow="SOMETIMES"/>
                 <RowConstraints prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
-                <RowConstraints percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <Button fx:id="addWord" mnemonicParsing="false" onAction="#handleAddWordButton" prefHeight="85.0"
-                        prefWidth="194.0" text="ADD NEW WORD" GridPane.halignment="CENTER" GridPane.rowIndex="1"
-                        GridPane.valignment="CENTER">
+                <Button fx:id="addWord" mnemonicParsing="false" onAction="#handleAddWordButton" prefHeight="100.0"
+                        prefWidth="100.0" textAlignment="CENTER" GridPane.columnIndex="2"
+                        GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                    <tooltip>
+                        <Tooltip text="Добавить карточку" style="-fx-font-size: 16px;"/>
+                    </tooltip>
+                    <graphic>
+                        <FontAwesomeIconView icon="ICON_PLUS"/>
+                    </graphic>
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="40.0"/>
                     </font>
                 </Button>
                 <Button fx:id="seeAllWords" layoutX="213.0" layoutY="35.0" mnemonicParsing="false"
-                        onAction="#handleSeeAllWordsButton" prefHeight="85.0" prefWidth="194.0" text="SEE ALL WORDS"
+                        onAction="#handleSeeAllWordsButton" prefHeight="100.0" prefWidth="100.0"
                         GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1"
                         GridPane.valignment="CENTER">
+                    <tooltip>
+                        <Tooltip text="Список карточек" style="-fx-font-size: 16px;"/>
+                    </tooltip>
+                    <graphic>
+                        <FontAwesomeIconView icon="ICON_LIST"/>
+                    </graphic>
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="40.0"/>
                     </font>
                 </Button>
                 <Button fx:id="close" layoutX="10.0" layoutY="168.0" mnemonicParsing="false"
-                        onAction="#handleCloseButton" prefHeight="85.0" prefWidth="194.0" text="EXIT"
-                        GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3"
+                        onAction="#handleCloseButton" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2"
                         GridPane.valignment="CENTER">
+                    <tooltip>
+                        <Tooltip text="Выход" style="-fx-font-size: 16px;"/>
+                    </tooltip>
+                    <graphic>
+                        <FontAwesomeIconView icon="ICON_SIGNOUT"/>
+                    </graphic>
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="40.0"/>
                     </font>
                 </Button>
                 <Button fx:id="learnCards" alignment="CENTER" layoutX="363.0" layoutY="118.0" mnemonicParsing="false"
-                        onAction="#handleLearnCardsButton" prefHeight="85.0" prefWidth="194.0" text="LEARN CARDS"
-                        GridPane.rowIndex="2">
+                        onAction="#handleLearnCardsButton" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.rowIndex="1">
+                    <tooltip>
+                        <Tooltip text="Карточки" style="-fx-font-size: 16px;"/>
+                    </tooltip>
+                    <graphic>
+                        <FontAwesomeIconView icon="ICON_ROCKET"/>
+                    </graphic>
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="40.0"/>
                     </font>
                 </Button>
                 <Button fx:id="profile" alignment="CENTER" layoutX="63.0" layoutY="218.0" mnemonicParsing="false"
-                        onAction="#handleProfileButton" prefHeight="85.0" prefWidth="194.0" text="PROFILE"
-                        GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        onAction="#handleProfileButton" prefHeight="100.0" prefWidth="100.0"
+                        GridPane.rowIndex="2">
+                    <tooltip>
+                        <Tooltip text="Профиль" style="-fx-font-size: 16px;"/>
+                    </tooltip>
+                    <graphic>
+                        <FontAwesomeIconView icon="ICON_USER"/>
+                    </graphic>
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="40.0"/>
                     </font>
                 </Button>
                 <Button fx:id="settings" alignment="CENTER" layoutX="363.0" layoutY="218.0" mnemonicParsing="false"
-                        onAction="#handleSettingsButton" prefHeight="85.0" prefWidth="194.0" text="SETTINGS"
-                        GridPane.rowIndex="3">
+                        onAction="#handleSettingsButton" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1"
+                        GridPane.rowIndex="2">
+                    <tooltip>
+                        <Tooltip text="Настройки" style="-fx-font-size: 16px;"/>
+                    </tooltip>
+                    <graphic>
+                        <FontAwesomeIconView icon="ICON_COG"/>
+                    </graphic>
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="40.0"/>
                     </font>
                 </Button>
-                <Label contentDisplay="RIGHT" text="Hello " textAlignment="RIGHT" GridPane.halignment="RIGHT"
-                       GridPane.valignment="CENTER">
+                <Label contentDisplay="RIGHT" text="Hello " textAlignment="RIGHT" GridPane.columnIndex="1"
+                       GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                     <font>
                         <Font size="30.0"/>
                     </font>
                 </Label>
-                <Label fx:id="greeting" contentDisplay="RIGHT" layoutX="232.0" layoutY="38.0" text="USer!" textAlignment="RIGHT"
-                       GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                <Label fx:id="greeting" contentDisplay="RIGHT" layoutX="232.0" layoutY="38.0" text="USer!"
+                       textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT"
+                       GridPane.valignment="CENTER">
                     <font>
                         <Font size="30.0"/>
                     </font>

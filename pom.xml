@@ -78,6 +78,11 @@
             <version>3.0.1-b08</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.cathive.fonts</groupId>
+            <artifactId>fonts-fontawesome</artifactId>
+            <version>3.2.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
