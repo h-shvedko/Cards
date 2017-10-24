@@ -16,17 +16,17 @@ import java.util.Set;
 public class ModelsDAO implements I_DAO {
 
     protected static Validator validator;
-    public static final String NOUN = "Noun";
-    public static final String VERB = "Verb";
-    public static final String ADJECTIVE = "Adjective";
-    public static final String PRONOUN = "Pronoun";
-    public static final String ADVERB = "Adverb";
-    public static final String NUMERAL = "Numeral";
-    public static final String PARTICIPLE = "Participle";
-    public static final String OTHER_PART_OF_SPEECH = "Other";
-    public static final String MUSKULINUM = "maskulinum";
-    public static final String FEMININUM = "femininum";
-    public static final String NEUTRUM = "neutrum";
+    public static final String NOUN = "Существительное";
+    public static final String VERB = "Глагол";
+    public static final String ADJECTIVE = "Прилогательное";
+    public static final String PRONOUN = "Местоимение";
+    public static final String ADVERB = "Наречие";
+    public static final String NUMERAL = "Числительное";
+    public static final String PARTICIPLE = "Причастие";
+    public static final String OTHER_PART_OF_SPEECH = "Другие";
+    public static final String MUSKULINUM = "мужской";
+    public static final String FEMININUM = "женский";
+    public static final String NEUTRUM = "средний";
     public static final int MUSKULINUM_INTO_DB = 1;
     public static final int FEMININUM_INTO_DB= 2;
     public static final int NEUTRUM_INTO_DB = 3;
@@ -36,14 +36,14 @@ public class ModelsDAO implements I_DAO {
     public static final String SEIN_PERFECT = "sein";
     public static final int SEIN_PERFECT_TO_DB = 0;
 
-    public static final String REGELMESSIG_VERB = "regelmessig";
+    public static final String REGELMESSIG_VERB = "правильный";
     public static final int REGELMESSIG_VERB_TO_DB = 1;
-    public static final String UNREGELMESSIG_VERB = "unregelmessig";
+    public static final String UNREGELMESSIG_VERB = "неправильный";
     public static final int UNREGELMESSIG_VERB_TO_DB = 0;
 
-    public static final String TREMBARE_PREFIX_VERB = "trembare";
+    public static final String TREMBARE_PREFIX_VERB = "отделяемая";
     public static final int TREMBARE_PREFIX_VERB_TO_DB = 1;
-    public static final String UMTREMBARE_PREFIX_VERB_VERB = "umtrembare";
+    public static final String UMTREMBARE_PREFIX_VERB_VERB = "не отделяемая";
     public static final int UMTREMBARE_PREFIX_VERB_VERB_TO_DB = 0;
 
     public static final int IS_REFLEXIVE = 1;

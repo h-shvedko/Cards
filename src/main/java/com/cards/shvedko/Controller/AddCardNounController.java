@@ -31,8 +31,8 @@ public class AddCardNounController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Add new noun:");
-        speechPart.setValue("Noun");
+        titleOfAddCard.setText("Создать новое существительное:");
+        speechPart.setValue("Существительное");
         speechPart.setDisable(true);
 
         maskulinum.setUserData(ModelsDAO.MUSKULINUM);
@@ -54,7 +54,7 @@ public class AddCardNounController extends A_Controller {
     public CardsDAO handleAddButton(ActionEvent actionEvent) {
 
         if (compareForeignValue() && compareNativeValue()) {
-            showQuiestion(actionEvent, "Do really want to save this card? You haven't changed anything in native and foreign words!");
+            showQuiestion(actionEvent, "Вы дествительно хотите сохранить картоку! Вы не внесли никаках изменений.");
         }
 
         CardsDAO cardsDAO = null;

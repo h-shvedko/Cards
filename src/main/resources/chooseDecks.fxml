@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cards.shvedko.Controller.ChooseDecksController">
+    <children>
+        <GridPane layoutX="-1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="2.0" prefWidth="79.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="443.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="77.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <GridPane GridPane.columnIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="14.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Выбрать колоду" textAlignment="CENTER"
+                               GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="32.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </GridPane>
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="12.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <ComboBox fx:id="decks" prefHeight="56.0" prefWidth="383.0" GridPane.halignment="CENTER"
+                                  GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+                    </children>
+                </GridPane>
+                <Button fx:id="createDeck" mnemonicParsing="false" prefHeight="68.0" prefWidth="262.0" onAction="#handleCreateButton"
+                        text="Создать новую колоду" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                        GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Button>
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="29.0" minHeight="7.0" prefHeight="21.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="64.0" valignment="CENTER"
+                                        vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="close" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="51.0"
+                                prefWidth="153.0" text="Назад" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                                GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="start" layoutX="64.0" layoutY="38.0" mnemonicParsing="false"
+                                onAction="#handleStartButton" prefHeight="51.0" prefWidth="153.0" text="Начать учить"
+                                GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                                GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </GridPane>
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" onAction="#handleSettingsButton"
+                        GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1"
+                        GridPane.valignment="CENTER">
+                    <tooltip>
+                        <Tooltip text="Редактировать колоду" style="-fx-font-size: 16px;"/>
+                    </tooltip>
+                    <graphic>
+                        <FontAwesomeIconView icon="ICON_COG"/>
+                    </graphic>
+                    <font>
+                        <Font size="10.0"/>
+                    </font>
+                </Button>
+
+            </children>
+        </GridPane>
+    </children>
+</AnchorPane>

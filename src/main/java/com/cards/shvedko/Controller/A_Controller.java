@@ -34,22 +34,25 @@ abstract public class A_Controller implements Initializable {
     /**
      * Titles for pages
      */
-    public static final String MAIN_PAGE_TITLE = "Cards learning application. Main page";
-    public static final String LOGIN_PAGE_TITLE = "Cards learning application. Login page.";
-    public static final String REGISTRATION_PAGE_TITLE = "Cards learning application. Registration page.";
-    public static final String PROFILE_PAGE_TITLE = "Cards learning application. Profile page.";
-    public static final String SETTINGS_PAGE_TITLE = "Cards learning application. Settings page.";
-    public static final String CHOOSE_TYPE_OF_CARD_PAGE_TITLE = "Cards learning application. Choose type of card.";
-    public static final String ADD_NOUN_PAGE = "Cards learning application. Add noun.";
-    public static final String ADD_VERB_PAGE = "Cards learning application. Add verb.";
-    public static final String ADD_ADJECTIVE_PAGE = "Cards learning application. Add adjective.";
-    public static final String ADD_ADVERB_PAGE = "Cards learning application. Add adverb.";
-    public static final String ADD_NUMERAL_PAGE = "Cards learning application. Add numeral.";
-    public static final String ADD_PARTICIPLE_PAGE = "Cards learning application. Add participle.";
-    public static final String ADD_PRONOUN_PAGE = "Cards learning application. Add pronoun.";
-    public static final String ADD_OTHER_PAGE = "Cards learning application. Add another type.";
-    public static final String CHOOSE_DECKS_TITLE = "Cards learning application. Lets start learning cards!";
-    public static final String LIST_OF_CARDS_TITLE = "Cards learning application. List of cards.";
+    public static final String MAIN_PAGE_TITLE = "Учим немецкие слова! Главная страница";
+    public static final String LOGIN_PAGE_TITLE = "Учим немецкие слова! Авторизация.";
+    public static final String REGISTRATION_PAGE_TITLE = "Учим немецкие слова! Регистрация.";
+    public static final String PROFILE_PAGE_TITLE = "Учим немецкие слова! Профиль.";
+    public static final String SETTINGS_PAGE_TITLE = "Учим немецкие слова! Настройки.";
+    public static final String CHOOSE_TYPE_OF_CARD_PAGE_TITLE = "Учим немецкие слова! Выберите часть речи.";
+    public static final String ADD_NOUN_PAGE = "Учим немецкие слова! Создание существительного.";
+    public static final String ADD_VERB_PAGE = "Учим немецкие слова! Создание глагола.";
+    public static final String ADD_ADJECTIVE_PAGE = "Учим немецкие слова! Создание прилогательного.";
+    public static final String ADD_ADVERB_PAGE = "Учим немецкие слова! Создание наречия.";
+    public static final String ADD_NUMERAL_PAGE = "Учим немецкие слова! Создание числительного.";
+    public static final String ADD_PARTICIPLE_PAGE = "Учим немецкие слова! Создание причастия.";
+    public static final String ADD_PRONOUN_PAGE = "Учим немецкие слова! Создание местоимения.";
+    public static final String ADD_OTHER_PAGE = "Учим немецкие слова! Создание других частей речи.";
+    public static final String ADD_DECK_PAGE_TITLE = "Учим немецкие слова! Создание новой колоды.";
+    public static final String EDIT_DECK_PAGE_TITLE = "Учим немецкие слова! Редактирование колоды.";
+    public static final String CHOOSE_DECKS_TITLE = "Учим немецкие слова! Выберите колоду";
+    public static final String CHOOSE_CARDS_TITLE = "Учим немецкие слова!";
+    public static final String LIST_OF_CARDS_TITLE = "Учим немецкие слова! Список карточек.";
 
     protected static String errorStringMsg;
 
@@ -68,9 +71,13 @@ abstract public class A_Controller implements Initializable {
     @FXML
     protected Label errorPartOfSpeech;
     @FXML
+    protected Label errorDecks;
+    @FXML
     protected Label errorForeignValue;
     @FXML
     protected ComboBox<String> speechPart;
+    @FXML
+    protected ComboBox<String> decksCombo;
     @FXML
     protected ComboBox<String> topic;
     @FXML
@@ -125,14 +132,13 @@ abstract public class A_Controller implements Initializable {
     protected String foreignValueOld;
     protected String foreignValueNew;
     protected boolean answer = true;
-    protected static String greetingValue = "";
 
     /**
      * Global data
      */
     protected static Object globalUserData;
     public static A_Models globalUserModel;
-
+    public static A_Models globalDeckData;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -150,7 +156,6 @@ abstract public class A_Controller implements Initializable {
                 }
             });
         }
-
 
         if (topic != null) {
             ObservableList<String> dataTopic = FXCollections.observableArrayList();
