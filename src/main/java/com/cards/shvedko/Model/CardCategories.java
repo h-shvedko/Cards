@@ -19,8 +19,12 @@ public class CardCategories extends A_Models implements Serializable {
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", targetEntity = Cards.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", targetEntity = Cards.class)
     private List<Cards> cardsRecords = new ArrayList<>(
+            0);
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", targetEntity = Decks.class)
+    private List<Decks> categoryDecks = new ArrayList<>(
             0);
 
     public int getId() {
@@ -80,5 +84,13 @@ public class CardCategories extends A_Models implements Serializable {
     @SuppressWarnings("UnusedDeclaration")
     public void setCardsRecords(List<Cards> cardsRecords) {
         this.cardsRecords = cardsRecords;
+    }
+
+    public List<Decks> getCategoryDecks() {
+        return categoryDecks;
+    }
+
+    public void setCategoryDecks(List<Decks> categoryDecks) {
+        this.categoryDecks = categoryDecks;
     }
 }

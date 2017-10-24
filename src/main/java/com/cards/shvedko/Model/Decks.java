@@ -25,12 +25,30 @@ public class Decks extends A_Models implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName="id")
     private Users user;
 
+    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName="id")
+    private CardCategories category;
+
+    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topic_id", referencedColumnName="id")
+    private CardTypes type;
+
     @NotNull(message = "Is Visible field in cards table can't be empty!")
     @Min(value = 1, message = "Is Visible value of Card can't be less then 1!")
     @Column(name = "is_visible", nullable = false)
     private int isVisible;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "decks", targetEntity = DecksValues.class)
+    @NotNull(message = "Anchor field in Decks table can't be empty!")
+    @Min(value = 1, message = "Anchor field in Decks table can't be less then 1!")
+    @Column(name = "is_anchor", nullable = false)
+    private int isAnchore;
+
+    @NotNull(message = "Favorite field in Decks table can't be empty!")
+    @Min(value = 1, message = "Favorite field in Decks table can't be less then 1!")
+    @Column(name = "is_favorite", nullable = false)
+    private int isFavorite;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "decks", targetEntity = DecksValues.class)
     private List<DecksValues> decksValues = new ArrayList<>(
             0);
 
@@ -77,5 +95,29 @@ public class Decks extends A_Models implements Serializable {
 
     public void setDecksValues(List<DecksValues> decksValues) {
         this.decksValues = decksValues;
+    }
+
+    public int getIsAnchore() {
+        return isAnchore;
+    }
+
+    public void setIsAnchore(int isAnchore) {
+        this.isAnchore = isAnchore;
+    }
+
+    public CardCategories getCategory() {
+        return category;
+    }
+
+    public void setCategory(CardCategories category) {
+        this.category = category;
+    }
+
+    public CardTypes getType() {
+        return type;
+    }
+
+    public void setType(CardTypes type) {
+        this.type = type;
     }
 }

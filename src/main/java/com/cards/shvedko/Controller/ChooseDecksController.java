@@ -54,13 +54,18 @@ public class ChooseDecksController extends A_Controller {
     private void setDeck() {
         int deckValue = Integer.parseInt(String.valueOf(decksCombo.getSelectionModel().getSelectedIndex())) + 1;
         DecksDAO decksDAO = new DecksDAO();
-        A_Models deck  = null;
+        A_Models deck = null;
         try {
             deck = decksDAO.select("where id=" + deckValue);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        A_Controller.globalDeckData = deck;
+        if (deck != null) {
+            A_Controller.globalDeckData = deck;
+        } else {
+            errorDecks.setText("Выберите колоду!");
+            errorDecks.setVisible(true);
+        }
     }
 
     public void handleSettingsButton(ActionEvent actionEvent) {
