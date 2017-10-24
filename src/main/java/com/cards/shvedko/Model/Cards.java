@@ -5,6 +5,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "CARDS")
@@ -81,6 +83,10 @@ public class Cards extends A_Models implements Serializable {
     @Min(value = 1, message = "Is Visible value of Card can't be less then 1!")
     @Column(name = "is_visible", nullable = false)
     private int isVisible;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cards", targetEntity = DecksValues.class)
+    private List<DecksValues> decksValues = new ArrayList<>(
+            0);
 
     @SuppressWarnings("UnusedDeclaration")
     public Cards() {
@@ -263,5 +269,13 @@ public class Cards extends A_Models implements Serializable {
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public List<DecksValues> getDecksValues() {
+        return decksValues;
+    }
+
+    public void setDecksValues(List<DecksValues> decksValues) {
+        this.decksValues = decksValues;
     }
 }

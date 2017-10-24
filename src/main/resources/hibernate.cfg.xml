@@ -28,6 +28,8 @@
         <mapping class="com.cards.shvedko.Model.Users"/>
         <mapping class="com.cards.shvedko.Model.CardsPrepositionDativ"/>
         <mapping class="com.cards.shvedko.Model.CardsPrepositionAkkusativ"/>
+        <mapping class="com.cards.shvedko.Model.Decks"/>
+        <mapping class="com.cards.shvedko.Model.DecksValues"/>
     </session-factory>
 
 </hibernate-configuration>
