@@ -32,7 +32,7 @@ public class AddCardNounController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         titleOfAddCard.setText("Создать новое существительное:");
-        speechPart.setValue("Существительное");
+        speechPart.setValue(ModelsDAO.NOUN);
         speechPart.setDisable(true);
 
         maskulinum.setUserData(ModelsDAO.MUSKULINUM);

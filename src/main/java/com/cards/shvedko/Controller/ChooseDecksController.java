@@ -27,19 +27,17 @@ public class ChooseDecksController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        if (decksCombo != null) {
-            ObservableList<String> decks = FXCollections.observableArrayList();
-            decks = DecksDAO.setAllDecks(decks);
-            decksCombo.setItems(decks);
+        ObservableList<String> decks = FXCollections.observableArrayList();
+        decks = DecksDAO.setAllDecks(decks);
+        decksCombo.setItems(decks);
 
-            decksCombo.valueProperty().addListener(new ChangeListener<String>() {
-                @Override
-                public void changed(ObservableValue value, String oldValue, String newValue) {
-                    errorDecks.setText("");
-                    errorDecks.setVisible(false);
-                }
-            });
-        }
+        decksCombo.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue value, String oldValue, String newValue) {
+                errorDecks.setText("");
+                errorDecks.setVisible(false);
+            }
+        });
     }
 
     public void handleCreateButton(ActionEvent actionEvent) {

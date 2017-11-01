@@ -1,6 +1,7 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.ModelDAO.CardsDAO;
+import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
 
 import java.net.URL;
@@ -11,8 +12,8 @@ public class AddCardOtherController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Add new other type word:");
-        speechPart.setValue("Other");
+        titleOfAddCard.setText("Создать другую часть речи:");
+        speechPart.setValue(ModelsDAO.OTHER_PART_OF_SPEECH);
         speechPart.setDisable(true);
     }
 

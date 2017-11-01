@@ -72,8 +72,8 @@ public class AddCardVerbController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Add new verb:");
-        speechPart.setValue("Verb");
+        titleOfAddCard.setText("Создать новый глагол:");
+        speechPart.setValue(ModelsDAO.VERB);
         speechPart.setDisable(true);
 
         regelmassigVerb.setUserData(ModelsDAO.REGELMESSIG_VERB);

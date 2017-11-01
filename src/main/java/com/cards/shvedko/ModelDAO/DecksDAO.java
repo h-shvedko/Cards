@@ -35,7 +35,7 @@ public class DecksDAO extends ModelsDAO {
         DecksDAO decksDAO = new DecksDAO();
         List decks = new ArrayList();
         try {
-            decks = decksDAO.selectAllBy("is_visible=1 and user_id=" + A_Controller.globalUserModel.getId());
+            decks = decksDAO.selectAllBy("where is_visible=1 and user_id=" + A_Controller.globalUserModel.getId());
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -50,7 +50,7 @@ public class DecksDAO extends ModelsDAO {
     }
 
     public boolean save() throws Exception {
-        if (errorMsg != null) {
+        if (errorMsg == null) {
             session.persist(decks);
             transaction.commit();
             session.close();

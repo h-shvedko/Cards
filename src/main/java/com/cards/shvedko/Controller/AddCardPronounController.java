@@ -1,6 +1,7 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.ModelDAO.CardsDAO;
+import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
 
 import java.net.URL;
@@ -11,8 +12,8 @@ public class AddCardPronounController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Add new pronoun:");
-        speechPart.setValue("Pronoun");
+        titleOfAddCard.setText("Создать новое местоимение:");
+        speechPart.setValue(ModelsDAO.PRONOUN);
         speechPart.setDisable(true);
     }
 

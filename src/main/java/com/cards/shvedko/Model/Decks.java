@@ -34,21 +34,18 @@ public class Decks extends A_Models implements Serializable {
     private CardTypes type;
 
     @NotNull(message = "Is Visible field in cards table can't be empty!")
-    @Min(value = 1, message = "Is Visible value of Card can't be less then 1!")
     @Column(name = "is_visible", nullable = false)
     private int isVisible;
 
     @NotNull(message = "Anchor field in Decks table can't be empty!")
-    @Min(value = 1, message = "Anchor field in Decks table can't be less then 1!")
     @Column(name = "is_anchor", nullable = false)
     private int isAnchore;
 
     @NotNull(message = "Favorite field in Decks table can't be empty!")
-    @Min(value = 1, message = "Favorite field in Decks table can't be less then 1!")
     @Column(name = "is_favorite", nullable = false)
     private int isFavorite;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "decks", targetEntity = DecksValues.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "decks", targetEntity = DecksValues.class, cascade=CascadeType.ALL)
     private List<DecksValues> decksValues = new ArrayList<>(
             0);
 
@@ -119,5 +116,13 @@ public class Decks extends A_Models implements Serializable {
 
     public void setType(CardTypes type) {
         this.type = type;
+    }
+
+    public int getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(int isFavorite) {
+        this.isFavorite = isFavorite;
     }
 }

@@ -26,7 +26,7 @@ public class DecksValuesDAO extends ModelsDAO {
     }
 
     public boolean save() throws Exception {
-        if (errorMsg != null) {
+        if (errorMsg == null) {
             session.persist(decksValues);
             transaction.commit();
             session.close();
@@ -34,5 +34,11 @@ public class DecksValuesDAO extends ModelsDAO {
             return false;
         }
         return true;
+    }
+
+    public void saveOrUpdate() {
+        if (errorMsg == null) {
+            session.persist(decksValues);
+        }
     }
 }

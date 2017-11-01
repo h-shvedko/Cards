@@ -28,6 +28,7 @@ public class ModelsDAO implements I_DAO {
     public static final String NUMERAL = "Числительное";
     public static final String PARTICIPLE = "Причастие";
     public static final String OTHER_PART_OF_SPEECH = "Другие";
+    public static final String ALL_PART_OF_SPEECH = "Все";
     public static final String MUSKULINUM = "мужской";
     public static final String FEMININUM = "женский";
     public static final String NEUTRUM = "средний";
@@ -173,6 +174,12 @@ public class ModelsDAO implements I_DAO {
                 break;
             case "CardsPrepositionDativDAO":
                 table = "com.cards.shvedko.Model.CardsPrepositionDativ";
+                break;
+            case "DecksDAO":
+                table = "com.cards.shvedko.Model.Decks";
+                break;
+            case "DecksValuesDAO":
+                table = "com.cards.shvedko.Model.DecksValues";
                 break;
         }
 

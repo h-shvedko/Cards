@@ -1,6 +1,7 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.ModelDAO.CardsDAO;
+import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
 
 import java.net.URL;
@@ -11,8 +12,8 @@ public class AddCardParticipleController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Add new participle:");
-        speechPart.setValue("Participle");
+        titleOfAddCard.setText("Создать новое причастие:");
+        speechPart.setValue(ModelsDAO.PARTICIPLE);
         speechPart.setDisable(true);
     }
 
