@@ -38,7 +38,9 @@ public class DecksValuesDAO extends ModelsDAO {
 
     public void saveOrUpdate() {
         if (errorMsg == null) {
-            session.persist(decksValues);
+            session.save(decksValues);
+            transaction.commit();
+            session.close();
         }
     }
 }

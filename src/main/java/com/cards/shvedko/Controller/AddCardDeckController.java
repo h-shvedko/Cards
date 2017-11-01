@@ -156,13 +156,12 @@ public class AddCardDeckController extends A_Controller {
 
         if (cards.size() > 0) {
             try {
-                DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
                 for (Object card : cards) {
+                    DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
                     decksValuesDAO.decksValues.setCards((Cards) card);
                     decksValuesDAO.decksValues.setDecks(decksDAO.decks);
                     decksValuesDAO.saveOrUpdate();
                 }
-                decksValuesDAO.save();
             } catch (Exception ex) {
                 throw new Exception(ex.getMessage());
             }

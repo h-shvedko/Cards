@@ -186,6 +186,10 @@ public class ModelsDAO implements I_DAO {
         return table;
     }
 
+    public void closeSession(){
+        session.close();
+    }
+
 //    public String getTableByClassName(){
 //
 //    }
