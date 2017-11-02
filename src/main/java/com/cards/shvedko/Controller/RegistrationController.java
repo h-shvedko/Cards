@@ -55,7 +55,9 @@ public class RegistrationController extends A_Controller {
             usersDAO.user.setIsVisible(1);
             if(usersDAO.validate(usersDAO.user)){
                 try{
-                    usersDAO.save();
+                    if(!usersDAO.save()){
+                        throw new Exception(usersDAO.errorMsg);
+                    }
                     showSuccessRegistration(actionEvent, usersDAO.user);
                 } catch (Exception e){
                     crashAppeared(e.getMessage());

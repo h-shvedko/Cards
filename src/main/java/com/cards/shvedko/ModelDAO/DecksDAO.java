@@ -50,7 +50,7 @@ public class DecksDAO extends ModelsDAO {
     }
 
     public boolean save() throws Exception {
-        if (errorMsg == null) {
+        if (errorMsg.equals("")) {
             session.persist(decks);
             transaction.commit();
             session.close();

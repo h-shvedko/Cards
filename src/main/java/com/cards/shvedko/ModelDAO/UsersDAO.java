@@ -65,7 +65,7 @@ public class UsersDAO extends ModelsDAO {
     }
 
     public boolean save() throws Exception {
-        if (errorMsg == null) {
+        if (errorMsg.equals("")) {
             session.persist(user);
             transaction.commit();
             session.close();

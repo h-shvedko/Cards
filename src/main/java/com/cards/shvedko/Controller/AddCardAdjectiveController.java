@@ -18,7 +18,9 @@ public class AddCardAdjectiveController extends A_Controller {
     }
 
     @Override
-    public void handleCancelButton(ActionEvent actionEvent){this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");}
+    public void handleCancelButton(ActionEvent actionEvent) {
+        this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
+    }
 
     @Override
     public CardsDAO handleAddButton(ActionEvent actionEvent) {
@@ -33,7 +35,9 @@ public class AddCardAdjectiveController extends A_Controller {
 
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {
-                    cardsDAO.save();
+                    if (!cardsDAO.save()) {
+                        throw new Exception(cardsDAO.errorMsg);
+                    }
                     showSuccess(actionEvent);
                 } catch (Exception ex) {
                     crashAppeared(ex.getMessage());

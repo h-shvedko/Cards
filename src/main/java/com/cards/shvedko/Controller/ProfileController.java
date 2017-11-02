@@ -43,7 +43,9 @@ public class ProfileController extends A_Controller {
         usersDAO.user.setLastName(lastName);
         if (usersDAO.validate(usersDAO.user)) {
             try {
-                usersDAO.save();
+                if (!usersDAO.save()) {
+                    throw new Exception(usersDAO.errorMsg);
+                }
                 A_Controller.globalUserModel = usersDAO.user;
                 showSuccessProfile(actionEvent);
             } catch (Exception e) {

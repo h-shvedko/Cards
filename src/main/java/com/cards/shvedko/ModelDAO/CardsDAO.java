@@ -32,7 +32,7 @@ public class CardsDAO extends ModelsDAO {
 //    }
 
     public boolean save() throws Exception {
-        if (errorMsg == null) {
+        if (errorMsg.equals("")) {
             session.persist(cards);
             transaction.commit();
             session.close();

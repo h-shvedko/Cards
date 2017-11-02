@@ -30,7 +30,7 @@ public class CardsPrepositionDativDAO extends ModelsDAO {
     }
 
     public boolean save() throws Exception {
-        if (errorMsg != null) {
+        if (errorMsg.equals("")) {
             session.persist(cardsPrepositionDativ);
             transaction.commit();
             session.close();

@@ -85,7 +85,9 @@ public class AddCardNounController extends A_Controller {
 
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {
-                    cardsDAO.save();
+                    if(!cardsDAO.save()){
+                        throw new Exception(cardsDAO.errorMsg);
+                    }
                     showSuccess(actionEvent);
                 } catch (Exception ex) {
                     crashAppeared(ex.getMessage());

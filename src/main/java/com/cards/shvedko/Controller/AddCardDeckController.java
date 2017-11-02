@@ -118,7 +118,9 @@ public class AddCardDeckController extends A_Controller {
 
         if (decksDAO.validate(decksDAO.decks)) {
             try {
-                decksDAO.save();
+                if(!decksDAO.save()){
+                    throw new Exception(decksDAO.errorMsg);
+                }
             } catch (Exception ex) {
                 crashAppeared(ex.getMessage());
             }
@@ -160,7 +162,9 @@ public class AddCardDeckController extends A_Controller {
                     DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
                     decksValuesDAO.decksValues.setCards((Cards) card);
                     decksValuesDAO.decksValues.setDecks(decksDAO.decks);
-                    decksValuesDAO.saveOrUpdate();
+                    if(!decksValuesDAO.saveOrUpdate()){
+                        throw new Exception(decksValuesDAO.errorMsg);
+                    }
                 }
             } catch (Exception ex) {
                 throw new Exception(ex.getMessage());
@@ -171,7 +175,7 @@ public class AddCardDeckController extends A_Controller {
 
     private A_Models getTopicAll() throws Exception {
         CardTypesDAO cardTypesDAO = new CardTypesDAO();
-        A_Models typeObject = null;
+        A_Models typeObject;
         try {
             typeObject = cardTypesDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
         } catch (Exception e) {
@@ -184,7 +188,7 @@ public class AddCardDeckController extends A_Controller {
 
     private A_Models getCategoryAll() throws Exception {
         CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
-        A_Models categoryObject = null;
+        A_Models categoryObject;
         try {
             categoryObject = cardCategoriesDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
         } catch (Exception e) {

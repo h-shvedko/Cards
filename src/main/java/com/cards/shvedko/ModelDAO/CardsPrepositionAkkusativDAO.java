@@ -31,7 +31,7 @@ public class CardsPrepositionAkkusativDAO extends ModelsDAO {
     }
 
     public boolean save() throws Exception {
-        if (errorMsg != null) {
+        if (errorMsg.equals("")) {
             session.persist(cardsPrepositionAkkusativ);
             transaction.commit();
             session.close();
