@@ -14,11 +14,11 @@ public class DecksValues extends A_Models implements Serializable {
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
-    @ManyToOne(optional=false, cascade=CascadeType.ALL) //(fetch = FetchType.LAZY)
+    @ManyToOne(optional=false, fetch = FetchType.EAGER)
     @JoinColumn(name = "deck_id", referencedColumnName="id")
     private Decks decks;
 
-    @ManyToOne(optional=false, cascade=CascadeType.MERGE) //(fetch = FetchType.LAZY)
+    @ManyToOne(optional=false, cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "cards_id", referencedColumnName="id")
     private Cards cards;
 

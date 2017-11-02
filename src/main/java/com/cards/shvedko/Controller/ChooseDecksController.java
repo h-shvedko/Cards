@@ -57,16 +57,16 @@ public class ChooseDecksController extends A_Controller {
     }
 
     private void setDeck() {
-        int deckValue = Integer.parseInt(String.valueOf(decksCombo.getSelectionModel().getSelectedIndex())) + 1;
+        String deckValue = String.valueOf(decksCombo.getSelectionModel().getSelectedItem());
         DecksDAO decksDAO = new DecksDAO();
         A_Models deck = null;
         try {
-            deck = decksDAO.select("where id=" + deckValue);
+            deck = decksDAO.select("where name='" + deckValue + "'");
         } catch (Exception e) {
             crashAppeared(e.getMessage());
         }
         if (deck != null) {
-            A_Controller.globalDeckData = deck;
+            A_Controller.globalDeckData = (Decks) deck;
         } else {
             errorDecks.setText("Выберите колоду!");
             errorDecks.setVisible(true);

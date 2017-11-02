@@ -18,19 +18,19 @@ public class Decks extends A_Models implements Serializable {
 
     @NotNull(message = "Native word value of Card can't be empty!")
     @Size(min = 2, message = "Native word value of Card can't be less then 2 symbols!")
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName="id")
+    @ManyToOne(optional = false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users user;
 
-    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName="id")
+    @ManyToOne(optional = false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private CardCategories category;
 
-    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
-    @JoinColumn(name = "topic_id", referencedColumnName="id")
+    @ManyToOne(optional = false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private CardTypes type;
 
     @NotNull(message = "Is Visible field in cards table can't be empty!")
@@ -45,7 +45,7 @@ public class Decks extends A_Models implements Serializable {
     @Column(name = "is_favorite", nullable = false)
     private int isFavorite;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "decks", targetEntity = DecksValues.class, cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "decks", targetEntity = DecksValues.class)
     private List<DecksValues> decksValues = new ArrayList<>(
             0);
 

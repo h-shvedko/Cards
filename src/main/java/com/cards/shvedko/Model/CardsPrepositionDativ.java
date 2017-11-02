@@ -26,7 +26,7 @@ public class CardsPrepositionDativ extends A_Models implements Serializable {
     @Column(name = "is_visible", nullable = false)
     private int isVisible;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "prepositionDativ", targetEntity = Cards.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "prepositionDativ", targetEntity = Cards.class)
     private List<Cards> prepositionDativ = new ArrayList<>(
             0);
 

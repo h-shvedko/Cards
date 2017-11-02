@@ -138,7 +138,7 @@ abstract public class A_Controller implements Initializable {
      */
     protected static Object globalUserData;
     public static A_Models globalUserModel;
-    public static A_Models globalDeckData;
+    public static Decks globalDeckData;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -155,8 +155,10 @@ abstract public class A_Controller implements Initializable {
             speechPart.valueProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
-                    errorPartOfSpeech.setText("");
-                    errorPartOfSpeech.setVisible(false);
+                    if (errorPartOfSpeech != null) {
+                        errorPartOfSpeech.setText("");
+                        errorPartOfSpeech.setVisible(false);
+                    }
                 }
             });
         }
@@ -173,8 +175,10 @@ abstract public class A_Controller implements Initializable {
             topic.valueProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
-                    errorTopic.setText("");
-                    errorTopic.setVisible(false);
+                    if (errorTopic != null) {
+                        errorTopic.setText("");
+                        errorTopic.setVisible(false);
+                    }
                 }
             });
         }

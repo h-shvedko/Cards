@@ -33,7 +33,7 @@ public class DecksDAO extends ModelsDAO {
 
     public static ObservableList<String> setAllDecks(ObservableList<String> data) throws Exception {
         DecksDAO decksDAO = new DecksDAO();
-        List decks = new ArrayList();
+        List decks;
         try {
             decks = decksDAO.selectAllBy("where is_visible=1 and user_id=" + A_Controller.globalUserModel.getId());
         } catch (Exception e){
@@ -50,7 +50,7 @@ public class DecksDAO extends ModelsDAO {
     }
 
     public boolean save() throws Exception {
-        if (errorMsg.equals("")) {
+        if (errorMsg== null || errorMsg.equals("")) {
             session.persist(decks);
             transaction.commit();
             session.close();
@@ -58,5 +58,14 @@ public class DecksDAO extends ModelsDAO {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void delete(int id) throws Exception{
+        decks = session.get(Decks.class, id);
+        session.delete(decks);
+        transaction.commit();
+        session.close();
+
     }
 }

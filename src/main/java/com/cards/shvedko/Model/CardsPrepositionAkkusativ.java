@@ -26,7 +26,7 @@ public class CardsPrepositionAkkusativ extends A_Models implements Serializable 
     @Column(name = "is_visible", nullable = false)
     private int isVisible;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "prepositionAkk", targetEntity = Cards.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "prepositionAkk", targetEntity = Cards.class)
     private List<Cards> prepositionAkkusativ = new ArrayList<>(
             0);
 
