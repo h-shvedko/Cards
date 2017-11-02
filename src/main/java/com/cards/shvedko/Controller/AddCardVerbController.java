@@ -93,7 +93,11 @@ public class AddCardVerbController extends A_Controller {
 
         if (pronomenAkk != null) {
             ObservableList<String> dataAkk = FXCollections.observableArrayList();
-            dataAkk = CardsPrepositionAkkusativDAO.setAllPrepositions(dataAkk);
+            try {
+                dataAkk = CardsPrepositionAkkusativDAO.setAllPrepositions(dataAkk);
+            } catch (Exception e) {
+                crashAppeared(e.getMessage());
+            }
             pronomenAkk.setItems(dataAkk);
 
             pronomenAkk.valueProperty().addListener(new ChangeListener<String>() {
@@ -107,7 +111,11 @@ public class AddCardVerbController extends A_Controller {
 
         if (pronomenDat != null) {
             ObservableList<String> dataDat = FXCollections.observableArrayList();
-            dataDat = CardsPrepositionDativDAO.setAllPrepositions(dataDat);
+            try {
+                dataDat = CardsPrepositionDativDAO.setAllPrepositions(dataDat);
+            } catch (Exception e) {
+                crashAppeared(e.getMessage());
+            }
             pronomenDat.setItems(dataDat);
 
             pronomenDat.valueProperty().addListener(new ChangeListener<String>() {
@@ -153,7 +161,7 @@ public class AddCardVerbController extends A_Controller {
             try {
                 dativObject = cardsPrepositionDativDAO.select("where id=" + prepositionDat);
             } catch (Exception e) {
-                e.printStackTrace();
+                crashAppeared(e.getMessage());
             }
             if (dativObject != null) {
                 cardsDAO.cards.setPrepositionDativ((CardsPrepositionDativ) dativObject);
@@ -166,7 +174,7 @@ public class AddCardVerbController extends A_Controller {
             try {
                 akkObject = cardsPrepositionAkkusativDAO.select("where id=" + prepositionAkk);
             } catch (Exception e) {
-                e.printStackTrace();
+                crashAppeared(e.getMessage());
             }
             if (akkObject != null) {
                 cardsDAO.cards.setPrepositionAkk((CardsPrepositionAkkusativ) akkObject);

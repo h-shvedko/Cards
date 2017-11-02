@@ -27,7 +27,12 @@ public class AuthenticationController extends A_Controller{
         password.setStyle("-fx-border-color: inherit");
         String loginValue = login.getText();
         String passwordValue = password.getText();
-        String validUser = UsersDAO.authenticator(loginValue, passwordValue);
+        String validUser;
+        try {
+            validUser = UsersDAO.authenticator(loginValue, passwordValue);
+        } catch (Exception e) {
+            validUser = e.getMessage();
+        }
         switch (validUser){
             case UsersDAO.AUTHENTICATION_FAILED:
                 errorAuth.setText("Authentication error!");

@@ -28,14 +28,21 @@ public class ChooseDecksController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         ObservableList<String> decks = FXCollections.observableArrayList();
-        decks = DecksDAO.setAllDecks(decks);
+        try {
+            decks = DecksDAO.setAllDecks(decks);
+        } catch (Exception e) {
+            crashAppeared(e.getMessage());
+        }
         decksCombo.setItems(decks);
 
         decksCombo.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue value, String oldValue, String newValue) {
-                errorDecks.setText("");
-                errorDecks.setVisible(false);
+                if (errorDecks != null) {
+                    errorDecks.setText("");
+                    errorDecks.setVisible(false);
+                }
+
             }
         });
     }
@@ -56,7 +63,7 @@ public class ChooseDecksController extends A_Controller {
         try {
             deck = decksDAO.select("where id=" + deckValue);
         } catch (Exception e) {
-            e.printStackTrace();
+            crashAppeared(e.getMessage());
         }
         if (deck != null) {
             A_Controller.globalDeckData = deck;

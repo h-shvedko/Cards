@@ -38,7 +38,7 @@ public class UsersDAO extends ModelsDAO {
         return (Users) session.get(Users.class, username);
     }
 
-    public static String authenticator(String loginValue, String passwordValue) {
+    public static String authenticator(String loginValue, String passwordValue) throws Exception {
         UsersDAO usersDAO = new UsersDAO();
         A_Models userObject = null;
 
@@ -49,8 +49,7 @@ public class UsersDAO extends ModelsDAO {
         try {
             userObject = usersDAO.select("where name='" + loginValue + "'");
         } catch (Exception e) {
-            e.printStackTrace();
-            return AUTHENTICATION_FAILED;
+            throw new Exception(AUTHENTICATION_FAILED);
         }
 
         if(userObject == null){

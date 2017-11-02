@@ -32,7 +32,7 @@ public class ListOfCardsController extends A_Controller {
         try {
             cards = cardsDAO.selectAll();
         } catch (Exception e) {
-            e.printStackTrace();
+            crashAppeared(e.getMessage());
         }
 
         if (cards.size() > 0) {

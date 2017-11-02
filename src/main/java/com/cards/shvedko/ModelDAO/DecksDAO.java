@@ -31,13 +31,13 @@ public class DecksDAO extends ModelsDAO {
         return (Decks) session.get(Decks.class, id);
     }
 
-    public static ObservableList<String> setAllDecks(ObservableList<String> data) {
+    public static ObservableList<String> setAllDecks(ObservableList<String> data) throws Exception {
         DecksDAO decksDAO = new DecksDAO();
         List decks = new ArrayList();
         try {
             decks = decksDAO.selectAllBy("where is_visible=1 and user_id=" + A_Controller.globalUserModel.getId());
         } catch (Exception e){
-            e.printStackTrace();
+            throw new Exception(e.getMessage());
         }
 
         if (decks.size() > 0) {

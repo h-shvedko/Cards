@@ -70,7 +70,7 @@ public class AddCardDeckController extends A_Controller {
             try {
                 categoryObject = cardCategoriesDAO.select("where id=" + speechPartValue);
             } catch (Exception e) {
-                e.printStackTrace();
+                crashAppeared(e.getMessage());
             }
         } else {
             try {
@@ -89,7 +89,7 @@ public class AddCardDeckController extends A_Controller {
             try {
                 typeObject = cardTypesDAO.select("where id=" + topicValue);
             } catch (Exception e) {
-                e.printStackTrace();
+                crashAppeared(e.getMessage());
             }
         } else {
             try {

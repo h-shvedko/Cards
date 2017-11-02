@@ -145,7 +145,11 @@ abstract public class A_Controller implements Initializable {
 
         if (speechPart != null) {
             ObservableList<String> dataSpeech = FXCollections.observableArrayList();
-            dataSpeech = CardTypesDAO.setAllTypes(dataSpeech);
+            try {
+                dataSpeech = CardTypesDAO.setAllTypes(dataSpeech);
+            } catch (Exception e) {
+                crashAppeared(e.getMessage());
+            }
             speechPart.setItems(dataSpeech);
 
             speechPart.valueProperty().addListener(new ChangeListener<String>() {
@@ -159,7 +163,11 @@ abstract public class A_Controller implements Initializable {
 
         if (topic != null) {
             ObservableList<String> dataTopic = FXCollections.observableArrayList();
-            dataTopic = CardCategoriesDAO.setAllTypes(dataTopic);
+            try {
+                dataTopic = CardCategoriesDAO.setAllTypes(dataTopic);
+            } catch (Exception e) {
+                crashAppeared(e.getMessage());
+            }
             topic.setItems(dataTopic);
 
             topic.valueProperty().addListener(new ChangeListener<String>() {
@@ -396,7 +404,7 @@ abstract public class A_Controller implements Initializable {
         try {
             categoryObject = cardCategoriesDAO.select("where id=" + category);
         } catch (Exception e) {
-            e.printStackTrace();
+            crashAppeared(e.getMessage());
         }
 
         A_Models userObject = globalUserModel;
@@ -406,7 +414,7 @@ abstract public class A_Controller implements Initializable {
         try {
             typeObject = cardTypesDAO.select("where id=" + type);
         } catch (Exception e) {
-            e.printStackTrace();
+            crashAppeared(e.getMessage());
         }
 
         CardsDAO cardsDAO = new CardsDAO();

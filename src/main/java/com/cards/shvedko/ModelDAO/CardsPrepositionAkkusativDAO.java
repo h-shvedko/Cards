@@ -41,13 +41,13 @@ public class CardsPrepositionAkkusativDAO extends ModelsDAO {
         return true;
     }
 
-    public static ObservableList<String> setAllPrepositions(ObservableList<String> data) {
+    public static ObservableList<String> setAllPrepositions(ObservableList<String> data) throws Exception {
         CardsPrepositionAkkusativDAO cardsPrepositionAkkusativDAO = new CardsPrepositionAkkusativDAO();
         List prepositionAkk = new ArrayList();
         try {
             prepositionAkk= cardsPrepositionAkkusativDAO.selectAll();
         } catch (Exception e){
-            e.printStackTrace();
+            throw new Exception(e.getMessage());
         }
 
         if (prepositionAkk.size() > 0) {
