@@ -53,7 +53,7 @@ public class ChooseDecksController extends A_Controller {
 
     public void handleStartButton(ActionEvent actionEvent) {
         this.setDeck();
-        this.goToPage("cards.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
+        this.goToPage("card.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
     }
 
     private void setDeck() {
