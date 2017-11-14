@@ -69,6 +69,9 @@ public class CardController extends A_Controller {
         favoriteButton.setToggleGroup(groupFavorite);
         trophyButton.setToggleGroup(groupTrophy);
 
+        translatedWord.setVisible(false);
+        translatedExample.setVisible(false);
+
         deckId = ((Decks) A_Controller.globalUserData).getId();
         List deckValues = ((Decks) A_Controller.globalUserData).getDecksValues();
 
@@ -246,5 +249,10 @@ public class CardController extends A_Controller {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+    public void handleTranslationButton(ActionEvent actionEvent) {
+        translatedExample.setVisible(!translatedExample.isVisible());
+        translatedWord.setVisible(!translatedWord.isVisible());
     }
 }

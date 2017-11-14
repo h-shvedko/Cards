@@ -150,7 +150,7 @@
                     <children>
                         <Button fx:id="previous" mnemonicParsing="false" text="previous" onAction="#handlePreviousButton"/>
                         <Button fx:id="translation" layoutX="10.0" layoutY="48.0" mnemonicParsing="false"
-                                text="translation" GridPane.columnIndex="2"/>
+                                text="translation" GridPane.columnIndex="2" onAction="#handleTranslationButton"/>
                         <Button fx:id="sound" layoutX="165.0" layoutY="48.0" mnemonicParsing="false" text="sound"
                                 GridPane.columnIndex="1"/>
                         <Button fx:id="next" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" text="next"
