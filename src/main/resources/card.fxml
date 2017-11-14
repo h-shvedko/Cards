@@ -148,13 +148,53 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Button fx:id="previous" mnemonicParsing="false" text="previous" onAction="#handlePreviousButton"/>
+                        <Button fx:id="previous" mnemonicParsing="false" onAction="#handlePreviousButton">
+                            <tooltip>
+                                <Tooltip text="Предыдущая карточка" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_CARET_LEFT"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
                         <Button fx:id="translation" layoutX="10.0" layoutY="48.0" mnemonicParsing="false"
-                                text="translation" GridPane.columnIndex="2" onAction="#handleTranslationButton"/>
-                        <Button fx:id="sound" layoutX="165.0" layoutY="48.0" mnemonicParsing="false" text="sound"
-                                GridPane.columnIndex="1"/>
-                        <Button fx:id="next" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" text="next"
-                                GridPane.columnIndex="3" onAction="#handleNextButton"/>
+                                GridPane.columnIndex="2" onAction="#handleTranslationButton">
+                            <tooltip>
+                                <Tooltip text="Показать перевод" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_UNDO"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="sound" layoutX="165.0" layoutY="48.0" mnemonicParsing="false"
+                                GridPane.columnIndex="1">
+                            <tooltip>
+                                <Tooltip text="Включить озвучивание" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="next" layoutX="10.0" layoutY="48.0" mnemonicParsing="false"
+                                GridPane.columnIndex="3" onAction="#handleNextButton">
+                            <tooltip>
+                                <Tooltip text="Следующая карточка" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_CARET_RIGHT"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
                     </children>
                 </GridPane>
                 <GridPane style="-fx-border-color: black;">

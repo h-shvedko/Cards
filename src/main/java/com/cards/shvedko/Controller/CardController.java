@@ -127,6 +127,8 @@ public class CardController extends A_Controller {
 
     public void handlePreviousButton(ActionEvent actionEvent) throws Exception {
         int numberOfWord = getNumberOfElement();
+        translatedWord.setVisible(false);
+        translatedExample.setVisible(false);
 
         if (numberOfWord > 0) {
             setNumberOfElement(--numberOfWord);
@@ -138,6 +140,8 @@ public class CardController extends A_Controller {
 
     public void handleNextButton(ActionEvent actionEvent) throws Exception {
         int numberOfWord = getNumberOfElement();
+        translatedWord.setVisible(false);
+        translatedExample.setVisible(false);
 
         if (numberOfWord < cardsTable.size() - 1) {
             setNumberOfElement(++numberOfWord);
