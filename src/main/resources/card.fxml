@@ -6,6 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.cards.shvedko.Controller.CardController">
@@ -41,28 +42,58 @@
                     </rowConstraints>
                     <children>
                         <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="166.0" text="Параметры"
-                                GridPane.columnIndex="1">
+                                GridPane.columnIndex="1" onAction="#handleSettingsButton">
                             <font>
                                 <Font size="21.0"/>
                             </font>
                         </Button>
                         <Button layoutX="10.0" layoutY="18.0" mnemonicParsing="false" prefHeight="48.0"
-                                prefWidth="167.0" text="Назад" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                prefWidth="167.0" text="Назад" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#handleCancelButton">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </Button>
                         <Button layoutX="10.0" layoutY="81.0" mnemonicParsing="false" prefHeight="48.0"
-                                prefWidth="171.0" text="Редактировать" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                prefWidth="171.0" text="Редактировать" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#handleEditButton">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                        <Button layoutX="55.0" layoutY="343.0" mnemonicParsing="false" text="Button"
-                                GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                        <Button layoutX="55.0" layoutY="405.0" mnemonicParsing="false" text="Button"
-                                GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                        <Button mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                            <tooltip>
+                                <Tooltip text="Продолжит обучение с этой карточки" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_ANCHOR"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button layoutX="55.0" layoutY="343.0" mnemonicParsing="false"
+                                GridPane.columnIndex="1" GridPane.rowIndex="6">
+                            <tooltip>
+                                <Tooltip text="Готово!" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_TROPHY"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button layoutX="55.0" layoutY="405.0" mnemonicParsing="false"
+                                GridPane.columnIndex="1" GridPane.rowIndex="7">
+                            <tooltip>
+                                <Tooltip text="Изучить повторно (избранное)" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_STAR"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -117,13 +148,13 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Button fx:id="previous" mnemonicParsing="false" text="previous"/>
+                        <Button fx:id="previous" mnemonicParsing="false" text="previous" onAction="#handlePreviousButton"/>
                         <Button fx:id="translation" layoutX="10.0" layoutY="48.0" mnemonicParsing="false"
                                 text="translation" GridPane.columnIndex="2"/>
                         <Button fx:id="sound" layoutX="165.0" layoutY="48.0" mnemonicParsing="false" text="sound"
                                 GridPane.columnIndex="1"/>
                         <Button fx:id="next" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" text="next"
-                                GridPane.columnIndex="3"/>
+                                GridPane.columnIndex="3" onAction="#handleNextButton"/>
                     </children>
                 </GridPane>
                 <GridPane style="-fx-border-color: black;">
