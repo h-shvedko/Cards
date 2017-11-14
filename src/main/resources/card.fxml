@@ -59,7 +59,7 @@
                                 <Font size="20.0"/>
                             </font>
                         </Button>
-                        <Button mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <ToggleButton mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" onAction="#handleAnchorButton" fx:id="anchorButton">
                             <tooltip>
                                 <Tooltip text="Продолжит обучение с этой карточки" style="-fx-font-size: 16px;"/>
                             </tooltip>
@@ -69,9 +69,9 @@
                             <font>
                                 <Font size="20.0"/>
                             </font>
-                        </Button>
-                        <Button layoutX="55.0" layoutY="343.0" mnemonicParsing="false"
-                                GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        </ToggleButton>
+                        <ToggleButton layoutX="55.0" layoutY="343.0" mnemonicParsing="false"
+                                GridPane.columnIndex="1" GridPane.rowIndex="6" onAction="#handleTrophyButton" fx:id="trophyButton">
                             <tooltip>
                                 <Tooltip text="Готово!" style="-fx-font-size: 16px;"/>
                             </tooltip>
@@ -81,9 +81,9 @@
                             <font>
                                 <Font size="20.0"/>
                             </font>
-                        </Button>
-                        <Button layoutX="55.0" layoutY="405.0" mnemonicParsing="false"
-                                GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        </ToggleButton>
+                        <ToggleButton layoutX="55.0" layoutY="405.0" mnemonicParsing="false"
+                                GridPane.columnIndex="1" GridPane.rowIndex="7" onAction="#handleFavoriteButton" fx:id="favoriteButton">
                             <tooltip>
                                 <Tooltip text="Изучить повторно (избранное)" style="-fx-font-size: 16px;"/>
                             </tooltip>
@@ -93,7 +93,7 @@
                             <font>
                                 <Font size="20.0"/>
                             </font>
-                        </Button>
+                        </ToggleButton>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>

@@ -1,9 +1,6 @@
 package com.cards.shvedko.Model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +10,18 @@ public class DecksValues extends A_Models implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
+
+    @Column(name = "is_favorite", nullable = false)
+    private int isFavorite;
+
+    @Column(name = "is_anchor", nullable = false)
+    private int isAnchor;
+
+    @Column(name = "is_ready", nullable = false)
+    private int isReady;
+
+    @Column(name = "date_ready", nullable = false)
+    private String dateReady;
 
     @ManyToOne(optional=false, fetch = FetchType.EAGER)
     @JoinColumn(name = "deck_id", referencedColumnName="id")
@@ -48,5 +57,37 @@ public class DecksValues extends A_Models implements Serializable {
 
     public void setCards(Cards cards) {
         this.cards = cards;
+    }
+
+    public int getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(int isFavorite) {
+        this.isFavorite = isFavorite;
+    }
+
+    public int getIsAnchor() {
+        return isAnchor;
+    }
+
+    public void setIsAnchor(int isAnchor) {
+        this.isAnchor = isAnchor;
+    }
+
+    public int getIsReady() {
+        return isReady;
+    }
+
+    public void setIsReady(int isReady) {
+        this.isReady = isReady;
+    }
+
+    public String getDateReady() {
+        return dateReady;
+    }
+
+    public void setDateReady(String dateReady) {
+        this.dateReady = dateReady;
     }
 }

@@ -17,6 +17,8 @@ public class ModelsDAO implements I_DAO {
 
     public static final int ANCHOR_OFF = 0;
     public static final int ANCHOR_ON = 1;
+    public static final int READY_OFF = 0;
+    public static final int READY_ON = 1;
     public static final int FAVORITE_OFF = 0;
     public static final int FAVORITE_ON = 1;
     protected static Validator validator;
