@@ -76,7 +76,7 @@ public class CardController extends A_Controller {
         List deckValues = ((Decks) A_Controller.globalUserData).getDecksValues();
 
         for (Object deckValue : deckValues) {
-            if(((DecksValues)deckValue).getIsFavorite() == 0){
+            if(((DecksValues)deckValue).getIsReady() == 0){
                 cardsTable.add(((DecksValues) deckValue).getCards());
             }
         }
