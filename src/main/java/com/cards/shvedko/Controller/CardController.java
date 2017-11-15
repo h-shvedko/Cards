@@ -61,7 +61,7 @@ public class CardController extends A_Controller {
     @FXML
     public Label categoryLabel;
 
-    private int numberOfElement = 0;
+    private int numberOfElement = 1;
     private int cardId = 0;
     private int deckId = 0;
     private int numberOfActiveCards = 0;
@@ -72,6 +72,7 @@ public class CardController extends A_Controller {
     private final ToggleGroup groupTrophy = new ToggleGroup();
 
     public ObservableList<Cards> cardsTable = FXCollections.observableArrayList();
+    public ObservableList<DecksValues> decksValuesTable = FXCollections.observableArrayList();
 
     public void initialize(URL location, ResourceBundle resources) {
         anchorButton.setToggleGroup(groupAnchor);
@@ -87,14 +88,34 @@ public class CardController extends A_Controller {
         topicLabel.setText(((Decks) A_Controller.globalUserData).getType().getName());
         categoryLabel.setText(((Decks) A_Controller.globalUserData).getCategory().getName());
 
-        for (Object deckValue : deckValues) {
-            if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getDecks().getIsVisible() == 1) {
-                cardsTable.add(((DecksValues) deckValue).getCards());
-                numberOfActiveCards++;
+        if (((Decks) A_Controller.globalUserData).getIsFavorite() == 0) {
+            for (Object deckValue : deckValues) {
+                if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getIsFavorite() == 0 && ((DecksValues) deckValue).getDecks().getIsVisible() == 1) {
+                    cardsTable.add(((DecksValues) deckValue).getCards());
+                    decksValuesTable.add((DecksValues) deckValue);
+                    ++numberOfActiveCards;
+                    if(((DecksValues) deckValue).getIsAnchor() == 1){
+                        setNumberOfElement(numberOfActiveCards);
+                        cardId = ((DecksValues) deckValue).getCards().getId();
+                    }
+                }
             }
+        } else {
+            for (Object deckValue : deckValues) {
+                if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getIsFavorite() == 1 && ((DecksValues) deckValue).getDecks().getIsVisible() == 1) {
+                    cardsTable.add(((DecksValues) deckValue).getCards());
+                    decksValuesTable.add((DecksValues) deckValue);
+                    ++numberOfActiveCards;
+                    if(((DecksValues) deckValue).getIsAnchor() == 1){
+                        setNumberOfElement(numberOfActiveCards);
+                        cardId = ((DecksValues) deckValue).getCards().getId();
+                    }
+                }
+            }
+
         }
 
-        numberOfCards.setText("Карточка " + 1 + " / " + String.valueOf(numberOfActiveCards));
+        numberOfCards.setText("Карточка " + getNumberOfElement() + " / " + String.valueOf(numberOfActiveCards));
 
         try {
             setValuesOfCard();
@@ -104,6 +125,7 @@ public class CardController extends A_Controller {
     }
 
     private void setValuesOfCard() throws Exception {
+        decksValues = decksValuesTable.get(getNumberOfElement() - 1);
         word.setText(cardsTable.get(getNumberOfElement()).getName());
         word.setWrapText(true);
         translatedWord.setText(cardsTable.get(getNumberOfElement()).getForeignName());
@@ -114,9 +136,7 @@ public class CardController extends A_Controller {
         translatedExample.setWrapText(true);
         numberOfCards.setWrapText(true);
 
-        cardId = cardsTable.get(getNumberOfElement()).getId();
-
-        getDecksValues();
+//        getDecksValues();
 
         if (((DecksValues) decksValues).getIsFavorite() == 1) {
             favoriteButton.setSelected(true);
@@ -150,16 +170,15 @@ public class CardController extends A_Controller {
         translatedWord.setVisible(false);
         translatedExample.setVisible(false);
 
-        if (numberOfWord > 0) {
+        if (numberOfWord > 1) {
             --numberOfWord;
         } else {
-            numberOfWord = cardsTable.size() - 1;
+            numberOfWord = cardsTable.size();
         }
         setNumberOfElement(numberOfWord);
         setValuesOfCard();
 
-        int currentCard = numberOfWord == 0? 1: numberOfWord + 1;
-        numberOfCards.setText("Карточка " + currentCard + " / " + String.valueOf(numberOfActiveCards));
+        numberOfCards.setText("Карточка " + numberOfWord + " / " + String.valueOf(numberOfActiveCards));
     }
 
     public void handleNextButton(ActionEvent actionEvent) throws Exception {
@@ -167,16 +186,15 @@ public class CardController extends A_Controller {
         translatedWord.setVisible(false);
         translatedExample.setVisible(false);
 
-        if (numberOfWord < cardsTable.size() - 1) {
+        if (numberOfWord < cardsTable.size()) {
             ++numberOfWord;
         } else {
-            numberOfWord = 0;
+            numberOfWord = 1;
         }
         setNumberOfElement(numberOfWord);
         setValuesOfCard();
 
-        int currentCard = numberOfWord == 0? 1: numberOfWord + 1;
-        numberOfCards.setText("Карточка " + currentCard + " / " + String.valueOf(numberOfActiveCards));
+        numberOfCards.setText("Карточка " + numberOfWord + " / " + String.valueOf(numberOfActiveCards));
     }
 
     public void handleSettingsButton(ActionEvent actionEvent) {
