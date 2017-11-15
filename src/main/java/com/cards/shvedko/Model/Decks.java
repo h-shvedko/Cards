@@ -33,16 +33,13 @@ public class Decks extends A_Models implements Serializable {
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private CardTypes type;
 
-    @NotNull(message = "Is Visible field in cards table can't be empty!")
-    @Column(name = "is_visible", nullable = false)
+    @Column(name = "is_visible")
     private int isVisible;
 
-    @NotNull(message = "Anchor field in Decks table can't be empty!")
-    @Column(name = "is_anchor", nullable = false)
+    @Column(name = "is_anchor")
     private int isAnchore;
 
-    @NotNull(message = "Favorite field in Decks table can't be empty!")
-    @Column(name = "is_favorite", nullable = false)
+    @Column(name = "is_favorite")
     private int isFavorite;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "decks", targetEntity = DecksValues.class)

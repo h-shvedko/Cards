@@ -60,6 +60,17 @@ public class DecksDAO extends ModelsDAO {
         return true;
     }
 
+    public boolean saveOrUpdate() {
+        if (errorMsg == null || errorMsg.equals("")) {
+            session.save(decks);
+            transaction.commit();
+            session.close();
+        } else {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void delete(int id) throws Exception{
         decks = session.get(Decks.class, id);

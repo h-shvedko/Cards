@@ -153,8 +153,10 @@
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="418.0" GridPane.rowIndex="6">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="10.0" prefWidth="28.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="181.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="10.0" prefWidth="36.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="178.0"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0"
+                                           prefWidth="151.0"/>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="164.0"/>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="10.0" prefWidth="28.0"/>
                     </columnConstraints>
@@ -171,7 +173,14 @@
                         </Button>
                         <Button fx:id="save" layoutX="143.0" layoutY="23.0" mnemonicParsing="false"
                                 onAction="#handleSaveButton" prefHeight="66.0" prefWidth="139.0" text="Сохранить"
-                                GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="delete" alignment="CENTER" contentDisplay="CENTER" layoutX="357.0" layoutY="23.0"
+                                mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="66.0" prefWidth="139.0"
+                                text="Удалить" GridPane.columnIndex="2">
                             <font>
                                 <Font size="20.0"/>
                             </font>

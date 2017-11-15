@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 public class EditCardDeckController extends A_Controller {
 
     @FXML
+    public Button delete;
+    @FXML
     private Button cancel;
     @FXML
     private ToggleButton allSpeechPart;
@@ -272,5 +274,22 @@ public class EditCardDeckController extends A_Controller {
     public void handleDisableTopicCombo(ActionEvent actionEvent) {
         boolean isDisabled = topic.isDisabled();
         topic.setDisable(!isDisabled);
+    }
+
+    public void handleDeleteButton(ActionEvent actionEvent) {
+        DecksDAO decksDAO = new DecksDAO(A_Controller.globalDeckData.getId());
+        decksDAO.decks.setIsVisible(Integer.parseInt(String.valueOf(0)));
+        if (decksDAO.validate(decksDAO.decks)) {
+            try {
+                if(!decksDAO.saveOrUpdate()){
+                    throw new Exception(decksDAO.errorMsg);
+                }
+                showSuccess(actionEvent);
+            } catch (Exception ex) {
+                crashAppeared(ex.getMessage());
+            }
+        } else {
+            showErrors(decksDAO);
+        }
     }
 }

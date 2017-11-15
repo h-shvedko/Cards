@@ -4,7 +4,9 @@ import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
+import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.DecksValuesDAO;
+import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,7 +81,7 @@ public class CardController extends A_Controller {
         List deckValues = ((Decks) A_Controller.globalUserData).getDecksValues();
 
         for (Object deckValue : deckValues) {
-            if (((DecksValues) deckValue).getIsReady() == 0) {
+            if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getDecks().getIsVisible() == 1) {
                 cardsTable.add(((DecksValues) deckValue).getCards());
                 numberOfActiveCards++;
             }
@@ -262,4 +264,10 @@ public class CardController extends A_Controller {
         translatedExample.setVisible(!translatedExample.isVisible());
         translatedWord.setVisible(!translatedWord.isVisible());
     }
+
+    @Override
+    public void handleCancelButton(ActionEvent actionEvent) {
+        this.goToPage("chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
+    }
+
 }

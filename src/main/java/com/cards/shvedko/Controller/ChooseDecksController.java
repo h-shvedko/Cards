@@ -61,7 +61,7 @@ public class ChooseDecksController extends A_Controller {
         DecksDAO decksDAO = new DecksDAO();
         A_Models deck = null;
         try {
-            deck = decksDAO.select("where name='" + deckValue + "'");
+            deck = decksDAO.select("where name='" + deckValue + "' and is_visible=1");
         } catch (Exception e) {
             crashAppeared(e.getMessage());
         }
