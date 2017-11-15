@@ -90,7 +90,7 @@
                         <ToggleButton fx:id="favoriteButton" layoutX="55.0" layoutY="405.0" mnemonicParsing="false"
                                       onAction="#handleFavoriteButton" GridPane.columnIndex="1" GridPane.rowIndex="8">
                             <tooltip>
-                                <Tooltip style="-fx-font-size: 16px;" text="Изучить повторно (избранное)"/>
+                                <Tooltip style="-fx-font-size: 16px;" text="Изучить повторно (в избранное)"/>
                             </tooltip>
                             <graphic>
                                 <FontAwesomeIconView icon="ICON_STAR"/>

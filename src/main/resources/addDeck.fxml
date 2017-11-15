@@ -9,6 +9,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
+
 <AnchorPane maxHeight="600.0" maxWidth="600.0" minHeight="600.0" minWidth="600.0" prefHeight="600.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.cards.shvedko.Controller.AddCardDeckController">
@@ -46,7 +48,8 @@
                                 <Font size="24.0"/>
                             </font>
                         </Label>
-                        <ToggleButton fx:id="allSpeechPart" onAction="#handleDisableSpeechPartCombo" mnemonicParsing="false" prefHeight="51.0" prefWidth="138.0"
+                        <ToggleButton fx:id="allSpeechPart" mnemonicParsing="false"
+                                      onAction="#handleDisableSpeechPartCombo" prefHeight="51.0" prefWidth="138.0"
                                       text="Все" GridPane.columnIndex="2" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
@@ -74,9 +77,9 @@
                                 <Font size="24.0"/>
                             </font>
                         </Label>
-                        <ToggleButton fx:id="allTopic" onAction="#handleDisableTopicCombo" mnemonicParsing="false" prefHeight="51.0" prefWidth="138.0"
-                                      text="Все" GridPane.columnIndex="2" GridPane.halignment="CENTER"
-                                      GridPane.valignment="CENTER">
+                        <ToggleButton fx:id="allTopic" mnemonicParsing="false" onAction="#handleDisableTopicCombo"
+                                      prefHeight="51.0" prefWidth="138.0" text="Все" GridPane.columnIndex="2"
+                                      GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
@@ -96,12 +99,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="82.0" prefWidth="183.0" text="Изучать карточки с: " textOverrun="CLIP"
-                               GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
-                            <font>
-                                <Font size="24.0"/>
-                            </font>
-                        </Label>
                         <ToggleButton fx:id="favoriteOn" mnemonicParsing="false" prefHeight="51.0" prefWidth="138.0"
                                       text="Да" GridPane.columnIndex="2" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
@@ -115,6 +112,37 @@
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
+                        <GridPane GridPane.columnIndex="1">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0"
+                                                   prefWidth="149.0"/>
+                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="86.0" minWidth="10.0"
+                                                   prefWidth="34.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER"
+                                                vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <Label text="Начать с ">
+                                    <font>
+                                        <Font size="24.0"/>
+                                    </font>
+                                </Label>
+                                <Label layoutX="10.0" layoutY="48.0" text="Label"
+                                       GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip style="-fx-font-size: 16px;" text="Избранные слова"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <FontAwesomeIconView icon="ICON_STAR"/>
+                                    </graphic>
+                                    <font>
+                                        <Font size="24.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                        </GridPane>
                     </children>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="316.0" GridPane.rowIndex="5">
@@ -129,12 +157,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label text="Начать с:" GridPane.columnIndex="1" GridPane.halignment="RIGHT"
-                               GridPane.valignment="CENTER">
-                            <font>
-                                <Font size="24.0"/>
-                            </font>
-                        </Label>
                         <ToggleButton fx:id="anchorOn" mnemonicParsing="false" prefHeight="51.0" prefWidth="138.0"
                                       text="Да" GridPane.columnIndex="2" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
@@ -148,6 +170,37 @@
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
+                        <GridPane GridPane.columnIndex="1">
+                            <children>
+                                <Label text="Начать с ">
+                                    <font>
+                                        <Font size="24.0"/>
+                                    </font>
+                                </Label>
+                                <Label layoutX="10.0" layoutY="48.0" text="Label"
+                                       GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip style="-fx-font-size: 16px;" text="Закрепленное слово"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <FontAwesomeIconView icon="ICON_ANCHOR"/>
+                                    </graphic>
+                                    <font>
+                                        <Font size="24.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0"
+                                                   prefWidth="149.0"/>
+                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="86.0" minWidth="10.0"
+                                                   prefWidth="34.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER"
+                                                vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                        </GridPane>
                     </children>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="418.0" GridPane.rowIndex="6">
@@ -161,15 +214,16 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Button fx:id="cancel" onAction="#handleCancelButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="139.0" text="Отмена"
-                                GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button fx:id="cancel" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="66.0"
+                                prefWidth="139.0" text="Отмена" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                                GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </Button>
-                        <Button fx:id="save" onAction="#handleSaveButton" layoutX="143.0" layoutY="23.0" mnemonicParsing="false" prefHeight="66.0"
-                                prefWidth="139.0" text="Сохранить" GridPane.columnIndex="2" GridPane.halignment="CENTER"
-                                GridPane.valignment="CENTER">
+                        <Button fx:id="save" layoutX="143.0" layoutY="23.0" mnemonicParsing="false"
+                                onAction="#handleSaveButton" prefHeight="66.0" prefWidth="139.0" text="Сохранить"
+                                GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>

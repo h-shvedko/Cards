@@ -20,6 +20,9 @@ public class DecksValues extends A_Models implements Serializable {
     @Column(name = "is_ready", nullable = false)
     private int isReady;
 
+    @Column(name = "order_in_card", nullable = false)
+    private int orderInCard;
+
     @Column(name = "date_ready", nullable = false)
     private String dateReady;
 
@@ -89,5 +92,13 @@ public class DecksValues extends A_Models implements Serializable {
 
     public void setDateReady(String dateReady) {
         this.dateReady = dateReady;
+    }
+
+    public int getOrderInCard() {
+        return orderInCard;
+    }
+
+    public void setOrderInCard(int orderInCard) {
+        this.orderInCard = orderInCard;
     }
 }
