@@ -56,6 +56,10 @@ public class CardController extends A_Controller {
     public ToggleButton anchorButton;
     @FXML
     public Label numberOfCards;
+    @FXML
+    public Label topicLabel;
+    @FXML
+    public Label categoryLabel;
 
     private int numberOfElement = 0;
     private int cardId = 0;
@@ -79,6 +83,9 @@ public class CardController extends A_Controller {
 
         deckId = ((Decks) A_Controller.globalUserData).getId();
         List deckValues = ((Decks) A_Controller.globalUserData).getDecksValues();
+
+        topicLabel.setText(((Decks) A_Controller.globalUserData).getType().getName());
+        categoryLabel.setText(((Decks) A_Controller.globalUserData).getCategory().getName());
 
         for (Object deckValue : deckValues) {
             if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getDecks().getIsVisible() == 1) {
