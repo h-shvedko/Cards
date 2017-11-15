@@ -58,6 +58,7 @@ public class CardController extends A_Controller {
     private int numberOfElement = 0;
     private int cardId = 0;
     private int deckId = 0;
+    private int numberOfActiveCards = 0;
     private A_Models decksValues;
 
     private final ToggleGroup groupAnchor = new ToggleGroup();
@@ -67,8 +68,6 @@ public class CardController extends A_Controller {
     public ObservableList<Cards> cardsTable = FXCollections.observableArrayList();
 
     public void initialize(URL location, ResourceBundle resources) {
-
-        int numberOfActiveCards = 0;
         anchorButton.setToggleGroup(groupAnchor);
         favoriteButton.setToggleGroup(groupFavorite);
         trophyButton.setToggleGroup(groupTrophy);
@@ -80,15 +79,14 @@ public class CardController extends A_Controller {
         List deckValues = ((Decks) A_Controller.globalUserData).getDecksValues();
 
         for (Object deckValue : deckValues) {
-            if(((DecksValues)deckValue).getIsReady() == 0){
+            if (((DecksValues) deckValue).getIsReady() == 0) {
                 cardsTable.add(((DecksValues) deckValue).getCards());
                 numberOfActiveCards++;
             }
         }
 
-        numberOfCards.setText("Карточек: " + String.valueOf(numberOfActiveCards));
+        numberOfCards.setText("Карточка " + 1 + " / " + String.valueOf(numberOfActiveCards));
 
-        checkNumberOfWords();
         try {
             setValuesOfCard();
         } catch (Exception e) {
@@ -111,19 +109,19 @@ public class CardController extends A_Controller {
 
         getDecksValues();
 
-        if(((DecksValues)decksValues).getIsFavorite() == 1){
+        if (((DecksValues) decksValues).getIsFavorite() == 1) {
             favoriteButton.setSelected(true);
         } else {
             favoriteButton.setSelected(false);
         }
 
-        if(((DecksValues)decksValues).getIsAnchor() == 1){
+        if (((DecksValues) decksValues).getIsAnchor() == 1) {
             anchorButton.setSelected(true);
         } else {
             anchorButton.setSelected(false);
         }
 
-        if(((DecksValues)decksValues).getIsReady() == 1){
+        if (((DecksValues) decksValues).getIsReady() == 1) {
             trophyButton.setSelected(true);
         } else {
             trophyButton.setSelected(false);
@@ -144,11 +142,15 @@ public class CardController extends A_Controller {
         translatedExample.setVisible(false);
 
         if (numberOfWord > 0) {
-            setNumberOfElement(--numberOfWord);
-            setValuesOfCard();
+            --numberOfWord;
+        } else {
+            numberOfWord = cardsTable.size() - 1;
         }
+        setNumberOfElement(numberOfWord);
+        setValuesOfCard();
 
-        checkNumberOfWords();
+        int currentCard = numberOfWord == 0? 1: numberOfWord + 1;
+        numberOfCards.setText("Карточка " + currentCard + " / " + String.valueOf(numberOfActiveCards));
     }
 
     public void handleNextButton(ActionEvent actionEvent) throws Exception {
@@ -157,27 +159,15 @@ public class CardController extends A_Controller {
         translatedExample.setVisible(false);
 
         if (numberOfWord < cardsTable.size() - 1) {
-            setNumberOfElement(++numberOfWord);
-            setValuesOfCard();
-        }
-
-        checkNumberOfWords();
-    }
-
-    private void checkNumberOfWords() {
-        int numberOfWord = getNumberOfElement();
-
-        if (numberOfWord == 0) {
-            previous.setDisable(true);
+            ++numberOfWord;
         } else {
-            previous.setDisable(false);
+            numberOfWord = 0;
         }
+        setNumberOfElement(numberOfWord);
+        setValuesOfCard();
 
-        if (numberOfWord == cardsTable.size() - 1) {
-            next.setDisable(true);
-        } else {
-            next.setDisable(false);
-        }
+        int currentCard = numberOfWord == 0? 1: numberOfWord + 1;
+        numberOfCards.setText("Карточка " + currentCard + " / " + String.valueOf(numberOfActiveCards));
     }
 
     public void handleSettingsButton(ActionEvent actionEvent) {
