@@ -90,9 +90,13 @@ public class CardController extends A_Controller {
 
     private void setValuesOfCard() throws Exception {
         word.setText(cardsTable.get(getNumberOfElement()).getName());
+        word.setWrapText(true);
         translatedWord.setText(cardsTable.get(getNumberOfElement()).getForeignName());
+        translatedWord.setWrapText(true);
         example.setText(cardsTable.get(getNumberOfElement()).getExample());
+        example.setWrapText(true);
         translatedExample.setText(cardsTable.get(getNumberOfElement()).getForeignExample());
+        translatedExample.setWrapText(true);
 
         cardId = cardsTable.get(getNumberOfElement()).getId();
 
