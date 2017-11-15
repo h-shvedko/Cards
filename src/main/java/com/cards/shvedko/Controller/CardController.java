@@ -52,6 +52,8 @@ public class CardController extends A_Controller {
     public ToggleButton trophyButton;
     @FXML
     public ToggleButton anchorButton;
+    @FXML
+    public Label numberOfCards;
 
     private int numberOfElement = 0;
     private int cardId = 0;
@@ -65,6 +67,8 @@ public class CardController extends A_Controller {
     public ObservableList<Cards> cardsTable = FXCollections.observableArrayList();
 
     public void initialize(URL location, ResourceBundle resources) {
+
+        int numberOfActiveCards = 0;
         anchorButton.setToggleGroup(groupAnchor);
         favoriteButton.setToggleGroup(groupFavorite);
         trophyButton.setToggleGroup(groupTrophy);
@@ -78,8 +82,12 @@ public class CardController extends A_Controller {
         for (Object deckValue : deckValues) {
             if(((DecksValues)deckValue).getIsReady() == 0){
                 cardsTable.add(((DecksValues) deckValue).getCards());
+                numberOfActiveCards++;
             }
         }
+
+        numberOfCards.setText("Карточек: " + String.valueOf(numberOfActiveCards));
+
         checkNumberOfWords();
         try {
             setValuesOfCard();
@@ -97,6 +105,7 @@ public class CardController extends A_Controller {
         example.setWrapText(true);
         translatedExample.setText(cardsTable.get(getNumberOfElement()).getForeignExample());
         translatedExample.setWrapText(true);
+        numberOfCards.setWrapText(true);
 
         cardId = cardsTable.get(getNumberOfElement()).getId();
 
