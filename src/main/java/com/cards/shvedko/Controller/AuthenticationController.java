@@ -5,9 +5,13 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AuthenticationController extends A_Controller{
@@ -22,7 +26,7 @@ public class AuthenticationController extends A_Controller{
     @FXML
     private Hyperlink createAccount;
 
-    public void handleSubmitButtonAction(ActionEvent actionEvent) {
+    public void handleSubmitButtonAction() {
         login.setStyle("-fx-border-color: inherit");
         password.setStyle("-fx-border-color: inherit");
         String loginValue = login.getText();
@@ -55,7 +59,7 @@ public class AuthenticationController extends A_Controller{
         }
     }
 
-    public void handleCancelButtonAction(ActionEvent actionEvent) {
+    public void handleCancelButtonAction() {
         Stage stage = (Stage) closeApp.getScene().getWindow();
         stage.close();
     }

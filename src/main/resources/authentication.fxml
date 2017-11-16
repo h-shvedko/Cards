@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.cards.shvedko.Controller.AuthenticationController">
     <children>
-        <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.topAnchor="0.0">
+        <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.topAnchor="0.0" onKeyPressed="#handleEnterKey">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="97.0"/>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="475.0" minWidth="10.0" prefWidth="409.0"/>

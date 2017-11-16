@@ -17,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -444,4 +446,19 @@ abstract public class A_Controller implements Initializable {
         return cardsDAO;
 
     }
+
+
+    public void handleEnterKey(KeyEvent keyEvent) {
+        if(keyEvent.getCode().equals(KeyCode.ENTER)){
+            handleSubmitButtonAction();
+        }
+
+        if(keyEvent.getCode().equals(KeyCode.ESCAPE)){
+            handleCancelButtonAction();
+        }
+    }
+
+    protected abstract void handleCancelButtonAction();
+
+    protected abstract void handleSubmitButtonAction();
 }

@@ -47,6 +47,16 @@ public class ChooseDecksController extends A_Controller {
         });
     }
 
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
+
     public void handleCreateButton(ActionEvent actionEvent) {
         this.goToPage("addDeck.fxml", A_Controller.ADD_DECK_PAGE_TITLE, "");
     }

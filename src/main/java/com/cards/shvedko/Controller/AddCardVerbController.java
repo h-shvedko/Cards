@@ -201,6 +201,16 @@ public class AddCardVerbController extends A_Controller {
         return cardsDAO;
     }
 
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
+
     private int getIsReflexive() {
 
         int ret = 0;

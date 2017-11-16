@@ -19,4 +19,14 @@ public class ModalQuestionController extends A_Controller {
         answer = true;
         closeWindow(agree);
     }
+
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
 }

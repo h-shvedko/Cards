@@ -38,4 +38,14 @@ public class AddCardController extends A_Controller {
         }
         return null;
     }
+
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
 }

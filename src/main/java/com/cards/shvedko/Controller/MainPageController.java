@@ -33,6 +33,16 @@ public class MainPageController extends A_Controller {
         greeting.setText(globalUserModel.getName());
     }
 
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
+
     public void handleLearnCardsButton(ActionEvent actionEvent) {
         this.goToPage("chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
     }

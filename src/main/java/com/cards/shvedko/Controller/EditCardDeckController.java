@@ -266,6 +266,16 @@ public class EditCardDeckController extends A_Controller {
         this.goToPage("chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
     }
 
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
+
     public void handleDisableSpeechPartCombo(ActionEvent actionEvent) {
         boolean isDisabled = speechPart.isDisabled();
         speechPart.setDisable(!isDisabled);

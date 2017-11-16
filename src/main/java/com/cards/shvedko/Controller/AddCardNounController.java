@@ -99,4 +99,14 @@ public class AddCardNounController extends A_Controller {
 
         return cardsDAO;
     }
+
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
 }

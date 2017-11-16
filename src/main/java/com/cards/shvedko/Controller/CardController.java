@@ -295,4 +295,14 @@ public class CardController extends A_Controller {
         this.goToPage("chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
     }
 
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
+
 }

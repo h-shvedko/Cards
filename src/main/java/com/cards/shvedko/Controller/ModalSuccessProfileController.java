@@ -12,4 +12,14 @@ public class ModalSuccessProfileController extends A_Controller {
         closeWindow(close);
         this.goToPage("mainPage.fxml", A_Controller.MAIN_PAGE_TITLE, "");
     }
+
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
 }

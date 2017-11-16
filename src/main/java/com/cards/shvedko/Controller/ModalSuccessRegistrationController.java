@@ -20,6 +20,16 @@ public class ModalSuccessRegistrationController extends A_Controller {
         congratulation.setText("Congratulation " + user.getName() + "!");
     }
 
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
+
     public void handleCloseButton(ActionEvent actionEvent) {
         closeWindow(close);
         this.goToPage("authentication.fxml", A_Controller.LOGIN_PAGE_TITLE, "");

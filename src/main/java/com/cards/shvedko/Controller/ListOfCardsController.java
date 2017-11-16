@@ -45,6 +45,16 @@ public class ListOfCardsController extends A_Controller {
 
     }
 
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
+
     private void makeTitleOfColumns() {
         tableTopic.setText("Topic");
         tableSpeechPart.setText("Part of speech");

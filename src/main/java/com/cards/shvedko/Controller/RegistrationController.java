@@ -78,4 +78,14 @@ public class RegistrationController extends A_Controller {
         firstNameError.setText("");
         lastNameError.setText("");
     }
+
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
 }

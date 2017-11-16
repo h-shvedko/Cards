@@ -69,4 +69,14 @@ public class ProfileController extends A_Controller {
         lastNameError.setText("");
         passwordError.setText("");
     }
+
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
+    }
 }
