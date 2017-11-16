@@ -94,7 +94,7 @@ public class CardController extends A_Controller {
                     cardsTable.add(((DecksValues) deckValue).getCards());
                     decksValuesTable.add((DecksValues) deckValue);
                     ++numberOfActiveCards;
-                    if(((DecksValues) deckValue).getIsAnchor() == 1){
+                    if (((DecksValues) deckValue).getIsAnchor() == 1) {
                         setNumberOfElement(numberOfActiveCards);
                         cardId = ((DecksValues) deckValue).getCards().getId();
                     }
@@ -106,7 +106,7 @@ public class CardController extends A_Controller {
                     cardsTable.add(((DecksValues) deckValue).getCards());
                     decksValuesTable.add((DecksValues) deckValue);
                     ++numberOfActiveCards;
-                    if(((DecksValues) deckValue).getIsAnchor() == 1){
+                    if (((DecksValues) deckValue).getIsAnchor() == 1) {
                         setNumberOfElement(numberOfActiveCards);
                         cardId = ((DecksValues) deckValue).getCards().getId();
                     }
@@ -213,6 +213,8 @@ public class CardController extends A_Controller {
             decksValuesDAO.decksValues.setIsAnchor(0);
         } else {
             decksValuesDAO.decksValues.setIsAnchor(1);
+            cancelOtherAnchorsInArrayList((DecksValues)decksValues);
+            cancelOtherAnchorsInDataBase((DecksValues)decksValues);
         }
 
         if (decksValuesDAO.validate(decksValuesDAO.decksValues)) {
@@ -225,6 +227,40 @@ public class CardController extends A_Controller {
             }
         } else {
             showErrors(decksValuesDAO);
+        }
+    }
+
+    private void cancelOtherAnchorsInDataBase(DecksValues decksCurrentValue) {
+        Decks decks = ((DecksValues) decksValues).getDecks();
+        List<DecksValues> decksValuesOfCurrentDeck = decks.getDecksValues();
+
+        for (Object deckValuesOfCurrentDeck : decksValuesOfCurrentDeck) {
+            if (((DecksValues) deckValuesOfCurrentDeck).getIsAnchor() == 1 && decksCurrentValue.getId() != ((DecksValues) deckValuesOfCurrentDeck).getId()) {
+                DecksValuesDAO decksValuesDAO = new DecksValuesDAO(((DecksValues) deckValuesOfCurrentDeck).getId());
+                decksValuesDAO.decksValues.setIsAnchor(0);
+                if (decksValuesDAO.validate(decksValuesDAO.decksValues)) {
+                    try {
+                        if (!decksValuesDAO.save()) {
+                            throw new Exception(decksValuesDAO.errorMsg);
+                        }
+                    } catch (Exception ex) {
+                        crashAppeared(ex.getMessage());
+                    }
+                } else {
+                    showErrors(decksValuesDAO);
+                }
+            }
+        }
+    }
+
+    private void cancelOtherAnchorsInArrayList(DecksValues decksValue) {
+        for(Object deckValueTable: decksValuesTable){
+            if(((DecksValues)deckValueTable).getIsAnchor() == 1 && decksValue.getId() != ((DecksValues)deckValueTable).getId()){
+                ((DecksValues) deckValueTable).setIsAnchor(0);
+            }
+            if(decksValue.getId() == ((DecksValues)deckValueTable).getId()){
+                ((DecksValues) deckValueTable).setIsAnchor(1);
+            }
         }
     }
 
