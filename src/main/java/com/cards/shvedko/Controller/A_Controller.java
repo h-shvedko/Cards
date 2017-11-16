@@ -138,6 +138,7 @@ abstract public class A_Controller implements Initializable {
     /**
      * Global data
      */
+    public static Stage stage;
     protected static Object globalUserData;
     public static A_Models globalUserModel;
     public static Decks globalDeckData;
@@ -253,6 +254,9 @@ abstract public class A_Controller implements Initializable {
 
     public void goToPage(String fxml, String title, Object userData) {
         try {
+            if(closeAdditionalStage()){
+                return;
+            }
             globalUserData = userData;
             Parent page = FXMLLoader.load(getClass().getClassLoader().getResource(fxml), null, new JavaFXBuilderFactory());
             Scene scene = MainApp.stage.getScene();
@@ -265,6 +269,37 @@ abstract public class A_Controller implements Initializable {
             MainApp.stage.setTitle(title);
             MainApp.stage.sizeToScene();
             MainApp.stage.setResizable(false);
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected boolean closeAdditionalStage(){
+        if(A_Controller.stage != null){
+            A_Controller.stage.close();
+            A_Controller.stage = null;
+            MainApp.stage.setOpacity(1);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void openOneMoreWindow(String fxml, String title, Object userData, ActionEvent event) {
+        try {
+            if(closeAdditionalStage()){
+                return;
+            }
+            globalUserData = userData;
+            A_Controller.stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(fxml), null, new JavaFXBuilderFactory());
+            A_Controller.stage.setScene(new Scene(root));
+            A_Controller.stage.setTitle(title);
+            A_Controller.stage.sizeToScene();
+            A_Controller.stage.setResizable(false);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+            A_Controller.stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            A_Controller.stage.show();
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -322,6 +357,7 @@ abstract public class A_Controller implements Initializable {
 
     protected void showSuccess(ActionEvent event) {
         try {
+            closeAdditionalStage();
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccess.fxml"), null, new JavaFXBuilderFactory());
             stage.setScene(new Scene(root));

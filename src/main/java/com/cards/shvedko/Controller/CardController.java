@@ -197,7 +197,8 @@ public class CardController extends A_Controller {
     }
 
     public void handleSettingsButton(ActionEvent actionEvent) {
-
+        A_Controller.globalDeckData = ((DecksValues)decksValues).getDecks();
+        this.openOneMoreWindow("editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, "", actionEvent);
     }
 
     public void handleEditButton(ActionEvent actionEvent) {
