@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import javax.validation.ConstraintViolation;
@@ -255,6 +257,7 @@ abstract public class A_Controller implements Initializable {
     public void goToPage(String fxml, String title, Object userData) {
         try {
             if(closeAdditionalStage()){
+                MainApp.stage.setOpacity(1);
                 return;
             }
             globalUserData = userData;
@@ -266,9 +269,13 @@ abstract public class A_Controller implements Initializable {
             } else {
                 MainApp.stage.getScene().setRoot(page);
             }
+            MainApp.stage.setOpacity(1);
             MainApp.stage.setTitle(title);
             MainApp.stage.sizeToScene();
             MainApp.stage.setResizable(false);
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            MainApp.stage.setX((primScreenBounds.getWidth() - MainApp.stage.getWidth()) / 2);
+            MainApp.stage.setY((primScreenBounds.getHeight() - MainApp.stage.getHeight()) / 2);
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -298,7 +305,11 @@ abstract public class A_Controller implements Initializable {
             A_Controller.stage.sizeToScene();
             A_Controller.stage.setResizable(false);
             ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+            A_Controller.stage.initModality(Modality.WINDOW_MODAL);
             A_Controller.stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+//            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+//            A_Controller.stage.setX((primScreenBounds.getWidth() - A_Controller.stage.getWidth()) / 2);
+//            A_Controller.stage.setY((primScreenBounds.getHeight() - A_Controller.stage.getHeight()) / 2);
             A_Controller.stage.show();
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
@@ -363,6 +374,7 @@ abstract public class A_Controller implements Initializable {
             stage.setScene(new Scene(root));
             stage.setTitle("Success!");
             stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
         } catch (Exception ex) {
@@ -377,6 +389,7 @@ abstract public class A_Controller implements Initializable {
             stage.setScene(new Scene(root));
             stage.setTitle("Success!");
             stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
         } catch (Exception ex) {
@@ -392,6 +405,7 @@ abstract public class A_Controller implements Initializable {
             stage.setScene(new Scene(root));
             stage.setTitle("Registration is success!");
             stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
         } catch (Exception ex) {
@@ -407,6 +421,7 @@ abstract public class A_Controller implements Initializable {
             stage.setTitle("Warning!");
             stage.setUserData(text);
             stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
         } catch (Exception ex) {

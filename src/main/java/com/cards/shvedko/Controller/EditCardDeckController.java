@@ -71,6 +71,10 @@ public class EditCardDeckController extends A_Controller {
 
             nameDeck.setText(A_Controller.globalDeckData.getName());
 
+            if(A_Controller.stage != null){
+                nameDeck.setDisable(true);
+            }
+
             String allSpeechPartValue = A_Controller.globalDeckData.getType().getName();
             if(allSpeechPartValue.equals(ModelsDAO.ALL_PART_OF_SPEECH)){
                 allSpeechPart.setSelected(true);
