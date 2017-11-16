@@ -108,12 +108,12 @@
                                 <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
-                                <Label prefHeight="33.0" prefWidth="182.0" text="Тема:">
+                                <Label prefHeight="33.0" prefWidth="182.0" text="Часть речи:">
                                     <font>
                                         <Font size="20.0"/>
                                     </font>
                                 </Label>
-                                <Label prefHeight="32.0" prefWidth="182.0" GridPane.rowIndex="1" fx:id="topicLabel"/>
+                                <Label prefHeight="32.0" prefWidth="182.0" GridPane.rowIndex="1" fx:id="typeLabel"/>
                             </children>
                         </GridPane>
                         <GridPane layoutX="10.0" layoutY="199.0" GridPane.columnIndex="1" GridPane.rowIndex="4">

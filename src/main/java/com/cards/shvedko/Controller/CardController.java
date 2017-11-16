@@ -4,9 +4,7 @@ import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
-import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.DecksValuesDAO;
-import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,7 +55,7 @@ public class CardController extends A_Controller {
     @FXML
     public Label numberOfCards;
     @FXML
-    public Label topicLabel;
+    public Label typeLabel;
     @FXML
     public Label categoryLabel;
 
@@ -85,7 +83,7 @@ public class CardController extends A_Controller {
         deckId = ((Decks) A_Controller.globalUserData).getId();
         List deckValues = ((Decks) A_Controller.globalUserData).getDecksValues();
 
-        topicLabel.setText(((Decks) A_Controller.globalUserData).getType().getName());
+        typeLabel.setText(((Decks) A_Controller.globalUserData).getType().getName());
         categoryLabel.setText(((Decks) A_Controller.globalUserData).getCategory().getName());
 
         if (((Decks) A_Controller.globalUserData).getIsFavorite() == 0) {

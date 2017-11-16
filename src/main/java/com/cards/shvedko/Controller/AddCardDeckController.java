@@ -17,83 +17,83 @@ public class AddCardDeckController extends A_Controller {
     private Button cancel;
     @FXML
     private ToggleButton allSpeechPart;
-    @FXML
-    private ToggleButton favoriteOff;
-    @FXML
-    private ToggleButton anchorOn;
-    @FXML
-    private ToggleButton anchorOff;
+//    @FXML
+//    private ToggleButton favoriteOff;
+//    @FXML
+//    private ToggleButton anchorOn;
+//    @FXML
+//    private ToggleButton anchorOff;
     @FXML
     private Button save;
     @FXML
     private TextField nameDeck;
     @FXML
     private ToggleButton allTopic;
-    @FXML
-    private ToggleButton favoriteOn;
+//    @FXML
+//    private ToggleButton favoriteOn;
 
-    private final ToggleGroup groupAnchor = new ToggleGroup();
-    private final ToggleGroup groupFavorite = new ToggleGroup();
+//    private final ToggleGroup groupAnchor = new ToggleGroup();
+//    private final ToggleGroup groupFavorite = new ToggleGroup();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
-        anchorOff.setUserData(ModelsDAO.ANCHOR_OFF);
-        anchorOff.setToggleGroup(groupAnchor);
-
-        anchorOn.setUserData(ModelsDAO.ANCHOR_ON);
-        anchorOn.setToggleGroup(groupAnchor);
-
-        favoriteOn.setUserData(ModelsDAO.FAVORITE_ON);
-        favoriteOn.setToggleGroup(groupFavorite);
-
-        favoriteOff.setUserData(ModelsDAO.FAVORITE_OFF);
-        favoriteOff.setToggleGroup(groupFavorite);
+//        anchorOff.setUserData(ModelsDAO.ANCHOR_OFF);
+//        anchorOff.setToggleGroup(groupAnchor);
+//
+//        anchorOn.setUserData(ModelsDAO.ANCHOR_ON);
+//        anchorOn.setToggleGroup(groupAnchor);
+//
+//        favoriteOn.setUserData(ModelsDAO.FAVORITE_ON);
+//        favoriteOn.setToggleGroup(groupFavorite);
+//
+//        favoriteOff.setUserData(ModelsDAO.FAVORITE_OFF);
+//        favoriteOff.setToggleGroup(groupFavorite);
 
     }
 
     public void handleSaveButton(ActionEvent actionEvent) {
         String name = nameDeck.getText();
-        String isAnchor = groupAnchor.getSelectedToggle().getUserData().toString();
-        String isFavorite = groupFavorite.getSelectedToggle().getUserData().toString();
+//        String isAnchor = groupAnchor.getSelectedToggle().getUserData().toString();
+//        String isFavorite = groupFavorite.getSelectedToggle().getUserData().toString();
         boolean ifAllSpeechPart = allSpeechPart.isSelected();
         boolean ifAllTopic = allTopic.isSelected();
         A_Models userObject = globalUserModel;
 
         int speechPartValue = 0;
-        A_Models categoryObject = null;
+        A_Models typeObject = null;
         if (!ifAllSpeechPart) {
             speechPartValue = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
-            CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
+            CardTypesDAO cardTypesDAO = new CardTypesDAO();
 
             try {
-                categoryObject = cardCategoriesDAO.select("where id=" + speechPartValue);
+                typeObject = cardTypesDAO.select("where id=" + speechPartValue);
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
         } else {
             try {
-                categoryObject = getCategoryAll();
+                typeObject = getCategoryAll();
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
         }
 
         int topicValue = 0;
-        A_Models typeObject = null;
+        A_Models categoryObject = null;
         if (!ifAllTopic) {
             topicValue = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex())) + 1;
-            CardTypesDAO cardTypesDAO = new CardTypesDAO();
+            CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
 
             try {
-                typeObject = cardTypesDAO.select("where id=" + topicValue);
+                categoryObject = cardCategoriesDAO.select("where id=" + topicValue);
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
         } else {
             try {
-                typeObject = getTopicAll();
+                categoryObject = getTopicAll();
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
@@ -108,8 +108,8 @@ public class AddCardDeckController extends A_Controller {
         }
 
         decksDAO.decks.setName(name);
-        decksDAO.decks.setIsAnchore(Integer.parseInt(isAnchor));
-        decksDAO.decks.setIsFavorite(Integer.parseInt(isFavorite));
+//        decksDAO.decks.setIsAnchore(Integer.parseInt(isAnchor));
+//        decksDAO.decks.setIsFavorite(Integer.parseInt(isFavorite));
         decksDAO.decks.setIsVisible(1);
 
         if (userObject != null) {
@@ -174,19 +174,6 @@ public class AddCardDeckController extends A_Controller {
     }
 
     private A_Models getTopicAll() throws Exception {
-        CardTypesDAO cardTypesDAO = new CardTypesDAO();
-        A_Models typeObject;
-        try {
-            typeObject = cardTypesDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-
-        assert typeObject != null;
-        return typeObject;
-    }
-
-    private A_Models getCategoryAll() throws Exception {
         CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
         A_Models categoryObject;
         try {
@@ -197,6 +184,19 @@ public class AddCardDeckController extends A_Controller {
 
         assert categoryObject != null;
         return categoryObject;
+    }
+
+    private A_Models getCategoryAll() throws Exception {
+        CardTypesDAO cardTypesDAO = new CardTypesDAO();
+        A_Models typeObject;
+        try {
+            typeObject = cardTypesDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+        assert typeObject != null;
+        return typeObject;
     }
 
     @Override
