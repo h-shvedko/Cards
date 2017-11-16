@@ -4,10 +4,7 @@ import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.List;
@@ -17,6 +14,8 @@ public class EditCardDeckController extends A_Controller {
 
     @FXML
     public Button delete;
+    @FXML
+    public Label startCards;
     @FXML
     private Button cancel;
     @FXML
@@ -43,6 +42,7 @@ public class EditCardDeckController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
+        startCards.setWrapText(true);
         if(A_Controller.globalDeckData != null){
             int isAnchorValue = A_Controller.globalDeckData.getIsAnchore();
 
@@ -100,38 +100,38 @@ public class EditCardDeckController extends A_Controller {
         A_Models userObject = globalUserModel;
 
         int speechPartValue = 0;
-        A_Models categoryObject = null;
+        A_Models typeObject = null;
         if (!ifAllSpeechPart) {
             speechPartValue = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
-            CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
+            CardTypesDAO cardTypesDAO = new CardTypesDAO();
 
             try {
-                categoryObject = cardCategoriesDAO.select("where id=" + speechPartValue);
+                typeObject = cardTypesDAO.select("where id=" + speechPartValue);
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
         } else {
             try {
-                categoryObject = getCategoryAll();
+                typeObject = getCategoryAll();
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
         }
 
         int topicValue = 0;
-        A_Models typeObject = null;
+        A_Models categoryObject = null;
         if (!ifAllTopic) {
             topicValue = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex())) + 1;
-            CardTypesDAO cardTypesDAO = new CardTypesDAO();
+            CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
 
             try {
-                typeObject = cardTypesDAO.select("where id=" + topicValue);
+                categoryObject = cardCategoriesDAO.select("where id=" + topicValue);
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
         } else {
             try {
-                typeObject = getTopicAll();
+                categoryObject = getTopicAll();
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
@@ -236,19 +236,6 @@ public class EditCardDeckController extends A_Controller {
     }
 
     private A_Models getTopicAll() throws Exception {
-        CardTypesDAO cardTypesDAO = new CardTypesDAO();
-        A_Models typeObject;
-        try {
-            typeObject = cardTypesDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-
-        assert typeObject != null;
-        return typeObject;
-    }
-
-    private A_Models getCategoryAll() throws Exception {
         CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
         A_Models categoryObject;
         try {
@@ -259,6 +246,19 @@ public class EditCardDeckController extends A_Controller {
 
         assert categoryObject != null;
         return categoryObject;
+    }
+
+    private A_Models getCategoryAll() throws Exception {
+        CardTypesDAO cardTypesDAO = new CardTypesDAO();
+        A_Models typeObject;
+        try {
+            typeObject = cardTypesDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+        assert typeObject != null;
+        return typeObject;
     }
 
     @Override

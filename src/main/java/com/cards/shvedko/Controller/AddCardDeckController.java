@@ -17,46 +17,20 @@ public class AddCardDeckController extends A_Controller {
     private Button cancel;
     @FXML
     private ToggleButton allSpeechPart;
-//    @FXML
-//    private ToggleButton favoriteOff;
-//    @FXML
-//    private ToggleButton anchorOn;
-//    @FXML
-//    private ToggleButton anchorOff;
     @FXML
     private Button save;
     @FXML
     private TextField nameDeck;
     @FXML
     private ToggleButton allTopic;
-//    @FXML
-//    private ToggleButton favoriteOn;
-
-//    private final ToggleGroup groupAnchor = new ToggleGroup();
-//    private final ToggleGroup groupFavorite = new ToggleGroup();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-
-//        anchorOff.setUserData(ModelsDAO.ANCHOR_OFF);
-//        anchorOff.setToggleGroup(groupAnchor);
-//
-//        anchorOn.setUserData(ModelsDAO.ANCHOR_ON);
-//        anchorOn.setToggleGroup(groupAnchor);
-//
-//        favoriteOn.setUserData(ModelsDAO.FAVORITE_ON);
-//        favoriteOn.setToggleGroup(groupFavorite);
-//
-//        favoriteOff.setUserData(ModelsDAO.FAVORITE_OFF);
-//        favoriteOff.setToggleGroup(groupFavorite);
-
     }
 
     public void handleSaveButton(ActionEvent actionEvent) {
         String name = nameDeck.getText();
-//        String isAnchor = groupAnchor.getSelectedToggle().getUserData().toString();
-//        String isFavorite = groupFavorite.getSelectedToggle().getUserData().toString();
         boolean ifAllSpeechPart = allSpeechPart.isSelected();
         boolean ifAllTopic = allTopic.isSelected();
         A_Models userObject = globalUserModel;
@@ -108,8 +82,6 @@ public class AddCardDeckController extends A_Controller {
         }
 
         decksDAO.decks.setName(name);
-//        decksDAO.decks.setIsAnchore(Integer.parseInt(isAnchor));
-//        decksDAO.decks.setIsFavorite(Integer.parseInt(isFavorite));
         decksDAO.decks.setIsVisible(1);
 
         if (userObject != null) {
