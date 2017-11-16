@@ -125,14 +125,15 @@ public class CardController extends A_Controller {
     }
 
     private void setValuesOfCard() throws Exception {
-        decksValues = decksValuesTable.get(getNumberOfElement() - 1);
-        word.setText(cardsTable.get(getNumberOfElement()).getName());
+        int numberOfCurrentElement = getNumberOfElement() - 1;
+        decksValues = decksValuesTable.get(numberOfCurrentElement);
+        word.setText(cardsTable.get(numberOfCurrentElement).getName());
         word.setWrapText(true);
-        translatedWord.setText(cardsTable.get(getNumberOfElement()).getForeignName());
+        translatedWord.setText(cardsTable.get(numberOfCurrentElement).getForeignName());
         translatedWord.setWrapText(true);
-        example.setText(cardsTable.get(getNumberOfElement()).getExample());
+        example.setText(cardsTable.get(numberOfCurrentElement).getExample());
         example.setWrapText(true);
-        translatedExample.setText(cardsTable.get(getNumberOfElement()).getForeignExample());
+        translatedExample.setText(cardsTable.get(numberOfCurrentElement).getForeignExample());
         translatedExample.setWrapText(true);
         numberOfCards.setWrapText(true);
 
