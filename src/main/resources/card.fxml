@@ -56,7 +56,7 @@
                                 <Font size="20.0"/>
                             </font>
                         </Button>
-                        <Button layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleEditButton"
+                        <Button layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleEditCardButton"
                                 prefHeight="48.0" prefWidth="171.0" text="Редактировать" GridPane.columnIndex="1"
                                 GridPane.rowIndex="1">
                             <font>

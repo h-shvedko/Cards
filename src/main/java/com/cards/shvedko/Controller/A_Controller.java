@@ -315,9 +315,6 @@ abstract public class A_Controller implements Initializable {
             ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
             A_Controller.stage.initModality(Modality.WINDOW_MODAL);
             A_Controller.stage.initOwner(((Node) event.getSource()).getScene().getWindow());
-//            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-//            A_Controller.stage.setX((primScreenBounds.getWidth() - A_Controller.stage.getWidth()) / 2);
-//            A_Controller.stage.setY((primScreenBounds.getHeight() - A_Controller.stage.getHeight()) / 2);
             A_Controller.stage.show();
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);

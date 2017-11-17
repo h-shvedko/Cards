@@ -127,7 +127,9 @@ public class EditCardNounController extends A_Controller {
                     if(!cardsDAO.save()){
                         throw new Exception(cardsDAO.errorMsg);
                     }
-                    showSuccessEditCard(actionEvent);
+                    if(A_Controller.stage != null){
+                        showSuccessEditCard(actionEvent);
+                    }
                 } catch (Exception ex) {
                     crashAppeared(ex.getMessage());
                 }

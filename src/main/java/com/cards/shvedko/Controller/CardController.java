@@ -6,6 +6,7 @@ import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.DecksValuesDAO;
+import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -202,9 +203,35 @@ public class CardController extends A_Controller {
         this.openOneMoreWindow("editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, "", actionEvent);
     }
 
-//    public CardsDAO handleEditButton(ActionEvent actionEvent) {
-//        return ;
-//    }
+    public void handleEditCardButton(ActionEvent actionEvent) {
+        Cards cards = cardsTable.get(getNumberOfElement() - 1);
+        switch (cards.getType().getName()){
+            case ModelsDAO.NOUN:
+                openOneMoreWindow("editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, cards, actionEvent);
+                break;
+            case ModelsDAO.VERB:
+                openOneMoreWindow("editCardVerb.fxml", A_Controller.EDIT_VERB_PAGE, cards, actionEvent);
+                break;
+            case ModelsDAO.ADJECTIVE:
+                openOneMoreWindow("editCardAdjective.fxml", A_Controller.EDIT_ADJECTIVE_PAGE, cards, actionEvent);
+                break;
+            case ModelsDAO.ADVERB:
+                openOneMoreWindow("editCardAdverb.fxml", A_Controller.EDIT_ADVERB_PAGE, cards, actionEvent);
+                break;
+            case ModelsDAO.NUMERAL:
+                openOneMoreWindow("editCardNumeral.fxml", A_Controller.EDIT_NUMERAL_PAGE, cards, actionEvent);
+                break;
+            case ModelsDAO.PARTICIPLE:
+                openOneMoreWindow("editCardParticiple.fxml", A_Controller.EDIT_PARTICIPLE_PAGE, cards, actionEvent);
+                break;
+            case ModelsDAO.PRONOUN:
+                openOneMoreWindow("editCardPronoun.fxml", A_Controller.EDIT_PRONOUN_PAGE, cards, actionEvent);
+                break;
+            default:
+                openOneMoreWindow("editCardOther.fxml", A_Controller.EDIT_OTHER_PAGE, cards, actionEvent);
+                break;
+        }
+    }
 
     public void handleAnchorButton(ActionEvent actionEvent) throws Exception {
         int isAnchor = ((DecksValues) decksValues).getIsAnchor();
