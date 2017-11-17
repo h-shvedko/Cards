@@ -40,11 +40,11 @@ public class Cards extends A_Models implements Serializable {
     @JoinColumn(name = "type_id", referencedColumnName="id")
     private CardTypes type;
 
-    @ManyToOne(optional=false, fetch = FetchType.LAZY)
+    @ManyToOne(optional=false, fetch = FetchType.EAGER)
     @JoinColumn(name = "preposition_akk", referencedColumnName="id")
     private CardsPrepositionAkkusativ prepositionAkk;
 
-    @ManyToOne(optional=false, fetch = FetchType.LAZY)
+    @ManyToOne(optional=false, fetch = FetchType.EAGER)
     @JoinColumn(name = "preposition_dat", referencedColumnName="id")
     private CardsPrepositionDativ prepositionDativ;
 

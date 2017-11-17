@@ -168,8 +168,14 @@ public class EditCardVerbController extends A_Controller {
                 habenPerfect.setSelected(false);
             }
 
-            pronomenAkk.setValue(cards.getPrepositionAkk().getName());
-            pronomenDat.setValue(cards.getPrepositionDativ().getName());
+            if(cards.getPrepositionAkk() != null){
+                pronomenAkk.setValue(cards.getPrepositionAkk().getName());
+            }
+
+            if(cards.getPrepositionDativ() != null){
+                pronomenDat.setValue(cards.getPrepositionDativ().getName());
+            }
+
             pronomenGen.setText(cards.getPrepositionGen());
 
             String speechPartValue = ((Cards) A_Controller.globalUserData).getType().getName();
