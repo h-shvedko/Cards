@@ -390,6 +390,22 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    protected void showSuccessEditCard(ActionEvent event) {
+        try {
+            closeAdditionalStage();
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccessEditCard.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Success!");
+            stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     protected void showSuccessProfile(ActionEvent event) {
         try {
             Stage stage = new Stage();
@@ -483,6 +499,58 @@ abstract public class A_Controller implements Initializable {
         }
 
         CardsDAO cardsDAO = new CardsDAO();
+        cardsDAO.cards.setName(name);
+        cardsDAO.cards.setForeignName(value);
+        cardsDAO.cards.setExample(nExample);
+        cardsDAO.cards.setForeignExample(fExample);
+
+        if (categoryObject != null) {
+            cardsDAO.cards.setCategory((CardCategories) categoryObject);
+        }
+
+        if (typeObject != null) {
+            cardsDAO.cards.setType((CardTypes) typeObject);
+        }
+
+        if (userObject != null) {
+            cardsDAO.cards.setUser((Users) userObject);
+        }
+
+        cardsDAO.cards.setIsVisible(1);
+
+        return cardsDAO;
+
+    }
+
+    public CardsDAO handleEditButton(ActionEvent actionEvent) {
+
+        String name = nativeValue.getText();
+        String value = foreignValue.getText();
+        String nExample = nativeExample.getText();
+        String fExample = foreignExample.getText();
+        int type = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
+        int category = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex())) + 1;
+
+        CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
+        A_Models categoryObject = null;
+        try {
+            categoryObject = cardCategoriesDAO.select("where id=" + category);
+        } catch (Exception e) {
+            crashAppeared(e.getMessage());
+        }
+
+        A_Models userObject = globalUserModel;
+
+        CardTypesDAO cardTypesDAO = new CardTypesDAO();
+        A_Models typeObject = null;
+        try {
+            typeObject = cardTypesDAO.select("where id=" + type);
+        } catch (Exception e) {
+            crashAppeared(e.getMessage());
+        }
+
+        int cardId = ((Cards)A_Controller.globalUserData).getId();
+        CardsDAO cardsDAO = new CardsDAO(cardId);
         cardsDAO.cards.setName(name);
         cardsDAO.cards.setForeignName(value);
         cardsDAO.cards.setExample(nExample);

@@ -1,5 +1,7 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Model.Cards;
+import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
@@ -10,6 +12,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class EditCardNounController extends A_Controller {
@@ -30,7 +33,7 @@ public class EditCardNounController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Редаткировать существительное:");
+        titleOfAddCard.setText("Редактировать существительное:");
         speechPart.setValue(ModelsDAO.NOUN);
         speechPart.setDisable(true);
 
@@ -42,15 +45,52 @@ public class EditCardNounController extends A_Controller {
 
         neutrum.setUserData(ModelsDAO.NEUTRUM);
         neutrum.setToggleGroup(group);
+
+        setData();
+    }
+
+    private void setData() {
+        if(A_Controller.globalUserData != null){
+
+            Cards cards = (Cards)A_Controller.globalUserData;
+            topic.setValue(cards.getCategory().getName());
+            nativeValue.setText(cards.getName());
+            nativeExample.setText(cards.getExample());
+            foreignExample.setText(cards.getForeignExample());
+            foreignValue.setText(cards.getForeignName());
+            foreignValuePlural.setText(cards.getPluralEndung());
+
+            switch (cards.getKindOfNoun()) {
+                case ModelsDAO.FEMININUM_INTO_DB:
+                    femininum.setSelected(true);
+                    break;
+                case ModelsDAO.MUSKULINUM_INTO_DB:
+                    maskulinum.setSelected(true);
+                    break;
+                case ModelsDAO.NEUTRUM_INTO_DB:
+                    neutrum.setSelected(true);
+                    break;
+            }
+
+            String speechPartValue = ((Cards)A_Controller.globalUserData).getType().getName();
+            if(!Objects.equals(speechPartValue, "")){
+                speechPart.setValue(speechPartValue);
+            }
+
+            String topicValue = ((Cards)A_Controller.globalUserData).getCategory().getName();
+            if(!Objects.equals(topicValue, "")){
+                topic.setValue(topicValue);
+            }
+        }
     }
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
+        goToPage("listOfCards.fxml", A_Controller.LIST_OF_CARDS_TITLE, "");
     }
 
     @Override
-    public CardsDAO handleAddButton(ActionEvent actionEvent) {
+    public CardsDAO handleEditButton(ActionEvent actionEvent) {
 
         if (compareForeignValue() && compareNativeValue()) {
             showQuiestion(actionEvent, "Вы дествительно хотите сохранить картоку! Вы не внесли никаках изменений.");
@@ -58,7 +98,7 @@ public class EditCardNounController extends A_Controller {
 
         CardsDAO cardsDAO = null;
         if (answer) {
-            cardsDAO = super.handleAddButton(actionEvent);
+            cardsDAO = super.handleEditButton(actionEvent);
 
             String typeOfNoun = group.getSelectedToggle().getUserData().toString();
             int typeOfNounIntoDB = 1;
@@ -87,7 +127,7 @@ public class EditCardNounController extends A_Controller {
                     if(!cardsDAO.save()){
                         throw new Exception(cardsDAO.errorMsg);
                     }
-                    showSuccess(actionEvent);
+                    showSuccessEditCard(actionEvent);
                 } catch (Exception ex) {
                     crashAppeared(ex.getMessage());
                 }

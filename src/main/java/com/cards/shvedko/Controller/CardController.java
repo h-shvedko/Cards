@@ -4,6 +4,7 @@ import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
+import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.DecksValuesDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -201,9 +202,9 @@ public class CardController extends A_Controller {
         this.openOneMoreWindow("editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, "", actionEvent);
     }
 
-    public void handleEditButton(ActionEvent actionEvent) {
-
-    }
+//    public CardsDAO handleEditButton(ActionEvent actionEvent) {
+//        return ;
+//    }
 
     public void handleAnchorButton(ActionEvent actionEvent) throws Exception {
         int isAnchor = ((DecksValues) decksValues).getIsAnchor();
