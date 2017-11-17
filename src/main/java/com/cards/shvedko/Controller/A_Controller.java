@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
@@ -307,6 +309,15 @@ abstract public class A_Controller implements Initializable {
             }
             globalUserData = userData;
             A_Controller.stage = new Stage();
+            A_Controller.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    if(A_Controller.stage != null){
+                        A_Controller.stage.close();
+                        A_Controller.stage = null;
+                        MainApp.stage.setOpacity(1);
+                    }
+                }
+            });
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(fxml), null, new JavaFXBuilderFactory());
             A_Controller.stage.setScene(new Scene(root));
             A_Controller.stage.setTitle(title);
