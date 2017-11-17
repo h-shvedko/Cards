@@ -7,8 +7,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.util.Callback;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 
@@ -43,6 +47,41 @@ public class ListOfCardsController extends A_Controller {
 
         cardsTable.setItems(getCardsData());
 
+        initializeContentMenu();
+
+    }
+
+    // Create ContextMenu
+    private void initializeContentMenu() {
+
+        final ContextMenu contextMenu = new ContextMenu();
+
+        MenuItem item1 = new MenuItem("Редактировать");
+        item1.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                goToPage("", "", getCardsData());
+            }
+        });
+        MenuItem item2 = new MenuItem("Удалить");
+        item2.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                goToPage("", "", getCardsData());
+            }
+        });
+
+        contextMenu.getItems().addAll(item1, item2);
+
+        cardsTable.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+            @Override
+            public void handle(ContextMenuEvent event) {
+                contextMenu.show(cardsTable, event.getScreenX(), event.getScreenY());
+            }
+        });
     }
 
     @Override
