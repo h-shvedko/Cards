@@ -1,6 +1,7 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.Model.A_Models;
+import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.Model.CardsPrepositionAkkusativ;
 import com.cards.shvedko.Model.CardsPrepositionDativ;
 import com.cards.shvedko.ModelDAO.CardsDAO;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class EditCardVerbController extends A_Controller {
@@ -129,28 +131,74 @@ public class EditCardVerbController extends A_Controller {
                 }
             });
         }
+        setData();
+    }
+
+    private void setData() {
+        if(A_Controller.globalUserData != null){
+
+            Cards cards = (Cards)A_Controller.globalUserData;
+            topic.setValue(cards.getCategory().getName());
+            nativeValue.setText(cards.getName());
+            nativeExample.setText(cards.getExample());
+            foreignExample.setText(cards.getForeignExample());
+            foreignValue.setText(cards.getForeignName());
+
+            if (cards.getIsRegularVerb() == 1) {
+                regelmassigVerb.setSelected(true);
+                unregelmassigVerb.setSelected(false);
+            } else {
+                regelmassigVerb.setSelected(true);
+                unregelmassigVerb.setSelected(false);
+            }
+
+            if (cards.getIsTrembarePrefixVerb() == 1) {
+                hasNotTermbarePrefix.setSelected(false);
+                hasTermbarePrefix.setSelected(true);
+            } else {
+                hasNotTermbarePrefix.setSelected(true);
+                hasTermbarePrefix.setSelected(false);
+            }
+
+            if (cards.getIsPerfectWithHaben() == 1) {
+                seinPerfect.setSelected(false);
+                habenPerfect.setSelected(true);
+            } else {
+                seinPerfect.setSelected(true);
+                habenPerfect.setSelected(false);
+            }
+
+            pronomenAkk.setValue(cards.getPrepositionAkk().getName());
+            pronomenDat.setValue(cards.getPrepositionDativ().getName());
+            pronomenGen.setText(cards.getPrepositionGen());
+
+            String speechPartValue = ((Cards)A_Controller.globalUserData).getType().getName();
+            if(!Objects.equals(speechPartValue, "")){
+                speechPart.setValue(speechPartValue);
+            }
+
+            String topicValue = ((Cards)A_Controller.globalUserData).getCategory().getName();
+            if(!Objects.equals(topicValue, "")){
+                topic.setValue(topicValue);
+            }
+        }
     }
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
+        this.goToPage("listOfCards.fxml", A_Controller.LIST_OF_CARDS_TITLE, "");
     }
 
     @Override
-    public void handlePreviewButton(ActionEvent actionEvent) {
-
-    }
-
-    @Override
-    public CardsDAO handleAddButton(ActionEvent actionEvent) {
+    public CardsDAO handleEditButton(ActionEvent actionEvent) {
 
         if (compareForeignValue() && compareNativeValue()) {
-            showQuiestion(actionEvent, "Do really want to save this card? You haven't changed anything in native and foreign words!");
+            showQuiestion(actionEvent, "Вы дествительно хотите сохранить картоку! Вы не внесли никаках изменений.");
         }
 
         CardsDAO cardsDAO = null;
         if (answer) {
-            cardsDAO = super.handleAddButton(actionEvent);
+            cardsDAO = super.handleEditButton(actionEvent);
 
             cardsDAO.cards.setIsPerfectWithHaben(getPerfectType());
             cardsDAO.cards.setIsRegularVerb(getVerbType());

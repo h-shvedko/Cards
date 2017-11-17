@@ -1,10 +1,12 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class EditCardParticipleController extends A_Controller {
@@ -15,23 +17,46 @@ public class EditCardParticipleController extends A_Controller {
         titleOfAddCard.setText("Редактировать причастие:");
         speechPart.setValue(ModelsDAO.PARTICIPLE);
         speechPart.setDisable(true);
+        setData();
+    }
+
+    private void setData() {
+        if(A_Controller.globalUserData != null){
+
+            Cards cards = (Cards)A_Controller.globalUserData;
+            topic.setValue(cards.getCategory().getName());
+            nativeValue.setText(cards.getName());
+            nativeExample.setText(cards.getExample());
+            foreignExample.setText(cards.getForeignExample());
+            foreignValue.setText(cards.getForeignName());
+
+            String speechPartValue = ((Cards)A_Controller.globalUserData).getType().getName();
+            if(!Objects.equals(speechPartValue, "")){
+                speechPart.setValue(speechPartValue);
+            }
+
+            String topicValue = ((Cards)A_Controller.globalUserData).getCategory().getName();
+            if(!Objects.equals(topicValue, "")){
+                topic.setValue(topicValue);
+            }
+        }
     }
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
+        this.goToPage("listOfCards.fxml", A_Controller.LIST_OF_CARDS_TITLE, "");
     }
 
     @Override
-    public CardsDAO handleAddButton(ActionEvent actionEvent) {
+    public CardsDAO handleEditButton(ActionEvent actionEvent) {
 
         if (compareForeignValue() && compareNativeValue()) {
-            showQuiestion(actionEvent, "Do really want to save this card? You haven't changed anything in native and foreign words!");
+            showQuiestion(actionEvent, "Вы дествительно хотите сохранить картоку! Вы не внесли никаках изменений.");
         }
 
         CardsDAO cardsDAO = null;
         if (answer) {
-            cardsDAO = super.handleAddButton(actionEvent);
+            cardsDAO = super.handleEditButton(actionEvent);
 
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {
