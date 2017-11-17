@@ -135,9 +135,9 @@ public class EditCardVerbController extends A_Controller {
     }
 
     private void setData() {
-        if(A_Controller.globalUserData != null){
+        if (A_Controller.globalUserData != null) {
 
-            Cards cards = (Cards)A_Controller.globalUserData;
+            Cards cards = (Cards) A_Controller.globalUserData;
             topic.setValue(cards.getCategory().getName());
             nativeValue.setText(cards.getName());
             nativeExample.setText(cards.getExample());
@@ -172,13 +172,13 @@ public class EditCardVerbController extends A_Controller {
             pronomenDat.setValue(cards.getPrepositionDativ().getName());
             pronomenGen.setText(cards.getPrepositionGen());
 
-            String speechPartValue = ((Cards)A_Controller.globalUserData).getType().getName();
-            if(!Objects.equals(speechPartValue, "")){
+            String speechPartValue = ((Cards) A_Controller.globalUserData).getType().getName();
+            if (!Objects.equals(speechPartValue, "")) {
                 speechPart.setValue(speechPartValue);
             }
 
-            String topicValue = ((Cards)A_Controller.globalUserData).getCategory().getName();
-            if(!Objects.equals(topicValue, "")){
+            String topicValue = ((Cards) A_Controller.globalUserData).getCategory().getName();
+            if (!Objects.equals(topicValue, "")) {
                 topic.setValue(topicValue);
             }
         }
@@ -240,7 +240,7 @@ public class EditCardVerbController extends A_Controller {
                     if (!cardsDAO.save()) {
                         throw new Exception(cardsDAO.errorMsg);
                     }
-                    showSuccess(actionEvent);
+                    showSuccessEditCard(actionEvent);
                 } catch (Exception ex) {
                     crashAppeared(ex.getMessage());
                 }

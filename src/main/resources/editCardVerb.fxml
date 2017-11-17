@@ -329,7 +329,7 @@
                                     <children>
                                         <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false"
                                                 onAction="#handleCancelButton" prefHeight="53.0" prefWidth="136.0"
-                                                style="-fx-background-color: #e53232;" text="Cancel"
+                                                style="-fx-background-color: #e53232;" text="Отмена"
                                                 GridPane.columnIndex="1" GridPane.halignment="LEFT"
                                                 GridPane.valignment="CENTER">
                                             <font>
@@ -342,7 +342,7 @@
                                         <Button fx:id="previewButton" layoutX="64.0" layoutY="24.0"
                                                 mnemonicParsing="false" onAction="#handlePreviewButton"
                                                 prefHeight="53.0" prefWidth="136.0"
-                                                style="-fx-background-color: #5d97f4;" text="Preview"
+                                                style="-fx-background-color: #5d97f4;" text="Просмотр"
                                                 GridPane.columnIndex="2" GridPane.halignment="CENTER"
                                                 GridPane.valignment="CENTER">
                                             <font>
@@ -353,8 +353,8 @@
                                             </cursor>
                                         </Button>
                                         <Button fx:id="addButton" layoutX="218.0" layoutY="24.0" mnemonicParsing="false"
-                                                onAction="#handleAddButton" prefHeight="53.0" prefWidth="136.0"
-                                                style="-fx-background-color: #3fa843;" text="Add"
+                                                onAction="#handleEditButton" prefHeight="53.0" prefWidth="136.0"
+                                                style="-fx-background-color: #3fa843;" text="Сохранить"
                                                 GridPane.columnIndex="3" GridPane.halignment="RIGHT"
                                                 GridPane.valignment="CENTER">
                                             <font>
