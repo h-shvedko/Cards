@@ -52,6 +52,14 @@ abstract public class A_Controller implements Initializable {
     public static final String ADD_PARTICIPLE_PAGE = "Учим немецкие слова! Создание причастия.";
     public static final String ADD_PRONOUN_PAGE = "Учим немецкие слова! Создание местоимения.";
     public static final String ADD_OTHER_PAGE = "Учим немецкие слова! Создание других частей речи.";
+    public static final String EDIT_NOUN_PAGE = "Учим немецкие слова! Редактирование существительного.";
+    public static final String EDIT_VERB_PAGE = "Учим немецкие слова! Редактирование глагола.";
+    public static final String EDIT_ADJECTIVE_PAGE = "Учим немецкие слова! Редактирование прилогательного.";
+    public static final String EDIT_ADVERB_PAGE = "Учим немецкие слова! Редактирование наречия.";
+    public static final String EDIT_NUMERAL_PAGE = "Учим немецкие слова! Редактирование числительного.";
+    public static final String EDIT_PARTICIPLE_PAGE = "Учим немецкие слова! Редактирование причастия.";
+    public static final String EDIT_PRONOUN_PAGE = "Учим немецкие слова! Редактирование местоимения.";
+    public static final String EDIT_OTHER_PAGE = "Учим немецкие слова! Редактирование других частей речи.";
     public static final String ADD_DECK_PAGE_TITLE = "Учим немецкие слова! Создание новой колоды.";
     public static final String EDIT_DECK_PAGE_TITLE = "Учим немецкие слова! Редактирование колоды.";
     public static final String CHOOSE_DECKS_TITLE = "Учим немецкие слова! Выберите колоду";

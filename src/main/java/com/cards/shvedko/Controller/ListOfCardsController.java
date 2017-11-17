@@ -1,7 +1,9 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardsDAO;
+import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,6 +21,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ListOfCardsController extends A_Controller {
@@ -61,15 +64,43 @@ public class ListOfCardsController extends A_Controller {
 
             @Override
             public void handle(ActionEvent event) {
-                goToPage("", "", getCardsData());
+                Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
+                switch (selectedItem.getType().getName()){
+                    case ModelsDAO.NOUN:
+                        goToPage("editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, selectedItem);
+                        break;
+                    case ModelsDAO.VERB:
+                        goToPage("editCardVerb.fxml", A_Controller.EDIT_VERB_PAGE, selectedItem);
+                        break;
+                    case ModelsDAO.ADJECTIVE:
+                        goToPage("editCardAdjective.fxml", A_Controller.EDIT_ADJECTIVE_PAGE, selectedItem);
+                        break;
+                    case ModelsDAO.ADVERB:
+                        goToPage("editCardAdverb.fxml", A_Controller.EDIT_ADVERB_PAGE, selectedItem);
+                        break;
+                    case ModelsDAO.NUMERAL:
+                        goToPage("editCardNumeral.fxml", A_Controller.EDIT_NUMERAL_PAGE, selectedItem);
+                        break;
+                    case ModelsDAO.PARTICIPLE:
+                        goToPage("editCardParticiple.fxml", A_Controller.EDIT_PARTICIPLE_PAGE, selectedItem);
+                        break;
+                    case ModelsDAO.PRONOUN:
+                        goToPage("editCardPronoun.fxml", A_Controller.EDIT_PRONOUN_PAGE, selectedItem);
+                        break;
+                    default:
+                        goToPage("editCardOther.fxml", A_Controller.EDIT_OTHER_PAGE, selectedItem);
+                        break;
+                }
             }
         });
+
         MenuItem item2 = new MenuItem("Удалить");
         item2.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                goToPage("", "", getCardsData());
+                Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
+                goToPage("removeCard.fxml", "Удаление карточки", selectedItem);
             }
         });
 
