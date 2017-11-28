@@ -1,10 +1,10 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Helpers.AudioPlaying;
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
-import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.DecksValuesDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.collections.FXCollections;
@@ -90,7 +90,8 @@ public class CardController extends A_Controller {
 
         if (((Decks) A_Controller.globalUserData).getIsFavorite() == 0) {
             for (Object deckValue : deckValues) {
-                if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getIsFavorite() == 0 && ((DecksValues) deckValue).getDecks().getIsVisible() == 1) {
+                if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getIsFavorite() == 0
+                        && ((DecksValues) deckValue).getDecks().getIsVisible() == 1) {
                     cardsTable.add(((DecksValues) deckValue).getCards());
                     decksValuesTable.add((DecksValues) deckValue);
                     ++numberOfActiveCards;
@@ -102,7 +103,8 @@ public class CardController extends A_Controller {
             }
         } else {
             for (Object deckValue : deckValues) {
-                if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getIsFavorite() == 1 && ((DecksValues) deckValue).getDecks().getIsVisible() == 1) {
+                if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getIsFavorite() == 1
+                        && ((DecksValues) deckValue).getDecks().getIsVisible() == 1) {
                     cardsTable.add(((DecksValues) deckValue).getCards());
                     decksValuesTable.add((DecksValues) deckValue);
                     ++numberOfActiveCards;
@@ -136,8 +138,6 @@ public class CardController extends A_Controller {
         translatedExample.setText(cardsTable.get(numberOfCurrentElement).getForeignExample());
         translatedExample.setWrapText(true);
         numberOfCards.setWrapText(true);
-
-//        getDecksValues();
 
         if (((DecksValues) decksValues).getIsFavorite() == 1) {
             favoriteButton.setSelected(true);
@@ -199,13 +199,13 @@ public class CardController extends A_Controller {
     }
 
     public void handleSettingsButton(ActionEvent actionEvent) {
-        A_Controller.globalDeckData = ((DecksValues)decksValues).getDecks();
+        A_Controller.globalDeckData = ((DecksValues) decksValues).getDecks();
         this.openOneMoreWindow("editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, "", actionEvent);
     }
 
     public void handleEditCardButton(ActionEvent actionEvent) {
         Cards cards = cardsTable.get(getNumberOfElement() - 1);
-        switch (cards.getType().getName()){
+        switch (cards.getType().getName()) {
             case ModelsDAO.NOUN:
                 openOneMoreWindow("editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, cards, actionEvent);
                 break;
@@ -240,8 +240,8 @@ public class CardController extends A_Controller {
             decksValuesDAO.decksValues.setIsAnchor(0);
         } else {
             decksValuesDAO.decksValues.setIsAnchor(1);
-            cancelOtherAnchorsInArrayList((DecksValues)decksValues);
-            cancelOtherAnchorsInDataBase((DecksValues)decksValues);
+            cancelOtherAnchorsInArrayList((DecksValues) decksValues);
+            cancelOtherAnchorsInDataBase((DecksValues) decksValues);
         }
 
         if (decksValuesDAO.validate(decksValuesDAO.decksValues)) {
@@ -262,7 +262,8 @@ public class CardController extends A_Controller {
         List<DecksValues> decksValuesOfCurrentDeck = decks.getDecksValues();
 
         for (Object deckValuesOfCurrentDeck : decksValuesOfCurrentDeck) {
-            if (((DecksValues) deckValuesOfCurrentDeck).getIsAnchor() == 1 && decksCurrentValue.getId() != ((DecksValues) deckValuesOfCurrentDeck).getId()) {
+            if (((DecksValues) deckValuesOfCurrentDeck).getIsAnchor() == 1
+                    && decksCurrentValue.getId() != ((DecksValues) deckValuesOfCurrentDeck).getId()) {
                 DecksValuesDAO decksValuesDAO = new DecksValuesDAO(((DecksValues) deckValuesOfCurrentDeck).getId());
                 decksValuesDAO.decksValues.setIsAnchor(0);
                 if (decksValuesDAO.validate(decksValuesDAO.decksValues)) {
@@ -281,11 +282,11 @@ public class CardController extends A_Controller {
     }
 
     private void cancelOtherAnchorsInArrayList(DecksValues decksValue) {
-        for(Object deckValueTable: decksValuesTable){
-            if(((DecksValues)deckValueTable).getIsAnchor() == 1 && decksValue.getId() != ((DecksValues)deckValueTable).getId()){
+        for (Object deckValueTable : decksValuesTable) {
+            if (((DecksValues) deckValueTable).getIsAnchor() == 1 && decksValue.getId() != ((DecksValues) deckValueTable).getId()) {
                 ((DecksValues) deckValueTable).setIsAnchor(0);
             }
-            if(decksValue.getId() == ((DecksValues)deckValueTable).getId()){
+            if (decksValue.getId() == ((DecksValues) deckValueTable).getId()) {
                 ((DecksValues) deckValueTable).setIsAnchor(1);
             }
         }
@@ -339,16 +340,6 @@ public class CardController extends A_Controller {
         }
     }
 
-    private void getDecksValues() throws Exception {
-        DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
-        String queryString = "where deck_id=" + deckId + " and cards_id=" + cardId;
-        try {
-            decksValues = decksValuesDAO.select(queryString);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
     public void handleTranslationButton(ActionEvent actionEvent) {
         translatedExample.setVisible(!translatedExample.isVisible());
         translatedWord.setVisible(!translatedWord.isVisible());
@@ -369,4 +360,8 @@ public class CardController extends A_Controller {
 
     }
 
+    public void handlePlayAction(ActionEvent actionEvent) {
+        int id = A_Controller.globalDeckData.getId();
+        AudioPlaying.playSound("e4a03c8e-78f4-4a17-983d-2f9baaacb1c0.wav");
+    }
 }
