@@ -21,6 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
@@ -67,6 +68,7 @@ abstract public class A_Controller implements Initializable {
     public static final String CHOOSE_DECKS_TITLE = "Учим немецкие слова! Выберите колоду";
     public static final String CHOOSE_CARDS_TITLE = "Учим немецкие слова!";
     public static final String LIST_OF_CARDS_TITLE = "Учим немецкие слова! Список карточек.";
+    public static final String AUDIO_CAPTURING_TITLE = "Учим немецкие слова! Запись аудио.";
 
     protected static String errorStringMsg;
 
@@ -99,21 +101,21 @@ abstract public class A_Controller implements Initializable {
     @FXML
     protected Hyperlink nativeConjunctions;
     @FXML
-    protected ImageView nativeVoice;
+    protected Button nativeVoice;
     @FXML
     protected TextArea nativeExample;
     @FXML
-    protected ImageView nativeExampleVoice;
+    protected Button nativeExampleVoice;
     @FXML
     protected TextArea foreignExample;
     @FXML
-    protected ImageView foreignExampleVoice;
+    protected Button foreignExampleVoice;
     @FXML
     protected TextField foreignValue;
     @FXML
     protected Hyperlink foreignConjunctions;
     @FXML
-    protected ImageView foreignValueVoice;
+    protected Button foreignValueVoice;
     @FXML
     protected Button previewButton;
     @FXML
@@ -596,4 +598,8 @@ abstract public class A_Controller implements Initializable {
     protected abstract void handleCancelButtonAction();
 
     protected abstract void handleSubmitButtonAction();
+
+    public void handleAudioCaption(ActionEvent actionEvent) {
+        openOneMoreWindow("audioCapturing.fxml", AUDIO_CAPTURING_TITLE, null, actionEvent);
+    }
 }
