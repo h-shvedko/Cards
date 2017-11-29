@@ -1,5 +1,6 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Helpers.AudioCapturing;
 import com.cards.shvedko.Helpers.AudioPlaying;
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Cards;
@@ -361,7 +362,7 @@ public class CardController extends A_Controller {
     }
 
     public void handlePlayAction(ActionEvent actionEvent) {
-        int id = A_Controller.globalDeckData.getId();
-        AudioPlaying.playSound("e4a03c8e-78f4-4a17-983d-2f9baaacb1c0.wav");
+        String nameVoice = cardsTable.get(getNumberOfElement() - 1).getNameVoice();
+        AudioPlaying.playSound(nameVoice + ".wav");
     }
 }
