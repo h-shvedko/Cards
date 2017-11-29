@@ -32,6 +32,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Path;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -201,6 +202,9 @@ abstract public class A_Controller implements Initializable {
         }
 
         if (nativeValue != null) {
+            if(nativeVoice != null){
+                nativeVoice.setDisable(true);
+            }
             nativeValue.textProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
@@ -209,10 +213,20 @@ abstract public class A_Controller implements Initializable {
 
                     nativeValueOld = oldValue;
                     nativeValueNew = newValue;
+                    if (!Objects.equals(newValue, "")) {
+                        if(nativeVoice != null){
+                            nativeVoice.setDisable(false);
+                        }
+                    }
                 }
             });
         }
+
         if (foreignValue != null) {
+            if(foreignValueVoice != null){
+                foreignValueVoice.setDisable(true);
+            }
+
             foreignValue.textProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
@@ -221,9 +235,49 @@ abstract public class A_Controller implements Initializable {
 
                     foreignValueOld = oldValue;
                     foreignValueNew = newValue;
+                    if (!Objects.equals(newValue, "")) {
+                        if(foreignValueVoice != null){
+                            foreignValueVoice.setDisable(false);
+                        }
+                    }
                 }
             });
         }
+
+        if (foreignExample != null) {
+            if(foreignExampleVoice != null){
+                foreignExampleVoice.setDisable(true);
+            }
+
+            foreignExample.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    if (!Objects.equals(newValue, "")) {
+                        if(foreignExampleVoice != null){
+                            foreignExampleVoice.setDisable(false);
+                        }
+                    }
+                }
+            });
+        }
+
+        if (nativeExample != null) {
+            if(nativeExampleVoice != null){
+                nativeExampleVoice.setDisable(true);
+            }
+
+            nativeExample.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    if (!Objects.equals(newValue, "")) {
+                        if(nativeExampleVoice != null){
+                            nativeExampleVoice.setDisable(false);
+                        }
+                    }
+                }
+            });
+        }
+
         if (nativeConjunctions != null) {
             nativeConjunctions.setVisible(false);
 

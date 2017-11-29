@@ -2,10 +2,13 @@ package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddCardAdjectiveController extends A_Controller {
@@ -16,6 +19,28 @@ public class AddCardAdjectiveController extends A_Controller {
         titleOfAddCard.setText("Создать новое прилогательное:");
         speechPart.setValue(ModelsDAO.ADJECTIVE);
         speechPart.setDisable(true);
+
+        foreignValueVoice.setDisable(true);
+
+        foreignValue.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!Objects.equals(newValue, "")) {
+                    foreignValueVoice.setDisable(false);
+                }
+            }
+        });
+
+        foreignExampleVoice.setDisable(true);
+
+        foreignExample.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!Objects.equals(newValue, "")) {
+                    foreignExampleVoice.setDisable(false);
+                }
+            }
+        });
     }
 
     @Override
