@@ -585,11 +585,19 @@ abstract public class A_Controller implements Initializable {
             Iterator it = A_Controller.globalCardData.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry)it.next();
-                if(pair.getKey().equals("nativeValue")){
-                    cardsDAO.cards.setNameVoice(pair.getValue());
+                if(pair.getKey().equals("nativeVoice")){
+                    cardsDAO.cards.setNameVoice((String) pair.getValue());
+                }
+                if(pair.getKey().equals("nativeExampleVoice")){
+                    cardsDAO.cards.setExampleVoice((String) pair.getValue());
+                }
+                if(pair.getKey().equals("foreignExampleVoice")){
+                    cardsDAO.cards.setForeignExampleVoice((String) pair.getValue());
+                }
+                if(pair.getKey().equals("foreignValueVoice")){
+                    cardsDAO.cards.setForeignNameVoice((String) pair.getValue());
                 }
                 it.remove();
-
             }
         }
 
