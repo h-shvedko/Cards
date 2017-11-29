@@ -21,16 +21,28 @@ public class Cards extends A_Models implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "name_voice", nullable = false)
+    private String nameVoice;
+
     @NotNull(message = "Foreign word value of Card can't be empty!")
     @Size(min = 2, message = "Foreign word value of Card can't be less then 2 symbols!")
     @Column(name = "foreign_name", nullable = false)
     private String foreignName;
 
+    @Column(name = "foreign_name_voice", nullable = false)
+    private String foreignNameVoice;
+
     @Column(name = "example")
     private String example;
 
+    @Column(name = "example_voice")
+    private String exampleVoice;
+
     @Column(name = "foreign_example")
     private String foreignExample;
+
+    @Column(name = "foreign_example_voice")
+    private String foreignExampleVoice;
 
     @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName="id")
@@ -277,5 +289,37 @@ public class Cards extends A_Models implements Serializable {
 
     public void setDecksValues(List<DecksValues> decksValues) {
         this.decksValues = decksValues;
+    }
+
+    public String getNameVoice() {
+        return nameVoice;
+    }
+
+    public void setNameVoice(String nameVoice) {
+        this.nameVoice = nameVoice;
+    }
+
+    public String getForeignNameVoice() {
+        return foreignNameVoice;
+    }
+
+    public void setForeignNameVoice(String foreignNameVoice) {
+        this.foreignNameVoice = foreignNameVoice;
+    }
+
+    public String getExampleVoice() {
+        return exampleVoice;
+    }
+
+    public void setExampleVoice(String exampleVoice) {
+        this.exampleVoice = exampleVoice;
+    }
+
+    public String getForeignExampleVoice() {
+        return foreignExampleVoice;
+    }
+
+    public void setForeignExampleVoice(String foreignExampleVoice) {
+        this.foreignExampleVoice = foreignExampleVoice;
     }
 }

@@ -1,5 +1,6 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ public class ModalSuccessController extends A_Controller {
 
 
     public void handleCreateButton(ActionEvent actionEvent) {
+        MainApp.stage.setOpacity(1);
         closeWindow(createNew);
     }
 

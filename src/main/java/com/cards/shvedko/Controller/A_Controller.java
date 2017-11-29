@@ -3,6 +3,7 @@ package com.cards.shvedko.Controller;
 import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
+import javafx.beans.property.StringPropertyBase;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -31,9 +32,7 @@ import javafx.stage.WindowEvent;
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -157,6 +156,8 @@ abstract public class A_Controller implements Initializable {
     protected static Object globalUserData;
     public static A_Models globalUserModel;
     public static Decks globalDeckData;
+    public static Object globalAudioFileData;
+    public static Map<String, String> globalCardData = new HashMap<String, String>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -580,6 +581,18 @@ abstract public class A_Controller implements Initializable {
             cardsDAO.cards.setUser((Users) userObject);
         }
 
+        if(A_Controller.globalCardData != null){
+            Iterator it = A_Controller.globalCardData.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry)it.next();
+                if(pair.getKey().equals("nativeValue")){
+                    cardsDAO.cards.setNameVoice(pair.getValue());
+                }
+                it.remove();
+
+            }
+        }
+
         cardsDAO.cards.setIsVisible(1);
 
         return cardsDAO;
@@ -654,6 +667,6 @@ abstract public class A_Controller implements Initializable {
     protected abstract void handleSubmitButtonAction();
 
     public void handleAudioCaption(ActionEvent actionEvent) {
-        openOneMoreWindow("audioCapturing.fxml", AUDIO_CAPTURING_TITLE, null, actionEvent);
+        openOneMoreWindow("audioCapturing.fxml", AUDIO_CAPTURING_TITLE, ((Button) actionEvent.getSource()).getId(), actionEvent);
     }
 }
