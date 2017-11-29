@@ -2,6 +2,7 @@ package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Decks;
+import com.cards.shvedko.Model.DecksValues;
 import com.cards.shvedko.ModelDAO.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ChooseDecksController extends A_Controller {
@@ -77,6 +80,17 @@ public class ChooseDecksController extends A_Controller {
         }
         if (deck != null) {
             A_Controller.globalDeckData = (Decks) deck;
+            DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
+            List decksValues = new ArrayList<DecksValues>();
+            try {
+                decksValues = decksValuesDAO.selectAllBy("where deck_id=" + deck.getId());
+            } catch (Exception e) {
+                crashAppeared(e.getMessage());
+            }
+
+            if(!decksValues.isEmpty()){
+                A_Controller.globalDeckData.setDecksValues(decksValues);
+            }
         } else {
             errorDecks.setText("Выберите колоду!");
             errorDecks.setVisible(true);

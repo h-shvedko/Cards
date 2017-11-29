@@ -134,7 +134,7 @@ public class AddCardDeckController extends A_Controller {
                     DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
                     decksValuesDAO.decksValues.setCards((Cards) card);
                     decksValuesDAO.decksValues.setDecks(decksDAO.decks);
-                    if(!decksValuesDAO.saveOrUpdate()){
+                    if(!decksValuesDAO.saveOrUpdateDeckValues()){
                         throw new Exception(decksValuesDAO.errorMsg);
                     }
                 }
