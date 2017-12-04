@@ -243,33 +243,54 @@
                                 <Font size="20.0"/>
                             </font>
                         </Label>
-                        <ImageView fx:id="wordSound" fitHeight="51.0" fitWidth="56.0" pickOnBounds="true"
-                                   preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                            <image>
-                                <Image url="@images/voice_recording.jpg"/>
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="translatedWordSound" fitHeight="51.0" fitWidth="56.0" layoutX="518.0"
-                                   layoutY="70.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2"
-                                   GridPane.rowIndex="2">
-                            <image>
-                                <Image url="@images/voice_recording.jpg"/>
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="exampleSound" fitHeight="51.0" fitWidth="56.0" layoutX="518.0" layoutY="189.0"
-                                   pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2"
-                                   GridPane.rowIndex="3">
-                            <image>
-                                <Image url="@images/voice_recording.jpg"/>
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="translatedExampleSound" fitHeight="51.0" fitWidth="56.0" layoutX="518.0"
-                                   layoutY="308.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2"
-                                   GridPane.rowIndex="4">
-                            <image>
-                                <Image url="@images/voice_recording.jpg"/>
-                            </image>
-                        </ImageView>
+                        <Button fx:id="wordSound" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handlePlayAudioAction"
+                                GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Прослушать аудио" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="translatedWordSound" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handlePlayAudioAction"
+                                GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Прослушать аудио" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="exampleSound" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handlePlayAudioAction"
+                                GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Прослушать аудио" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="translatedExampleSound" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handlePlayAudioAction"
+                                GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Прослушать аудио" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
                     </children>
                 </GridPane>
                 <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">

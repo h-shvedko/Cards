@@ -42,13 +42,13 @@ public class CardController extends A_Controller {
     @FXML
     public Label translatedExample;
     @FXML
-    public ImageView wordSound;
+    public Button wordSound;
     @FXML
-    public ImageView translatedWordSound;
+    public Button translatedWordSound;
     @FXML
-    public ImageView exampleSound;
+    public Button exampleSound;
     @FXML
-    public ImageView translatedExampleSound;
+    public Button translatedExampleSound;
     @FXML
     public ToggleButton favoriteButton;
     @FXML
@@ -363,6 +363,30 @@ public class CardController extends A_Controller {
 
     public void handlePlayAction(ActionEvent actionEvent) {
         String nameVoice = cardsTable.get(getNumberOfElement() - 1).getNameVoice();
+        AudioPlaying.playSound(nameVoice + ".wav");
+    }
+
+    public void handlePlayAudioAction(ActionEvent actionEvent) {
+        String id = ((Button) actionEvent.getSource()).getId();
+
+        String nameVoice = "";
+
+        switch (id) {
+            case "wordSound":
+                nameVoice = cardsTable.get(getNumberOfElement() - 1).getNameVoice();
+                break;
+            case "translatedWordSound":
+                nameVoice = cardsTable.get(getNumberOfElement() - 1).getForeignNameVoice();
+                break;
+            case "exampleSound":
+                nameVoice = cardsTable.get(getNumberOfElement() - 1).getExampleVoice();
+                break;
+            case "translatedExampleSound":
+                nameVoice = cardsTable.get(getNumberOfElement() - 1).getForeignExampleVoice();
+                break;
+
+        }
+
         AudioPlaying.playSound(nameVoice + ".wav");
     }
 }
