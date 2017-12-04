@@ -665,6 +665,40 @@ abstract public class A_Controller implements Initializable {
             cardsDAO.cards.setUser((Users) userObject);
         }
 
+        if(A_Controller.globalCardData != null){
+            Iterator it = A_Controller.globalCardData.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry)it.next();
+                if(!pair.getValue().equals("")){
+                    if(pair.getKey().equals("nativeVoice")){
+                        cardsDAO.cards.setNameVoice((String) pair.getValue());
+                    }
+                    if(pair.getKey().equals("nativeExampleVoice")){
+                        cardsDAO.cards.setExampleVoice((String) pair.getValue());
+                    }
+                    if(pair.getKey().equals("foreignExampleVoice")){
+                        cardsDAO.cards.setForeignExampleVoice((String) pair.getValue());
+                    }
+                    if(pair.getKey().equals("foreignValueVoice")){
+                        cardsDAO.cards.setForeignNameVoice((String) pair.getValue());
+                    }
+                    if(pair.getKey().equals("foreignValueVoicePlural")){
+                        cardsDAO.cards.setForeignValuePluralVoice((String) pair.getValue());
+                    }
+                    if(pair.getKey().equals("foreignValueVoicePreteriturm")){
+                        cardsDAO.cards.setForeignValuePreteriturmVoice((String) pair.getValue());
+                    }
+                    if(pair.getKey().equals("foreignValueVoicePresence")){
+                        cardsDAO.cards.setForeignValuePresenceVoice((String) pair.getValue());
+                    }
+                    if(pair.getKey().equals("foreignValueVoicePerfect")){
+                        cardsDAO.cards.setForeignValuePerfectVoice((String) pair.getValue());
+                    }
+                }
+                it.remove();
+            }
+        }
+
         cardsDAO.cards.setIsVisible(1);
 
         return cardsDAO;

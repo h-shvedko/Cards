@@ -9,6 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
 <AnchorPane maxHeight="1001.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="1001.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.cards.shvedko.Controller.EditCardOtherController">
@@ -107,16 +108,18 @@
                                 <Font size="16.0"/>
                             </font>
                         </Label>
-                        <ImageView fx:id="nativeVoice" fitHeight="38.0" fitWidth="44.0" pickOnBounds="true"
-                                   preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER"
-                                   GridPane.valignment="CENTER">
-                            <image>
-                                <Image url="@images/voice_recording.jpg"/>
-                            </image>
-                            <cursor>
-                                <Cursor fx:constant="HAND"/>
-                            </cursor>
-                        </ImageView>
+                        <Button fx:id="nativeVoice" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handleAudioCaption"
+                                GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Записать аудио" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_MICROPHONE"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
                     </children>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="40.0"/>
@@ -158,31 +161,35 @@
                     </rowConstraints>
                     <children>
                         <TextArea fx:id="nativeExample" prefHeight="111.0" prefWidth="522.0" GridPane.columnIndex="1"/>
-                        <ImageView fx:id="nativeExampleVoice" fitHeight="38.0" fitWidth="44.0" pickOnBounds="true"
-                                   preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER"
-                                   GridPane.valignment="CENTER">
-                            <cursor>
-                                <Cursor fx:constant="HAND"/>
-                            </cursor>
-                            <image>
-                                <Image url="@images/voice_recording.jpg"/>
-                            </image>
-                        </ImageView>
+                        <Button fx:id="nativeExampleVoice" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handleAudioCaption"
+                                GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Записать аудио" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_MICROPHONE"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
                     </children>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="410.0" style="-fx-background-color: #5bf765;" GridPane.rowIndex="8">
                     <children>
                         <TextArea fx:id="foreignExample" prefHeight="80.0" prefWidth="509.0" GridPane.columnIndex="1"/>
-                        <ImageView fx:id="foreignExampleVoice" fitHeight="38.0" fitWidth="44.0" pickOnBounds="true"
-                                   preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER"
-                                   GridPane.valignment="CENTER">
-                            <cursor>
-                                <Cursor fx:constant="HAND"/>
-                            </cursor>
-                            <image>
-                                <Image url="@images/voice_recording.jpg"/>
-                            </image>
-                        </ImageView>
+                        <Button fx:id="foreignExampleVoice" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handleAudioCaption"
+                                GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Записать аудио" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_MICROPHONE"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
                     </children>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="0.0" prefWidth="32.0"/>
@@ -230,16 +237,18 @@
                                 <Font size="16.0"/>
                             </font>
                         </Label>
-                        <ImageView fx:id="foreignValueVoice" fitHeight="38.0" fitWidth="44.0" pickOnBounds="true"
-                                   preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER"
-                                   GridPane.valignment="CENTER">
-                            <cursor>
-                                <Cursor fx:constant="HAND"/>
-                            </cursor>
-                            <image>
-                                <Image url="@images/voice_recording.jpg"/>
-                            </image>
-                        </ImageView>
+                        <Button fx:id="foreignValueVoice" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handleAudioCaption"
+                                GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <tooltip>
+                                <Tooltip text="Записать аудио" style="-fx-font-size: 16px;"/>
+                            </tooltip>
+                            <graphic>
+                                <FontAwesomeIconView icon="ICON_MICROPHONE"/>
+                            </graphic>
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
                     </children>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="40.0"/>

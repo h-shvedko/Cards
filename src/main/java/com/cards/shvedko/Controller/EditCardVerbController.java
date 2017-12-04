@@ -42,7 +42,7 @@ public class EditCardVerbController extends A_Controller {
     @FXML
     public Label errorForeignValuePresence;
     @FXML
-    public ImageView foreignValueVoicePresence;
+    public Button foreignValueVoicePresence;
     @FXML
     public TextField foreignValuePreteriturm;
     @FXML
@@ -50,7 +50,7 @@ public class EditCardVerbController extends A_Controller {
     @FXML
     public Label errorForeignValuePreteriturm;
     @FXML
-    public ImageView foreignValueVoicePreteriturm;
+    public Button foreignValueVoicePreteriturm;
     @FXML
     public TextField foreignValuePerfect;
     @FXML
@@ -58,7 +58,7 @@ public class EditCardVerbController extends A_Controller {
     @FXML
     public Label errorForeignValuePerfect;
     @FXML
-    public ImageView foreignValueVoicePerfect;
+    public Button foreignValueVoicePerfect;
     @FXML
     public RadioButton regelmassigVerb;
     @FXML

@@ -6,6 +6,7 @@ import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -26,7 +27,7 @@ public class EditCardNounController extends A_Controller {
     @FXML
     public TextField foreignValuePlural;
     @FXML
-    public ImageView foreignValueVoicePlural;
+    public Button foreignValueVoicePlural;
 
     private final ToggleGroup group = new ToggleGroup();
 
