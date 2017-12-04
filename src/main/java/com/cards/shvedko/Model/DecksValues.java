@@ -20,6 +20,9 @@ public class DecksValues extends A_Models implements Serializable {
     @Column(name = "is_ready", nullable = false)
     private int isReady;
 
+    @Column(name = "count_of_appearence", nullable = false)
+    private int countOfAppearance;
+
     @Column(name = "order_in_card", nullable = false)
     private int orderInCard;
 
@@ -100,5 +103,13 @@ public class DecksValues extends A_Models implements Serializable {
 
     public void setOrderInCard(int orderInCard) {
         this.orderInCard = orderInCard;
+    }
+
+    public int getCountOfAppearance() {
+        return countOfAppearance;
+    }
+
+    public void setCountOfAppearance(int countOfAppearance) {
+        this.countOfAppearance = countOfAppearance;
     }
 }

@@ -6,6 +6,7 @@ import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
+import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.DecksValuesDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.collections.FXCollections;
@@ -130,14 +131,19 @@ public class CardController extends A_Controller {
     private void setValuesOfCard() throws Exception {
         int numberOfCurrentElement = getNumberOfElement() - 1;
         decksValues = decksValuesTable.get(numberOfCurrentElement);
+
         word.setText(cardsTable.get(numberOfCurrentElement).getName());
         word.setWrapText(true);
+
         translatedWord.setText(cardsTable.get(numberOfCurrentElement).getForeignName());
         translatedWord.setWrapText(true);
+
         example.setText(cardsTable.get(numberOfCurrentElement).getExample());
         example.setWrapText(true);
+
         translatedExample.setText(cardsTable.get(numberOfCurrentElement).getForeignExample());
         translatedExample.setWrapText(true);
+
         numberOfCards.setWrapText(true);
 
         if (((DecksValues) decksValues).getIsFavorite() == 1) {
@@ -180,6 +186,7 @@ public class CardController extends A_Controller {
         setNumberOfElement(numberOfWord);
         setValuesOfCard();
 
+//        markCardAsShown();
         numberOfCards.setText("Карточка " + numberOfWord + " / " + String.valueOf(numberOfActiveCards));
     }
 
@@ -196,7 +203,27 @@ public class CardController extends A_Controller {
         setNumberOfElement(numberOfWord);
         setValuesOfCard();
 
+//        markCardAsShown();
         numberOfCards.setText("Карточка " + numberOfWord + " / " + String.valueOf(numberOfActiveCards));
+    }
+
+    //TODO: check wh session returns null
+    private void markCardAsShown() throws Exception {
+        DecksValuesDAO decksValuesDAO = new DecksValuesDAO(decksValues.getId());
+        int count = decksValuesDAO.decksValues.getCountOfAppearance();
+        decksValuesDAO.decksValues.setCountOfAppearance(++count);
+
+        if (decksValuesDAO.validate(decksValuesDAO.decksValues)) {
+            try {
+                if (!decksValuesDAO.saveOrUpdateDeckValues()) {
+                    throw new Exception(decksValuesDAO.errorMsg);
+                }
+            } catch (Exception ex) {
+                crashAppeared(ex.getMessage());
+            }
+        } else {
+            showErrors(decksValuesDAO);
+        }
     }
 
     public void handleSettingsButton(ActionEvent actionEvent) {
