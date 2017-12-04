@@ -44,6 +44,18 @@ public class Cards extends A_Models implements Serializable {
     @Column(name = "foreign_example_voice")
     private String foreignExampleVoice;
 
+    @Column(name = "foreign_value_presense_voice")
+    private String foreignValuePresenceVoice;
+
+    @Column(name = "foreign_value_preteritum_voice")
+    private String foreignValuePreteriturmVoice;
+
+    @Column(name = "foreign_value_plural_voice")
+    private String foreignValuePluralVoice;
+
+    @Column(name = "foreign_value_perfect_voice")
+    private String foreignValuePerfectVoice;
+
     @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName="id")
     private CardCategories category;
@@ -321,5 +333,37 @@ public class Cards extends A_Models implements Serializable {
 
     public void setForeignExampleVoice(String foreignExampleVoice) {
         this.foreignExampleVoice = foreignExampleVoice;
+    }
+
+    public String getForeignValuePresenceVoice() {
+        return foreignValuePresenceVoice;
+    }
+
+    public void setForeignValuePresenceVoice(String foreignValuePresenceVoice) {
+        this.foreignValuePresenceVoice = foreignValuePresenceVoice;
+    }
+
+    public String getForeignValuePreteriturmVoice() {
+        return foreignValuePreteriturmVoice;
+    }
+
+    public void setForeignValuePreteriturmVoice(String foreignValuePreteriturmVoice) {
+        this.foreignValuePreteriturmVoice = foreignValuePreteriturmVoice;
+    }
+
+    public String getForeignValuePerfectVoice() {
+        return foreignValuePerfectVoice;
+    }
+
+    public void setForeignValuePerfectVoice(String foreignValuePerfectVoice) {
+        this.foreignValuePerfectVoice = foreignValuePerfectVoice;
+    }
+
+    public String getForeignValuePluralVoice() {
+        return foreignValuePluralVoice;
+    }
+
+    public void setForeignValuePluralVoice(String foreignValuePluralVoice) {
+        this.foreignValuePluralVoice = foreignValuePluralVoice;
     }
 }

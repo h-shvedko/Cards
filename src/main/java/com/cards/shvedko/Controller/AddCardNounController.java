@@ -3,14 +3,18 @@ package com.cards.shvedko.Controller;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddCardNounController extends A_Controller {
@@ -24,7 +28,7 @@ public class AddCardNounController extends A_Controller {
     @FXML
     public TextField foreignValuePlural;
     @FXML
-    public ImageView foreignValueVoicePlural;
+    public Button foreignValueVoicePlural;
 
     private final ToggleGroup group = new ToggleGroup();
 
@@ -43,6 +47,23 @@ public class AddCardNounController extends A_Controller {
 
         neutrum.setUserData(ModelsDAO.NEUTRUM);
         neutrum.setToggleGroup(group);
+
+        if (foreignValuePlural != null) {
+            if(foreignValueVoicePlural != null){
+                foreignValueVoicePlural.setDisable(true);
+            }
+
+            foreignValuePlural.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    if (!Objects.equals(newValue, "")) {
+                        if(foreignValueVoicePlural != null){
+                            foreignValueVoicePlural.setDisable(false);
+                        }
+                    }
+                }
+            });
+        }
     }
 
     @Override

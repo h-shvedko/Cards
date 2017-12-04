@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddCardVerbController extends A_Controller {
@@ -37,7 +38,7 @@ public class AddCardVerbController extends A_Controller {
     @FXML
     public Label errorForeignValuePresence;
     @FXML
-    public ImageView foreignValueVoicePresence;
+    public Button foreignValueVoicePresence;
     @FXML
     public TextField foreignValuePreteriturm;
     @FXML
@@ -45,7 +46,7 @@ public class AddCardVerbController extends A_Controller {
     @FXML
     public Label errorForeignValuePreteriturm;
     @FXML
-    public ImageView foreignValueVoicePreteriturm;
+    public Button foreignValueVoicePreteriturm;
     @FXML
     public TextField foreignValuePerfect;
     @FXML
@@ -53,7 +54,7 @@ public class AddCardVerbController extends A_Controller {
     @FXML
     public Label errorForeignValuePerfect;
     @FXML
-    public ImageView foreignValueVoicePerfect;
+    public Button foreignValueVoicePerfect;
     @FXML
     public RadioButton regelmassigVerb;
     @FXML
@@ -126,6 +127,59 @@ public class AddCardVerbController extends A_Controller {
                 }
             });
         }
+
+        if (foreignValuePerfect != null) {
+            if(foreignValueVoicePerfect != null){
+                foreignValueVoicePerfect.setDisable(true);
+            }
+
+            foreignValuePerfect.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    if (!Objects.equals(newValue, "")) {
+                        if(foreignValueVoicePerfect != null){
+                            foreignValueVoicePerfect.setDisable(false);
+                        }
+                    }
+                }
+            });
+        }
+
+        if (foreignValuePresence != null) {
+            if(foreignValueVoicePresence != null){
+                foreignValueVoicePresence.setDisable(true);
+            }
+
+            foreignValuePresence.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    if (!Objects.equals(newValue, "")) {
+                        if(foreignValueVoicePresence!= null){
+                            foreignValueVoicePresence.setDisable(false);
+                        }
+                    }
+                }
+            });
+        }
+
+        if (foreignValuePreteriturm != null) {
+            if(foreignValueVoicePreteriturm != null){
+                foreignValueVoicePreteriturm.setDisable(true);
+            }
+
+            foreignValuePreteriturm.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    if (!Objects.equals(newValue, "")) {
+                        if(foreignValueVoicePreteriturm!= null){
+                            foreignValueVoicePreteriturm.setDisable(false);
+                        }
+                    }
+                }
+            });
+        }
+
+
     }
 
     @Override

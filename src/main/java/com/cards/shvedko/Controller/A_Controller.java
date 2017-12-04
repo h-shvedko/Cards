@@ -597,6 +597,18 @@ abstract public class A_Controller implements Initializable {
                 if(pair.getKey().equals("foreignValueVoice")){
                     cardsDAO.cards.setForeignNameVoice((String) pair.getValue());
                 }
+                if(pair.getKey().equals("foreignValueVoicePlural")){
+                    cardsDAO.cards.setForeignValuePluralVoice((String) pair.getValue());
+                }
+                if(pair.getKey().equals("foreignValueVoicePreteriturm")){
+                    cardsDAO.cards.setForeignValuePreteriturmVoice((String) pair.getValue());
+                }
+                if(pair.getKey().equals("foreignValueVoicePresence")){
+                    cardsDAO.cards.setForeignValuePresenceVoice((String) pair.getValue());
+                }
+                if(pair.getKey().equals("foreignValueVoicePerfect")){
+                    cardsDAO.cards.setForeignValuePerfectVoice((String) pair.getValue());
+                }
                 it.remove();
             }
         }
