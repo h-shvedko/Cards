@@ -41,4 +41,15 @@ public class CardsDAO extends ModelsDAO {
         }
         return true;
     }
+
+    public boolean saveOrUpdate() {
+        if (errorMsg == null || errorMsg.equals("")) {
+            session.save(cards);
+            transaction.commit();
+            session.close();
+        } else {
+            return false;
+        }
+        return true;
+    }
 }

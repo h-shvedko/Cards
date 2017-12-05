@@ -1,27 +1,24 @@
 package com.cards.shvedko.Controller;
 
-import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.util.Callback;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 
+import javax.smartcardio.Card;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ListOfCardsController extends A_Controller {
@@ -49,6 +46,22 @@ public class ListOfCardsController extends A_Controller {
         }
 
         cardsTable.setItems(getCardsData());
+
+        cardsTable.setRowFactory(new Callback<TableView<Cards>, TableRow<Cards>>() {
+            @Override
+            public TableRow<Cards> call(TableView<Cards> tv) {
+                final TableRow<Cards> row = new TableRow<>();
+                row.itemProperty().addListener(new ChangeListener<Cards>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Cards> obs, Cards oldItem, Cards newItem) {
+                        if (newItem.getIsVisible() != ModelsDAO.READY_ON) {
+                            row.setStyle("-fx-background-color: indianred");
+                        }
+                    }
+                });
+                return row;
+            }
+        });
 
         initializeContentMenu();
 
@@ -100,7 +113,7 @@ public class ListOfCardsController extends A_Controller {
             @Override
             public void handle(ActionEvent event) {
                 Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
-                goToPage("removeCard.fxml", "Удаление карточки", selectedItem);
+                goToPage("modalRemoveCard.fxml", "Удаление карточки", selectedItem);
             }
         });
 
@@ -132,6 +145,7 @@ public class ListOfCardsController extends A_Controller {
         tableNativeExample.setText("Native example");
         tableForeignValue.setText("Foreign value");
         tableForeignExample.setText("Foreign example");
+        active.setText("Active");
     }
 
     private void linkToColumns() {
@@ -153,6 +167,7 @@ public class ListOfCardsController extends A_Controller {
         tableNativeExample.setCellValueFactory(new PropertyValueFactory<Cards, String>("example"));
         tableForeignValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("foreignName"));
         tableForeignExample.setCellValueFactory(new PropertyValueFactory<Cards, String>("foreignExample"));
+        active.setCellValueFactory(new PropertyValueFactory<Cards, Integer>("isVisible"));
     }
 
     public ObservableList<Cards> getCardsData() {

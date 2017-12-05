@@ -113,7 +113,6 @@ public class Cards extends A_Models implements Serializable {
     private String prepositionGen;
 
     @NotNull(message = "Is Visible field in cards table can't be empty!")
-    @Min(value = 1, message = "Is Visible value of Card can't be less then 1!")
     @Column(name = "is_visible", nullable = false)
     private int isVisible;
 

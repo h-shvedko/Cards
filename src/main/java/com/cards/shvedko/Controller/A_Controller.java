@@ -3,7 +3,6 @@ package com.cards.shvedko.Controller;
 import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
-import javafx.beans.property.StringPropertyBase;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,10 +18,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
@@ -138,6 +135,8 @@ abstract public class A_Controller implements Initializable {
     protected TableColumn<Cards, String> tableNativeExample;
     @FXML
     protected TableColumn<Cards, String> tableForeignExample;
+    @FXML
+    protected TableColumn<Cards, Integer> active;
     @FXML
     protected TableColumn<Cards, String> tableForeignValue;
     //************************************************************************
