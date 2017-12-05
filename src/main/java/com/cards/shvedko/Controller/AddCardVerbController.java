@@ -238,6 +238,10 @@ public class AddCardVerbController extends A_Controller {
             String genPronomenValue = pronomenGen.getText();
             cardsDAO.cards.setPrepositionGen(genPronomenValue);
 
+            cardsDAO.cards.setForeignNameInfinitive(foreignValuePresence.getText());
+            cardsDAO.cards.setForeignNamePerfect(foreignValuePerfect.getText());
+            cardsDAO.cards.setForeignNamePreteritum(foreignValuePreteriturm.getText());
+
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {
                     if (!cardsDAO.save()) {

@@ -12,6 +12,7 @@
             prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.cards.shvedko.Controller.CardController">
     <children>
+        <!--other card-->
         <GridPane layoutX="-2.0" layoutY="-9.0" prefHeight="1000.0" prefWidth="1400.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1211.0" minWidth="10.0" prefWidth="1178.0"/>
@@ -215,14 +216,14 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label fx:id="word" alignment="CENTER" contentDisplay="CENTER" prefHeight="197.0"
+                        <Label fx:id="word" alignment="CENTER" contentDisplay="CENTER" prefHeight="200.0"
                                prefWidth="1032.0" text="Word" GridPane.columnIndex="1" GridPane.halignment="CENTER"
                                GridPane.rowIndex="1" GridPane.valignment="CENTER">
                             <font>
                                 <Font size="30.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="example" alignment="CENTER" layoutX="258.0" layoutY="186.0" prefHeight="232.0"
+                        <Label fx:id="example" alignment="CENTER" layoutX="258.0" layoutY="186.0" prefHeight="200.0"
                                prefWidth="1033.0" text="Example" GridPane.columnIndex="1" GridPane.halignment="CENTER"
                                GridPane.rowIndex="3" GridPane.valignment="CENTER">
                             <font>
@@ -230,7 +231,7 @@
                             </font>
                         </Label>
                         <Label fx:id="translatedExample" alignment="CENTER" layoutX="10.0" layoutY="336.0"
-                               prefHeight="232.0" prefWidth="1033.0" text="Example translated" GridPane.columnIndex="1"
+                               prefHeight="200.0" prefWidth="1033.0" text="Example translated" GridPane.columnIndex="1"
                                GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
@@ -290,22 +291,14 @@
                         </Button>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints/>
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints/>
                             </rowConstraints>
                             <children>
-                                <Label fx:id="translatedWord" alignment="CENTER" prefHeight="232.0" prefWidth="1033.0"
+                                <Label fx:id="translatedWord" alignment="CENTER" prefHeight="200.0" prefWidth="1033.0"
                                        text="Translated">
-                                    <font>
-                                        <Font size="30.0"/>
-                                    </font>
-                                </Label>
-                                <Label fx:id="translatedWordPlural" alignment="CENTER" layoutX="10.0" layoutY="10.0"
-                                       prefHeight="232.0" prefWidth="1033.0" text="TranslatedPlural"
-                                       GridPane.columnIndex="1">
                                     <font>
                                         <Font size="30.0"/>
                                     </font>

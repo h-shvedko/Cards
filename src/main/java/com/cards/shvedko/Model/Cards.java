@@ -29,6 +29,15 @@ public class Cards extends A_Models implements Serializable {
     @Column(name = "foreign_name", nullable = false)
     private String foreignName;
 
+    @Column(name = "foreign_nama_infinitive")
+    private String foreignNameInfinitive;
+
+    @Column(name = "foreign_name_preteritum")
+    private String foreignNamePreteritum;
+
+    @Column(name = "foreign_name_perfect")
+    private String foreignNamePerfect;
+
     @Column(name = "foreign_name_voice", nullable = false)
     private String foreignNameVoice;
 
@@ -365,5 +374,29 @@ public class Cards extends A_Models implements Serializable {
 
     public void setForeignValuePluralVoice(String foreignValuePluralVoice) {
         this.foreignValuePluralVoice = foreignValuePluralVoice;
+    }
+
+    public String getForeignNamePreteritum() {
+        return foreignNamePreteritum;
+    }
+
+    public void setForeignNamePreteritum(String foreignNamePreteritum) {
+        this.foreignNamePreteritum = foreignNamePreteritum;
+    }
+
+    public String getForeignNamePerfect() {
+        return foreignNamePerfect;
+    }
+
+    public void setForeignNamePerfect(String foreignNamePerfect) {
+        this.foreignNamePerfect = foreignNamePerfect;
+    }
+
+    public String getForeignNameInfinitive() {
+        return foreignNameInfinitive;
+    }
+
+    public void setForeignNameInfinitive(String foreignNameInfinitive) {
+        this.foreignNameInfinitive = foreignNameInfinitive;
     }
 }

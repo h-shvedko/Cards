@@ -58,8 +58,6 @@ public class A_CardController extends A_Controller {
     public Label typeLabel;
     @FXML
     public Label categoryLabel;
-    @FXML
-    public Label translatedWordPlural;
 
     private int numberOfElement = 1;
     private int cardId = 0;
@@ -81,7 +79,6 @@ public class A_CardController extends A_Controller {
 
         translatedWord.setVisible(false);
         translatedExample.setVisible(false);
-        translatedWordPlural.setVisible(false);
 
         deckId = ((Decks) A_Controller.globalUserData).getId();
         List deckValues = ((Decks) A_Controller.globalUserData).getDecksValues();
@@ -134,20 +131,17 @@ public class A_CardController extends A_Controller {
         word.setText(cardsTable.get(numberOfCurrentElement).getName());
         word.setWrapText(true);
 
-        translatedWord.setText(cardsTable.get(numberOfCurrentElement).getForeignName());
-        translatedWord.setWrapText(true);
+        if (translatedWord != null) {
+            setTranslatedWordValue(cardsTable.get(numberOfCurrentElement));
+            translatedWord.setWrapText(true);
+        }
+
 
         example.setText(cardsTable.get(numberOfCurrentElement).getExample());
         example.setWrapText(true);
 
         translatedExample.setText(cardsTable.get(numberOfCurrentElement).getForeignExample());
         translatedExample.setWrapText(true);
-
-
-        if(translatedWordPlural != null){
-            translatedWordPlural.setText(cardsTable.get(numberOfCurrentElement).getPluralEndung());
-            translatedWordPlural.setWrapText(true);
-        }
 
         numberOfCards.setWrapText(true);
 
@@ -168,6 +162,65 @@ public class A_CardController extends A_Controller {
         } else {
             trophyButton.setSelected(false);
         }
+    }
+
+    private void setTranslatedWordValue(Cards cards) {
+//        translatedWord.setText(.getForeignName());
+        String typeOfWord = cards.getType().getName();
+
+        switch (typeOfWord) {
+            case ModelsDAO.VERB:
+                generateVerbTranslation(cards);
+                break;
+            case ModelsDAO.NOUN:
+                generateNounTranslation(cards);
+                break;
+            default:
+                translatedWord.setText(cards.getForeignName());
+                break;
+        }
+    }
+
+    private void generateNounTranslation(Cards cards) {
+        String value;
+
+        value = cards.getForeignName();
+
+        if(!cards.getPluralEndung().equals("")){
+            value += " (-" + cards.getPluralEndung() + ")";
+        }
+
+        translatedWord.setText(value);
+    }
+
+    private void generateVerbTranslation(Cards cards) {
+        String value = "";
+        String haben = "";
+        String sich = "";
+        String preteritum = "";
+        String perfect = "";
+
+        if(cards.getIsPerfectWithHaben() != 0){
+            haben = " /haben ";
+        } else {
+            haben = " /sein ";
+        }
+
+        if(!cards.getForeignNamePreteritum().equals("")){
+            preteritum = " /" + cards.getForeignNamePreteritum();
+        }
+
+        if(!cards.getForeignNamePerfect().equals("")){
+            perfect = " " + cards.getForeignNamePerfect();
+        }
+
+        if(cards.getIsReflexiveVerb() != 0){
+            sich += " sich ";
+        }
+
+        value = sich + cards.getForeignName() + preteritum + haben + perfect;
+
+        translatedWord.setText(value);
     }
 
     public int getNumberOfElement() {
@@ -376,7 +429,6 @@ public class A_CardController extends A_Controller {
     public void handleTranslationButton(ActionEvent actionEvent) {
         translatedExample.setVisible(!translatedExample.isVisible());
         translatedWord.setVisible(!translatedWord.isVisible());
-        translatedWordPlural.setVisible(!translatedWordPlural.isVisible());
     }
 
     @Override
