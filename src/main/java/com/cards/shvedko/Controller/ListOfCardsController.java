@@ -3,6 +3,8 @@ package com.cards.shvedko.Controller;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -56,6 +58,30 @@ public class ListOfCardsController extends A_Controller {
                     public void changed(ObservableValue<? extends Cards> obs, Cards oldItem, Cards newItem) {
                         if (newItem.getIsVisible() != ModelsDAO.READY_ON) {
                             row.setStyle("-fx-background-color: indianred");
+                            Tooltip tooltip = new Tooltip("Эта карточка удалена");
+                            tooltip.setStyle("-fx-font-size: 16px;");
+                            row.setTooltip(tooltip);
+                        } else {
+                            row.setStyle("");
+                            Tooltip tooltip = new Tooltip("Эта карточка активна");
+                            tooltip.setStyle("-fx-font-size: 16px;");
+                            row.setTooltip(tooltip);
+                        }
+                    }
+                });
+
+                row.hoverProperty().addListener(new InvalidationListener() {
+                    @Override
+                    public void invalidated(Observable observable) {
+                        Cards cardsValue = row.getItem();
+                        if (row.isHover()) {
+                            row.setStyle("-fx-background-color: cornflowerblue");
+                        } else {
+                            if(cardsValue.getIsVisible() == ModelsDAO.READY_ON){
+                                row.setStyle("");
+                            } else {
+                                row.setStyle("-fx-background-color: indianred");
+                            }
                         }
                     }
                 });
@@ -78,7 +104,7 @@ public class ListOfCardsController extends A_Controller {
             @Override
             public void handle(ActionEvent event) {
                 Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
-                switch (selectedItem.getType().getName()){
+                switch (selectedItem.getType().getName()) {
                     case ModelsDAO.NOUN:
                         goToPage("editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, selectedItem);
                         break;
@@ -107,13 +133,13 @@ public class ListOfCardsController extends A_Controller {
             }
         });
 
-        MenuItem item2 = new MenuItem("Удалить");
+        MenuItem item2 = new MenuItem("Удалить/Восстановить");
         item2.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
-                goToPage("modalRemoveCard.fxml", "Удаление карточки", selectedItem);
+                goToPage("modalRemoveCard.fxml", "Удаление/восстановление карточки", selectedItem);
             }
         });
 
@@ -145,7 +171,7 @@ public class ListOfCardsController extends A_Controller {
         tableNativeExample.setText("Native example");
         tableForeignValue.setText("Foreign value");
         tableForeignExample.setText("Foreign example");
-        active.setText("Active");
+//        active.setText("Active");
     }
 
     private void linkToColumns() {
@@ -167,7 +193,7 @@ public class ListOfCardsController extends A_Controller {
         tableNativeExample.setCellValueFactory(new PropertyValueFactory<Cards, String>("example"));
         tableForeignValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("foreignName"));
         tableForeignExample.setCellValueFactory(new PropertyValueFactory<Cards, String>("foreignExample"));
-        active.setCellValueFactory(new PropertyValueFactory<Cards, Integer>("isVisible"));
+//        active.setCellValueFactory(new PropertyValueFactory<Cards, Integer>("isVisible"));
     }
 
     public ObservableList<Cards> getCardsData() {

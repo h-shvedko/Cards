@@ -47,8 +47,8 @@
                         </Button>
                     </children>
                 </GridPane>
-                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="99.0" prefWidth="589.0"
-                       text="Вы действительно хотите удалить карточку?" textAlignment="CENTER" wrapText="true"
+                <Label fx:id="messageRemove" alignment="CENTER" contentDisplay="CENTER" prefHeight="99.0" prefWidth="589.0"
+                       textAlignment="CENTER" wrapText="true"
                        GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <font>
                         <Font size="31.0"/>

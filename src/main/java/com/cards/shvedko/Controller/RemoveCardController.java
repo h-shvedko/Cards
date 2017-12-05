@@ -1,7 +1,9 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardsDAO;
+import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,10 +18,20 @@ public class RemoveCardController extends A_Controller {
     public Button agree;
     @FXML
     public Label cardName;
+    @FXML
+    public Label messageRemove;
+
+    private boolean deleteAction = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
+        if(((Cards)globalUserData).getIsVisible() == ModelsDAO.READY_ON){
+            deleteAction = true;
+            messageRemove.setText("Вы действительно хотите удалить карточку?");
+        } else {
+            messageRemove.setText("Вы действительно хотите восстановить карточку?");
+        }
         cardName.setText(((Cards)globalUserData).getName());
     }
 
@@ -50,7 +62,11 @@ public class RemoveCardController extends A_Controller {
         CardsDAO cardsDAO = new CardsDAO(cards.getId());
 
         if(cardsDAO.cards != null){
-            cardsDAO.cards.setIsVisible(2);
+            if(deleteAction){
+                cardsDAO.cards.setIsVisible(2);
+            } else{
+                cardsDAO.cards.setIsVisible(1);
+            }
             if (cardsDAO.validate(cardsDAO.cards)) {
                 try {
                     if (!cardsDAO.saveOrUpdate()) {
