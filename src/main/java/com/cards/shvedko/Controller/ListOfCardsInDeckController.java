@@ -1,6 +1,8 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.Model.Cards;
+import com.cards.shvedko.Model.Decks;
+import com.cards.shvedko.Model.DecksValues;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.beans.InvalidationListener;
@@ -18,44 +20,38 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.util.Callback;
 
-import javax.smartcardio.Card;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ListOfCardsController extends A_Controller {
+public class ListOfCardsInDeckController extends A_Controller {
 
     @FXML
     public TableColumn<Cards, String> tableSounds;
     @FXML
-    public TableColumn<Cards, String> tableIsAnchor;
+    public TableColumn<DecksValues, Boolean> tableIsAnchor;
     @FXML
     public TableColumn<Cards, String> tableIsLearnt;
 
-    private ObservableList<Cards> cardsData = FXCollections.observableArrayList();
+    private ObservableList<Cards> decksValues = FXCollections.observableArrayList();
 
     public void initialize(URL location, ResourceBundle resources) {
 
         linkToColumns();
         makeTitleOfColumns();
 
-        CardsDAO cardsDAO = new CardsDAO();
+        Decks deck = globalDeckData;
 
-        List cards = new ArrayList();
-        try {
-            cards = cardsDAO.selectAll();
-        } catch (Exception e) {
-            crashAppeared(e.getMessage());
-        }
+        List<DecksValues> decksValuesFromDeck = deck.getDecksValues();
 
-        if (cards.size() > 0) {
-            for (Object card : cards) {
-                cardsData.add((Cards) card);
+        if (decksValuesFromDeck.size() > 0) {
+            for (Object deckValue : decksValuesFromDeck) {
+                this.decksValues.add(((DecksValues) deckValue).getCards());
             }
         }
 
-        cardsTable.setItems(getCardsData());
+        cardsTable.setItems(getDecksValues());
 
         cardsTable.setRowFactory(new Callback<TableView<Cards>, TableRow<Cards>>() {
             @Override
@@ -65,14 +61,15 @@ public class ListOfCardsController extends A_Controller {
                     @Override
                     public void changed(ObservableValue<? extends Cards> obs, Cards oldItem, Cards newItem) {
                         if (newItem != null) {
-                            if (newItem.getIsVisible() != ModelsDAO.READY_ON) {
-                                row.setStyle("-fx-background-color: indianred");
-                                Tooltip tooltip = new Tooltip("Эта карточка удалена");
+                            Boolean isReady = checkIfCardIsReadyInDeck(newItem);
+                            if (isReady) {
+                                row.setStyle("-fx-background-color: mediumseagreen");
+                                Tooltip tooltip = new Tooltip("Эта карточка выучена");
                                 tooltip.setStyle("-fx-font-size: 16px;");
                                 row.setTooltip(tooltip);
                             } else {
                                 row.setStyle("");
-                                Tooltip tooltip = new Tooltip("Эта карточка активна");
+                                Tooltip tooltip = new Tooltip("Эта карточка еще не выучена");
                                 tooltip.setStyle("-fx-font-size: 16px;");
                                 row.setTooltip(tooltip);
                             }
@@ -105,6 +102,26 @@ public class ListOfCardsController extends A_Controller {
 
         initializeContentMenu();
 
+    }
+
+    private Boolean checkIfCardIsReadyInDeck(Cards newItem) {
+        Boolean res = false;
+
+        Decks deck = globalDeckData;
+
+        List<DecksValues> decksValuesFromDeck = deck.getDecksValues();
+
+        if (decksValuesFromDeck.size() > 0) {
+            for (Object deckValue : decksValuesFromDeck) {
+                if (((DecksValues) deckValue).getCards().getId() == newItem.getId()) {
+                    if (((DecksValues) deckValue).getIsReady() == 1) {
+                        res = true;
+                    }
+                }
+            }
+        }
+
+        return res;
     }
 
     // Create ContextMenu
@@ -210,6 +227,31 @@ public class ListOfCardsController extends A_Controller {
                 return new SimpleStringProperty(getNumberOfSounds(p.getValue()));
             }
         });
+//        tableIsAnchor.setCellValueFactory(new PropertyValueFactory<DecksValues, Boolean>("isAnchor"));
+
+//
+//        tableIsAnchor.setCellFactory(new Callback<TableColumn<DecksValues, Boolean>, TableCell<DecksValues, Boolean>>() {
+//            @Override
+//            public TableCell<DecksValues, Boolean> call(TableColumn<DecksValues, Boolean> column) {
+//                return new CheckBoxTableCell<>();
+//            }
+//        });
+//        tableIsAnchor.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DecksValues, Boolean>, Boolean>() {
+//            @Override
+//            public Boolean call(TableColumn.CellDataFeatures<DecksValues, Boolean> cellData) {
+//                DecksValues cellValue = cellData.getValue();
+//                boolean property = false;
+//
+//                if(cellValue.getIsAnchor() == 1){
+//                    property = true;
+//                }
+//
+//                // Add listener to handler change
+//                property.addListener((observable, oldValue, newValue) -> cellValue.setChoosed(newValue));
+//
+//                return property;
+//            }
+//        });
     }
 
     private String getNumberOfSounds(Cards card) {
@@ -231,11 +273,11 @@ public class ListOfCardsController extends A_Controller {
         return cnt + "/4";
     }
 
-    public ObservableList<Cards> getCardsData() {
-        return cardsData;
+    public ObservableList<Cards> getDecksValues() {
+        return decksValues;
     }
 
-    public void setCardsData(ObservableList<Cards> cardsData) {
-        this.cardsData = cardsData;
+    public void setDecksValues(ObservableList<Cards> decksValues) {
+        this.decksValues = decksValues;
     }
 }

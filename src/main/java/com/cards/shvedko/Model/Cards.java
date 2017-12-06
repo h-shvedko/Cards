@@ -73,11 +73,13 @@ public class Cards extends A_Models implements Serializable {
     @JoinColumn(name = "type_id", referencedColumnName="id")
     private CardTypes type;
 
-    @ManyToOne(optional=false, fetch = FetchType.EAGER)
+    //TODO: check LAZY/EAGER loading
+    @ManyToOne(optional=false, fetch = FetchType.LAZY)
     @JoinColumn(name = "preposition_akk", referencedColumnName="id")
     private CardsPrepositionAkkusativ prepositionAkk;
 
-    @ManyToOne(optional=false, fetch = FetchType.EAGER)
+    //TODO: check LAZY/EAGER loading
+    @ManyToOne(optional=false, fetch = FetchType.LAZY)
     @JoinColumn(name = "preposition_dat", referencedColumnName="id")
     private CardsPrepositionDativ prepositionDativ;
 

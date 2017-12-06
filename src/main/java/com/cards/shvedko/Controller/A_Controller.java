@@ -126,6 +126,8 @@ abstract public class A_Controller implements Initializable {
     @FXML
     protected TableView<Cards> cardsTable;
     @FXML
+    protected TableView<DecksValues> deckValuesTable;
+    @FXML
     protected TableColumn<Cards, String> tableTopic;
     @FXML
     protected TableColumn<Cards, String> tableSpeechPart;

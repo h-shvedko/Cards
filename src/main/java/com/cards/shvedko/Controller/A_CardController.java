@@ -226,7 +226,7 @@ public class A_CardController extends A_Controller {
             preteritum = " /" + cards.getForeignNamePreteritum();
         }
 
-        if (cards.getForeignNamePerfect() != null && !cards.getForeignNamePerfect().equals("")) {
+        if (!cards.getForeignNamePerfect().equals("")) {
             perfect = " " + cards.getForeignNamePerfect();
         }
 
@@ -295,7 +295,7 @@ public class A_CardController extends A_Controller {
         numberOfCards.setText("Карточка " + numberOfWord + " / " + String.valueOf(numberOfActiveCards));
     }
 
-    //TODO: check wh session returns null
+    //TODO: check LAZY/EAGER loading for prepositions in CARDS
     private void markCardAsShown() throws Exception {
         DecksValuesDAO decksValuesDAO = new DecksValuesDAO(decksValues.getId());
         int count = decksValuesDAO.decksValues.getCountOfAppearance();
