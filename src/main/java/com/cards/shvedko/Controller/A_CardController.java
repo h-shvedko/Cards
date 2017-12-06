@@ -186,7 +186,7 @@ public class A_CardController extends A_Controller {
 
         value = cards.getForeignName();
 
-        if(!cards.getPluralEndung().equals("")){
+        if (!cards.getPluralEndung().equals("")) {
             value += " (-" + cards.getPluralEndung() + ")";
         }
 
@@ -199,26 +199,56 @@ public class A_CardController extends A_Controller {
         String sich = "";
         String preteritum = "";
         String perfect = "";
+        String akkusative = "";
+        String dative = "";
+        String genetive = "";
+        String infinitive = "";
 
-        if(cards.getIsPerfectWithHaben() != 0){
+        if (cards.getPrepositionAkk() != null) {
+            akkusative = cards.getPrepositionAkk().getName();
+        }
+
+        if (cards.getPrepositionDativ() != null) {
+            dative = cards.getPrepositionDativ().getName();
+        }
+
+        if (cards.getPrepositionGen() != null) {
+            genetive = cards.getPrepositionGen();
+        }
+
+        if (cards.getIsPerfectWithHaben() != 0) {
             haben = " /haben ";
         } else {
             haben = " /sein ";
         }
 
-        if(!cards.getForeignNamePreteritum().equals("")){
+        if (cards.getForeignNamePreteritum() != null && !cards.getForeignNamePreteritum().equals("")) {
             preteritum = " /" + cards.getForeignNamePreteritum();
         }
 
-        if(!cards.getForeignNamePerfect().equals("")){
+        if (cards.getForeignNamePerfect() != null && !cards.getForeignNamePerfect().equals("")) {
             perfect = " " + cards.getForeignNamePerfect();
         }
 
-        if(cards.getIsReflexiveVerb() != 0){
+        if (cards.getIsReflexiveVerb() != 0) {
             sich += " sich ";
         }
 
-        value = sich + cards.getForeignName() + preteritum + haben + perfect;
+        infinitive = cards.getForeignName();
+
+        if (!akkusative.equals("")) {
+            infinitive += " (" + akkusative + " etw. Akk.)";
+        }
+
+        if (!dative.equals("")) {
+            infinitive += " (" + dative + " etw. Dat.)";
+        }
+
+        if (!genetive.equals("")) {
+            infinitive += " (" + genetive + " etw. Gen.)";
+        }
+
+        value = sich + infinitive + preteritum + haben + perfect;
 
         translatedWord.setText(value);
     }
