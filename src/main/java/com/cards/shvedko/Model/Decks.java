@@ -42,6 +42,27 @@ public class Decks extends A_Models implements Serializable {
     @Column(name = "is_favorite")
     private int isFavorite;
 
+    @Column(name = "trembare_prefix", nullable = false)
+    private int trembarePrefix;
+
+    @Column(name = "regelmassig", nullable = false)
+    private int regelmessig;
+
+    @Column(name = "reflexive", nullable = false)
+    private int reflexive;
+
+    @Column(name = "perfect", nullable = false)
+    private int perfect;
+
+    @Column(name = "preposition_akkusative", nullable = false)
+    private int prepositionAkkusative;
+
+    @Column(name = "preposition_dative", nullable = false)
+    private int prepositionDative;
+
+    @Column(name = "preposition_genetive", nullable = false)
+    private int prepositionGenetive;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "decks", targetEntity = DecksValues.class)
     private List<DecksValues> decksValues = new ArrayList<>(
             0);
@@ -121,5 +142,61 @@ public class Decks extends A_Models implements Serializable {
 
     public void setIsFavorite(int isFavorite) {
         this.isFavorite = isFavorite;
+    }
+
+    public int getTrembarePrefix() {
+        return trembarePrefix;
+    }
+
+    public void setTrembarePrefix(int trembarePrefix) {
+        this.trembarePrefix = trembarePrefix;
+    }
+
+    public int getRegelmessig() {
+        return regelmessig;
+    }
+
+    public void setRegelmessig(int regelmessig) {
+        this.regelmessig = regelmessig;
+    }
+
+    public int getReflexive() {
+        return reflexive;
+    }
+
+    public void setReflexive(int reflexive) {
+        this.reflexive = reflexive;
+    }
+
+    public int getPerfect() {
+        return perfect;
+    }
+
+    public void setPerfect(int perfect) {
+        this.perfect = perfect;
+    }
+
+    public int getPrepositionAkkusative() {
+        return prepositionAkkusative;
+    }
+
+    public void setPrepositionAkkusative(int prepositionAkkusative) {
+        this.prepositionAkkusative = prepositionAkkusative;
+    }
+
+    public int getPrepositionDative() {
+        return prepositionDative;
+    }
+
+    public void setPrepositionDative(int prepositionDative) {
+        this.prepositionDative = prepositionDative;
+    }
+
+    public int getPrepositionGenetive() {
+        return prepositionGenetive;
+    }
+
+    public void setPrepositionGenetive(int prepositionGenetive) {
+        this.prepositionGenetive = prepositionGenetive;
     }
 }

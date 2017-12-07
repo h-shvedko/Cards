@@ -29,18 +29,6 @@ public class DecksValues extends A_Models implements Serializable {
     @Column(name = "date_ready", nullable = false)
     private String dateReady;
 
-    @Column(name = "trembare_prefix", nullable = false)
-    private String trembarePrefix;
-
-    @Column(name = "regelmassig", nullable = false)
-    private String regelmessig;
-
-    @Column(name = "reflexive", nullable = false)
-    private String reflexive;
-
-    @Column(name = "perfect", nullable = false)
-    private String perfect;
-
     @ManyToOne(optional=false, fetch = FetchType.LAZY)
     @JoinColumn(name = "deck_id", referencedColumnName="id")
     private Decks decks;
@@ -123,37 +111,5 @@ public class DecksValues extends A_Models implements Serializable {
 
     public void setCountOfAppearance(int countOfAppearance) {
         this.countOfAppearance = countOfAppearance;
-    }
-
-    public String getTrembarePrefix() {
-        return trembarePrefix;
-    }
-
-    public void setTrembarePrefix(String trembarePrefix) {
-        this.trembarePrefix = trembarePrefix;
-    }
-
-    public String getRegelmessig() {
-        return regelmessig;
-    }
-
-    public void setRegelmessig(String regelmessig) {
-        this.regelmessig = regelmessig;
-    }
-
-    public String getReflexive() {
-        return reflexive;
-    }
-
-    public void setReflexive(String reflexive) {
-        this.reflexive = reflexive;
-    }
-
-    public String getPerfect() {
-        return perfect;
-    }
-
-    public void setPerfect(String perfect) {
-        this.perfect = perfect;
     }
 }

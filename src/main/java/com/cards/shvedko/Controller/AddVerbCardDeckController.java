@@ -53,10 +53,13 @@ public class AddVerbCardDeckController extends A_Controller {
 
     @FXML
     public ToggleButton prefixGenetive;
+    protected final ToggleGroup genetiveGroup = new ToggleGroup();
     @FXML
     public ToggleButton prefixDative;
+    protected final ToggleGroup dativeGroup = new ToggleGroup();
     @FXML
     public ToggleButton prefixAkkusative;
+    protected final ToggleGroup akkusativeGroup = new ToggleGroup();
 
     @FXML
     private Button cancel;
@@ -83,21 +86,42 @@ public class AddVerbCardDeckController extends A_Controller {
             });
         }
 
+        trembarePrefixYes.setUserData(ModelsDAO.TREMBARE_YES);
+        trembarePrefixNot.setUserData(ModelsDAO.TREMBARE_NO);
+        trembarePrefixAll.setUserData(ModelsDAO.TREMBARE_ALL);
         trembarePrefixYes.setToggleGroup(trembareGroup);
         trembarePrefixNot.setToggleGroup(trembareGroup);
         trembarePrefixAll.setToggleGroup(trembareGroup);
 
+        regelmassigAll.setUserData(ModelsDAO.REGELMESSIG_ALL);
+        regelmassigNo.setUserData(ModelsDAO.REGELMESSIG_NO);
+        regelmassigYes.setUserData(ModelsDAO.REGELMESSIG_YES);
         regelmassigAll.setToggleGroup(regelmessigGroup);
         regelmassigNo.setToggleGroup(regelmessigGroup);
         regelmassigYes.setToggleGroup(regelmessigGroup);
 
+        reflexiveAll.setUserData(ModelsDAO.REFLEXIVE_ALL);
+        reflexiveNo.setUserData(ModelsDAO.REFLEXIVE_NO);
+        reflexiveYes.setUserData(ModelsDAO.REFLEXIVE_YES);
         reflexiveAll.setToggleGroup(reflexiveGroup);
         reflexiveNo.setToggleGroup(reflexiveGroup);
         reflexiveYes.setToggleGroup(reflexiveGroup);
 
+        perfectAll.setUserData(ModelsDAO.PERFECT_ALL);
+        perfectHaben.setUserData(ModelsDAO.PERFECT_HABEN);
+        perfectSein.setUserData(ModelsDAO.PERFECT_SEIN);
         perfectAll.setToggleGroup(perfectGroup);
         perfectHaben.setToggleGroup(perfectGroup);
         perfectSein.setToggleGroup(perfectGroup);
+
+        prefixAkkusative.setUserData(1);
+        prefixAkkusative.setToggleGroup(akkusativeGroup);
+
+        prefixGenetive.setUserData(1);
+        prefixGenetive.setToggleGroup(genetiveGroup);
+
+        prefixDative.setUserData(1);
+        prefixDative.setToggleGroup(dativeGroup);
 
         allSpeechPart.setSelected(false);
         allSpeechPart.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -163,10 +187,30 @@ public class AddVerbCardDeckController extends A_Controller {
             decksDAO.decks.setUser((Users) userObject);
         }
 
-        //TODO: change deck model
         String isRegelmessig = regelmessigGroup.getSelectedToggle().getUserData().toString();
+        decksDAO.decks.setRegelmessig(Integer.parseInt(isRegelmessig));
+
         String isTrembare = trembareGroup.getSelectedToggle().getUserData().toString();
+        decksDAO.decks.setTrembarePrefix(Integer.parseInt(isTrembare));
+
         String isReflexive = reflexiveGroup.getSelectedToggle().getUserData().toString();
+        decksDAO.decks.setReflexive(Integer.parseInt(isReflexive));
+
+        if (akkusativeGroup.getSelectedToggle() != null) {
+            String isAkkusative = akkusativeGroup.getSelectedToggle().getUserData().toString();
+            decksDAO.decks.setReflexive(Integer.parseInt(isAkkusative));
+        }
+
+        if (dativeGroup.getSelectedToggle() != null) {
+            String isDative = dativeGroup.getSelectedToggle().getUserData().toString();
+            decksDAO.decks.setReflexive(Integer.parseInt(isDative));
+        }
+
+        if (genetiveGroup.getSelectedToggle() != null) {
+            String isGenetive = genetiveGroup.getSelectedToggle().getUserData().toString();
+            decksDAO.decks.setReflexive(Integer.parseInt(isGenetive));
+
+        }
 
         if (decksDAO.validate(decksDAO.decks)) {
             try {
@@ -198,6 +242,42 @@ public class AddVerbCardDeckController extends A_Controller {
         String queryString = "where user_id=" + userId + " and is_visible=1";
         try {
             //TODO: add all other stuff
+            if (decksDAO.decks.getReflexive() == ModelsDAO.REFLEXIVE_NO) {
+                queryString += " and is_reflexiv_verb=" + ModelsDAO.REFLEXIVE_NO;
+            } else if (decksDAO.decks.getReflexive() == ModelsDAO.REFLEXIVE_YES) {
+                queryString += " and is_reflexiv_verb=" + ModelsDAO.REFLEXIVE_YES;
+            }
+
+            if (decksDAO.decks.getRegelmessig() == ModelsDAO.REGELMESSIG_NO) {
+                queryString += " and is_regular_verb=" + ModelsDAO.REGELMESSIG_NO;
+            } else if (decksDAO.decks.getReflexive() == ModelsDAO.REGELMESSIG_YES) {
+                queryString += " and is_regular_verb=" + ModelsDAO.REGELMESSIG_YES;
+            }
+
+            if (decksDAO.decks.getTrembarePrefix() == ModelsDAO.TREMBARE_NO) {
+                queryString += " and is_trembare_prefix_verb=" + ModelsDAO.TREMBARE_NO;
+            } else if (decksDAO.decks.getReflexive() == ModelsDAO.TREMBARE_YES) {
+                queryString += " and is_trembare_prefix_verb=" + ModelsDAO.TREMBARE_YES;
+            }
+
+            if (decksDAO.decks.getPerfect() == ModelsDAO.PERFECT_HABEN) {
+                queryString += " and is_perfect_with_haben=" + ModelsDAO.PERFECT_HABEN;
+            } else if (decksDAO.decks.getReflexive() == ModelsDAO.PERFECT_SEIN) {
+                queryString += " and is_perfect_with_haben=" + ModelsDAO.PERFECT_SEIN;
+            }
+
+            if (decksDAO.decks.getPrepositionAkkusative() == 1) {
+                queryString += " and preposition_akk>0";
+            }
+
+            if (decksDAO.decks.getPrepositionDative() == 1) {
+                queryString += " and preposition_dat>0";
+            }
+
+            if (decksDAO.decks.getPrepositionGenetive() == 1) {
+                queryString += " and preposition_gen!=NULL";
+            }
+
             if (!decksDAO.decks.getCategory().getName().equals(ModelsDAO.ALL_PART_OF_SPEECH)) {
                 queryString += " and category_id=" + categoryId;
             }

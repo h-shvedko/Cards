@@ -30,8 +30,8 @@ public class ModelsDAO implements I_DAO {
     public static final int REGELMESSIG_YES = 1;
     public static final int REGELMESSIG_NO = 0;
     public static final int REGELMESSIG_ALL = 2;
-    public static final int PERFECT_SEIN = 1;
-    public static final int PERFECT_HABEN = 0;
+    public static final int PERFECT_SEIN = 0;
+    public static final int PERFECT_HABEN = 1;
     public static final int PERFECT_ALL = 2;
     protected static Validator validator;
     public static final String NOUN = "Существительное";
