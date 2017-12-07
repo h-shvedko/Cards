@@ -211,7 +211,7 @@ public class AddVerbCardDeckController extends A_Controller {
 
         if (genetiveGroup.getSelectedToggle() != null) {
             String isGenetive = genetiveGroup.getSelectedToggle().getUserData().toString();
-            decksDAO.decks.setPrepositionDative(Integer.parseInt(isGenetive));
+            decksDAO.decks.setPrepositionGenetive(Integer.parseInt(isGenetive));
 
         }
 
@@ -244,7 +244,6 @@ public class AddVerbCardDeckController extends A_Controller {
         List cards;
         String queryString = "where user_id=" + userId + " and is_visible=1";
         try {
-            //TODO: add all other stuff
             if (decksDAO.decks.getReflexive() == ModelsDAO.REFLEXIVE_NO) {
                 queryString += " and is_reflexiv_verb=" + ModelsDAO.REFLEXIVE_NO;
             } else if (decksDAO.decks.getReflexive() == ModelsDAO.REFLEXIVE_YES) {
