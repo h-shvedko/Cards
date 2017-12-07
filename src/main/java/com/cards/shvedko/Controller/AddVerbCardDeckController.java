@@ -114,27 +114,19 @@ public class AddVerbCardDeckController extends A_Controller {
 
     public void handleSaveButton(ActionEvent actionEvent) {
         String name = nameDeck.getText();
-        boolean ifAllSpeechPart = allSpeechPart.isSelected();
         boolean ifAllTopic = allTopic.isSelected();
         A_Models userObject = globalUserModel;
 
         int speechPartValue = 0;
         A_Models typeObject = null;
-        if (!ifAllSpeechPart) {
-            speechPartValue = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
-            CardTypesDAO cardTypesDAO = new CardTypesDAO();
 
-            try {
-                typeObject = cardTypesDAO.select("where id=" + speechPartValue);
-            } catch (Exception e) {
-                crashAppeared(e.getMessage());
-            }
-        } else {
-            try {
-                typeObject = getCategoryAll();
-            } catch (Exception e) {
-                crashAppeared(e.getMessage());
-            }
+        speechPartValue = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
+        CardTypesDAO cardTypesDAO = new CardTypesDAO();
+
+        try {
+            typeObject = cardTypesDAO.select("where id=" + speechPartValue);
+        } catch (Exception e) {
+            crashAppeared(e.getMessage());
         }
 
         int topicValue = 0;
@@ -171,6 +163,11 @@ public class AddVerbCardDeckController extends A_Controller {
             decksDAO.decks.setUser((Users) userObject);
         }
 
+        //TODO: change deck model
+        String isRegelmessig = regelmessigGroup.getSelectedToggle().getUserData().toString();
+        String isTrembare = trembareGroup.getSelectedToggle().getUserData().toString();
+        String isReflexive = reflexiveGroup.getSelectedToggle().getUserData().toString();
+
         if (decksDAO.validate(decksDAO.decks)) {
             try {
                 if (!decksDAO.save()) {
@@ -200,6 +197,7 @@ public class AddVerbCardDeckController extends A_Controller {
         List cards;
         String queryString = "where user_id=" + userId + " and is_visible=1";
         try {
+            //TODO: add all other stuff
             if (!decksDAO.decks.getCategory().getName().equals(ModelsDAO.ALL_PART_OF_SPEECH)) {
                 queryString += " and category_id=" + categoryId;
             }
