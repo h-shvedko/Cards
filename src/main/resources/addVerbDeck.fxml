@@ -161,7 +161,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="81.0" prefWidth="202.0" text="С отделяемой приставкой"
+                        <Label fx:id="trembareLabel" prefHeight="81.0" prefWidth="202.0" text="С отделяемой приставкой"
                                GridPane.columnIndex="1">
                             <font>
                                 <Font size="24.0"/>

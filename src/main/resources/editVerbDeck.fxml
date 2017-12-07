@@ -9,11 +9,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<!--<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>-->
+<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
 
 <AnchorPane maxHeight="1000.0" maxWidth="600.0" minHeight="1000.0" minWidth="600.0" prefHeight="1000.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.cards.shvedko.Controller.AddVerbCardDeckController">
+            fx:controller="com.cards.shvedko.Controller.EditVerbCardDeckController">
     <children>
         <GridPane layoutX="-5.0" layoutY="-7.0" maxHeight="1000.0" minHeight="1000.0" prefHeight="1000.0"
                   prefWidth="608.0">
@@ -142,7 +142,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Изучать избранные карточки"/>
                             </tooltip>
                             <graphic>
-                                <!--<FontAwesomeIconView icon="ICON_STAR"/>-->
+                                <FontAwesomeIconView icon="ICON_STAR"/>
                             </graphic>
                             <font>
                                 <Font size="24.0"/>
@@ -191,7 +191,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Начать изучение с закрепленной карточки"/>
                             </tooltip>
                             <graphic>
-                                <!--<FontAwesomeIconView icon="ICON_ANCHOR"/>-->
+                                <FontAwesomeIconView icon="ICON_ANCHOR"/>
                             </graphic>
                             <font>
                                 <Font size="24.0"/>
@@ -265,27 +265,27 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="81.0" prefWidth="202.0" text="С отделяемой приставкой"
+                        <Label fx:id="trembareLabel" prefHeight="81.0" prefWidth="202.0" text="С отделяемой приставкой"
                                GridPane.columnIndex="1">
                             <font>
                                 <Font size="24.0"/>
                             </font>
                         </Label>
-                        <ToggleButton fx:id="anchorOn1" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                        <ToggleButton fx:id="trembarePrefixYes" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
                                       text="Да" GridPane.columnIndex="2" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff1" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                        <ToggleButton fx:id="trembarePrefixNot" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
                                       text="Нет" GridPane.columnIndex="3" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff12" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                        <ToggleButton fx:id="trembarePrefixAll" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
                                       prefHeight="51.0" prefWidth="100.0" text="Все" GridPane.columnIndex="4"
                                       GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
@@ -301,21 +301,21 @@
                                 <Font size="24.0"/>
                             </font>
                         </Label>
-                        <ToggleButton fx:id="anchorOn11" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                        <ToggleButton fx:id="regelmassigYes" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
                                       text="Да" GridPane.columnIndex="2" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff11" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                        <ToggleButton fx:id="regelmassigNo" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
                                       text="Нет" GridPane.columnIndex="3" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff121" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                        <ToggleButton fx:id="regelmassigAll" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
                                       prefHeight="51.0" prefWidth="100.0" text="Все" GridPane.columnIndex="4"
                                       GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
@@ -342,21 +342,21 @@
                                 <Font size="24.0"/>
                             </font>
                         </Label>
-                        <ToggleButton fx:id="anchorOn111" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                        <ToggleButton fx:id="reflexiveYes" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
                                       text="Да" GridPane.columnIndex="2" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff111" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                        <ToggleButton fx:id="reflexiveNo" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
                                       text="Нет" GridPane.columnIndex="3" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff1211" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                        <ToggleButton fx:id="reflexiveAll" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
                                       prefHeight="51.0" prefWidth="100.0" text="Все" GridPane.columnIndex="4"
                                       GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
@@ -383,21 +383,21 @@
                                 <Font size="24.0"/>
                             </font>
                         </Label>
-                        <ToggleButton fx:id="anchorOn1111" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                        <ToggleButton fx:id="perfectHaben" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
                                       text="haben" GridPane.columnIndex="2" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff1111" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                        <ToggleButton fx:id="perfectSein" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
                                       text="sein" GridPane.columnIndex="3" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff12111" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                        <ToggleButton fx:id="perfectAll" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
                                       prefHeight="51.0" prefWidth="100.0" text="Все" GridPane.columnIndex="4"
                                       GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
@@ -424,21 +424,21 @@
                                 <Font size="24.0"/>
                             </font>
                         </Label>
-                        <ToggleButton fx:id="anchorOn11111" mnemonicParsing="false" prefHeight="51.0" prefWidth="142.0"
+                        <ToggleButton fx:id="prefixAkkusative" mnemonicParsing="false" prefHeight="51.0" prefWidth="142.0"
                                       text="akkusative" GridPane.columnIndex="2" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff11111" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                        <ToggleButton fx:id="prefixDative" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
                                       text="dativ" GridPane.columnIndex="3" GridPane.halignment="CENTER"
                                       GridPane.valignment="CENTER">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="anchorOff121111" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                        <ToggleButton fx:id="prefixGenetive" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
                                       prefHeight="51.0" prefWidth="100.0" text="genetiv" GridPane.columnIndex="4"
                                       GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>

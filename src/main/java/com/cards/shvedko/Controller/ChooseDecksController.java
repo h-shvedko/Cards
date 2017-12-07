@@ -98,7 +98,13 @@ public class ChooseDecksController extends A_Controller {
     }
 
     public void handleSettingsButton(ActionEvent actionEvent) {
+
         this.setDeck();
-        this.goToPage("editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
+
+        if(A_Controller.globalDeckData.getType() != null && !A_Controller.globalDeckData.getType().getName().equals(ModelsDAO.VERB)){
+            this.goToPage("editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
+        } else {
+            this.goToPage("editVerbDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
+        }
     }
 }

@@ -6,10 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.List;
@@ -62,6 +59,9 @@ public class AddVerbCardDeckController extends A_Controller {
     protected final ToggleGroup akkusativeGroup = new ToggleGroup();
 
     @FXML
+    public Label trembareLabel;
+
+    @FXML
     private Button cancel;
     @FXML
     private ToggleButton allSpeechPart;
@@ -75,6 +75,9 @@ public class AddVerbCardDeckController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
+
+        trembareLabel.setWrapText(true);
+
         if (speechPart != null) {
             speechPart.valueProperty().addListener(new ChangeListener<String>() {
                 @Override
@@ -198,17 +201,17 @@ public class AddVerbCardDeckController extends A_Controller {
 
         if (akkusativeGroup.getSelectedToggle() != null) {
             String isAkkusative = akkusativeGroup.getSelectedToggle().getUserData().toString();
-            decksDAO.decks.setReflexive(Integer.parseInt(isAkkusative));
+            decksDAO.decks.setPrepositionAkkusative(Integer.parseInt(isAkkusative));
         }
 
         if (dativeGroup.getSelectedToggle() != null) {
             String isDative = dativeGroup.getSelectedToggle().getUserData().toString();
-            decksDAO.decks.setReflexive(Integer.parseInt(isDative));
+            decksDAO.decks.setPrepositionDative(Integer.parseInt(isDative));
         }
 
         if (genetiveGroup.getSelectedToggle() != null) {
             String isGenetive = genetiveGroup.getSelectedToggle().getUserData().toString();
-            decksDAO.decks.setReflexive(Integer.parseInt(isGenetive));
+            decksDAO.decks.setPrepositionDative(Integer.parseInt(isGenetive));
 
         }
 
