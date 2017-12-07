@@ -2,6 +2,10 @@ package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,6 +13,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddCardDeckController extends A_Controller {
@@ -26,7 +31,19 @@ public class AddCardDeckController extends A_Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         super.initialize(location, resources);
+
+        if (speechPart != null) {
+            speechPart.valueProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    if(Objects.equals(newValue, ModelsDAO.VERB)){
+                        goToPage("addVerbDeck.fxml", "Создать колоду с глаголами", globalUserData);
+                    }
+                }
+            });
+        }
     }
 
     public void handleSaveButton(ActionEvent actionEvent) {

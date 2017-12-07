@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1000.0" maxWidth="600.0" minHeight="1000.0" minWidth="600.0" prefHeight="1000.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cards.shvedko.Controller.AddVerbCardDeckController">
+    <children>
+        <GridPane layoutX="-5.0" layoutY="-7.0" maxHeight="1000.0" minHeight="1000.0" prefHeight="1000.0"
+                  prefWidth="608.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="800.0" minHeight="10.0" percentHeight="10.0" prefHeight="800.0"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="800.0" minHeight="10.0" percentHeight="10.0" prefHeight="800.0"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="800.0" minHeight="10.0" percentHeight="10.0" prefHeight="83.85321100917429"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="800.0" minHeight="10.0" percentHeight="10.0" prefHeight="83.85321100917429"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="800.0" minHeight="10.0" percentHeight="10.0" prefHeight="83.85321100917429"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="193.8532110091743" minHeight="10.0" percentHeight="10.0"
+                                prefHeight="193.8532110091743" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" percentHeight="4.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <GridPane GridPane.rowIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Label text="Части речи:" GridPane.columnIndex="1" GridPane.halignment="RIGHT"
+                               GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <ToggleButton fx:id="allSpeechPart" mnemonicParsing="false"
+                                      onAction="#handleDisableSpeechPartCombo" prefHeight="51.0" prefWidth="138.0"
+                                      text="Все" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ComboBox fx:id="speechPart" prefHeight="51.0" prefWidth="181.0" GridPane.columnIndex="3"/>
+                    </children>
+                </GridPane>
+                <GridPane GridPane.rowIndex="3">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Label text="Тематика:" GridPane.columnIndex="1" GridPane.halignment="RIGHT"
+                               GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <ToggleButton fx:id="allTopic" mnemonicParsing="false" onAction="#handleDisableTopicCombo"
+                                      prefHeight="51.0" prefWidth="138.0" text="Все" GridPane.columnIndex="2"
+                                      GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ComboBox fx:id="topic" prefHeight="51.0" prefWidth="181.0" GridPane.columnIndex="3"/>
+                    </children>
+                </GridPane>
+                <GridPane layoutX="10.0" layoutY="418.0" prefHeight="75.0" prefWidth="599.0" GridPane.rowIndex="9">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="10.0" prefWidth="36.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="178.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="164.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="10.0" prefWidth="28.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="cancel" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="66.0"
+                                prefWidth="139.0" text="Отмена" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                                GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="save" layoutX="143.0" layoutY="23.0" mnemonicParsing="false"
+                                onAction="#handleSaveButton" prefHeight="66.0" prefWidth="139.0" text="Сохранить"
+                                GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </GridPane>
+                <Label text="Создать колоду для глаголов" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="32.0"/>
+                    </font>
+                </Label>
+                <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Label text="Введите имя колоды:" GridPane.columnIndex="1" GridPane.halignment="RIGHT"
+                               GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="nameDeck" prefHeight="51.0" prefWidth="241.0" GridPane.columnIndex="3"/>
+                    </children>
+                </GridPane>
+                <GridPane GridPane.rowIndex="4">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="0.0" prefWidth="29.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="219.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="107.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="118.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="120.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="24.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Label prefHeight="81.0" prefWidth="202.0" text="С отделяемой приставкой"
+                               GridPane.columnIndex="1">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <ToggleButton fx:id="trembarePrefixYes" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                                      text="Да" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="trembarePrefixNot" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                                      text="Нет" GridPane.columnIndex="3" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="trembarePrefixAll" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                                      prefHeight="51.0" prefWidth="100.0" text="Все" GridPane.columnIndex="4"
+                                      GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                    </children>
+                </GridPane>
+                <GridPane layoutX="10.0" layoutY="430.0" GridPane.rowIndex="5">
+                    <children>
+                        <Label prefHeight="81.0" prefWidth="202.0" text="Правильный" GridPane.columnIndex="1">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <ToggleButton fx:id="regelmassigYes" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                                      text="Да" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="regelmassigNo" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                                      text="Нет" GridPane.columnIndex="3" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="regelmassigAll" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                                      prefHeight="51.0" prefWidth="100.0" text="Все" GridPane.columnIndex="4"
+                                      GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                    </children>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="0.0" prefWidth="29.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="219.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="107.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="118.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="120.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="24.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                </GridPane>
+                <GridPane layoutX="10.0" layoutY="540.0" GridPane.rowIndex="6">
+                    <children>
+                        <Label prefHeight="81.0" prefWidth="202.0" text="Возвратный" GridPane.columnIndex="1">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <ToggleButton fx:id="reflexiveYes" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                                      text="Да" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="reflexiveNo" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                                      text="Нет" GridPane.columnIndex="3" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="reflexiveAll" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                                      prefHeight="51.0" prefWidth="100.0" text="Все" GridPane.columnIndex="4"
+                                      GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                    </children>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="0.0" prefWidth="29.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="219.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="107.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="118.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="120.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="24.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                </GridPane>
+                <GridPane layoutX="10.0" layoutY="710.0" GridPane.rowIndex="7">
+                    <children>
+                        <Label prefHeight="81.0" prefWidth="202.0" text="Perfect c" GridPane.columnIndex="1">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <ToggleButton fx:id="perfectHaben" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                                      text="haben" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="perfectSein" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                                      text="sein" GridPane.columnIndex="3" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="perfectAll" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                                      prefHeight="51.0" prefWidth="100.0" text="Все" GridPane.columnIndex="4"
+                                      GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                    </children>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="0.0" prefWidth="29.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="219.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="107.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="118.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="120.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="24.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                </GridPane>
+                <GridPane layoutX="10.0" layoutY="753.0" GridPane.rowIndex="8">
+                    <children>
+                        <Label prefHeight="81.0" prefWidth="202.0" text="С приставками" GridPane.columnIndex="1">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <ToggleButton fx:id="prefixAkkusative" mnemonicParsing="false" prefHeight="51.0" prefWidth="142.0"
+                                      text="akkusative" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="prefixDative" mnemonicParsing="false" prefHeight="51.0" prefWidth="100.0"
+                                      text="dativ" GridPane.columnIndex="3" GridPane.halignment="CENTER"
+                                      GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                        <ToggleButton fx:id="prefixGenetive" layoutX="362.0" layoutY="40.0" mnemonicParsing="false"
+                                      prefHeight="51.0" prefWidth="100.0" text="genetiv" GridPane.columnIndex="4"
+                                      GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </ToggleButton>
+                    </children>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="0.0" prefWidth="29.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="219.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="107.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="118.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="120.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="24.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                </GridPane>
+            </children>
+        </GridPane>
+    </children>
+</AnchorPane>

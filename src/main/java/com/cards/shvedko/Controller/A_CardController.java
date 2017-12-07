@@ -186,7 +186,7 @@ public class A_CardController extends A_Controller {
 
         value = cards.getForeignName();
 
-        if (!cards.getPluralEndung().equals("")) {
+        if (cards.getPluralEndung() != null && !cards.getPluralEndung().equals("")) {
             value += " (-" + cards.getPluralEndung() + ")";
         }
 
@@ -274,7 +274,7 @@ public class A_CardController extends A_Controller {
         setNumberOfElement(numberOfWord);
         setValuesOfCard();
 
-//        markCardAsShown();
+        markCardAsShown();
         numberOfCards.setText("Карточка " + numberOfWord + " / " + String.valueOf(numberOfActiveCards));
     }
 
@@ -291,11 +291,10 @@ public class A_CardController extends A_Controller {
         setNumberOfElement(numberOfWord);
         setValuesOfCard();
 
-//        markCardAsShown();
+        markCardAsShown();
         numberOfCards.setText("Карточка " + numberOfWord + " / " + String.valueOf(numberOfActiveCards));
     }
 
-    //TODO: check LAZY/EAGER loading for prepositions in CARDS
     private void markCardAsShown() throws Exception {
         DecksValuesDAO decksValuesDAO = new DecksValuesDAO(decksValues.getId());
         int count = decksValuesDAO.decksValues.getCountOfAppearance();

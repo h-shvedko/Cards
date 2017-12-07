@@ -2,77 +2,118 @@ package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class EditCardDeckController extends A_Controller {
+public class AddVerbCardDeckController extends A_Controller {
+
+    @FXML
+    public ToggleButton trembarePrefixYes;
+    @FXML
+    public ToggleButton trembarePrefixNot;
+    @FXML
+    public ToggleButton trembarePrefixAll;
+    protected final ToggleGroup trembareGroup = new ToggleGroup();
+
+
+    @FXML
+    public ToggleButton regelmassigAll;
+    @FXML
+    public ToggleButton regelmassigNo;
+    @FXML
+    public ToggleButton regelmassigYes;
+    protected final ToggleGroup regelmessigGroup = new ToggleGroup();
+
+    @FXML
+    public ToggleButton reflexiveAll;
+    @FXML
+    public ToggleButton reflexiveNo;
+    @FXML
+    public ToggleButton reflexiveYes;
+    protected final ToggleGroup reflexiveGroup = new ToggleGroup();
+
+    @FXML
+    public ToggleButton perfectAll;
+    @FXML
+    public ToggleButton perfectSein;
+    @FXML
+    public ToggleButton perfectHaben;
+    protected final ToggleGroup perfectGroup = new ToggleGroup();
+
+    @FXML
+    public ToggleButton prefixGenetive;
+    @FXML
+    public ToggleButton prefixDative;
+    @FXML
+    public ToggleButton prefixAkkusative;
+
+    @FXML
+    private Button cancel;
+    @FXML
+    private ToggleButton allSpeechPart;
+    @FXML
+    private Button save;
+    @FXML
+    private TextField nameDeck;
+    @FXML
+    private ToggleButton allTopic;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-
-        startCards.setWrapText(true);
-        if(A_Controller.globalDeckData != null){
-            int isAnchorValue = A_Controller.globalDeckData.getIsAnchore();
-
-            if(isAnchorValue == ModelsDAO.ANCHOR_OFF){
-                anchorOff.setUserData(ModelsDAO.ANCHOR_OFF);
-                anchorOff.setSelected(true);
-            }
-            if(isAnchorValue == ModelsDAO.ANCHOR_ON){
-                anchorOn.setUserData(ModelsDAO.ANCHOR_ON);
-                anchorOn.setSelected(true);
-            }
-            anchorOff.setToggleGroup(groupAnchor);
-            anchorOn.setToggleGroup(groupAnchor);
-
-            int isFavoriteValue = A_Controller.globalDeckData.getIsFavorite();
-            if(isFavoriteValue == ModelsDAO.FAVORITE_ON){
-                favoriteOn.setUserData(ModelsDAO.FAVORITE_ON);
-                favoriteOn.setSelected(true);
-            }
-            if (isFavoriteValue == ModelsDAO.FAVORITE_OFF) {
-                favoriteOff.setUserData(ModelsDAO.FAVORITE_OFF);
-                favoriteOff.setSelected(true);
-            }
-            favoriteOn.setToggleGroup(groupFavorite);
-            favoriteOff.setToggleGroup(groupFavorite);
-
-            nameDeck.setText(A_Controller.globalDeckData.getName());
-
-            if(A_Controller.stage != null){
-                nameDeck.setDisable(true);
-            }
-
-            String allSpeechPartValue = A_Controller.globalDeckData.getType().getName();
-            if(allSpeechPartValue.equals(ModelsDAO.ALL_PART_OF_SPEECH)){
-                allSpeechPart.setSelected(true);
-                speechPart.setDisable(true);
-            } else {
-                speechPart.setValue(allSpeechPartValue);
-            }
-
-            String allTopicValue = A_Controller.globalDeckData.getCategory().getName();
-            if(allTopicValue.equals(ModelsDAO.ALL_PART_OF_SPEECH)){
-                allTopic.setSelected(true);
-                topic.setDisable(true);
-            } else {
-                topic.setValue(allTopicValue);
-            }
-        } else {
-            crashAppeared("Deck is not chosen!");
+        if (speechPart != null) {
+            speechPart.valueProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    if (!Objects.equals(newValue, ModelsDAO.VERB)) {
+                        goToPage("addDeck.fxml", "Создать колоду", globalUserData);
+                    }
+                }
+            });
         }
+
+        trembarePrefixYes.setToggleGroup(trembareGroup);
+        trembarePrefixNot.setToggleGroup(trembareGroup);
+        trembarePrefixAll.setToggleGroup(trembareGroup);
+
+        regelmassigAll.setToggleGroup(regelmessigGroup);
+        regelmassigNo.setToggleGroup(regelmessigGroup);
+        regelmassigYes.setToggleGroup(regelmessigGroup);
+
+        reflexiveAll.setToggleGroup(reflexiveGroup);
+        reflexiveNo.setToggleGroup(reflexiveGroup);
+        reflexiveYes.setToggleGroup(reflexiveGroup);
+
+        perfectAll.setToggleGroup(perfectGroup);
+        perfectHaben.setToggleGroup(perfectGroup);
+        perfectSein.setToggleGroup(perfectGroup);
+
+        allSpeechPart.setSelected(false);
+        allSpeechPart.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    goToPage("addDeck.fxml", "Создать колоду", globalUserData);
+                }
+            }
+        });
+        speechPart.setDisable(false);
+        speechPart.setValue(ModelsDAO.VERB);
     }
 
     public void handleSaveButton(ActionEvent actionEvent) {
         String name = nameDeck.getText();
-        String isAnchor = groupAnchor.getSelectedToggle().getUserData().toString();
-        String isFavorite = groupFavorite.getSelectedToggle().getUserData().toString();
         boolean ifAllSpeechPart = allSpeechPart.isSelected();
         boolean ifAllTopic = allTopic.isSelected();
         A_Models userObject = globalUserModel;
@@ -115,7 +156,7 @@ public class EditCardDeckController extends A_Controller {
             }
         }
 
-        DecksDAO decksDAO = new DecksDAO(A_Controller.globalDeckData.getId());
+        DecksDAO decksDAO = new DecksDAO();
         if (categoryObject != null) {
             decksDAO.decks.setCategory((CardCategories) categoryObject);
         }
@@ -124,8 +165,6 @@ public class EditCardDeckController extends A_Controller {
         }
 
         decksDAO.decks.setName(name);
-        decksDAO.decks.setIsAnchore(Integer.parseInt(isAnchor));
-        decksDAO.decks.setIsFavorite(Integer.parseInt(isFavorite));
         decksDAO.decks.setIsVisible(1);
 
         if (userObject != null) {
@@ -134,7 +173,7 @@ public class EditCardDeckController extends A_Controller {
 
         if (decksDAO.validate(decksDAO.decks)) {
             try {
-                if(!decksDAO.save()){
+                if (!decksDAO.save()) {
                     throw new Exception(decksDAO.errorMsg);
                 }
             } catch (Exception ex) {
@@ -142,7 +181,7 @@ public class EditCardDeckController extends A_Controller {
             }
 
             try {
-                updateDecksValues(decksDAO);
+                saveDecksValues(decksDAO);
                 showSuccess(actionEvent);
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
@@ -152,7 +191,7 @@ public class EditCardDeckController extends A_Controller {
         }
     }
 
-    private void updateDecksValues(DecksDAO decksDAO) throws Exception {
+    private void saveDecksValues(DecksDAO decksDAO) throws Exception {
         int categoryId = decksDAO.decks.getCategory().getId();
         int typeId = decksDAO.decks.getType().getId();
         int userId = decksDAO.decks.getUser().getId();
@@ -172,42 +211,18 @@ public class EditCardDeckController extends A_Controller {
             throw new Exception(e.getMessage());
         }
 
-        try{
-            cleanAllValues(decksDAO.decks.getDecksValues());
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-
         if (cards.size() > 0) {
             try {
                 for (Object card : cards) {
                     DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
                     decksValuesDAO.decksValues.setCards((Cards) card);
                     decksValuesDAO.decksValues.setDecks(decksDAO.decks);
-                    if(!decksValuesDAO.saveOrUpdate()){
+                    if (!decksValuesDAO.saveOrUpdateDeckValues()) {
                         throw new Exception(decksValuesDAO.errorMsg);
                     }
                 }
             } catch (Exception ex) {
                 throw new Exception(ex.getMessage());
-            }
-        }
-
-    }
-
-    private void cleanAllValues(List<DecksValues> decksValues) throws Exception {
-        for(Object deckValue: decksValues){
-            int id = ((DecksValues)deckValue).getId();
-            DecksValuesDAO decksValuesDAO;
-            try{
-                decksValuesDAO = new DecksValuesDAO(id);
-            } catch (Exception e){
-                throw new Exception(e.getMessage());
-            }
-            if(decksValuesDAO.decksValues != null){
-                decksValuesDAO.delete(decksValuesDAO.decksValues.getId());
-            } else {
-                decksValuesDAO.closeSession();
             }
         }
 
@@ -262,22 +277,5 @@ public class EditCardDeckController extends A_Controller {
     public void handleDisableTopicCombo(ActionEvent actionEvent) {
         boolean isDisabled = topic.isDisabled();
         topic.setDisable(!isDisabled);
-    }
-
-    public void handleDeleteButton(ActionEvent actionEvent) {
-        DecksDAO decksDAO = new DecksDAO(A_Controller.globalDeckData.getId());
-        decksDAO.decks.setIsVisible(Integer.parseInt(String.valueOf(0)));
-        if (decksDAO.validate(decksDAO.decks)) {
-            try {
-                if(!decksDAO.saveOrUpdate()){
-                    throw new Exception(decksDAO.errorMsg);
-                }
-                showSuccess(actionEvent);
-            } catch (Exception ex) {
-                crashAppeared(ex.getMessage());
-            }
-        } else {
-            showErrors(decksDAO);
-        }
     }
 }

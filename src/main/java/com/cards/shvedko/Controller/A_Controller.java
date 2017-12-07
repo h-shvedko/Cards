@@ -121,6 +121,31 @@ abstract public class A_Controller implements Initializable {
     protected Button cancelButton;
     @FXML
     public Label greeting;
+    @FXML
+    public Button delete;
+    @FXML
+    public Label startCards;
+    @FXML
+    protected Button cancel;
+    @FXML
+    protected ToggleButton allSpeechPart;
+    @FXML
+    protected ToggleButton favoriteOff;
+    @FXML
+    protected ToggleButton anchorOn;
+    @FXML
+    protected ToggleButton anchorOff;
+    @FXML
+    protected Button save;
+    @FXML
+    protected TextField nameDeck;
+    @FXML
+    protected ToggleButton allTopic;
+    @FXML
+    protected ToggleButton favoriteOn;
+
+    protected final ToggleGroup groupAnchor = new ToggleGroup();
+    protected final ToggleGroup groupFavorite = new ToggleGroup();
 
     //*********************TABLE VIEW CARDS DATA *****************************
     @FXML
