@@ -226,7 +226,7 @@ public class A_CardController extends A_Controller {
             preteritum = " /" + cards.getForeignNamePreteritum();
         }
 
-        if (!cards.getForeignNamePerfect().equals("")) {
+        if (cards.getForeignNamePerfect() != null && !cards.getForeignNamePerfect().equals("")) {
             perfect = " " + cards.getForeignNamePerfect();
         }
 
@@ -351,7 +351,7 @@ public class A_CardController extends A_Controller {
 
     public void handleAnchorButton(ActionEvent actionEvent) throws Exception {
         int isAnchor = ((DecksValues) decksValues).getIsAnchor();
-        DecksValuesDAO decksValuesDAO = new DecksValuesDAO(decksValues.getId());
+        DecksValuesDAO decksValuesDAO = new DecksValuesDAO(decksValues.getId(), true);
         if (isAnchor == 1) {
             decksValuesDAO.decksValues.setIsAnchor(0);
         } else {

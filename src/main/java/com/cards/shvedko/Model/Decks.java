@@ -42,7 +42,7 @@ public class Decks extends A_Models implements Serializable {
     @Column(name = "is_favorite")
     private int isFavorite;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "decks", targetEntity = DecksValues.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "decks", targetEntity = DecksValues.class)
     private List<DecksValues> decksValues = new ArrayList<>(
             0);
 

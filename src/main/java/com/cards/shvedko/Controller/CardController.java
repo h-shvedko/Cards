@@ -15,6 +15,6 @@ public class CardController extends A_CardController {
     }
 
     public void handleDisplayList(ActionEvent actionEvent) {
-        goToPage("listOfCardsInDeck.fxml", "List of cards in deck", "");
+        goToPage("listOfCardsInDeck.fxml", "Список карточек в колоде", "");
     }
 }

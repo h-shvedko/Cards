@@ -73,12 +73,10 @@ public class Cards extends A_Models implements Serializable {
     @JoinColumn(name = "type_id", referencedColumnName="id")
     private CardTypes type;
 
-    //TODO: check LAZY/EAGER loading
     @ManyToOne(optional=false, fetch = FetchType.LAZY)
     @JoinColumn(name = "preposition_akk", referencedColumnName="id")
     private CardsPrepositionAkkusativ prepositionAkk;
 
-    //TODO: check LAZY/EAGER loading
     @ManyToOne(optional=false, fetch = FetchType.LAZY)
     @JoinColumn(name = "preposition_dat", referencedColumnName="id")
     private CardsPrepositionDativ prepositionDativ;
@@ -118,7 +116,7 @@ public class Cards extends A_Models implements Serializable {
     @Column(name = "is_visible", nullable = false)
     private int isVisible;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cards", targetEntity = DecksValues.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cards", targetEntity = DecksValues.class)
     private List<DecksValues> decksValues = new ArrayList<>(
             0);
 

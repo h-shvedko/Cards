@@ -21,6 +21,16 @@ public class DecksValuesDAO extends ModelsDAO {
         decksValues = (DecksValues) session.get(DecksValues.class, id);
     }
 
+    public DecksValuesDAO(int id, boolean ifLoad) {
+        super();
+
+        if(ifLoad){
+            decksValues = (DecksValues) session.load(DecksValues.class, id);
+        } else {
+            decksValues = (DecksValues) session.get(DecksValues.class, id);
+        }
+    }
+
     public boolean save() throws Exception {
         if (errorMsg== null || errorMsg.equals("")) {
             session.persist(decksValues);

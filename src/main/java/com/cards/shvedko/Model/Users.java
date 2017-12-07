@@ -28,7 +28,7 @@ public class Users extends A_Models implements Serializable {
     @Column(name = "is_visible", length = 1, nullable = false)
     private int isVisible;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", targetEntity = Cards.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", targetEntity = Cards.class)
     private List<Cards> user = new ArrayList<>(
             0);
 
