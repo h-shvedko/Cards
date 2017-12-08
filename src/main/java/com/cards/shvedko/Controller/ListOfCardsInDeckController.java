@@ -3,11 +3,11 @@ package com.cards.shvedko.Controller;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
+import com.cards.shvedko.ModelDAO.DecksValuesDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -55,26 +55,6 @@ public class ListOfCardsInDeckController extends A_Controller {
             @Override
             public TableRow<Cards> call(TableView<Cards> tv) {
                 final TableRow<Cards> row = new TableRow<>();
-                row.itemProperty().addListener(new ChangeListener<Cards>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Cards> obs, Cards oldItem, Cards newItem) {
-                        if (newItem != null) {
-                            Boolean isReady = checkIfCardIsReadyInDeck(newItem);
-                            if (isReady) {
-                                row.setStyle("-fx-background-color: mediumseagreen");
-                                Tooltip tooltip = new Tooltip("Эта карточка выучена");
-                                tooltip.setStyle("-fx-font-size: 16px;");
-                                row.setTooltip(tooltip);
-                            } else {
-                                row.setStyle("");
-                                Tooltip tooltip = new Tooltip("Эта карточка еще не выучена");
-                                tooltip.setStyle("-fx-font-size: 16px;");
-                                row.setTooltip(tooltip);
-                            }
-                        }
-                    }
-                });
-
                 row.hoverProperty().addListener(new InvalidationListener() {
                     @Override
                     public void invalidated(Observable observable) {
@@ -85,18 +65,7 @@ public class ListOfCardsInDeckController extends A_Controller {
                             }
                         } else {
                             if (cardsValue != null) {
-                                Boolean isReady = checkIfCardIsReadyInDeck(cardsValue);
-                                if (isReady) {
-                                    row.setStyle("-fx-background-color: mediumseagreen");
-                                    Tooltip tooltip = new Tooltip("Эта карточка выучена");
-                                    tooltip.setStyle("-fx-font-size: 16px;");
-                                    row.setTooltip(tooltip);
-                                } else {
-                                    row.setStyle("");
-                                    Tooltip tooltip = new Tooltip("Эта карточка еще не выучена");
-                                    tooltip.setStyle("-fx-font-size: 16px;");
-                                    row.setTooltip(tooltip);
-                                }
+                                row.setStyle("");
                             }
                         }
                     }
@@ -107,26 +76,6 @@ public class ListOfCardsInDeckController extends A_Controller {
 
         initializeContentMenu();
 
-    }
-
-    private Boolean checkIfCardIsReadyInDeck(Cards newItem) {
-        Boolean res = false;
-
-        Decks deck = globalDeckData;
-
-        List<DecksValues> decksValuesFromDeck = deck.getDecksValues();
-
-        if (decksValuesFromDeck.size() > 0) {
-            for (Object deckValue : decksValuesFromDeck) {
-                if (((DecksValues) deckValue).getCards().getId() == newItem.getId()) {
-                    if (((DecksValues) deckValue).getIsReady() == 1) {
-                        res = true;
-                    }
-                }
-            }
-        }
-
-        return res;
     }
 
     // Create ContextMenu
@@ -176,6 +125,11 @@ public class ListOfCardsInDeckController extends A_Controller {
             @Override
             public void handle(ActionEvent event) {
                 Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
+                try {
+                    RemoveIsLearntController.deckValueId = getSelectedDeckValue(selectedItem.getId());
+                } catch (Exception e) {
+                    crashAppeared(e.getMessage());
+                }
                 goToPage("modalRemoveIsLearnt.fxml", "Учить заново/Готово", selectedItem);
             }
         });
@@ -201,6 +155,25 @@ public class ListOfCardsInDeckController extends A_Controller {
         });
     }
 
+    private int getSelectedDeckValue(int id) throws Exception {
+        int idDeckValues = 0;
+
+        DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
+
+        DecksValues deckValuesList;
+        try {
+            deckValuesList = (DecksValues) decksValuesDAO.select("where deck_id=" + globalDeckData.getId() + " and cards_id=" + id);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+        if(deckValuesList != null){
+            return deckValuesList.getId();
+        }
+
+        return idDeckValues;
+    }
+
     @Override
     protected void handleCancelButtonAction() {
 
@@ -218,6 +191,8 @@ public class ListOfCardsInDeckController extends A_Controller {
         tableForeignValue.setText("Перевод (нем)");
         tableSounds.setText("Озвучено");
         tableIsAnchor.setText("Первая");
+        tableIsLearnt.setText("Готово");
+
     }
 
     private void linkToColumns() {
@@ -237,6 +212,8 @@ public class ListOfCardsInDeckController extends A_Controller {
         });
         tableNativeValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("name"));
         tableForeignValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("foreignName"));
+
+        tableSounds.setCellValueFactory(new PropertyValueFactory<Cards, String>("sounds"));
         tableSounds.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cards, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Cards, String> p) {
@@ -251,6 +228,34 @@ public class ListOfCardsInDeckController extends A_Controller {
                 return new SimpleStringProperty(getIfAnchor(p.getValue()));
             }
         });
+
+        tableIsLearnt.setCellValueFactory(new PropertyValueFactory<Cards, String>("isLearnt"));
+        tableIsLearnt.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cards, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Cards, String> p) {
+                return new SimpleStringProperty(getIfLearnt(p.getValue()));
+            }
+        });
+    }
+
+    private String getIfLearnt(Cards value) {
+        String res = "";
+
+        if (value != null) {
+            Decks deck = globalDeckData;
+
+            List<DecksValues> decksValuesFromDeck = deck.getDecksValues();
+
+            if (decksValuesFromDeck.size() > 0) {
+                for (Object deckValue : decksValuesFromDeck) {
+                    if (value.getId() == ((DecksValues) deckValue).getCards().getId() && ((DecksValues) deckValue).getIsReady() == 1) {
+                        res = "Да";
+                    }
+                }
+            }
+        }
+
+        return res;
     }
 
     private String getIfAnchor(Cards value) {
@@ -263,8 +268,7 @@ public class ListOfCardsInDeckController extends A_Controller {
 
             if (decksValuesFromDeck.size() > 0) {
                 for (Object deckValue : decksValuesFromDeck) {
-                    if (value.getId() == ((DecksValues) deckValue).getCards().getId() && ((DecksValues) deckValue).getIsAnchor() == 1
-                            && value.getIsVisible() != 0) {
+                    if (value.getId() == ((DecksValues) deckValue).getCards().getId() && ((DecksValues) deckValue).getIsAnchor() == 1) {
                         res = "Да";
                     }
                 }
@@ -299,5 +303,9 @@ public class ListOfCardsInDeckController extends A_Controller {
 
     public void setDecksValues(ObservableList<Cards> decksValues) {
         this.decksValues = decksValues;
+    }
+
+    public void handleReturnButton(ActionEvent actionEvent) {
+        goToPage("card.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
     }
 }

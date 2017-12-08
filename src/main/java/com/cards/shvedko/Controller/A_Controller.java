@@ -752,4 +752,20 @@ abstract public class A_Controller implements Initializable {
     public void handleAudioCaption(ActionEvent actionEvent) {
         openOneMoreWindow("audioCapturing.fxml", AUDIO_CAPTURING_TITLE, ((Button) actionEvent.getSource()).getId(), actionEvent);
     }
+
+    public static void updateGlobalDeckData() throws Exception {
+
+        Decks deck = globalDeckData;
+
+        DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
+        List decksValues;
+        try {
+            decksValues = decksValuesDAO.selectAllBy("where deck_id=" + deck.getId());
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+        if(decksValues != null){
+            globalDeckData.setDecksValues(decksValues);
+        }
+    }
 }
