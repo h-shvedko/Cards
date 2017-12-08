@@ -203,7 +203,6 @@ public class ListOfCardsController extends A_Controller {
         });
         tableNativeValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("name"));
         tableForeignValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("foreignName"));
-        tableSounds.setCellValueFactory(new PropertyValueFactory<Cards, String>("type"));
         tableSounds.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cards, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Cards, String> p) {

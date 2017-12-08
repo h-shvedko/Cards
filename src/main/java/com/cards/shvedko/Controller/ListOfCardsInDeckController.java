@@ -3,7 +3,6 @@ package com.cards.shvedko.Controller;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
-import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -21,7 +20,6 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.util.Callback;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,7 +28,7 @@ public class ListOfCardsInDeckController extends A_Controller {
     @FXML
     public TableColumn<Cards, String> tableSounds;
     @FXML
-    public TableColumn<DecksValues, Boolean> tableIsAnchor;
+    public TableColumn<Cards, String> tableIsAnchor;
     @FXML
     public TableColumn<Cards, String> tableIsLearnt;
 
@@ -87,10 +85,17 @@ public class ListOfCardsInDeckController extends A_Controller {
                             }
                         } else {
                             if (cardsValue != null) {
-                                if (cardsValue.getIsVisible() == ModelsDAO.READY_ON) {
-                                    row.setStyle("");
+                                Boolean isReady = checkIfCardIsReadyInDeck(cardsValue);
+                                if (isReady) {
+                                    row.setStyle("-fx-background-color: mediumseagreen");
+                                    Tooltip tooltip = new Tooltip("Эта карточка выучена");
+                                    tooltip.setStyle("-fx-font-size: 16px;");
+                                    row.setTooltip(tooltip);
                                 } else {
-                                    row.setStyle("-fx-background-color: indianred");
+                                    row.setStyle("");
+                                    Tooltip tooltip = new Tooltip("Эта карточка еще не выучена");
+                                    tooltip.setStyle("-fx-font-size: 16px;");
+                                    row.setTooltip(tooltip);
                                 }
                             }
                         }
@@ -164,17 +169,28 @@ public class ListOfCardsInDeckController extends A_Controller {
             }
         });
 
-        MenuItem item2 = new MenuItem("Удалить/Восстановить");
+
+        MenuItem item2 = new MenuItem("Учить заново/Готово");
         item2.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
-                goToPage("modalRemoveCard.fxml", "Удаление/восстановление карточки", selectedItem);
+                goToPage("modalRemoveIsLearnt.fxml", "Учить заново/Готово", selectedItem);
             }
         });
 
-        contextMenu.getItems().addAll(item1, item2);
+        MenuItem item3 = new MenuItem("Сделать первой/Убрать из первой");
+        item3.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
+                goToPage("modalRemoveAnchor.fxml", "Сделать первой/Убрать из первой", selectedItem);
+            }
+        });
+
+        contextMenu.getItems().addAll(item1, item2, item3);
 
         cardsTable.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
 
@@ -201,6 +217,7 @@ public class ListOfCardsInDeckController extends A_Controller {
         tableNativeValue.setText("Слово (рус)");
         tableForeignValue.setText("Перевод (нем)");
         tableSounds.setText("Озвучено");
+        tableIsAnchor.setText("Первая");
     }
 
     private void linkToColumns() {
@@ -220,38 +237,41 @@ public class ListOfCardsInDeckController extends A_Controller {
         });
         tableNativeValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("name"));
         tableForeignValue.setCellValueFactory(new PropertyValueFactory<Cards, String>("foreignName"));
-        tableSounds.setCellValueFactory(new PropertyValueFactory<Cards, String>("type"));
         tableSounds.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cards, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Cards, String> p) {
                 return new SimpleStringProperty(getNumberOfSounds(p.getValue()));
             }
         });
-//        tableIsAnchor.setCellValueFactory(new PropertyValueFactory<DecksValues, Boolean>("isAnchor"));
 
-//
-//        tableIsAnchor.setCellFactory(new Callback<TableColumn<DecksValues, Boolean>, TableCell<DecksValues, Boolean>>() {
-//            @Override
-//            public TableCell<DecksValues, Boolean> call(TableColumn<DecksValues, Boolean> column) {
-//                return new CheckBoxTableCell<>();
-//            }
-//        });
-//        tableIsAnchor.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DecksValues, Boolean>, Boolean>() {
-//            @Override
-//            public Boolean call(TableColumn.CellDataFeatures<DecksValues, Boolean> cellData) {
-//                DecksValues cellValue = cellData.getValue();
-//                boolean property = false;
-//
-//                if(cellValue.getIsAnchor() == 1){
-//                    property = true;
-//                }
-//
-//                // Add listener to handler change
-//                property.addListener((observable, oldValue, newValue) -> cellValue.setChoosed(newValue));
-//
-//                return property;
-//            }
-//        });
+        tableIsAnchor.setCellValueFactory(new PropertyValueFactory<Cards, String>("isAnchor"));
+        tableIsAnchor.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cards, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Cards, String> p) {
+                return new SimpleStringProperty(getIfAnchor(p.getValue()));
+            }
+        });
+    }
+
+    private String getIfAnchor(Cards value) {
+        String res = "";
+
+        if (value != null) {
+            Decks deck = globalDeckData;
+
+            List<DecksValues> decksValuesFromDeck = deck.getDecksValues();
+
+            if (decksValuesFromDeck.size() > 0) {
+                for (Object deckValue : decksValuesFromDeck) {
+                    if (value.getId() == ((DecksValues) deckValue).getCards().getId() && ((DecksValues) deckValue).getIsAnchor() == 1
+                            && value.getIsVisible() != 0) {
+                        res = "Да";
+                    }
+                }
+            }
+        }
+
+        return res;
     }
 
     private String getNumberOfSounds(Cards card) {
