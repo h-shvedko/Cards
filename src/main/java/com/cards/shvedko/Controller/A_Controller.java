@@ -66,6 +66,7 @@ abstract public class A_Controller implements Initializable {
     public static final String CHOOSE_CARDS_TITLE = "Учим немецкие слова!";
     public static final String LIST_OF_CARDS_TITLE = "Учим немецкие слова! Список карточек.";
     public static final String AUDIO_CAPTURING_TITLE = "Учим немецкие слова! Запись аудио.";
+    public static final String EMPTY_DECK_TITLE = "Учим немецкие слова! Пустая колода.";
 
     protected static String errorStringMsg;
 
@@ -418,6 +419,8 @@ abstract public class A_Controller implements Initializable {
     public void closeWindow(Button btn) {
         Stage stage = (Stage) btn.getScene().getWindow();
         stage.close();
+
+        closeAdditionalStage();
     }
 
     public void crashAppeared(String message) {

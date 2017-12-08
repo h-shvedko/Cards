@@ -66,7 +66,12 @@ public class ChooseDecksController extends A_Controller {
 
     public void handleStartButton(ActionEvent actionEvent) {
         this.setDeck();
-        this.goToPage("card.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
+        if(A_Controller.globalDeckData.getDecksValues() != null && A_Controller.globalDeckData.getDecksValues().size() > 0){
+            this.goToPage("card.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
+        } else {
+            this.openOneMoreWindow("emptyDeck.fxml", A_Controller.EMPTY_DECK_TITLE, A_Controller.globalDeckData, actionEvent);
+        }
+
     }
 
     private void setDeck() {

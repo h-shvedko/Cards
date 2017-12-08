@@ -24,11 +24,15 @@ public class ModalSuccessController extends A_Controller {
 
     @Override
     protected void handleCancelButtonAction() {
-
     }
 
     @Override
     protected void handleSubmitButtonAction() {
 
+    }
+
+    public void handleCancelButtonEmptyDeck(ActionEvent actionEvent) {
+        MainApp.stage.setOpacity(1);
+        closeWindow(close);
     }
 }
