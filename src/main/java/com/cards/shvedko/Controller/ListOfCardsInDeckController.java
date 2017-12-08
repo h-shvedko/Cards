@@ -140,7 +140,12 @@ public class ListOfCardsInDeckController extends A_Controller {
             @Override
             public void handle(ActionEvent event) {
                 Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
-                goToPage("modalRemoveAnchor.fxml", "Сделать первой/Убрать из первой", selectedItem);
+                try {
+                    RemoveIsAnchorController.deckValueId = getSelectedDeckValue(selectedItem.getId());
+                } catch (Exception e) {
+                    crashAppeared(e.getMessage());
+                }
+                goToPage("modalRemoveIsAnchor.fxml", "Сделать первой/Убрать из первой", selectedItem);
             }
         });
 
