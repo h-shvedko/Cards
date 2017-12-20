@@ -19,6 +19,7 @@ public class ModalSuccessController extends A_Controller {
 
     public void handleCloseButton(ActionEvent actionEvent) {
         closeWindow(createNew);
+        MainApp.stage.setOpacity(1);
         this.goToPage("mainPage.fxml", A_Controller.MAIN_PAGE_TITLE, "");
     }
 
