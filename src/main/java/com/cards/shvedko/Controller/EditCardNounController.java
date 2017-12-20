@@ -51,9 +51,9 @@ public class EditCardNounController extends A_Controller {
     }
 
     private void setData() {
-        if (A_Controller.globalUserData != null) {
+        if (A_Controller.globalCardSavedData != null) {
 
-            Cards cards = (Cards) A_Controller.globalUserData;
+            Cards cards = (Cards) A_Controller.globalCardSavedData;
             topic.setValue(cards.getCategory().getName());
             nativeValue.setText(cards.getName());
             nativeExample.setText(cards.getExample());
@@ -73,12 +73,12 @@ public class EditCardNounController extends A_Controller {
                     break;
             }
 
-            String speechPartValue = ((Cards) A_Controller.globalUserData).getType().getName();
+            String speechPartValue = ((Cards) A_Controller.globalCardSavedData).getType().getName();
             if (!Objects.equals(speechPartValue, "")) {
                 speechPart.setValue(speechPartValue);
             }
 
-            String topicValue = ((Cards) A_Controller.globalUserData).getCategory().getName();
+            String topicValue = ((Cards) A_Controller.globalCardSavedData).getCategory().getName();
             if (!Objects.equals(topicValue, "")) {
                 topic.setValue(topicValue);
             }

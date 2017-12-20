@@ -181,6 +181,7 @@ abstract public class A_Controller implements Initializable {
      */
     public static Stage stage;
     protected static Object globalUserData;
+    protected static Object globalCardSavedData;
     public static A_Models globalUserModel;
     public static Decks globalDeckData;
     public static Object globalAudioFileData;
@@ -329,6 +330,10 @@ abstract public class A_Controller implements Initializable {
         if (errorTopic != null) {
             errorTopic.setVisible(false);
 
+        }
+
+        if(A_Controller.globalUserData != null){
+            A_Controller.globalCardSavedData = A_Controller.globalUserData;
         }
     }
 
@@ -675,7 +680,7 @@ abstract public class A_Controller implements Initializable {
             crashAppeared(e.getMessage());
         }
 
-        int cardId = ((Cards)A_Controller.globalUserData).getId();
+        int cardId = ((Cards)A_Controller.globalCardSavedData).getId();
         CardsDAO cardsDAO = new CardsDAO(cardId);
         cardsDAO.cards.setName(name);
         cardsDAO.cards.setForeignName(value);
