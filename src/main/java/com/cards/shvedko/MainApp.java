@@ -2,17 +2,23 @@ package com.cards.shvedko;
 
 import com.cards.shvedko.Controller.A_Controller;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import org.hibernate.SessionFactory;
+
+import java.io.IOException;
 
 public class MainApp extends Application {
 
     public static Stage stage;
+
+    private Stage splashScreen;
 
     private static MainApp instance;
 
@@ -26,6 +32,32 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void init() throws Exception {
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    splashScreen = new Stage(StageStyle.TRANSPARENT);
+                    splashScreen.setTitle("Splash");
+                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("splash.fxml"));
+                    Scene scene = new Scene(root, Color.TRANSPARENT);
+                    splashScreen.setScene(scene);
+                    splashScreen.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Thread.sleep(10000);
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                splashScreen.close();
+            }
+        });
     }
 
     @Override
