@@ -14,6 +14,9 @@ public class FillDatabase {
                 for(int i=0; i< data.length; i++){
                     CardsDAO cardsDAO = new CardsDAO();
                     cardsDAO.cards.setUser((Users) A_Controller.globalUserModel);
+                    //TODO: create tmp table for storing info before import
+                    //TODO: create form for selecting file (with file-input) and getting path of file
+                    //TODO: create preview for tmp table with ability to change data exactly in table of form
 
                 }
             }
