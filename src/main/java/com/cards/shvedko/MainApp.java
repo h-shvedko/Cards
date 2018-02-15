@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -19,6 +21,8 @@ public class MainApp extends Application {
     public static Stage stage;
 
     private Stage splashScreen;
+
+    private ProgressBar loading;
 
     private static MainApp instance;
 
