@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 
 public class MainPageController extends A_Controller {
 
+    public Button settings;
+
     public void handleAddWordButton(ActionEvent actionEvent) {
         this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
     }

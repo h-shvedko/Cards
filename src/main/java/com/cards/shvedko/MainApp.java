@@ -55,7 +55,7 @@ public class MainApp extends Application {
                 }
             }
         });
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         Platform.runLater(new Runnable(){
             @Override
             public void run() {
