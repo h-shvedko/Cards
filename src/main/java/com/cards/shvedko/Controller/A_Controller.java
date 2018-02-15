@@ -67,6 +67,9 @@ abstract public class A_Controller implements Initializable {
     public static final String LIST_OF_CARDS_TITLE = "Учим немецкие слова! Список карточек.";
     public static final String AUDIO_CAPTURING_TITLE = "Учим немецкие слова! Запись аудио.";
     public static final String EMPTY_DECK_TITLE = "Учим немецкие слова! Пустая колода.";
+    public static final String IMPORT_FROM_CSV = "Учим немецкие слова! Импорт слов из CSV файла.";
+    public static final String COPY_DB = "Учим немецкие слова! Создание резервной копии БД.";
+    public static final String CLEAN_DB = "Учим немецкие слова! Очистка БД.";
 
     protected static String errorStringMsg;
 
@@ -151,6 +154,8 @@ abstract public class A_Controller implements Initializable {
     //*********************TABLE VIEW CARDS DATA *****************************
     @FXML
     protected TableView<Cards> cardsTable;
+    @FXML
+    protected TableView<TmpCards> tmpCardsTable;
     @FXML
     protected TableView<DecksValues> deckValuesTable;
     @FXML

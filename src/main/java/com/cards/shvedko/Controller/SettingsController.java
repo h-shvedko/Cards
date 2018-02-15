@@ -3,15 +3,18 @@ package com.cards.shvedko.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SettingsController extends A_Controller {
 
+    @FXML
     public Button importFromCSV;
+    @FXML
     public Button cleanDB;
+    @FXML
+    public Button copyDB;
 
     public void handleCancelButtonAction(ActionEvent actionEvent) {
         this.goToPage("mainPage.fxml", A_Controller.MAIN_PAGE_TITLE, "");
@@ -32,11 +35,14 @@ public class SettingsController extends A_Controller {
     }
 
     public void handleImportFromCSV(ActionEvent actionEvent) {
-
-
+        this.goToPage("tmpListOfCards.fxml", A_Controller.IMPORT_FROM_CSV, "");
     }
 
     public void handleCleanDB(ActionEvent actionEvent) {
+//        this.goToPage("cleanDB.fxml", A_Controller.CLEAN_DB, "");
+    }
 
+    public void handleCopyDB(ActionEvent actionEvent) {
+//        this.goToPage("copyDB.fxml", A_Controller.COPY_DB, "");
     }
 }
