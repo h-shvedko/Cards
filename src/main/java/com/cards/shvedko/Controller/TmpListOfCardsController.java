@@ -1,12 +1,13 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Helpers.FillDatabase;
+import com.cards.shvedko.Helpers.ReadCSV;
 import com.cards.shvedko.Model.TmpCards;
-import com.cards.shvedko.ModelDAO.TmpCardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
+import com.cards.shvedko.ModelDAO.TmpCardsDAO;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,6 +62,10 @@ public class TmpListOfCardsController extends A_Controller {
     public TableColumn<TmpCards, String> tmpDative;
     @FXML
     public TableColumn<TmpCards, String> tmpGenetive;
+    @FXML
+    public Button importButton;
+    @FXML
+    public Label fileName;
 
     private ObservableList<TmpCards> tmpCardsData = FXCollections.observableArrayList();
 
@@ -69,6 +74,10 @@ public class TmpListOfCardsController extends A_Controller {
         linkToColumns();
         makeTitleOfColumns();
 
+        fulfilTableWithData();
+    }
+
+    private void fulfilTableWithData() {
         TmpCardsDAO tmpCardsDAO = new TmpCardsDAO();
 
         List tmpCards = new ArrayList();
@@ -84,31 +93,31 @@ public class TmpListOfCardsController extends A_Controller {
             }
         }
 
-        tmpCardsTable.setItems(getTmpCardsData());
-
-        tmpCardsTable.setRowFactory(new Callback<TableView<TmpCards>, TableRow<TmpCards>>() {
-            @Override
-            public TableRow<TmpCards> call(TableView<TmpCards> tv) {
-                final TableRow<TmpCards> row = new TableRow<>();
-                row.hoverProperty().addListener(new InvalidationListener() {
-                    @Override
-                    public void invalidated(Observable observable) {
-                        TmpCards cardsValue = row.getItem();
-                        if (row.isHover()) {
-                            if (cardsValue != null) {
-                                row.setStyle("-fx-background-color: cornflowerblue");
+        if (getTmpCardsData().size() > 0) {
+            tmpCardsTable.setTableMenuButtonVisible(true);
+            tmpCardsTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+            tmpCardsTable.setItems(getTmpCardsData());
+            tmpCardsTable.setRowFactory(new Callback<TableView<TmpCards>, TableRow<TmpCards>>() {
+                @Override
+                public TableRow<TmpCards> call(TableView<TmpCards> tv) {
+                    final TableRow<TmpCards> row = new TableRow<>();
+                    row.hoverProperty().addListener(new InvalidationListener() {
+                        @Override
+                        public void invalidated(Observable observable) {
+                            TmpCards cardsValue = row.getItem();
+                            if (row.isHover()) {
+                                if (cardsValue != null) {
+                                    row.setStyle("-fx-background-color: cornflowerblue");
+                                }
+                            } else {
+                                row.setStyle("-fx-background-color: indianred");
                             }
-                        } else {
-                            row.setStyle("-fx-background-color: indianred");
                         }
-                    }
-                });
-                return row;
-            }
-        });
-
-//        initializeContentMenu();
-
+                    });
+                    return row;
+                }
+            });
+        }
     }
 
     // Create ContextMenu
@@ -193,7 +202,6 @@ public class TmpListOfCardsController extends A_Controller {
         tmpThirdFace.setText("Форма глагола в 3ем лице");
         tmpPreteritum.setText("Präteritum");
         tmpPerfect.setText("Perfect");
-        tmpPerfect.setText("Perfect");
         tmpNouneType.setText("Тип сущ");
         tmpPerfectWithHaben.setText("Perfect mit haben");
         tmpReflexive.setText("Возвратный");
@@ -205,8 +213,6 @@ public class TmpListOfCardsController extends A_Controller {
     }
 
     private void linkToColumns() {
-
-
         tmpTranslatedWord.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("name"));
         tmpOriginalWord.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("foreign_name"));
         tmpTranslatedExample.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("example"));
@@ -219,6 +225,42 @@ public class TmpListOfCardsController extends A_Controller {
                 return new SimpleStringProperty(p.getValue().getCategory().getName());
             }
         });
+
+        tmpType.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("type"));
+        tmpType.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
+                return new SimpleStringProperty(p.getValue().getType().getName());
+            }
+        });
+
+        tmpIsPlural.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("plural_endung"));
+        tmpThirdFace.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("foreign_nama_infinitive"));
+        tmpPreteritum.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("foreign_name_preteritum"));
+        tmpPerfect.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("foreign_name_perfect"));
+        tmpNouneType.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("kind_of_noun"));
+        tmpPerfectWithHaben.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("id_perfect_with_haben"));
+        tmpReflexive.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("is_reflexive_verb"));
+        tmpTrembare.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("is_trembare_prefix_verb"));
+        tmpRegelmessig.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("is_regular_verb"));
+
+        tmpAkkusative.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("preposition_akk"));
+        tmpAkkusative.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
+                return new SimpleStringProperty(p.getValue().getPrepositionAkk().getName());
+            }
+        });
+
+        tmpDative.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("preposition_dat"));
+        tmpDative.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
+                return new SimpleStringProperty(p.getValue().getPrepositionDativ().getName());
+            }
+        });
+
+        tmpGenetive.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("preposition_gen"));
     }
 
     public ObservableList<TmpCards> getTmpCardsData() {
@@ -227,5 +269,20 @@ public class TmpListOfCardsController extends A_Controller {
 
     public void setTmpCardsData(ObservableList<TmpCards> cardsData) {
         this.tmpCardsData = cardsData;
+    }
+
+    public void handleCancelButton(ActionEvent actionEvent) {
+        this.goToPage("settings.fxml", A_Controller.SETTINGS_PAGE_TITLE, "");
+    }
+
+    public void importFileAction(ActionEvent actionEvent) {
+        try {
+            ReadCSV.read();
+            FillDatabase.fillCardsFromCSV(ReadCSV.fileContent);
+            fulfilTableWithData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        fileName.setText(ReadCSV.fileNameValue);
     }
 }

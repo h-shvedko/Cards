@@ -195,6 +195,9 @@ public class ModelsDAO implements I_DAO {
             case "DecksValuesDAO":
                 table = "com.cards.shvedko.Model.DecksValues";
                 break;
+            case "TmpCardsDAO":
+                table = "com.cards.shvedko.Model.TmpCards";
+                break;
         }
 
         return table;

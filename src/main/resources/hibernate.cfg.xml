@@ -31,6 +31,7 @@
         <mapping class="com.cards.shvedko.Model.CardsPrepositionAkkusativ"/>
         <mapping class="com.cards.shvedko.Model.Decks"/>
         <mapping class="com.cards.shvedko.Model.DecksValues"/>
+        <mapping class="com.cards.shvedko.Model.TmpCards"/>
     </session-factory>
 
 </hibernate-configuration>
