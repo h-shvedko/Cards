@@ -23,7 +23,7 @@ public class TmpCards extends A_Models implements Serializable {
     @Column(name = "foreign_name", nullable = false)
     private String foreignName;
 
-    @Column(name = "foreign_name_infinitive")
+    @Column(name = "foreign_nama_infinitive")
     private String foreignNameInfinitive;
 
     @Column(name = "foreign_name_preteritum")
@@ -220,5 +220,29 @@ public class TmpCards extends A_Models implements Serializable {
 
     public void setPrepositionAkk(CardsPrepositionAkkusativ prepositionAkk) {
         this.prepositionAkk = prepositionAkk;
+    }
+
+    public String getForeignNameInfinitive() {
+        return foreignNameInfinitive;
+    }
+
+    public void setForeignNameInfinitive(String foreignNameInfinitive) {
+        this.foreignNameInfinitive = foreignNameInfinitive;
+    }
+
+    public String getForeignNamePreteritum() {
+        return foreignNamePreteritum;
+    }
+
+    public void setForeignNamePreteritum(String foreignNamePreteritum) {
+        this.foreignNamePreteritum = foreignNamePreteritum;
+    }
+
+    public String getForeignNamePerfect() {
+        return foreignNamePerfect;
+    }
+
+    public void setForeignNamePerfect(String foreignNamePerfect) {
+        this.foreignNamePerfect = foreignNamePerfect;
     }
 }
