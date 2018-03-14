@@ -75,6 +75,9 @@ public class TmpCards extends A_Models implements Serializable {
     @Column(name = "preposition_gen")
     private String prepositionGen;
 
+    @Column(name = "proceed")
+    private int proceed;
+
     @SuppressWarnings("UnusedDeclaration")
     public TmpCards() {
     }
@@ -244,5 +247,13 @@ public class TmpCards extends A_Models implements Serializable {
 
     public void setForeignNamePerfect(String foreignNamePerfect) {
         this.foreignNamePerfect = foreignNamePerfect;
+    }
+
+    public int getProceed() {
+        return proceed;
+    }
+
+    public void setProceed(int proceed) {
+        this.proceed = proceed;
     }
 }

@@ -78,6 +78,9 @@ public class TmpListOfCardsController extends A_Controller {
     }
 
     private void fulfilTableWithData() {
+
+        clearData();
+
         TmpCardsDAO tmpCardsDAO = new TmpCardsDAO();
 
         List tmpCards = new ArrayList();
@@ -95,7 +98,7 @@ public class TmpListOfCardsController extends A_Controller {
 
         if (getTmpCardsData().size() > 0) {
             tmpCardsTable.setTableMenuButtonVisible(true);
-            tmpCardsTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+            tmpCardsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             tmpCardsTable.setItems(getTmpCardsData());
             tmpCardsTable.setRowFactory(new Callback<TableView<TmpCards>, TableRow<TmpCards>>() {
                 @Override
@@ -110,7 +113,9 @@ public class TmpListOfCardsController extends A_Controller {
                                     row.setStyle("-fx-background-color: cornflowerblue");
                                 }
                             } else {
-                                row.setStyle("-fx-background-color: indianred");
+                                if (cardsValue != null) {
+                                    row.setStyle("");
+                                }
                             }
                         }
                     });
@@ -118,6 +123,10 @@ public class TmpListOfCardsController extends A_Controller {
                 }
             });
         }
+    }
+
+    private void clearData() {
+        tmpCardsData.clear();
     }
 
     // Create ContextMenu
@@ -210,6 +219,7 @@ public class TmpListOfCardsController extends A_Controller {
         tmpAkkusative.setText("Предлог аккузатива");
         tmpDative.setText("Предлог датива");
         tmpGenetive.setText("Предлог генетива");
+        tmpGenetive.setText("Импортировать");
     }
 
     private void linkToColumns() {
@@ -248,7 +258,11 @@ public class TmpListOfCardsController extends A_Controller {
         tmpAkkusative.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
-                return new SimpleStringProperty(p.getValue().getPrepositionAkk().getName());
+                if(p.getValue().getPrepositionAkk() != null){
+                    return new SimpleStringProperty(p.getValue().getPrepositionAkk().getName());
+                }
+
+                return new SimpleStringProperty("");
             }
         });
 
@@ -256,11 +270,15 @@ public class TmpListOfCardsController extends A_Controller {
         tmpDative.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
-                return new SimpleStringProperty(p.getValue().getPrepositionDativ().getName());
+                if(p.getValue().getPrepositionDativ() != null){
+                    return new SimpleStringProperty(p.getValue().getPrepositionDativ().getName());
+                }
+                return new SimpleStringProperty("");
             }
         });
 
         tmpGenetive.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("preposition_gen"));
+        tmpGenetive.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("proceed"));
     }
 
     public ObservableList<TmpCards> getTmpCardsData() {

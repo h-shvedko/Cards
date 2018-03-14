@@ -597,7 +597,7 @@ abstract public class A_Controller implements Initializable {
         CardTypesDAO cardTypesDAO = new CardTypesDAO();
         A_Models typeObject = null;
         try {
-            typeObject = cardTypesDAO.select("where id=" + type);
+                typeObject = cardTypesDAO.select("where id=" + type);
         } catch (Exception e) {
             crashAppeared(e.getMessage());
         }

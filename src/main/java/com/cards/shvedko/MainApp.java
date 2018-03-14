@@ -1,6 +1,7 @@
 package com.cards.shvedko;
 
 import com.cards.shvedko.Controller.A_Controller;
+import com.cards.shvedko.Helpers.Splash;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -40,28 +41,8 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        Platform.runLater(new Runnable(){
-            @Override
-            public void run() {
-                try {
-                    splashScreen = new Stage(StageStyle.TRANSPARENT);
-                    splashScreen.setTitle("Splash");
-                    Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("splash.fxml"));
-                    Scene scene = new Scene(root, Color.TRANSPARENT);
-                    splashScreen.setScene(scene);
-                    splashScreen.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Thread.sleep(5000);
-        Platform.runLater(new Runnable(){
-            @Override
-            public void run() {
-                splashScreen.close();
-            }
-        });
+        Splash splash = new Splash();
+        splash.init();
     }
 
     @Override
@@ -82,8 +63,8 @@ public class MainApp extends Application {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("authentication.fxml"));
         primaryStage.setTitle("Authentication");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
         primaryStage.sizeToScene();
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }

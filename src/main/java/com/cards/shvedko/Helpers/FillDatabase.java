@@ -22,6 +22,10 @@ public class FillDatabase {
                 A_Models categoryObject = null;
                 try {
                     categoryObject = cardCategoriesDAO.select("where name='" + values[10] + "'");
+                    if(categoryObject == null){
+                        CardCategoriesDAO cardCategoriesEmptyDAO = new CardCategoriesDAO();
+                        categoryObject = cardCategoriesEmptyDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
+                    }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -30,6 +34,10 @@ public class FillDatabase {
                 A_Models typeObject = null;
                 try {
                     typeObject = cardTypesDAO.select("where name='" + values[11] + "'");
+                    if(typeObject == null){
+                        CardTypesDAO cardTypesEmptyDAO = new CardTypesDAO();
+                        typeObject = cardTypesEmptyDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
+                    }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -64,6 +72,7 @@ public class FillDatabase {
                 if(categoryObject != null){
                     tmpCardsDAO.tmpCards.setCategory((CardCategories) categoryObject);
                 }
+
                 if(typeObject != null){
                     tmpCardsDAO.tmpCards.setType((CardTypes) typeObject);
                 }
@@ -72,6 +81,7 @@ public class FillDatabase {
                 tmpCardsDAO.tmpCards.setIsPerfectWithHaben(getPerfectType(values[13]));
                 tmpCardsDAO.tmpCards.setIsTrembarePrefixVerb(getPrefixType(values[14]));
                 tmpCardsDAO.tmpCards.setIsRegularVerb(getVerbType(values[14]));
+                tmpCardsDAO.tmpCards.setProceed(1);
 
                 if (akkObject != null) {
                     tmpCardsDAO.tmpCards.setPrepositionAkk((CardsPrepositionAkkusativ) akkObject);

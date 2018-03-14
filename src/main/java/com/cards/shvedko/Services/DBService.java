@@ -36,6 +36,7 @@ public class DBService {
                 .addAnnotatedClass(CardsPrepositionAkkusativ.class)
                 .addAnnotatedClass(Decks.class)
                 .addAnnotatedClass(DecksValues.class)
+                .addAnnotatedClass(TmpCards.class)
                 .buildSessionFactory(serviceRegistry);
         return sessionFactory;
     }
