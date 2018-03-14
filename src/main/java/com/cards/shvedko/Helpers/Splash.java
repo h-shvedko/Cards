@@ -22,7 +22,7 @@ public class Splash {
 
     private Stage splashScreen;
 
-    public void init() throws Exception {
+    public Splash() throws Exception {
         Platform.runLater(new Runnable(){
             @Override
             public void run() {
@@ -33,7 +33,7 @@ public class Splash {
                     Scene scene = new Scene(root, Color.TRANSPARENT);
                     splashScreen.setScene(scene);
                     splashScreen.show();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -45,5 +45,9 @@ public class Splash {
                 splashScreen.close();
             }
         });
+    }
+
+    public void init() throws Exception {
+
     }
 }

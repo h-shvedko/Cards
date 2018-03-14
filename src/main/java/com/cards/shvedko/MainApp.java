@@ -1,21 +1,16 @@
 package com.cards.shvedko;
 
 import com.cards.shvedko.Controller.A_Controller;
+import com.cards.shvedko.Helpers.FirstPreloader;
 import com.cards.shvedko.Helpers.Splash;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-
-import java.io.IOException;
 
 public class MainApp extends Application {
 
@@ -25,10 +20,13 @@ public class MainApp extends Application {
 
     private ProgressBar loading;
 
+    private static FirstPreloader firstPreloader;
+
     private static MainApp instance;
 
     public MainApp() {
         instance = this;
+        firstPreloader = new FirstPreloader();
     }
 
     public static MainApp getInstance() {
@@ -41,13 +39,14 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        Splash splash = new Splash();
-        splash.init();
+//        new Splash();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         MainApp.stage = primaryStage;
+        firstPreloader.runPreloader(MainApp.stage);
+        Thread.sleep(5000);
         MainApp.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 if(A_Controller.stage != null){
