@@ -14,11 +14,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.util.Callback;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,14 +66,21 @@ public class TmpListOfCardsController extends A_Controller {
     @FXML
     public TableColumn<TmpCards, String> tmpGenetive;
     @FXML
+    public TableColumn<TmpCards, Boolean> tmpProceed;
+    @FXML
     public Button importButton;
     @FXML
     public Label fileName;
+    @FXML
+    public Button importFinalButton;
 
     private ObservableList<TmpCards> tmpCardsData = FXCollections.observableArrayList();
 
     public void initialize(URL location, ResourceBundle resources) {
 
+        tmpCardsTable.setEditable(true);
+
+        importFinalButton.setVisible(false);
         linkToColumns();
         makeTitleOfColumns();
 
@@ -94,6 +104,7 @@ public class TmpListOfCardsController extends A_Controller {
             for (Object tmpCard : tmpCards) {
                 tmpCardsData.add((TmpCards) tmpCard);
             }
+            importFinalButton.setVisible(true);
         }
 
         if (getTmpCardsData().size() > 0) {
@@ -219,7 +230,7 @@ public class TmpListOfCardsController extends A_Controller {
         tmpAkkusative.setText("Предлог аккузатива");
         tmpDative.setText("Предлог датива");
         tmpGenetive.setText("Предлог генетива");
-        tmpGenetive.setText("Импортировать");
+        tmpProceed.setText("Импортировать");
     }
 
     private void linkToColumns() {
@@ -258,7 +269,7 @@ public class TmpListOfCardsController extends A_Controller {
         tmpAkkusative.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
-                if(p.getValue().getPrepositionAkk() != null){
+                if (p.getValue().getPrepositionAkk() != null) {
                     return new SimpleStringProperty(p.getValue().getPrepositionAkk().getName());
                 }
 
@@ -270,7 +281,7 @@ public class TmpListOfCardsController extends A_Controller {
         tmpDative.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
-                if(p.getValue().getPrepositionDativ() != null){
+                if (p.getValue().getPrepositionDativ() != null) {
                     return new SimpleStringProperty(p.getValue().getPrepositionDativ().getName());
                 }
                 return new SimpleStringProperty("");
@@ -278,7 +289,19 @@ public class TmpListOfCardsController extends A_Controller {
         });
 
         tmpGenetive.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("preposition_gen"));
-        tmpGenetive.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("proceed"));
+
+        tmpProceed.setCellValueFactory(new PropertyValueFactory<TmpCards, Boolean>("proceed"));
+        tmpProceed.setCellFactory(new Callback<TableColumn<TmpCards, Boolean>, TableCell<TmpCards, Boolean>>() {
+            @Override
+            public TableCell<TmpCards, Boolean> call(TableColumn<TmpCards, Boolean> param) {
+                return new CheckBoxTableCell<TmpCards, Boolean>() {
+                    {
+                        setAlignment(Pos.CENTER);
+                    }
+                };
+            }
+        });
+        tmpProceed.setEditable(true);
     }
 
     public ObservableList<TmpCards> getTmpCardsData() {
@@ -302,5 +325,13 @@ public class TmpListOfCardsController extends A_Controller {
             e.printStackTrace();
         }
         fileName.setText(ReadCSV.fileNameValue);
+    }
+
+    public void handleImportFinalButton(ActionEvent actionEvent) throws UnsupportedEncodingException {
+
+        ObservableList<TmpCards> values = tmpCardsTable.getItems();
+        if(values.size() > 0){
+            FillDatabase.fillMainTableFromTmpTable(values);
+        }
     }
 }

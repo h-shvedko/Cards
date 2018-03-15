@@ -39,14 +39,14 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-//        new Splash();
+        new Splash();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         MainApp.stage = primaryStage;
-        firstPreloader.runPreloader(MainApp.stage);
-        Thread.sleep(5000);
+//        firstPreloader.runPreloader(MainApp.stage);
+//        Thread.sleep(5000);
         MainApp.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 if(A_Controller.stage != null){

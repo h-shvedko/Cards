@@ -2,6 +2,7 @@ package com.cards.shvedko.Helpers;
 
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
+import javafx.collections.ObservableList;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
@@ -81,7 +82,7 @@ public class FillDatabase {
                 tmpCardsDAO.tmpCards.setIsPerfectWithHaben(getPerfectType(values[13]));
                 tmpCardsDAO.tmpCards.setIsTrembarePrefixVerb(getPrefixType(values[14]));
                 tmpCardsDAO.tmpCards.setIsRegularVerb(getVerbType(values[14]));
-                tmpCardsDAO.tmpCards.setProceed(1);
+                tmpCardsDAO.tmpCards.setProceed(true);
 
                 if (akkObject != null) {
                     tmpCardsDAO.tmpCards.setPrepositionAkk((CardsPrepositionAkkusativ) akkObject);
@@ -109,7 +110,47 @@ public class FillDatabase {
         }
     }
 
-    private static void showError(TmpCardsDAO model){
+
+    public static void fillMainTableFromTmpTable(ObservableList<TmpCards> content) throws UnsupportedEncodingException {
+
+        if (content.size() > 0) {
+            for (TmpCards values : content) {
+
+                CardsDAO cardsDAO = new CardsDAO();
+                cardsDAO.cards.setName(values.getName());
+                cardsDAO.cards.setForeignName(values.getForeignName());
+                cardsDAO.cards.setPluralEndung(values.getPluralEndung());
+                cardsDAO.cards.setForeignNameInfinitive(values.getForeignNameInfinitive());
+                cardsDAO.cards.setForeignNamePreteritum(values.getForeignNamePreteritum());
+                cardsDAO.cards.setForeignNamePerfect(values.getForeignNamePerfect());
+                cardsDAO.cards.setExample(values.getExample());
+                cardsDAO.cards.setForeignExample(values.getForeignExample());
+                cardsDAO.cards.setCategory(values.getCategory());
+                cardsDAO.cards.setType(values.getType());
+                cardsDAO.cards.setKindOfNoun(values.getKindOfNoun());
+                cardsDAO.cards.setIsPerfectWithHaben(values.getIsPerfectWithHaben());
+                cardsDAO.cards.setIsTrembarePrefixVerb(values.getIsTrembarePrefixVerb());
+                cardsDAO.cards.setIsRegularVerb(values.getIsRegularVerb());
+                cardsDAO.cards.setPrepositionAkk(values.getPrepositionAkk());
+                cardsDAO.cards.setPrepositionDativ(values.getPrepositionDativ());
+                cardsDAO.cards.setPrepositionGen(values.getPrepositionGen());
+
+                if (cardsDAO.validate(cardsDAO.cards)) {
+                    try {
+                        if (!cardsDAO.save()) {
+                            throw new Exception(cardsDAO.errorMsg);
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    showError(cardsDAO);
+                }
+            }
+        }
+    }
+
+    private static void showError(ModelsDAO model){
         if (model.errorSet != null) {
             for (ConstraintViolation violation : model.errorSet) {
                 Path wrongAttribute = violation.getPropertyPath();

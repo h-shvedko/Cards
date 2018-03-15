@@ -1,5 +1,7 @@
 package com.cards.shvedko.Model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -76,7 +78,7 @@ public class TmpCards extends A_Models implements Serializable {
     private String prepositionGen;
 
     @Column(name = "proceed")
-    private int proceed;
+    private Boolean proceed;
 
     @SuppressWarnings("UnusedDeclaration")
     public TmpCards() {
@@ -249,11 +251,11 @@ public class TmpCards extends A_Models implements Serializable {
         this.foreignNamePerfect = foreignNamePerfect;
     }
 
-    public int getProceed() {
+    public Boolean getProceed() {
         return proceed;
     }
 
-    public void setProceed(int proceed) {
+    public void setProceed(Boolean proceed) {
         this.proceed = proceed;
     }
 }
