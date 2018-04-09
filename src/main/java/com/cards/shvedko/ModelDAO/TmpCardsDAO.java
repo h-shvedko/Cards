@@ -51,4 +51,13 @@ public class TmpCardsDAO extends ModelsDAO {
         }
         return true;
     }
+
+    @Override
+    public void delete(int id) throws Exception{
+        tmpCards = session.get(TmpCards.class, id);
+        session.delete(tmpCards);
+        transaction.commit();
+        session.close();
+
+    }
 }

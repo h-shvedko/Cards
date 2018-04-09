@@ -1,8 +1,10 @@
 package com.cards.shvedko.Helpers;
 
+import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
@@ -11,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class FillDatabase {
+public class FillDatabase extends A_Controller {
 
     public static void fillCardsFromCSV(List<String> content) throws UnsupportedEncodingException {
 
@@ -23,7 +25,7 @@ public class FillDatabase {
                 A_Models categoryObject = null;
                 try {
                     categoryObject = cardCategoriesDAO.select("where name='" + values[10] + "'");
-                    if(categoryObject == null){
+                    if (categoryObject == null) {
                         CardCategoriesDAO cardCategoriesEmptyDAO = new CardCategoriesDAO();
                         categoryObject = cardCategoriesEmptyDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
                     }
@@ -35,7 +37,7 @@ public class FillDatabase {
                 A_Models typeObject = null;
                 try {
                     typeObject = cardTypesDAO.select("where name='" + values[11] + "'");
-                    if(typeObject == null){
+                    if (typeObject == null) {
                         CardTypesDAO cardTypesEmptyDAO = new CardTypesDAO();
                         typeObject = cardTypesEmptyDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
                     }
@@ -70,11 +72,11 @@ public class FillDatabase {
                 tmpCardsDAO.tmpCards.setExample(values[8]);
                 tmpCardsDAO.tmpCards.setForeignExample(values[9]);
 
-                if(categoryObject != null){
+                if (categoryObject != null) {
                     tmpCardsDAO.tmpCards.setCategory((CardCategories) categoryObject);
                 }
 
-                if(typeObject != null){
+                if (typeObject != null) {
                     tmpCardsDAO.tmpCards.setType((CardTypes) typeObject);
                 }
 
@@ -91,7 +93,7 @@ public class FillDatabase {
                     tmpCardsDAO.tmpCards.setPrepositionDativ((CardsPrepositionDativ) dativObject);
 
                 }
-                if(values.length > 18){
+                if (values.length > 18) {
                     tmpCardsDAO.tmpCards.setPrepositionGen(values[18]);
                 }
 
@@ -111,46 +113,61 @@ public class FillDatabase {
     }
 
 
-    public static void fillMainTableFromTmpTable(ObservableList<TmpCards> content) throws UnsupportedEncodingException {
+    public void fillMainTableFromTmpTable(ObservableList<TmpCards> content, ActionEvent actionEvent) throws Exception {
 
         if (content.size() > 0) {
+            clearTmpData(content);
+
             for (TmpCards values : content) {
 
-                CardsDAO cardsDAO = new CardsDAO();
-                cardsDAO.cards.setName(values.getName());
-                cardsDAO.cards.setForeignName(values.getForeignName());
-                cardsDAO.cards.setPluralEndung(values.getPluralEndung());
-                cardsDAO.cards.setForeignNameInfinitive(values.getForeignNameInfinitive());
-                cardsDAO.cards.setForeignNamePreteritum(values.getForeignNamePreteritum());
-                cardsDAO.cards.setForeignNamePerfect(values.getForeignNamePerfect());
-                cardsDAO.cards.setExample(values.getExample());
-                cardsDAO.cards.setForeignExample(values.getForeignExample());
-                cardsDAO.cards.setCategory(values.getCategory());
-                cardsDAO.cards.setType(values.getType());
-                cardsDAO.cards.setKindOfNoun(values.getKindOfNoun());
-                cardsDAO.cards.setIsPerfectWithHaben(values.getIsPerfectWithHaben());
-                cardsDAO.cards.setIsTrembarePrefixVerb(values.getIsTrembarePrefixVerb());
-                cardsDAO.cards.setIsRegularVerb(values.getIsRegularVerb());
-                cardsDAO.cards.setPrepositionAkk(values.getPrepositionAkk());
-                cardsDAO.cards.setPrepositionDativ(values.getPrepositionDativ());
-                cardsDAO.cards.setPrepositionGen(values.getPrepositionGen());
+                if (values.getProceed()) {
+                    CardsDAO cardsDAO = new CardsDAO();
+                    cardsDAO.cards.setName(values.getName());
+                    cardsDAO.cards.setForeignName(values.getForeignName());
+                    cardsDAO.cards.setPluralEndung(values.getPluralEndung());
+                    cardsDAO.cards.setForeignNameInfinitive(values.getForeignNameInfinitive());
+                    cardsDAO.cards.setForeignNamePreteritum(values.getForeignNamePreteritum());
+                    cardsDAO.cards.setForeignNamePerfect(values.getForeignNamePerfect());
+                    cardsDAO.cards.setExample(values.getExample());
+                    cardsDAO.cards.setForeignExample(values.getForeignExample());
+                    cardsDAO.cards.setCategory(values.getCategory());
+                    cardsDAO.cards.setType(values.getType());
+                    cardsDAO.cards.setKindOfNoun(values.getKindOfNoun());
+                    cardsDAO.cards.setIsPerfectWithHaben(values.getIsPerfectWithHaben());
+                    cardsDAO.cards.setIsTrembarePrefixVerb(values.getIsTrembarePrefixVerb());
+                    cardsDAO.cards.setIsRegularVerb(values.getIsRegularVerb());
+                    cardsDAO.cards.setPrepositionAkk(values.getPrepositionAkk());
+                    cardsDAO.cards.setPrepositionDativ(values.getPrepositionDativ());
+                    cardsDAO.cards.setPrepositionGen(values.getPrepositionGen());
+                    cardsDAO.cards.setIsVisible(1);
 
-                if (cardsDAO.validate(cardsDAO.cards)) {
-                    try {
-                        if (!cardsDAO.save()) {
-                            throw new Exception(cardsDAO.errorMsg);
+                    if (cardsDAO.validate(cardsDAO.cards)) {
+                        try {
+                            if (!cardsDAO.save()) {
+                                throw new Exception(cardsDAO.errorMsg);
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
                         }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                    } else {
+                        showError(cardsDAO);
                     }
-                } else {
-                    showError(cardsDAO);
                 }
+            }
+            showSuccessProfile(actionEvent);
+        }
+    }
+
+    private void clearTmpData(ObservableList<TmpCards> content) throws Exception {
+        for (TmpCards values : content) {
+            if (values.getProceed()) {
+                TmpCardsDAO tmpCardsDAO = new TmpCardsDAO(values.getId());
+                tmpCardsDAO.delete(values.getId());
             }
         }
     }
 
-    private static void showError(ModelsDAO model){
+    private static void showError(ModelsDAO model) {
         if (model.errorSet != null) {
             for (ConstraintViolation violation : model.errorSet) {
                 Path wrongAttribute = violation.getPropertyPath();
@@ -167,7 +184,7 @@ public class FillDatabase {
 
     private static int getNounType(String value) {
         int typeOfNounIntoDB;
-        switch (value){
+        switch (value) {
             case ModelsDAO.NEUTRUM:
                 typeOfNounIntoDB = ModelsDAO.NEUTRUM_INTO_DB;
                 break;
@@ -233,5 +250,15 @@ public class FillDatabase {
         }
 
         return typeOfPrefixIntoDB;
+    }
+
+    @Override
+    protected void handleCancelButtonAction() {
+
+    }
+
+    @Override
+    protected void handleSubmitButtonAction() {
+
     }
 }

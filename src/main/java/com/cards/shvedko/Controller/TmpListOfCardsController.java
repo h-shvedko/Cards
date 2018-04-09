@@ -331,7 +331,12 @@ public class TmpListOfCardsController extends A_Controller {
 
         ObservableList<TmpCards> values = tmpCardsTable.getItems();
         if(values.size() > 0){
-            FillDatabase.fillMainTableFromTmpTable(values);
+            FillDatabase fillDatabase = new FillDatabase();
+            try{
+                fillDatabase.fillMainTableFromTmpTable(values, actionEvent);
+            } catch (Exception e){
+                crashAppeared(e.getMessage());
+            }
         }
     }
 }
