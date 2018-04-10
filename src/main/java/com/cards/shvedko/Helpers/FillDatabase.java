@@ -9,92 +9,123 @@ import javafx.event.ActionEvent;
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
 import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class FillDatabase extends A_Controller {
 
-    public static void fillCardsFromCSV(List<String> content) throws UnsupportedEncodingException {
+    public static void fillCardsFromCSV(List<String> content) throws UnsupportedEncodingException, ArrayIndexOutOfBoundsException, InterruptedException {
 
+        int i = 0;
         if (content.size() > 0) {
             for (String line : content) {
-                String[] values = line.split(",");
-
-                CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
-                A_Models categoryObject = null;
-                try {
-                    categoryObject = cardCategoriesDAO.select("where name='" + values[10] + "'");
-                    if (categoryObject == null) {
-                        CardCategoriesDAO cardCategoriesEmptyDAO = new CardCategoriesDAO();
-                        categoryObject = cardCategoriesEmptyDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                i++;
+                List values;
+                if(i % 200 == 0){
+                    System.runFinalization();
+                    System.gc();
+                    Thread.sleep(60000);
                 }
-
-                CardTypesDAO cardTypesDAO = new CardTypesDAO();
-                A_Models typeObject = null;
-                try {
-                    typeObject = cardTypesDAO.select("where name='" + values[11] + "'");
-                    if (typeObject == null) {
-                        CardTypesDAO cardTypesEmptyDAO = new CardTypesDAO();
-                        typeObject = cardTypesEmptyDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-
-                CardsPrepositionAkkusativDAO cardsPrepositionAkkusativDAO = new CardsPrepositionAkkusativDAO();
-                A_Models akkObject = null;
-                try {
-                    akkObject = cardsPrepositionAkkusativDAO.select("where name='" + values[16] + "'");
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-
-                CardsPrepositionDativDAO cardsPrepositionDativDAO = new CardsPrepositionDativDAO();
-                A_Models dativObject = null;
-                try {
-                    dativObject = cardsPrepositionDativDAO.select("where name='" + values[17] + "'");
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-
 
                 TmpCardsDAO tmpCardsDAO = new TmpCardsDAO();
-                tmpCardsDAO.tmpCards.setName(values[1]);
-                tmpCardsDAO.tmpCards.setForeignName(values[2]);
-                tmpCardsDAO.tmpCards.setPluralEndung(values[3]);
-                tmpCardsDAO.tmpCards.setForeignNameInfinitive(values[5]);
-                tmpCardsDAO.tmpCards.setForeignNamePreteritum(values[6]);
-                tmpCardsDAO.tmpCards.setForeignNamePerfect(values[7]);
-                tmpCardsDAO.tmpCards.setExample(values[8]);
-                tmpCardsDAO.tmpCards.setForeignExample(values[9]);
+                try {
+                     values = Arrays.asList(line.split("\t"));
 
-                if (categoryObject != null) {
-                    tmpCardsDAO.tmpCards.setCategory((CardCategories) categoryObject);
-                }
+                    CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
+                    A_Models categoryObject = null;
+                    if (values.size() > 10) {
+                        categoryObject = cardCategoriesDAO.select("where name='" + (String) values.get(10) + "'");
+                        if (categoryObject == null) {
+                            CardCategoriesDAO cardCategoriesEmptyDAO = new CardCategoriesDAO();
+                            categoryObject = cardCategoriesEmptyDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
+                        }
+                    }
 
-                if (typeObject != null) {
-                    tmpCardsDAO.tmpCards.setType((CardTypes) typeObject);
-                }
+                    CardTypesDAO cardTypesDAO = new CardTypesDAO();
+                    A_Models typeObject = null;
+                    if (values.size() > 11) {
+                        typeObject = cardTypesDAO.select("where name='" + (String)values.get(11) + "'");
+                        if (typeObject == null) {
+                            CardTypesDAO cardTypesEmptyDAO = new CardTypesDAO();
+                            typeObject = cardTypesEmptyDAO.select("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
+                        }
+                    }
 
-                tmpCardsDAO.tmpCards.setKindOfNoun(getNounType(values[12]));
-                tmpCardsDAO.tmpCards.setIsPerfectWithHaben(getPerfectType(values[13]));
-                tmpCardsDAO.tmpCards.setIsTrembarePrefixVerb(getPrefixType(values[14]));
-                tmpCardsDAO.tmpCards.setIsRegularVerb(getVerbType(values[14]));
-                tmpCardsDAO.tmpCards.setProceed(true);
+                    A_Models akkObject = null;
+                    if (values.size() > 16) {
+                        CardsPrepositionAkkusativDAO cardsPrepositionAkkusativDAO = new CardsPrepositionAkkusativDAO();
+                        akkObject = cardsPrepositionAkkusativDAO.select("where name='" + (String)values.get(16) + "'");
+                    }
 
-                if (akkObject != null) {
-                    tmpCardsDAO.tmpCards.setPrepositionAkk((CardsPrepositionAkkusativ) akkObject);
-                }
-                if (akkObject != null) {
-                    tmpCardsDAO.tmpCards.setPrepositionDativ((CardsPrepositionDativ) dativObject);
+                    A_Models dativObject = null;
+                    if (values.size() > 17) {
+                        CardsPrepositionDativDAO cardsPrepositionDativDAO = new CardsPrepositionDativDAO();
+                        dativObject = cardsPrepositionDativDAO.select("where name='" + (String)values.get(17) + "'");
+                    }
 
-                }
-                if (values.length > 18) {
-                    tmpCardsDAO.tmpCards.setPrepositionGen(values[18]);
+                    if (values.size() > 1) {
+                        tmpCardsDAO.tmpCards.setName((String) values.get(1));
+                    }
+                    if (values.size() > 2) {
+                        tmpCardsDAO.tmpCards.setForeignName((String) values.get(2));
+                    }
+                    if (values.size() > 3) {
+                        tmpCardsDAO.tmpCards.setPluralEndung((String) values.get(3));
+                    }
+                    if (values.size() > 5) {
+                        tmpCardsDAO.tmpCards.setForeignNameInfinitive((String) values.get(5));
+                    }
+                    if (values.size() > 6) {
+                        tmpCardsDAO.tmpCards.setForeignNamePreteritum((String) values.get(6));
+                    }
+                    if (values.size() > 7) {
+                        tmpCardsDAO.tmpCards.setForeignNamePerfect((String) values.get(7));
+                    }
+                    if (values.size() > 8) {
+                        tmpCardsDAO.tmpCards.setExample((String) values.get(8));
+                    }
+                    if (values.size() > 9) {
+                        tmpCardsDAO.tmpCards.setForeignExample((String) values.get(9));
+                    }
+
+                    if (categoryObject != null) {
+                        tmpCardsDAO.tmpCards.setCategory((CardCategories) categoryObject);
+                    }
+
+                    if (typeObject != null) {
+                        tmpCardsDAO.tmpCards.setType((CardTypes) typeObject);
+                    }
+                    if (values.size() > 12) {
+                        tmpCardsDAO.tmpCards.setKindOfNoun(getNounType((String) values.get(12)));
+                    }
+                    if (values.size() > 13) {
+                        tmpCardsDAO.tmpCards.setIsPerfectWithHaben(getPerfectType((String) values.get(13)));
+                    }
+                    if (values.size() > 14) {
+                        tmpCardsDAO.tmpCards.setIsTrembarePrefixVerb(getPrefixType((String) values.get(14)));
+                    }
+                    if (values.size() > 15) {
+                        tmpCardsDAO.tmpCards.setIsRegularVerb(getVerbType((String) values.get(15)));
+                    }
+                    tmpCardsDAO.tmpCards.setProceed(true);
+
+                    if (akkObject != null) {
+                        tmpCardsDAO.tmpCards.setPrepositionAkk((CardsPrepositionAkkusativ) akkObject);
+                    }
+                    if (akkObject != null) {
+                        tmpCardsDAO.tmpCards.setPrepositionDativ((CardsPrepositionDativ) dativObject);
+
+                    }
+                    if (values.size() > 18) {
+                        tmpCardsDAO.tmpCards.setPrepositionGen((String) values.get(18));
+                    }
+                } catch (OutOfMemoryError out){
+                    System.runFinalization();
+                    System.gc();
+                    Thread.sleep(60000);
+                    continue;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    continue;
                 }
 
                 if (tmpCardsDAO.validate(tmpCardsDAO.tmpCards)) {
@@ -102,6 +133,10 @@ public class FillDatabase extends A_Controller {
                         if (!tmpCardsDAO.save()) {
                             throw new Exception(tmpCardsDAO.errorMsg);
                         }
+                    } catch (OutOfMemoryError out){
+                        System.runFinalization();
+                        System.gc();
+                        Thread.sleep(60000);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -120,7 +155,8 @@ public class FillDatabase extends A_Controller {
 
             for (TmpCards values : content) {
 
-                if (values.getProceed()) {
+                if (true) {
+//                if (values.getProceed()) {
                     CardsDAO cardsDAO = new CardsDAO();
                     cardsDAO.cards.setName(values.getName());
                     cardsDAO.cards.setForeignName(values.getForeignName());

@@ -260,7 +260,7 @@ public class TmpListOfCardsController extends A_Controller {
         tmpPreteritum.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("foreign_name_preteritum"));
         tmpPerfect.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("foreign_name_perfect"));
         tmpNouneType.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("kind_of_noun"));
-        tmpPerfectWithHaben.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("id_perfect_with_haben"));
+        tmpPerfectWithHaben.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("is_perfect_with_haben"));
         tmpReflexive.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("is_reflexive_verb"));
         tmpTrembare.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("is_trembare_prefix_verb"));
         tmpRegelmessig.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("is_regular_verb"));
@@ -319,6 +319,7 @@ public class TmpListOfCardsController extends A_Controller {
     public void importFileAction(ActionEvent actionEvent) {
         try {
             ReadCSV.read();
+//            FillDatabase.validateData(ReadCSV.fileContent);
             FillDatabase.fillCardsFromCSV(ReadCSV.fileContent);
             fulfilTableWithData();
         } catch (Exception e) {
