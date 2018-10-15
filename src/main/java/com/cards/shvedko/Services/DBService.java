@@ -12,8 +12,10 @@ public class DBService {
     private static StandardServiceRegistry serviceRegistry;
 
     public DBService(){
-        Configuration configuration = getSQLiteConfiguration();
-        sessionFactory = createSessionFactory();
+//        Configuration configuration = getSQLiteConfiguration();
+        if(sessionFactory == null){
+            sessionFactory = createSessionFactory();
+        }
     }
 
     public static SessionFactory createSessionFactory() {

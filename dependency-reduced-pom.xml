@@ -49,8 +49,8 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>8</source>
+          <target>8</target>
         </configuration>
       </plugin>
     </plugins>
@@ -68,6 +68,7 @@
     <org.hibernate.hibernate-core.version>5.2.11.Final</org.hibernate.hibernate-core.version>
     <org.xerial.sqlite.version>3.7.2</org.xerial.sqlite.version>
     <org.apache.logging.log4j.version>2.7</org.apache.logging.log4j.version>
+    <com.h2database.h2.version>1.4.187</com.h2database.h2.version>
     <junit.version>4.11</junit.version>
   </properties>
 </project>

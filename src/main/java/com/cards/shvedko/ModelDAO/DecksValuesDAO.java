@@ -63,6 +63,15 @@ public class DecksValuesDAO extends ModelsDAO {
         return true;
     }
 
+    public boolean commit() {
+        if (errorMsg == null || errorMsg.equals("")) {
+            transaction.commit();
+        } else {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void delete(int id) throws Exception{
         decksValues = session.load(DecksValues.class, id);
