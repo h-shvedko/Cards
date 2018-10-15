@@ -80,6 +80,10 @@ public class A_CardController extends A_Controller {
         translatedWord.setVisible(false);
         translatedExample.setVisible(false);
 
+        //Disable buttons for foreign language sounds
+        translatedWordSound.setVisible(false);
+        translatedExampleSound.setVisible(false);
+
         deckId = ((Decks) A_Controller.globalUserData).getId();
         List deckValues = ((Decks) A_Controller.globalUserData).getDecksValues();
 
@@ -458,6 +462,10 @@ public class A_CardController extends A_Controller {
     public void handleTranslationButton(ActionEvent actionEvent) {
         translatedExample.setVisible(!translatedExample.isVisible());
         translatedWord.setVisible(!translatedWord.isVisible());
+
+        //Enable buttons for foreign language sounds
+        translatedWordSound.setVisible(!translatedWordSound.isVisible());
+        translatedExampleSound.setVisible(!translatedExampleSound.isVisible());
     }
 
     @Override

@@ -226,7 +226,7 @@
                                 <Font size="20.0" />
                             </font>
                         </Button>
-                        <Button fx:id="translatedWordSound" mnemonicParsing="false" onAction="#handlePlayAudioAction" prefHeight="38.0" prefWidth="44.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Button fx:id="exampleSound" mnemonicParsing="false" onAction="#handlePlayAudioAction" prefHeight="38.0" prefWidth="44.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                             <tooltip>
                                 <Tooltip style="-fx-font-size: 16px;" text="Прослушать аудио" />
                             </tooltip>
@@ -237,7 +237,7 @@
                                 <Font size="20.0" />
                             </font>
                         </Button>
-                        <Button fx:id="exampleSound" mnemonicParsing="false" onAction="#handlePlayAudioAction" prefHeight="38.0" prefWidth="44.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Button fx:id="translatedWordSound" mnemonicParsing="false" onAction="#handlePlayAudioAction" prefHeight="38.0" prefWidth="44.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                             <tooltip>
                                 <Tooltip style="-fx-font-size: 16px;" text="Прослушать аудио" />
                             </tooltip>
