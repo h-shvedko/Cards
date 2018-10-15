@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
+<!--<?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>-->
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.CardController">
     <children>
@@ -59,7 +59,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Продолжит обучение с этой карточки" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_ANCHOR"/>
+                                <!--<FontAwesomeIconView icon="ICON_ANCHOR"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
@@ -70,7 +70,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Готово!" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_TROPHY"/>
+                                <!--<FontAwesomeIconView icon="ICON_TROPHY"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
@@ -81,7 +81,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Изучить повторно (в избранное)" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_STAR"/>
+                                <!--<FontAwesomeIconView icon="ICON_STAR"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
@@ -126,7 +126,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Показать карточки списком" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_LIST"/>
+                                <!--<FontAwesomeIconView icon="ICON_LIST"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
@@ -150,29 +150,23 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Предыдущая карточка" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_CARET_LEFT"/>
+                                <!--<FontAwesomeIconView icon="ICON_CARET_LEFT"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
                             </font>
                         </Button>
                         <Button fx:id="translation" layoutX="10.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleTranslationButton" GridPane.columnIndex="2">
-                            <tooltip>
-                                <Tooltip style="-fx-font-size: 16px;" text="Показать перевод" />
-                            </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_UNDO"/>
+                                <!--<FontAwesomeIconView icon="ICON_UNDO"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
                             </font>
                         </Button>
                         <Button fx:id="sound" layoutX="165.0" layoutY="48.0" mnemonicParsing="false" onAction="#handlePlayAction" GridPane.columnIndex="1">
-                            <tooltip>
-                                <Tooltip style="-fx-font-size: 16px;" text="Включить озвучивание" />
-                            </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                                <!--<FontAwesomeIconView icon="ICON_VOLUME_UP"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
@@ -183,7 +177,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Следующая карточка" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_CARET_RIGHT"/>
+                                <!--<FontAwesomeIconView icon="ICON_CARET_RIGHT"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
@@ -226,7 +220,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Прослушать аудио" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                                <!--<FontAwesomeIconView icon="ICON_VOLUME_UP"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
@@ -237,7 +231,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Прослушать аудио" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                                <!--<FontAwesomeIconView icon="ICON_VOLUME_UP"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
@@ -248,7 +242,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Прослушать аудио" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                                <!--<FontAwesomeIconView icon="ICON_VOLUME_UP"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />
@@ -259,7 +253,7 @@
                                 <Tooltip style="-fx-font-size: 16px;" text="Прослушать аудио" />
                             </tooltip>
                             <graphic>
-                                <FontAwesomeIconView icon="ICON_VOLUME_UP"/>
+                                <!--<FontAwesomeIconView icon="ICON_VOLUME_UP"/>-->
                             </graphic>
                             <font>
                                 <Font size="20.0" />

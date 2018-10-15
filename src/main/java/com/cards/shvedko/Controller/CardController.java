@@ -26,6 +26,16 @@ public class CardController extends A_CardController {
         Tooltip editDeckTooltip = new Tooltip();
         editDeckTooltip.setText(LanguageLabelsRu.EDIT_DECK);
         editDeck.setTooltip(editDeckTooltip);
+
+        translation.setText(LanguageLabelsRu.SHOW_TRANSLATION);
+        Tooltip translationTooltip = new Tooltip();
+        translationTooltip.setText(LanguageLabelsRu.SHOW_TRANSLATION_TOOLTIP);
+        translation.setTooltip(translationTooltip);
+
+        sound.setText(LanguageLabelsRu.PLAY_SOUND);
+        Tooltip soundTooltip = new Tooltip();
+        soundTooltip.setText(LanguageLabelsRu.PLAY_SOUND_TOOLTIP);
+        sound.setTooltip(soundTooltip);
     }
 
     @Override
