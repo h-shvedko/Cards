@@ -12,6 +12,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.util.Objects;
+
 public class MainApp extends Application {
 
     public static Stage stage;
@@ -61,9 +63,11 @@ public class MainApp extends Application {
         });
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("authentication.fxml"));
         primaryStage.setTitle("Authentication");
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.setResizable(false);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getClassLoader().getResource("css/style.css")).toExternalForm());
         primaryStage.show();
     }
 }
