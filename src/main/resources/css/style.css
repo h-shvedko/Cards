@@ -2,3 +2,6 @@
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
+.tooltip{
+    -fx-font-size: 14px!important;
+}
