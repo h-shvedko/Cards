@@ -1,5 +1,6 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Helpers.Language.LanguageLabelsRu;
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
@@ -26,10 +27,14 @@ public class ChooseDecksController extends A_Controller {
     public Button createDeck;
     @FXML
     public Button start;
+    public Label chooseDeckMainLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
+
+        chooseDeckMainLabel.setText(LanguageLabelsRu.CHOOSE_DECK_HEADER);
+
         ObservableList<String> decks = FXCollections.observableArrayList();
         try {
             decks = DecksDAO.setAllDecks(decks);
@@ -38,6 +43,7 @@ public class ChooseDecksController extends A_Controller {
         }
         decksCombo.setItems(decks);
 
+        decksCombo.setPromptText(LanguageLabelsRu.PLACEHOLDER_SELECT_DECK);
         decksCombo.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue value, String oldValue, String newValue) {
