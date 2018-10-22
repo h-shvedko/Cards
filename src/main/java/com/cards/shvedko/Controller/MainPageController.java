@@ -1,5 +1,6 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Helpers.Language.Language;
 import com.cards.shvedko.Helpers.Language.LanguageLabelsRu;
 import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.Users;
@@ -23,6 +24,12 @@ public class MainPageController extends A_Controller {
     public Button seeAllWords;
     public Button learnCards;
     public Button profile;
+    public Label seeAllWordsTitle;
+    public Label addWordTitle;
+    public Label profileTitle;
+    public Label closeTitle;
+    public Label settingsTitle;
+    public Label learnCardsTitle;
 
     public void handleAddWordButton(ActionEvent actionEvent) {
         this.goToPage("addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
@@ -64,6 +71,13 @@ public class MainPageController extends A_Controller {
         Tooltip learnCardsTooltip = new Tooltip();
         learnCardsTooltip.setText(LanguageLabelsRu.MAIN_PAGE_LEARN_CARDS_TOOLTIP);
         learnCards.setTooltip(learnCardsTooltip);
+
+        seeAllWordsTitle.setText(LanguageLabelsRu.MAIN_ALL_WORDS_TEXT);
+        addWordTitle.setText(LanguageLabelsRu.MAIN_PAGE_ADD_WORD_TEXT);
+        profileTitle.setText(LanguageLabelsRu.MAIN_PAGE_PROFILE_TEXT);
+        closeTitle.setText(LanguageLabelsRu.MAIN_PAGE_CLOSE_TEXT);
+        settingsTitle.setText(LanguageLabelsRu.MAIN_PAGE_SETTINGS_TEXT);
+        learnCardsTitle.setText(LanguageLabelsRu.MAIN_PAGE_LEARN_CARDS_TEXT);
     }
 
     @Override

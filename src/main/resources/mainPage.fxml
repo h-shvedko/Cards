@@ -9,98 +9,178 @@
 
 <?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.cards.shvedko.Controller.MainPageController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.MainPageController">
     <children>
-        <GridPane fx:id="grid" alignment="CENTER" layoutY="-3.0" prefHeight="400.0" prefWidth="600.0">
+        <GridPane fx:id="grid" alignment="CENTER" layoutY="-3.0" prefHeight="600.0" prefWidth="800.0">
             <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="154.0" minHeight="10.0" percentHeight="25.0" prefHeight="154.0"
-                                valignment="CENTER" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="100.0" minHeight="46.0" percentHeight="25.0" prefHeight="46.0"
-                                valignment="CENTER" vgrow="SOMETIMES"/>
-                <RowConstraints prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="0.0" minHeight="10.0" percentHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="0.0" minHeight="0.0" percentHeight="25.0" prefHeight="0.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="0.0" minHeight="0.0" percentHeight="30.0" prefHeight="0.0" valignment="TOP" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="0.0" minHeight="0.0" percentHeight="30.0" prefHeight="0.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button fx:id="addWord" mnemonicParsing="false" onAction="#handleAddWordButton" prefHeight="100.0"
-                        prefWidth="100.0" textAlignment="CENTER" GridPane.columnIndex="2"
-                        GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                    <graphic>
-                        <FontAwesomeIconView icon="ICON_PLUS"/>
-                    </graphic>
+                <Label contentDisplay="RIGHT" text="Hello " textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <font>
-                        <Font size="40.0"/>
-                    </font>
-                </Button>
-                <Button fx:id="seeAllWords" layoutX="213.0" layoutY="35.0" mnemonicParsing="false"
-                        onAction="#handleSeeAllWordsButton" prefHeight="100.0" prefWidth="100.0"
-                        GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1"
-                        GridPane.valignment="CENTER">
-                    <graphic>
-                        <FontAwesomeIconView icon="ICON_LIST"/>
-                    </graphic>
-                    <font>
-                        <Font size="40.0"/>
-                    </font>
-                </Button>
-                <Button fx:id="close" layoutX="10.0" layoutY="168.0" mnemonicParsing="false"
-                        onAction="#handleCloseButton" prefHeight="100.0" prefWidth="100.0"
-                        GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2"
-                        GridPane.valignment="CENTER">
-                    <graphic>
-                        <FontAwesomeIconView icon="ICON_SIGNOUT"/>
-                    </graphic>
-                    <font>
-                        <Font size="40.0"/>
-                    </font>
-                </Button>
-                <Button fx:id="learnCards" alignment="CENTER" layoutX="363.0" layoutY="118.0" mnemonicParsing="false"
-                        onAction="#handleLearnCardsButton" prefHeight="100.0" prefWidth="100.0"
-                        GridPane.rowIndex="1">
-                    <graphic>
-                        <FontAwesomeIconView icon="ICON_ROCKET"/>
-                    </graphic>
-                    <font>
-                        <Font size="40.0"/>
-                    </font>
-                </Button>
-                <Button fx:id="profile" alignment="CENTER" layoutX="63.0" layoutY="218.0" mnemonicParsing="false"
-                        onAction="#handleProfileButton" prefHeight="100.0" prefWidth="100.0"
-                        GridPane.rowIndex="2">
-                    <graphic>
-                        <FontAwesomeIconView icon="ICON_USER"/>
-                    </graphic>
-                    <font>
-                        <Font size="40.0"/>
-                    </font>
-                </Button>
-                <Button fx:id="settings" alignment="CENTER" layoutX="363.0" layoutY="218.0" mnemonicParsing="false"
-                        onAction="#handleSettingsButton" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1"
-                        GridPane.rowIndex="2">
-                    <graphic>
-                        <FontAwesomeIconView icon="ICON_COG"/>
-                    </graphic>
-                    <font>
-                        <Font size="40.0"/>
-                    </font>
-                </Button>
-                <Label contentDisplay="RIGHT" text="Hello " textAlignment="RIGHT" GridPane.columnIndex="1"
-                       GridPane.halignment="LEFT" GridPane.valignment="CENTER">
-                    <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Label>
-                <Label fx:id="greeting" contentDisplay="RIGHT" layoutX="232.0" layoutY="38.0" text="USer!"
-                       textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT"
-                       GridPane.valignment="CENTER">
+                <Label fx:id="greeting" contentDisplay="RIGHT" layoutX="232.0" layoutY="38.0" text="USer!" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <font>
-                        <Font size="30.0"/>
+                        <Font size="30.0" />
                     </font>
                 </Label>
+            <GridPane GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="109.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="learnCardsTitle" text="Учить карточки" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="learnCards" mnemonicParsing="false" onAction="#handleLearnCardsButton" prefHeight="100.0" prefWidth="100.0">
+                      <graphic>
+                          <FontAwesomeIconView icon="ICON_ROCKET"/>
+                      </graphic>
+                      <font>
+                          <Font size="40.0" />
+                      </font>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="110.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="seeAllWordsTitle" text="Учить карточки" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="seeAllWords" mnemonicParsing="false" onAction="#handleSeeAllWordsButton" prefHeight="100.0" prefWidth="100.0">
+                      <graphic>
+                          <FontAwesomeIconView icon="ICON_LIST"/>
+                      </graphic>
+                      <font>
+                          <Font size="40.0" />
+                      </font>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="2" GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="107.0" minHeight="10.0" prefHeight="107.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="addWordTitle" text="Создать новую карточку" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="addWord" mnemonicParsing="false" onAction="#handleAddWordButton" prefHeight="100.0" prefWidth="100.0">
+                      <graphic>
+                          <FontAwesomeIconView icon="ICON_PLUS"/>
+                      </graphic>
+                      <font>
+                          <Font size="40.0" />
+                      </font>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane GridPane.rowIndex="3">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="90.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="profileTitle" text="Личный кабинет" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="profile" mnemonicParsing="false" onAction="#handleProfileButton" prefHeight="100.0" prefWidth="100.0">
+                      <graphic>
+                          <FontAwesomeIconView icon="ICON_USER"/>
+                      </graphic>
+                      <font>
+                          <Font size="40.0" />
+                      </font>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="90.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="settings" mnemonicParsing="false" onAction="#handleSettingsButton" prefHeight="100.0" prefWidth="100.0">
+                      <graphic>
+                          <FontAwesomeIconView icon="ICON_COG"/>
+                      </graphic>
+                      <font>
+                          <Font size="40.0" />
+                      </font>
+                  </Button>
+                  <Label fx:id="settingsTitle" text="Общие настройки" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="2" GridPane.rowIndex="3">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="90.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="close" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" onAction="#handleCloseButton">
+                      <graphic>
+                          <FontAwesomeIconView icon="ICON_SIGNOUT"/>
+                      </graphic>
+                      <font>
+                          <Font size="40.0" />
+                      </font>
+                  </Button>
+                  <Label fx:id="closeTitle" text="Выход" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
             </children>
         </GridPane>
     </children>

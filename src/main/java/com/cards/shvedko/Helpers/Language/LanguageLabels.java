@@ -1,6 +1,7 @@
 package com.cards.shvedko.Helpers.Language;
 
 abstract class LanguageLabels extends Language {
+    public static String MAIN_PAGE_ADD_WORD_TEXT = "Create new card";
     public static String CHOOSE_DECK_HEADER = "Cards";
     public static String PLACEHOLDER_SELECT_DECK = "Choose deck";
     public static String EDIT_CARD = "Edit card";

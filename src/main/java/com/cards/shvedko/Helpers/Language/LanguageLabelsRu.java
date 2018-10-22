@@ -1,6 +1,12 @@
 package com.cards.shvedko.Helpers.Language;
 
 public class LanguageLabelsRu extends LanguageLabels {
+    public static String MAIN_PAGE_ADD_WORD_TEXT = "Создать новую карточку";
+    public static String MAIN_ALL_WORDS_TEXT     = "Список слов";
+    public static String MAIN_PAGE_PROFILE_TEXT     = "Личный кабинет";
+    public static String MAIN_PAGE_CLOSE_TEXT     = "Выход";
+    public static String MAIN_PAGE_SETTINGS_TEXT     = "Общие настройки";
+    public static String MAIN_PAGE_LEARN_CARDS_TEXT      = "Учить карточки";
     public static String MAIN_PAGE_SETTINGS_TOOLTIP = "Настройки приложения";
     public static String MAIN_PAGE_PROFILE_TOOLTIP = "Позволяет контролировать прогресс";
     public static String MAIN_PAGE_LEARN_CARDS_TOOLTIP = "Учить карточки";
