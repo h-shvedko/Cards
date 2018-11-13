@@ -2,6 +2,7 @@ package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
+import com.cards.shvedko.Services.DBService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,6 +10,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.hibernate.Session;
+import org.hibernate.internal.SessionImpl;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -38,7 +41,7 @@ public class AddCardDeckController extends A_Controller {
             speechPart.valueProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
-                    if(Objects.equals(newValue, ModelsDAO.VERB)){
+                    if (Objects.equals(newValue, ModelsDAO.VERB)) {
                         goToPage("addVerbDeck.fxml", "Создать колоду с глаголами", globalUserData);
                     }
                 }
@@ -107,7 +110,7 @@ public class AddCardDeckController extends A_Controller {
 
         if (decksDAO.validate(decksDAO.decks)) {
             try {
-                if(!decksDAO.save()){
+                if (!decksDAO.save()) {
                     throw new Exception(decksDAO.errorMsg);
                 }
             } catch (Exception ex) {
@@ -129,6 +132,7 @@ public class AddCardDeckController extends A_Controller {
         int categoryId = decksDAO.decks.getCategory().getId();
         int typeId = decksDAO.decks.getType().getId();
         int userId = decksDAO.decks.getUser().getId();
+        int deckId = decksDAO.decks.getId();
 
         CardsDAO cardsDAO = new CardsDAO();
         List cards;
@@ -146,16 +150,26 @@ public class AddCardDeckController extends A_Controller {
         }
 
         if (cards.size() > 0) {
+            final Session session = DBService.sessionFactory.getCurrentSession();
+
             try {
+                StringBuilder insertString = null;
+                DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
+
                 for (Object card : cards) {
-                    DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
-                    decksValuesDAO.decksValues.setCards((Cards) card);
-                    decksValuesDAO.decksValues.setDecks(decksDAO.decks);
-                    if(!decksValuesDAO.saveOrUpdateDeckValues()){
-                        throw new Exception(decksValuesDAO.errorMsg);
-                    }
+                    insertString = new StringBuilder("INSERT INTO DECKS_VALUES (cards_id, deck_id, is_favorite, is_anchor, is_ready, date_ready, order_in_card, count_of_appearence) VALUES ");
+                    insertString.append("(");
+                    insertString.append(((Cards) card).getId());
+                    insertString.append(",");
+                    insertString.append(deckId);
+                    insertString.append(",0,0,0,null,0,0)");
+                    insertString.append(";");
+                    decksValuesDAO.insert(insertString, session);
                 }
+
+                decksValuesDAO.commit();
             } catch (Exception ex) {
+                if (session.getTransaction() != null) session.getTransaction().rollback();
                 throw new Exception(ex.getMessage());
             }
         }

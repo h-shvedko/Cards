@@ -3,6 +3,8 @@ package com.cards.shvedko.ModelDAO;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  * Created by hennadii.shvedko on 14/07/2017.
@@ -79,5 +81,12 @@ public class DecksValuesDAO extends ModelsDAO {
         transaction.commit();
         session.close();
 
+    }
+
+    public void insert(StringBuilder query, Session session){
+        if(session.isConnected()){
+            Query queryToInsert = session.createNativeQuery(String.valueOf(query));
+            int result = queryToInsert.executeUpdate();
+        }
     }
 }
