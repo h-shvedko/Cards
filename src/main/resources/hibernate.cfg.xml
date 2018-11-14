@@ -30,6 +30,7 @@
 
         <mapping class="com.cards.shvedko.Model.CardTypes"/>
         <mapping class="com.cards.shvedko.Model.CardCategories"/>
+        <mapping class="com.cards.shvedko.Model.CardLevels"/>
         <mapping class="com.cards.shvedko.Model.SystemConfigs"/>
         <mapping class="com.cards.shvedko.Model.CardLanguages"/>
         <mapping class="com.cards.shvedko.Model.CardLanguageDe"/>
