@@ -86,6 +86,8 @@ abstract public class A_Controller implements Initializable {
     @FXML
     protected Label errorTopic;
     @FXML
+    protected Label errorLevel;
+    @FXML
     protected Label errorPartOfSpeech;
     @FXML
     protected Label errorDecks;
@@ -97,6 +99,8 @@ abstract public class A_Controller implements Initializable {
     protected ComboBox<String> decksCombo;
     @FXML
     protected ComboBox<String> topic;
+    @FXML
+    protected ComboBox<String> level;
     @FXML
     protected TextField nativeValue;
     @FXML
@@ -230,6 +234,26 @@ abstract public class A_Controller implements Initializable {
                     if (errorTopic != null) {
                         errorTopic.setText("");
                         errorTopic.setVisible(false);
+                    }
+                }
+            });
+        }
+
+        if (level != null) {
+            ObservableList<String> dataLevel = FXCollections.observableArrayList();
+            try {
+                dataLevel = CardLevelsDAO.setAllLevels(dataLevel);
+            } catch (Exception e) {
+                crashAppeared(e.getMessage());
+            }
+            level.setItems(dataLevel);
+
+            level.valueProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue value, String oldValue, String newValue) {
+                    if (errorLevel != null) {
+                        errorLevel.setText("");
+                        errorLevel.setVisible(false);
                     }
                 }
             });
@@ -603,6 +627,14 @@ abstract public class A_Controller implements Initializable {
             crashAppeared(e.getMessage());
         }
 
+        CardLevelsDAO cardLevels = new CardLevelsDAO();
+        A_Models levelObject = null;
+        try {
+                levelObject = cardLevels.select("where id=" + type);
+        } catch (Exception e) {
+            crashAppeared(e.getMessage());
+        }
+
         CardsDAO cardsDAO = new CardsDAO();
         cardsDAO.cards.setName(name);
         cardsDAO.cards.setForeignName(value);
@@ -619,6 +651,10 @@ abstract public class A_Controller implements Initializable {
 
         if (userObject != null) {
             cardsDAO.cards.setUser((Users) userObject);
+        }
+
+        if (levelObject != null) {
+            cardsDAO.cards.setLevels((CardLevels) levelObject);
         }
 
         if(A_Controller.globalCardData != null){
@@ -686,6 +722,14 @@ abstract public class A_Controller implements Initializable {
             crashAppeared(e.getMessage());
         }
 
+        CardLevelsDAO cardLevelsDAO = new CardLevelsDAO();
+        A_Models levelObject = null;
+        try {
+            levelObject = cardLevelsDAO.select("where id=" + type);
+        } catch (Exception e) {
+            crashAppeared(e.getMessage());
+        }
+
         int cardId = ((Cards)A_Controller.globalCardSavedData).getId();
         CardsDAO cardsDAO = new CardsDAO(cardId);
         cardsDAO.cards.setName(name);
@@ -703,6 +747,10 @@ abstract public class A_Controller implements Initializable {
 
         if (userObject != null) {
             cardsDAO.cards.setUser((Users) userObject);
+        }
+
+        if (levelObject != null) {
+            cardsDAO.cards.setLevels((CardLevels) levelObject);
         }
 
         if(A_Controller.globalCardData != null){

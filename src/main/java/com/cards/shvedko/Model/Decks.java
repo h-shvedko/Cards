@@ -30,6 +30,10 @@ public class Decks extends A_Models implements Serializable {
     private CardCategories category;
 
     @ManyToOne(optional = false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "level_id", referencedColumnName = "id")
+    private CardLevels levels;
+
+    @ManyToOne(optional = false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private CardTypes type;
 
@@ -198,5 +202,13 @@ public class Decks extends A_Models implements Serializable {
 
     public void setPrepositionGenetive(int prepositionGenetive) {
         this.prepositionGenetive = prepositionGenetive;
+    }
+
+    public CardLevels getLevels() {
+        return levels;
+    }
+
+    public void setLevels(CardLevels levels) {
+        this.levels = levels;
     }
 }

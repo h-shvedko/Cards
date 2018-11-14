@@ -70,6 +70,10 @@ public class Cards extends A_Models implements Serializable {
     private CardCategories category;
 
     @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "level_id", referencedColumnName="id")
+    private CardLevels levels;
+
+    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName="id")
     private CardTypes type;
 
@@ -397,5 +401,13 @@ public class Cards extends A_Models implements Serializable {
 
     public void setForeignNameInfinitive(String foreignNameInfinitive) {
         this.foreignNameInfinitive = foreignNameInfinitive;
+    }
+
+    public CardLevels getLevels() {
+        return levels;
+    }
+
+    public void setLevels(CardLevels levels) {
+        this.levels = levels;
     }
 }
