@@ -32,7 +32,7 @@ create table CARDS
 	foreign_name_preteritum VARCHAR(255),
 	foreign_name_perfect VARCHAR(255),
 	foreign_nama_infinitive VARCHAR(255),
-	level_id AFTER 'foreign_name',
+	level_id integer not null,
 	check (is_visible>=1)
 )
 ;
@@ -74,7 +74,8 @@ create table DECKS
 	perfect INT default 0,
 	preposition_akkusative INT default 0,
 	preposition_dative INT default 0,
-	preposition_genetive INT default 0
+	preposition_genetive INT default 0,
+	level_id integer not null
 )
 ;
 

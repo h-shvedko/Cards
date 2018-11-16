@@ -1,0 +1,13 @@
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (1, 1, 'Транспорт');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (2, 1, 'Образование');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (3, 1, 'Еда / напитки');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (4, 1, 'Отношения');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (5, 1, 'Медицина');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (6, 1, 'Спрот / здоровье');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (7, 1, 'Человек');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (8, 1, 'Погода');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (9, 1, 'Финансы');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (10, 1, 'Бизнесс / комерция');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (11, 1, 'Дом / быт');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (12, 1, 'Другие');
+INSERT INTO CATEGORIES (id, is_visible, name) VALUES (13, 1, 'Все');
