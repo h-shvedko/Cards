@@ -103,10 +103,13 @@ public class AddCardDeckController extends A_Controller {
 
         DecksDAO decksDAO = new DecksDAO();
         if (levelObject != null) {
-            decksDAO.decks.setCategory((CardCategories) levelObject);
+            decksDAO.decks.setLevels((CardLevels) levelObject);
         }
         if (typeObject != null) {
             decksDAO.decks.setType((CardTypes) typeObject);
+        }
+        if (categoryObject != null) {
+            decksDAO.decks.setCategory((CardCategories) categoryObject);
         }
 
         decksDAO.decks.setName(name);
