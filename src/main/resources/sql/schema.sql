@@ -5,8 +5,18 @@ create table CARDS
 		primary key
 		unique,
 	example varchar(255),
+	example_voice varchar(255),
 	foreign_example varchar(255),
+	foreign_example_voice varchar(255),
 	foreign_name varchar(255) not null,
+	foreign_nama_infinitive varchar(255),
+	foreign_name_perfect varchar(255),
+	foreign_name_preteritum varchar(255),
+	foreign_name_voice varchar(255) not null,
+	foreign_value_perfect_voice varchar(255),
+	foreign_value_plural_voice varchar(255),
+	foreign_value_presense_voice varchar(255),
+	foreign_value_preteritum_voice varchar(255),
 	is_perfect_with_haben integer,
 	is_reflexiv_verb integer,
 	is_regular_verb integer,
@@ -14,35 +24,16 @@ create table CARDS
 	is_visible integer not null,
 	kind_of_noun integer,
 	name varchar(255) not null,
+	name_voice varchar(255) not null,
 	plural_endung varchar(255),
-	preposition_akk varchar(255),
-	preposition_dat varchar(255),
 	preposition_gen varchar(255),
 	category_id integer not null,
-	type_id integer not null,
-	user_id INTEGER default 1,
-	name_voice VARCHAR(255),
-	foreign_name_voice VARCHAR(255),
-	example_voice VARCHAR(255),
-	foreign_example_voice VARCHAR(255),
-	foreign_value_presense_voice VARCHAR(255),
-	foreign_value_preteritum_voice VARCHAR(255),
-	foreign_value_perfect_voice VARCHAR(255),
-	foreign_value_plural_voice VARCHAR(255),
-	foreign_name_preteritum VARCHAR(255),
-	foreign_name_perfect VARCHAR(255),
-	foreign_nama_infinitive VARCHAR(255),
 	level_id integer not null,
-	check (is_visible>=1)
+	preposition_akk integer not null,
+	preposition_dat integer not null,
+	type_id integer not null,
+	user_id integer not null
 )
-;
-
-create index CARDS_category_id_index
-	on CARDS (category_id)
-;
-
-create index CARDS_type_id_index
-	on CARDS (type_id)
 ;
 
 create table CATEGORIES
@@ -61,21 +52,22 @@ create table DECKS
 	id integer not null
 		primary key
 		unique,
-	is_visible integer not null,
-	name varchar(255) not null,
-	user_id integer not null,
-	category_id INTEGER,
-	topic_id INTEGER,
-	is_anchor INTEGER,
-	is_favorite INTEGER,
-	trembare_prefix INT default 0,
-	regelmassig INT default 0,
-	reflexive INT default 0,
-	perfect INT default 0,
-	preposition_akkusative INT default 0,
-	preposition_dative INT default 0,
-	preposition_genetive INT default 0,
-	level_id integer not null
+	is_anchor integer,
+	is_favorite integer,
+	is_visible integer,
+	name varchar(255) not null
+		unique,
+	perfect integer not null,
+	preposition_akkusative integer not null,
+	preposition_dative integer not null,
+	preposition_genetive integer not null,
+	reflexive integer not null,
+	regelmassig integer not null,
+	trembare_prefix integer not null,
+	category_id integer not null,
+	level_id integer not null,
+	topic_id integer not null,
+	user_id integer not null
 )
 ;
 
@@ -84,14 +76,14 @@ create table DECKS_VALUES
 	id integer not null
 		primary key
 		unique,
+	count_of_appearence integer not null,
+	date_ready varchar(255) not null,
+	is_anchor integer not null,
+	is_favorite integer not null,
+	is_ready integer not null,
+	order_in_card integer not null,
 	cards_id integer not null,
-	deck_id integer not null,
-	is_favorite INT default 0 not null,
-	is_anchor INT default 0 not null,
-	is_ready INT default 0 not null,
-	date_ready DATE,
-	order_in_card INT default 0,
-	count_of_appearence INT default 0
+	deck_id integer not null
 )
 ;
 
@@ -209,11 +201,13 @@ create table SYSTEM_CONFIGS
 create table TMP_CARDS
 (
 	id integer not null
-		primary key
-		unique,
+		primary key,
 	example varchar(255),
 	foreign_example varchar(255),
 	foreign_name varchar(255) not null,
+	foreign_nama_infinitive varchar(255),
+	foreign_name_perfect varchar(255),
+	foreign_name_preteritum varchar(255),
 	is_perfect_with_haben integer,
 	is_reflexiv_verb integer,
 	is_regular_verb integer,
@@ -221,15 +215,12 @@ create table TMP_CARDS
 	kind_of_noun integer,
 	name varchar(255) not null,
 	plural_endung varchar(255),
-	preposition_akk varchar(255),
-	preposition_dat varchar(255),
 	preposition_gen varchar(255),
+	proceed boolean,
 	category_id integer not null,
-	type_id integer not null,
-	foreign_name_preteritum VARCHAR(255),
-	foreign_name_perfect VARCHAR(255),
-	foreign_nama_infinitive VARCHAR(255),
-	proceed INT default 1
+	preposition_akk integer,
+	preposition_dat integer,
+	type_id integer not null
 )
 ;
 
@@ -249,11 +240,11 @@ create table USERS
 	id integer not null
 		primary key
 		unique,
-	is_visible integer not null,
-	name varchar(255),
-	password varchar(255),
 	first_name varchar(255),
-	last_name varchar(255)
+	is_visible integer not null,
+	last_name varchar(255),
+	name varchar(255),
+	password varchar(255)
 )
 ;
 

@@ -3,8 +3,10 @@ package com.cards.shvedko.Helpers;
 import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
+import com.cards.shvedko.Services.DBService;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import org.hibernate.Session;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
@@ -17,17 +19,28 @@ public class FillDatabase extends A_Controller {
 
         int i = 0;
         if (content.size() > 0) {
+            final Session session = DBService.sessionFactory.getCurrentSession();
+
+            StringBuilder insertString = null;
+            TmpCardsDAO tmpCardsDAO = new TmpCardsDAO();
+
             for (String line : content) {
                 i++;
                 List values;
-                if(i % 200 == 0){
-                    System.runFinalization();
-                    System.gc();
-                    Thread.sleep(60000);
-                }
-
-                TmpCardsDAO tmpCardsDAO = new TmpCardsDAO();
+//                if(i % 200 == 0){
+//                    System.runFinalization();
+//                    System.gc();
+//                    Thread.sleep(6000);
+//                    tmpCardsDAO.commit();
+//                }
                 try {
+                    insertString = new StringBuilder("INSERT INTO TMP_CARDS (example, foreign_example, foreign_name, " +
+                            "foreign_nama_infinitive, foreign_name_perfect, foreign_name_preteritum, " +
+                            "is_perfect_with_haben, is_reflexiv_verb, is_regular_verb," +
+                            "is_trembare_prefix_verb, kind_of_noun, name, plural_endung, preposition_gen," +
+                            "proceed, category_id, preposition_akk, preposition_dat, type_id) VALUES ");
+
+                    insertString.append("(");
                      values = Arrays.asList(line.split("\t"));
 
                     CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
@@ -51,98 +64,198 @@ public class FillDatabase extends A_Controller {
                     }
 
                     A_Models akkObject = null;
-                    if (values.size() > 16) {
+                    if (values.size() > 17) {
                         CardsPrepositionAkkusativDAO cardsPrepositionAkkusativDAO = new CardsPrepositionAkkusativDAO();
-                        akkObject = cardsPrepositionAkkusativDAO.select("where name='" + (String)values.get(16) + "'");
+                        akkObject = cardsPrepositionAkkusativDAO.select("where name='" + (String)values.get(17) + "'");
                     }
 
                     A_Models dativObject = null;
-                    if (values.size() > 17) {
-                        CardsPrepositionDativDAO cardsPrepositionDativDAO = new CardsPrepositionDativDAO();
-                        dativObject = cardsPrepositionDativDAO.select("where name='" + (String)values.get(17) + "'");
-                    }
-
-                    if (values.size() > 1) {
-                        tmpCardsDAO.tmpCards.setName((String) values.get(1));
-                    }
-                    if (values.size() > 2) {
-                        tmpCardsDAO.tmpCards.setForeignName((String) values.get(2));
-                    }
-                    if (values.size() > 3) {
-                        tmpCardsDAO.tmpCards.setPluralEndung((String) values.get(3));
-                    }
-                    if (values.size() > 5) {
-                        tmpCardsDAO.tmpCards.setForeignNameInfinitive((String) values.get(5));
-                    }
-                    if (values.size() > 6) {
-                        tmpCardsDAO.tmpCards.setForeignNamePreteritum((String) values.get(6));
-                    }
-                    if (values.size() > 7) {
-                        tmpCardsDAO.tmpCards.setForeignNamePerfect((String) values.get(7));
-                    }
-                    if (values.size() > 8) {
-                        tmpCardsDAO.tmpCards.setExample((String) values.get(8));
-                    }
-                    if (values.size() > 9) {
-                        tmpCardsDAO.tmpCards.setForeignExample((String) values.get(9));
-                    }
-
-                    if (categoryObject != null) {
-                        tmpCardsDAO.tmpCards.setCategory((CardCategories) categoryObject);
-                    }
-
-                    if (typeObject != null) {
-                        tmpCardsDAO.tmpCards.setType((CardTypes) typeObject);
-                    }
-                    if (values.size() > 12) {
-                        tmpCardsDAO.tmpCards.setKindOfNoun(getNounType((String) values.get(12)));
-                    }
-                    if (values.size() > 13) {
-                        tmpCardsDAO.tmpCards.setIsPerfectWithHaben(getPerfectType((String) values.get(13)));
-                    }
-                    if (values.size() > 14) {
-                        tmpCardsDAO.tmpCards.setIsTrembarePrefixVerb(getPrefixType((String) values.get(14)));
-                    }
-                    if (values.size() > 15) {
-                        tmpCardsDAO.tmpCards.setIsRegularVerb(getVerbType((String) values.get(15)));
-                    }
-                    tmpCardsDAO.tmpCards.setProceed(true);
-
-                    if (akkObject != null) {
-                        tmpCardsDAO.tmpCards.setPrepositionAkk((CardsPrepositionAkkusativ) akkObject);
-                    }
-                    if (akkObject != null) {
-                        tmpCardsDAO.tmpCards.setPrepositionDativ((CardsPrepositionDativ) dativObject);
-
-                    }
                     if (values.size() > 18) {
-                        tmpCardsDAO.tmpCards.setPrepositionGen((String) values.get(18));
+                        CardsPrepositionDativDAO cardsPrepositionDativDAO = new CardsPrepositionDativDAO();
+                        dativObject = cardsPrepositionDativDAO.select("where name='" + (String)values.get(18) + "'");
                     }
+
+                    //example field
+                    if (values.size() > 8) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(8));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //foreign example field
+                    if (values.size() > 9) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(9));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //foreign name field
+                    if (values.size() > 2) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(2));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //foreign name infinitive field
+                    if (values.size() > 5) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(5));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //foreign name perfect field
+                    if (values.size() > 7) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(7));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //foreign name preteritum field
+                    if (values.size() > 6) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(6));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //is perfect with haben field
+                    if (values.size() > 13) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(13));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //is reflexiv verb field
+                    if (values.size() > 14) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(14));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //is regular verb field
+                    if (values.size() > 16) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(16));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //is trembare prefix verb field
+                    if (values.size() > 15) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(15));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //kind of noun field
+                    if (values.size() > 12) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(12));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //name field
+                    if (values.size() > 1) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(1));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //plural endung field
+                    if (values.size() > 3) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(3));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //genetiv preposition field
+                    if (values.size() > 19) {
+                        insertString.append("'");
+                        insertString.append((String) values.get(19));
+                        insertString.append("',");
+                    } else {
+                        insertString.append("'',");
+                    }
+
+                    //proceed field
+                    insertString.append(1);
+                    insertString.append(",");
+
+                    //category field
+                    if (categoryObject != null) {
+                        insertString.append((Integer) categoryObject.getId());
+                        insertString.append(",");
+                    } else {
+                        insertString.append("null,");
+                    }
+
+                    //akkusative preposition field
+                    if (akkObject != null) {
+                        insertString.append((Integer) akkObject.getId());
+                        insertString.append(",");
+                    } else {
+                        insertString.append("null,");
+                    }
+
+                    //dative preposition field
+                    if (dativObject != null) {
+                        insertString.append((Integer) dativObject.getId());
+                        insertString.append(",");
+                    } else {
+                        insertString.append("null,");
+                    }
+
+                    //dative preposition field
+                    if (typeObject != null) {
+                        insertString.append((Integer) typeObject.getId());
+                        insertString.append(")");
+                    } else {
+                        insertString.append("null)");
+                    }
+
+                    insertString.append(";");
+                    tmpCardsDAO.insert(insertString, session);
+
                 } catch (OutOfMemoryError out){
                     System.runFinalization();
                     System.gc();
                     Thread.sleep(60000);
-                    continue;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    continue;
                 }
-
-                if (tmpCardsDAO.validate(tmpCardsDAO.tmpCards)) {
-                    try {
-                        if (!tmpCardsDAO.save()) {
-                            throw new Exception(tmpCardsDAO.errorMsg);
-                        }
-                    } catch (OutOfMemoryError out){
-                        System.runFinalization();
-                        System.gc();
-                        Thread.sleep(60000);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                } else {
-                    showError(tmpCardsDAO);
-                }
+            }
+            try {
+                tmpCardsDAO.commit();
+            } catch (OutOfMemoryError out){
+                System.runFinalization();
+                System.gc();
+                Thread.sleep(60000);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
     }

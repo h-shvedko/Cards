@@ -79,7 +79,9 @@ public class ModelsDAO implements I_DAO {
         dbServise = new DBService();
 
         session = DBService.sessionFactory.getCurrentSession();
-        transaction = session.beginTransaction();
+        if(session.isOpen() && !session.getTransaction().isActive()){
+            transaction = session.beginTransaction();
+        }
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
@@ -128,7 +130,7 @@ public class ModelsDAO implements I_DAO {
         if (result.list().size() > 0) {
             object = (A_Models) result.list().get(0);
         }
-        session.close();
+//        session.close();
         return object;
     }
 
