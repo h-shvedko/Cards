@@ -43,6 +43,7 @@ public class ModelsDAO implements I_DAO {
     public static final String PARTICIPLE = "Причастие";
     public static final String OTHER_PART_OF_SPEECH = "Другие";
     public static final String ALL_PART_OF_SPEECH = "Все";
+    public static final String ALL_LEVELS = "Все";
     public static final String MUSKULINUM = "мужской";
     public static final String FEMININUM = "женский";
     public static final String NEUTRUM = "средний";
@@ -130,7 +131,19 @@ public class ModelsDAO implements I_DAO {
         if (result.list().size() > 0) {
             object = (A_Models) result.list().get(0);
         }
-//        session.close();
+        session.close();
+        return object;
+    }
+
+    public A_Models selectWithoutClosingSession(String criteria) throws Exception {
+        A_Models object = null;
+        String table = this.getClassName();
+
+        Query result = session.createQuery("from " + table + " " + criteria);
+
+        if (result.list().size() > 0) {
+            object = (A_Models) result.list().get(0);
+        }
         return object;
     }
 
