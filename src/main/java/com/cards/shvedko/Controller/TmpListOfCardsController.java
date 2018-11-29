@@ -30,6 +30,8 @@ import java.util.ResourceBundle;
 public class TmpListOfCardsController extends A_Controller {
 
     @FXML
+    public TableColumn<TmpCards, String> tmpLevel;
+    @FXML
     public TableColumn<TmpCards, String> tmpTranslatedWord;
     @FXML
     public TableColumn<TmpCards, String> tmpOriginalWord;
@@ -212,7 +214,7 @@ public class TmpListOfCardsController extends A_Controller {
     }
 
     private void makeTitleOfColumns() {
-        tmpTranslatedWord.setText("Уровень");
+        tmpLevel.setText("Уровень");
         tmpTranslatedWord.setText("Русский перевод");
         tmpOriginalWord.setText("Немецкий перевод");
         tmpTranslatedExample.setText("Русский пример");
@@ -235,11 +237,14 @@ public class TmpListOfCardsController extends A_Controller {
     }
 
     private void linkToColumns() {
-        tmpCategory.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("level"));
-        tmpCategory.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
+        tmpLevel.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("level"));
+        tmpLevel.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
-                return new SimpleStringProperty(p.getValue().getLevel().getName());
+                if (p.getValue().getPrepositionAkk() != null) {
+                    return new SimpleStringProperty(p.getValue().getLevel().getName());
+                }
+                return new SimpleStringProperty("");
             }
         });
 

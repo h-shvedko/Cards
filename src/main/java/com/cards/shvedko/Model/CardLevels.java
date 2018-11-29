@@ -23,9 +23,9 @@ public class CardLevels extends A_Models implements Serializable {
     private List<Cards> cardsRecords = new ArrayList<>(
             0);
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "levels", targetEntity = Decks.class)
-    private List<Decks> levelDecks = new ArrayList<>(
-            0);
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "levels", targetEntity = Decks.class)
+//    private List<Decks> levelDecks = new ArrayList<>(
+//            0);
 
     public int getId() {
         return id;
@@ -85,12 +85,12 @@ public class CardLevels extends A_Models implements Serializable {
     public void setCardsRecords(List<Cards> cardsRecords) {
         this.cardsRecords = cardsRecords;
     }
-
-    public List<Decks> getLevelDecks() {
-        return levelDecks;
-    }
-
-    public void setLevelDecks(List<Decks> levelDecks) {
-        this.levelDecks = levelDecks;
-    }
+//
+//    public List<Decks> getLevelDecks() {
+//        return levelDecks;
+//    }
+//
+//    public void setLevelDecks(List<Decks> levelDecks) {
+//        this.levelDecks = levelDecks;
+//    }
 }

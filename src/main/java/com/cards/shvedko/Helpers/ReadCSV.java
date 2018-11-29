@@ -26,7 +26,11 @@ public class ReadCSV {
         fileChooser.getExtensionFilters().add(extFilter);
 
         File file = fileChooser.showOpenDialog(null);
-        fileNameValue = file.getPath();
+        try {
+            fileNameValue = file.getPath();
+        } catch (NullPointerException nullPointer) {
+            System.out.println(nullPointer.getMessage());
+        }
 
         Charset charset = Charset.forName(ENCODING);
         Path path = Paths.get(file.getPath());
