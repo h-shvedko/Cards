@@ -93,12 +93,26 @@ public class AddCardDeckController extends A_Controller {
             }
         }
 
+        int levelValue = 0;
+        A_Models levelObject = null;
+        levelValue = Integer.parseInt(String.valueOf(level.getSelectionModel().getSelectedIndex())) + 1;
+        CardLevelsDAO cardLevelsDAO = new CardLevelsDAO();
+
+        try {
+            levelObject = cardLevelsDAO.select("where id=" + levelValue);
+        } catch (Exception e) {
+            crashAppeared(e.getMessage());
+        }
+
         DecksDAO decksDAO = new DecksDAO();
-        if (categoryObject != null) {
-            decksDAO.decks.setCategory((CardCategories) categoryObject);
+        if (levelObject != null) {
+            decksDAO.decks.setLevels((CardLevels) levelObject);
         }
         if (typeObject != null) {
             decksDAO.decks.setType((CardTypes) typeObject);
+        }
+        if (categoryObject != null) {
+            decksDAO.decks.setCategory((CardCategories) categoryObject);
         }
 
         decksDAO.decks.setName(name);

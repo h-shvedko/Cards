@@ -27,6 +27,7 @@ public class DBService {
                 .addPackage("com.cards.shvedko.Model")
                 .addAnnotatedClass(Cards.class)
                 .addAnnotatedClass(CardCategories.class)
+                .addAnnotatedClass(CardLevels.class)
                 .addAnnotatedClass(CardFiles.class)
                 .addAnnotatedClass(CardFilesDe.class)
                 .addAnnotatedClass(CardLanguageDe.class)

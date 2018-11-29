@@ -2,6 +2,8 @@ package com.cards.shvedko.ModelDAO;
 
 import com.cards.shvedko.Model.TmpCards;
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  * Created by hennadii.shvedko on 14/07/2017.
@@ -59,5 +61,21 @@ public class TmpCardsDAO extends ModelsDAO {
         transaction.commit();
         session.close();
 
+    }
+
+    public boolean commit() {
+        if (errorMsg == null || errorMsg.equals("")) {
+            transaction.commit();
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public void insert(StringBuilder query, Session session){
+        if(session.isConnected()){
+            Query queryToInsert = session.createNativeQuery(String.valueOf(query));
+            int result = queryToInsert.executeUpdate();
+        }
     }
 }

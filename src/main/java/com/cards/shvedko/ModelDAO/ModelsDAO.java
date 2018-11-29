@@ -43,6 +43,7 @@ public class ModelsDAO implements I_DAO {
     public static final String PARTICIPLE = "Причастие";
     public static final String OTHER_PART_OF_SPEECH = "Другие";
     public static final String ALL_PART_OF_SPEECH = "Все";
+    public static final String ALL_LEVELS = "Все";
     public static final String MUSKULINUM = "мужской";
     public static final String FEMININUM = "женский";
     public static final String NEUTRUM = "средний";
@@ -79,7 +80,11 @@ public class ModelsDAO implements I_DAO {
         dbServise = new DBService();
 
         session = DBService.sessionFactory.getCurrentSession();
-        transaction = session.beginTransaction();
+        if(session.isOpen() && !session.getTransaction().isActive()){
+            transaction = session.beginTransaction();
+        } else {
+            transaction = session.getTransaction();
+        }
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
@@ -93,6 +98,13 @@ public class ModelsDAO implements I_DAO {
     }
 
     public void delete(int id) throws Exception{
+    }
+
+    public void deleteWithNativeQuery(StringBuilder query, Session session){
+        if(session.isConnected()){
+            Query queryToExecute = session.createNativeQuery(String.valueOf(query));
+            int result = queryToExecute.executeUpdate();
+        }
     }
 
     public boolean validate(A_Models model) throws ConstraintViolationException {
@@ -132,12 +144,24 @@ public class ModelsDAO implements I_DAO {
         return object;
     }
 
+    public A_Models selectWithoutClosingSession(String criteria, Session session) throws Exception {
+        A_Models object = null;
+        String table = this.getClassName();
+
+        Query result = session.createQuery("from " + table + " " + criteria);
+
+        if (result.list().size() > 0) {
+            object = (A_Models) result.list().get(0);
+        }
+        return object;
+    }
+
     @Override
     public List selectAll() throws Exception {
         String table = this.getClassName();
         Query result = session.createQuery("from " + table);
         List ret = result.list();
-        session.close();
+//        session.close();
         return ret;
     }
 
@@ -198,10 +222,20 @@ public class ModelsDAO implements I_DAO {
             case "TmpCardsDAO":
                 table = "com.cards.shvedko.Model.TmpCards";
                 break;
+            case "CardLevelsDAO":
+                table = "com.cards.shvedko.Model.CardLevels";
+                break;
         }
 
         return table;
     }
+
+    public void commitWithGivenSession(Session session) {
+        if(session.isOpen()){
+            session.getTransaction().commit();
+        }
+    }
+
 
     public void closeSession(){
         session.close();

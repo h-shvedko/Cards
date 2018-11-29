@@ -1,0 +1,17 @@
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (1, 1, 'neben');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (2, 1, 'zwischen');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (3, 1, 'an');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (4, 1, 'vor');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (5, 1, 'unter');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (6, 1, 'gegenüber');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (7, 1, 'hinter');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (8, 1, 'auf');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (9, 1, 'über');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (10, 1, 'mit');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (11, 1, 'nach');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (12, 1, 'ab');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (13, 1, 'zu');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (14, 1, 'von');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (15, 1, 'bei');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (16, 1, 'seit');
+INSERT INTO PREPOSITION_DATIV (id, is_visible, name) VALUES (17, 1, 'außer');

@@ -103,25 +103,26 @@
             </rowConstraints>
             <TableView fx:id="tmpCardsTable" prefHeight="200.0" prefWidth="4800.0">
                 <columns>
-                    <TableColumn fx:id="tmpTranslatedWord" maxWidth="300.0" prefWidth="300.0" text="C1"/>
-                    <TableColumn fx:id="tmpOriginalWord" maxWidth="300.0" prefWidth="300.0" text="C2"/>
-                    <TableColumn fx:id="tmpIsPlural" maxWidth="300.0" prefWidth="300.0" text="C3"/>
-                    <TableColumn fx:id="tmpThirdFace" maxWidth="300.0" prefWidth="300.0" text="C4"/>
-                    <TableColumn fx:id="tmpPreteritum" maxWidth="300.0" prefWidth="300.0" text="C5"/>
-                    <TableColumn fx:id="tmpPerfect" maxWidth="300.0" prefWidth="300.0" text="C6"/>
-                    <TableColumn fx:id="tmpTranslatedExample" maxWidth="300.0" prefWidth="300.0" text="C7"/>
-                    <TableColumn fx:id="tmpOriginalExample" maxWidth="300.0" prefWidth="300.0" text="C8"/>
-                    <TableColumn fx:id="tmpCategory" maxWidth="300.0" prefWidth="300.0" text="C9"/>
-                    <TableColumn fx:id="tmpType" maxWidth="300.0" prefWidth="300.0" text="C10"/>
-                    <TableColumn fx:id="tmpNouneType" maxWidth="300.0" prefWidth="300.0" text="C11"/>
-                    <TableColumn fx:id="tmpPerfectWithHaben" maxWidth="300.0" prefWidth="300.0" text="C12"/>
-                    <TableColumn fx:id="tmpReflexive" maxWidth="300.0" prefWidth="300.0" text="C13"/>
-                    <TableColumn fx:id="tmpTrembare" maxWidth="300.0" prefWidth="300.0" text="C14"/>
-                    <TableColumn fx:id="tmpRegelmessig" maxWidth="300.0" prefWidth="300.0" text="C15"/>
-                    <TableColumn fx:id="tmpAkkusative" maxWidth="300.0" prefWidth="300.0" text="C16"/>
-                    <TableColumn fx:id="tmpDative" maxWidth="300.0" prefWidth="300.0" text="C17"/>
-                    <TableColumn fx:id="tmpGenetive" maxWidth="300.0" prefWidth="300.0" text="C18"/>
-                    <TableColumn fx:id="tmpProceed" maxWidth="300.0" prefWidth="300.0" text="C19"/>
+                    <TableColumn fx:id="tmpLevel" maxWidth="300.0" prefWidth="300.0" text="C1"/>
+                    <TableColumn fx:id="tmpTranslatedWord" maxWidth="300.0" prefWidth="300.0" text="C2"/>
+                    <TableColumn fx:id="tmpOriginalWord" maxWidth="300.0" prefWidth="300.0" text="C3"/>
+                    <TableColumn fx:id="tmpIsPlural" maxWidth="300.0" prefWidth="300.0" text="C4"/>
+                    <TableColumn fx:id="tmpThirdFace" maxWidth="300.0" prefWidth="300.0" text="C5"/>
+                    <TableColumn fx:id="tmpPreteritum" maxWidth="300.0" prefWidth="300.0" text="C6"/>
+                    <TableColumn fx:id="tmpPerfect" maxWidth="300.0" prefWidth="300.0" text="C7"/>
+                    <TableColumn fx:id="tmpTranslatedExample" maxWidth="300.0" prefWidth="300.0" text="C8"/>
+                    <TableColumn fx:id="tmpOriginalExample" maxWidth="300.0" prefWidth="300.0" text="C9"/>
+                    <TableColumn fx:id="tmpCategory" maxWidth="300.0" prefWidth="300.0" text="C10"/>
+                    <TableColumn fx:id="tmpType" maxWidth="300.0" prefWidth="300.0" text="C11"/>
+                    <TableColumn fx:id="tmpNouneType" maxWidth="300.0" prefWidth="300.0" text="C12"/>
+                    <TableColumn fx:id="tmpPerfectWithHaben" maxWidth="300.0" prefWidth="300.0" text="C13"/>
+                    <TableColumn fx:id="tmpReflexive" maxWidth="300.0" prefWidth="300.0" text="C14"/>
+                    <TableColumn fx:id="tmpTrembare" maxWidth="300.0" prefWidth="300.0" text="C15"/>
+                    <TableColumn fx:id="tmpRegelmessig" maxWidth="300.0" prefWidth="300.0" text="C16"/>
+                    <TableColumn fx:id="tmpAkkusative" maxWidth="300.0" prefWidth="300.0" text="C17"/>
+                    <TableColumn fx:id="tmpDative" maxWidth="300.0" prefWidth="300.0" text="C18"/>
+                    <TableColumn fx:id="tmpGenetive" maxWidth="300.0" prefWidth="300.0" text="C19"/>
+                    <TableColumn fx:id="tmpProceed" maxWidth="300.0" prefWidth="300.0" text="C20"/>
                 </columns>
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>

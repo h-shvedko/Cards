@@ -1,7 +1,5 @@
 package com.cards.shvedko.Model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -47,6 +45,10 @@ public class TmpCards extends A_Models implements Serializable {
     @ManyToOne(optional = false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "id")
     private CardTypes type;
+
+    @ManyToOne(optional = false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "level_id", referencedColumnName = "id")
+    private CardLevels level;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "preposition_akk", referencedColumnName = "id")
@@ -257,5 +259,13 @@ public class TmpCards extends A_Models implements Serializable {
 
     public void setProceed(Boolean proceed) {
         this.proceed = proceed;
+    }
+
+    public CardLevels getLevel() {
+        return level;
+    }
+
+    public void setLevel(CardLevels level) {
+        this.level = level;
     }
 }

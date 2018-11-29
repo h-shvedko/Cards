@@ -30,6 +30,8 @@ import java.util.ResourceBundle;
 public class TmpListOfCardsController extends A_Controller {
 
     @FXML
+    public TableColumn<TmpCards, String> tmpLevel;
+    @FXML
     public TableColumn<TmpCards, String> tmpTranslatedWord;
     @FXML
     public TableColumn<TmpCards, String> tmpOriginalWord;
@@ -212,6 +214,7 @@ public class TmpListOfCardsController extends A_Controller {
     }
 
     private void makeTitleOfColumns() {
+        tmpLevel.setText("Уровень");
         tmpTranslatedWord.setText("Русский перевод");
         tmpOriginalWord.setText("Немецкий перевод");
         tmpTranslatedExample.setText("Русский пример");
@@ -234,6 +237,17 @@ public class TmpListOfCardsController extends A_Controller {
     }
 
     private void linkToColumns() {
+        tmpLevel.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("level"));
+        tmpLevel.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
+                if (p.getValue().getPrepositionAkk() != null) {
+                    return new SimpleStringProperty(p.getValue().getLevel().getName());
+                }
+                return new SimpleStringProperty("");
+            }
+        });
+
         tmpTranslatedWord.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("name"));
         tmpOriginalWord.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("foreign_name"));
         tmpTranslatedExample.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("example"));

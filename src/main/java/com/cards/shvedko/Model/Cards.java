@@ -1,7 +1,6 @@
 package com.cards.shvedko.Model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -68,6 +67,10 @@ public class Cards extends A_Models implements Serializable {
     @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName="id")
     private CardCategories category;
+
+    @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "level_id", referencedColumnName="id")
+    private CardLevels levels;
 
     @ManyToOne(optional=false) //(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName="id")
@@ -397,5 +400,13 @@ public class Cards extends A_Models implements Serializable {
 
     public void setForeignNameInfinitive(String foreignNameInfinitive) {
         this.foreignNameInfinitive = foreignNameInfinitive;
+    }
+
+    public CardLevels getLevels() {
+        return levels;
+    }
+
+    public void setLevels(CardLevels levels) {
+        this.levels = levels;
     }
 }

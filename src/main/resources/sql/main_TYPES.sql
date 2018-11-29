@@ -1,0 +1,9 @@
+INSERT INTO TYPES (id, is_visible, name) VALUES (1, 1, 'Существительное');
+INSERT INTO TYPES (id, is_visible, name) VALUES (2, 1, 'Глагол');
+INSERT INTO TYPES (id, is_visible, name) VALUES (3, 1, 'Прилогательное');
+INSERT INTO TYPES (id, is_visible, name) VALUES (4, 1, 'Местоимение');
+INSERT INTO TYPES (id, is_visible, name) VALUES (5, 1, 'Наречие');
+INSERT INTO TYPES (id, is_visible, name) VALUES (6, 1, 'Числительное');
+INSERT INTO TYPES (id, is_visible, name) VALUES (7, 1, 'Причастие');
+INSERT INTO TYPES (id, is_visible, name) VALUES (8, 1, 'Другие');
+INSERT INTO TYPES (id, is_visible, name) VALUES (9, 1, 'Все');
