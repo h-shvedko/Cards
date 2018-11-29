@@ -212,6 +212,7 @@ public class TmpListOfCardsController extends A_Controller {
     }
 
     private void makeTitleOfColumns() {
+        tmpTranslatedWord.setText("Уровень");
         tmpTranslatedWord.setText("Русский перевод");
         tmpOriginalWord.setText("Немецкий перевод");
         tmpTranslatedExample.setText("Русский пример");
@@ -234,6 +235,14 @@ public class TmpListOfCardsController extends A_Controller {
     }
 
     private void linkToColumns() {
+        tmpCategory.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("level"));
+        tmpCategory.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
+                return new SimpleStringProperty(p.getValue().getLevel().getName());
+            }
+        });
+
         tmpTranslatedWord.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("name"));
         tmpOriginalWord.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("foreign_name"));
         tmpTranslatedExample.setCellValueFactory(new PropertyValueFactory<TmpCards, String>("example"));

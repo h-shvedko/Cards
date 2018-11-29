@@ -46,6 +46,10 @@ public class TmpCards extends A_Models implements Serializable {
     @JoinColumn(name = "type_id", referencedColumnName = "id")
     private CardTypes type;
 
+    @ManyToOne(optional = false) //(fetch = FetchType.LAZY)
+    @JoinColumn(name = "level_id", referencedColumnName = "id")
+    private CardLevels level;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "preposition_akk", referencedColumnName = "id")
     private CardsPrepositionAkkusativ prepositionAkk;
@@ -255,5 +259,13 @@ public class TmpCards extends A_Models implements Serializable {
 
     public void setProceed(Boolean proceed) {
         this.proceed = proceed;
+    }
+
+    public CardLevels getLevel() {
+        return level;
+    }
+
+    public void setLevel(CardLevels level) {
+        this.level = level;
     }
 }

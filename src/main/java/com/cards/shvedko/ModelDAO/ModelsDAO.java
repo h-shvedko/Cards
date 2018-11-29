@@ -82,6 +82,8 @@ public class ModelsDAO implements I_DAO {
         session = DBService.sessionFactory.getCurrentSession();
         if(session.isOpen() && !session.getTransaction().isActive()){
             transaction = session.beginTransaction();
+        } else {
+            transaction = session.getTransaction();
         }
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -96,6 +98,13 @@ public class ModelsDAO implements I_DAO {
     }
 
     public void delete(int id) throws Exception{
+    }
+
+    public void deleteWithNativeQuery(StringBuilder query, Session session){
+        if(session.isConnected()){
+            Query queryToExecute = session.createNativeQuery(String.valueOf(query));
+            int result = queryToExecute.executeUpdate();
+        }
     }
 
     public boolean validate(A_Models model) throws ConstraintViolationException {
@@ -135,7 +144,7 @@ public class ModelsDAO implements I_DAO {
         return object;
     }
 
-    public A_Models selectWithoutClosingSession(String criteria) throws Exception {
+    public A_Models selectWithoutClosingSession(String criteria, Session session) throws Exception {
         A_Models object = null;
         String table = this.getClassName();
 
@@ -152,7 +161,7 @@ public class ModelsDAO implements I_DAO {
         String table = this.getClassName();
         Query result = session.createQuery("from " + table);
         List ret = result.list();
-        session.close();
+//        session.close();
         return ret;
     }
 
@@ -220,6 +229,13 @@ public class ModelsDAO implements I_DAO {
 
         return table;
     }
+
+    public void commitWithGivenSession(Session session) {
+        if(session.isOpen()){
+            session.getTransaction().commit();
+        }
+    }
+
 
     public void closeSession(){
         session.close();

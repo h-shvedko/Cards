@@ -41,48 +41,48 @@ public class FillDatabase extends A_Controller {
                             "proceed, category_id, preposition_akk, preposition_dat, type_id, level_id) VALUES ");
 
                     insertString.append("(");
-                     values = Arrays.asList(line.split("\t"));
+                    values = Arrays.asList(line.split("\t"));
 
                     CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
                     A_Models categoryObject = null;
                     if (values.size() > 10) {
-                        categoryObject = cardCategoriesDAO.select("where name='" + (String) values.get(10) + "'");
+                        categoryObject = cardCategoriesDAO.selectWithoutClosingSession("where name='" + (String) values.get(10) + "'", session);
                         if (categoryObject == null) {
                             CardCategoriesDAO cardCategoriesEmptyDAO = new CardCategoriesDAO();
-                            categoryObject = cardCategoriesEmptyDAO.selectWithoutClosingSession("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
+                            categoryObject = cardCategoriesEmptyDAO.selectWithoutClosingSession("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'", session);
                         }
                     }
 
                     CardLevelsDAO cardLevelsDAO = new CardLevelsDAO();
                     A_Models levelObject = null;
                     if (values.size() > 1) {
-                        levelObject = cardLevelsDAO.select("where name='" + (String) values.get(0) + "'");
+                        levelObject = cardLevelsDAO.selectWithoutClosingSession("where name='" + (String) values.get(0) + "'", session);
                         if (levelObject == null) {
                             CardLevelsDAO cardLevelsDAOEmpty = new CardLevelsDAO();
-                            levelObject = cardLevelsDAOEmpty.selectWithoutClosingSession("where name='" + ModelsDAO.ALL_LEVELS + "'");
+                            levelObject = cardLevelsDAOEmpty.selectWithoutClosingSession("where name='" + ModelsDAO.ALL_LEVELS + "'", session);
                         }
                     }
 
                     CardTypesDAO cardTypesDAO = new CardTypesDAO();
                     A_Models typeObject = null;
                     if (values.size() > 11) {
-                        typeObject = cardTypesDAO.select("where name='" + (String)values.get(11) + "'");
+                        typeObject = cardTypesDAO.selectWithoutClosingSession("where name='" + (String) values.get(11) + "'", session);
                         if (typeObject == null) {
                             CardTypesDAO cardTypesEmptyDAO = new CardTypesDAO();
-                            typeObject = cardTypesEmptyDAO.selectWithoutClosingSession("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'");
+                            typeObject = cardTypesEmptyDAO.selectWithoutClosingSession("where name='" + ModelsDAO.ALL_PART_OF_SPEECH + "'", session);
                         }
                     }
 
                     A_Models akkObject = null;
                     if (values.size() > 17) {
                         CardsPrepositionAkkusativDAO cardsPrepositionAkkusativDAO = new CardsPrepositionAkkusativDAO();
-                        akkObject = cardsPrepositionAkkusativDAO.selectWithoutClosingSession("where name='" + (String)values.get(17) + "'");
+                        akkObject = cardsPrepositionAkkusativDAO.selectWithoutClosingSession("where name='" + (String) values.get(17) + "'", session);
                     }
 
                     A_Models dativObject = null;
                     if (values.size() > 18) {
                         CardsPrepositionDativDAO cardsPrepositionDativDAO = new CardsPrepositionDativDAO();
-                        dativObject = cardsPrepositionDativDAO.selectWithoutClosingSession("where name='" + (String)values.get(18) + "'");
+                        dativObject = cardsPrepositionDativDAO.selectWithoutClosingSession("where name='" + (String) values.get(18) + "'", session);
                     }
 
                     //example field
@@ -258,7 +258,7 @@ public class FillDatabase extends A_Controller {
                     insertString.append(";");
                     tmpCardsDAO.insert(insertString, session);
 
-                } catch (OutOfMemoryError out){
+                } catch (OutOfMemoryError out) {
                     System.runFinalization();
                     System.gc();
                     Thread.sleep(60000);
@@ -267,8 +267,8 @@ public class FillDatabase extends A_Controller {
                 }
             }
             try {
-                tmpCardsDAO.commit();
-            } catch (OutOfMemoryError out){
+                tmpCardsDAO.commitWithGivenSession(session);
+            } catch (OutOfMemoryError out) {
                 System.runFinalization();
                 System.gc();
                 Thread.sleep(60000);
@@ -291,108 +291,130 @@ public class FillDatabase extends A_Controller {
             for (TmpCards values : content) {
 
                 if (true) {
-//                if (values.getProceed()) {
-                    insertString = new StringBuilder("INSERT INTO TMP_CARDS (example, foreign_example, foreign_name, " +
-                            "foreign_nama_infinitive, foreign_name_perfect, foreign_name_preteritum, " +
-                            "is_perfect_with_haben, is_reflexiv_verb, is_regular_verb," +
-                            "is_trembare_prefix_verb, kind_of_noun, name, plural_endung, preposition_gen," +
-                            "proceed, category_id, preposition_akk, preposition_dat, type_id, is_visible, level_id, user_id) VALUES ");
+                    try {
+                        insertString = new StringBuilder("INSERT INTO CARDS (example, foreign_example, foreign_name, foreign_nama_infinitive, foreign_name_perfect, foreign_name_preteritum, is_perfect_with_haben, is_reflexiv_verb, is_regular_verb, is_trembare_prefix_verb, kind_of_noun, name, plural_endung, preposition_gen, category_id, preposition_akk, preposition_dat, type_id, is_visible, level_id, user_id) VALUES ");
 
-                    insertString.append("(");
+                        insertString.append("(");
 
-                    insertString.append("'");
-                    insertString.append(values.getExample());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getExample());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getForeignExample());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getForeignExample());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getForeignName());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getForeignName());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getForeignNameInfinitive());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getForeignNameInfinitive());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getForeignNamePerfect());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getForeignNamePerfect());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getForeignNamePreteritum());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getForeignNamePreteritum());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getIsPerfectWithHaben());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getIsPerfectWithHaben());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getIsReflexiveVerb());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getIsReflexiveVerb());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getIsRegularVerb());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getIsRegularVerb());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getIsTrembarePrefixVerb());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getIsTrembarePrefixVerb());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getKindOfNoun());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getKindOfNoun());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getName());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getName());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getPluralEndung());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getPluralEndung());
+                        insertString.append("',");
 
-                    insertString.append("'");
-                    insertString.append(values.getPrepositionGen());
-                    insertString.append("',");
+                        insertString.append("'");
+                        insertString.append(values.getPrepositionGen());
+                        insertString.append("',");
 
-                    insertString.append(values.getCategory());
-                    insertString.append(",");
-
-                    insertString.append(values.getPrepositionAkk());
-                    insertString.append(",");
-
-                    insertString.append(values.getPrepositionDativ());
-                    insertString.append(",");
-
-                    insertString.append(values.getType());
-                    insertString.append(",");
-
-                    insertString.append(1);
-                    insertString.append(",");
-
-                    insertString.append(values.getLevel());
-                    insertString.append(",");
-
-                    insertString.append(globalUserModel.getId());
-
-                    insertString.append(")");
-
-                    insertString.append(";");
-                    cardsDAO.insert(insertString, session);
-
-                    if (cardsDAO.validate(cardsDAO.cards)) {
-                        try {
-                            if (!cardsDAO.save()) {
-                                throw new Exception(cardsDAO.errorMsg);
-                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
+                        int categoryId = 0;
+                        if(values.getCategory() != null){
+                            categoryId = values.getCategory().getId();
                         }
-                    } else {
-                        showError(cardsDAO);
+                        insertString.append(categoryId);
+                        insertString.append(",");
+
+                        int prepositionAkkId = 0;
+                        if(values.getPrepositionAkk() != null){
+                            prepositionAkkId = values.getPrepositionAkk().getId();
+                        }
+                        insertString.append(prepositionAkkId);
+                        insertString.append(",");
+
+                        int prepositionDatId = 0;
+                        if(values.getPrepositionDativ() != null){
+                            prepositionDatId = values.getPrepositionDativ().getId();
+                        }
+                        insertString.append(prepositionDatId);
+                        insertString.append(",");
+
+                        int typeId = 0;
+                        if(values.getType() != null){
+                            typeId = values.getType().getId();
+                        }
+                        insertString.append(typeId);
+                        insertString.append(",");
+
+                        insertString.append(1);
+                        insertString.append(",");
+
+                        int levelId = 0;
+                        if(values.getLevel() != null){
+                            levelId = values.getLevel().getId();
+                        }
+                        insertString.append(levelId);
+                        insertString.append(",");
+
+                        insertString.append(globalUserModel.getId());
+
+                        insertString.append(")");
+
+                        insertString.append(";");
+                        cardsDAO.insert(insertString, session);
+                    } catch (OutOfMemoryError out) {
+                        System.runFinalization();
+                        System.gc();
+                        Thread.sleep(60000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
+
+            }
+            try {
+                cardsDAO.commitWithGivenSession(session);
+            } catch (OutOfMemoryError out) {
+                System.runFinalization();
+                System.gc();
+                Thread.sleep(60000);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                if (session.getTransaction() != null) session.getTransaction().rollback();
             }
 
             clearTmpData(content);
@@ -401,12 +423,18 @@ public class FillDatabase extends A_Controller {
         }
     }
 
-    private void clearTmpData(ObservableList<TmpCards> content) throws Exception {
-        for (TmpCards values : content) {
-            if (values.getProceed()) {
-                TmpCardsDAO tmpCardsDAO = new TmpCardsDAO(values.getId());
-                tmpCardsDAO.delete(values.getId());
-            }
+    private void clearTmpData(ObservableList<TmpCards> content) {
+        final Session session = DBService.sessionFactory.getCurrentSession();
+        StringBuilder deleteString = null;
+        TmpCardsDAO tmpCardsDAO = new TmpCardsDAO();
+
+        try {
+            deleteString = new StringBuilder("DELETE FROM TMP_CARDS;");
+            tmpCardsDAO.deleteWithNativeQuery(deleteString, session);
+            tmpCardsDAO.commitWithGivenSession(session);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (session.getTransaction() != null) session.getTransaction().rollback();
         }
     }
 
@@ -503,5 +531,38 @@ public class FillDatabase extends A_Controller {
     @Override
     protected void handleSubmitButtonAction() {
 
+    }
+
+    public void fillMainTableFromTmpTableWithAllData(ActionEvent actionEvent) throws UnsupportedEncodingException, ArrayIndexOutOfBoundsException, InterruptedException {
+        final Session session = DBService.sessionFactory.getCurrentSession();
+        StringBuilder insertString = null;
+        CardsDAO cardsDAO = new CardsDAO();
+
+        try {
+            insertString = new StringBuilder("INSERT INTO CARDS SELECT example, foreign_example, foreign_name, \" +\n" +
+                    "                            \"foreign_nama_infinitive, foreign_name_perfect, foreign_name_preteritum, \" +\n" +
+                    "                            \"is_perfect_with_haben, is_reflexiv_verb, is_regular_verb,\" +\n" +
+                    "                            \"is_trembare_prefix_verb, kind_of_noun, name, plural_endung, preposition_gen,\" +\n" +
+                    "                            \"proceed, category_id, preposition_akk, preposition_dat, type_id, level_id FROM TMP_CARDS");
+
+            cardsDAO.insert(insertString, session);
+
+        } catch (OutOfMemoryError out) {
+            System.runFinalization();
+            System.gc();
+            Thread.sleep(60000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            cardsDAO.commitWithGivenSession(session);
+        } catch (OutOfMemoryError out) {
+            System.runFinalization();
+            System.gc();
+            Thread.sleep(60000);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (session.getTransaction() != null) session.getTransaction().rollback();
+        }
     }
 }
