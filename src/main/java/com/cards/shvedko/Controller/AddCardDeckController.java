@@ -93,9 +93,14 @@ public class AddCardDeckController extends A_Controller {
             }
         }
 
-        int levelValue = 0;
+        int levelValue = 1;
         A_Models levelObject = null;
-        levelValue = Integer.parseInt(String.valueOf(level.getSelectionModel().getSelectedIndex())) + 1;
+        levelValue = Integer.parseInt(String.valueOf(level.getSelectionModel().getSelectedIndex()));
+
+        if(levelValue == -1){
+            levelValue = 1;
+        }
+
         CardLevelsDAO cardLevelsDAO = new CardLevelsDAO();
 
         try {
@@ -104,7 +109,7 @@ public class AddCardDeckController extends A_Controller {
             crashAppeared(e.getMessage());
         }
 
-        DecksDAO decksDAO = new DecksDAO();
+         DecksDAO decksDAO = new DecksDAO();
         if (levelObject != null) {
             decksDAO.decks.setLevels((CardLevels) levelObject);
         }
