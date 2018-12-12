@@ -1,10 +1,7 @@
 package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.Helpers.AudioPlaying;
-import com.cards.shvedko.Model.A_Models;
-import com.cards.shvedko.Model.Cards;
-import com.cards.shvedko.Model.Decks;
-import com.cards.shvedko.Model.DecksValues;
+import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.DecksValuesDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.collections.FXCollections;
@@ -208,11 +205,11 @@ public class A_CardController extends A_Controller {
         String genetive = "";
         String infinitive = "";
 
-        if (cards.getPrepositionAkk() != null) {
+        if (!cards.getPrepositionAkk().getName().equals(CardsPrepositionAkkusativ.PREPOSITION_AKKUSATIVE_NO)) {
             akkusative = cards.getPrepositionAkk().getName();
         }
 
-        if (cards.getPrepositionDativ() != null) {
+        if (!cards.getPrepositionDativ().getName().equals(CardsPrepositionDativ.PREPOSITION_DATIVE_NO)) {
             dative = cards.getPrepositionDativ().getName();
         }
 
