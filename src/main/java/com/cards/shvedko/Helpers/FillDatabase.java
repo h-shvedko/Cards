@@ -228,7 +228,7 @@ public class FillDatabase extends A_Controller {
                         insertString.append((Integer) akkObject.getId());
                         insertString.append(",");
                     } else {
-                        insertString.append("null,");
+                        insertString.append("1,");
                     }
 
                     //dative preposition field
@@ -236,7 +236,7 @@ public class FillDatabase extends A_Controller {
                         insertString.append((Integer) dativObject.getId());
                         insertString.append(",");
                     } else {
-                        insertString.append("null,");
+                        insertString.append("1,");
                     }
 
                     //dative preposition field

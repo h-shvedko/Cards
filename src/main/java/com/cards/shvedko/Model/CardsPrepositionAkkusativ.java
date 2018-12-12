@@ -11,6 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "PREPOSITION_AKKUSATIV")
 public class CardsPrepositionAkkusativ extends A_Models implements Serializable {
+
+    public static final String PREPOSITION_AKKUSATIVE_NO = "No";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)

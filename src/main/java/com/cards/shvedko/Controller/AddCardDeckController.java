@@ -152,6 +152,7 @@ public class AddCardDeckController extends A_Controller {
         int typeId = decksDAO.decks.getType().getId();
         int userId = decksDAO.decks.getUser().getId();
         int deckId = decksDAO.decks.getId();
+        int levelId = decksDAO.decks.getLevels().getId();
 
         CardsDAO cardsDAO = new CardsDAO();
         List cards;
@@ -162,6 +163,9 @@ public class AddCardDeckController extends A_Controller {
             }
             if (!decksDAO.decks.getType().getName().equals(ModelsDAO.ALL_PART_OF_SPEECH)) {
                 queryString += " and type_id=" + typeId;
+            }
+            if (!decksDAO.decks.getLevels().getName().equals(ModelsDAO.ALL_LEVELS)) {
+                queryString += " and level_id=" + levelId;
             }
             cards = cardsDAO.selectAllBy(queryString);
         } catch (Exception e) {
