@@ -71,6 +71,10 @@ public class EditVerbCardDeckController extends A_Controller {
     private TextField nameDeck;
     @FXML
     private ToggleButton allTopic;
+    @FXML
+    public Label deckNameLabel;
+
+    private String nameDeckData;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -80,6 +84,8 @@ public class EditVerbCardDeckController extends A_Controller {
 
         if (A_Controller.globalDeckData != null) {
             int isTrembarePrefix = A_Controller.globalDeckData.getTrembarePrefix();
+
+            deckNameLabel.setText(A_Controller.globalDeckData.getName());
 
             if (isTrembarePrefix == ModelsDAO.TREMBARE_YES) {
                 trembarePrefixYes.setUserData(ModelsDAO.TREMBARE_YES);
@@ -207,7 +213,7 @@ public class EditVerbCardDeckController extends A_Controller {
             favoriteOn.setToggleGroup(groupFavorite);
             favoriteOff.setToggleGroup(groupFavorite);
 
-            nameDeck.setText(A_Controller.globalDeckData.getName());
+            nameDeckData = A_Controller.globalDeckData.getName();
 
             if (A_Controller.stage != null) {
                 nameDeck.setDisable(true);
@@ -232,7 +238,7 @@ public class EditVerbCardDeckController extends A_Controller {
     }
 
     public void handleSaveButton(ActionEvent actionEvent) {
-        String name = nameDeck.getText();
+        String name = nameDeckData;
         String isAnchor = groupAnchor.getSelectedToggle().getUserData().toString();
         String isFavorite = groupFavorite.getSelectedToggle().getUserData().toString();
         boolean ifAllSpeechPart = allSpeechPart.isSelected();
@@ -495,7 +501,7 @@ public class EditVerbCardDeckController extends A_Controller {
                 if (!decksDAO.saveOrUpdate()) {
                     throw new Exception(decksDAO.errorMsg);
                 }
-                showSuccess(actionEvent);
+                showSuccessAfterDeleteStayOnPage(actionEvent);
             } catch (Exception ex) {
                 crashAppeared(ex.getMessage());
             }

@@ -279,7 +279,7 @@ public class EditCardDeckController extends A_Controller {
                 if(!decksDAO.saveOrUpdate()){
                     throw new Exception(decksDAO.errorMsg);
                 }
-                showSuccess(actionEvent);
+                showSuccessAfterDeleteStayOnPage(actionEvent);
             } catch (Exception ex) {
                 crashAppeared(ex.getMessage());
             }
