@@ -109,7 +109,7 @@ public class AddCardDeckController extends A_Controller {
         A_Models levelObject = null;
         levelValue = Integer.parseInt(String.valueOf(level.getSelectionModel().getSelectedIndex()));
 
-        if(levelValue == -1){
+        if(levelValue == -1 || levelValue == 0){
             levelValue = 1;
         }
 
@@ -150,7 +150,7 @@ public class AddCardDeckController extends A_Controller {
 
             try {
                 saveDecksValues(decksDAO);
-                showSuccess(actionEvent);
+                showSuccessStayOnPage(actionEvent);
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }

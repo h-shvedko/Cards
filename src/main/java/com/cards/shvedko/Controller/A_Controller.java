@@ -503,6 +503,22 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    protected void showSuccessStayOnPage(ActionEvent event) {
+        try {
+            closeAdditionalStage();
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccessStayOnThePage.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Success!");
+            stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     protected void showSuccess(ActionEvent event) {
         try {
             closeAdditionalStage();

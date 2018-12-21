@@ -247,7 +247,7 @@ public class AddVerbCardDeckController extends A_Controller {
 
             try {
                 saveDecksValues(decksDAO);
-                showSuccess(actionEvent);
+                showSuccessStayOnPage(actionEvent);
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
