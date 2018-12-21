@@ -18,7 +18,7 @@ public class FillDatabase extends A_Controller {
     public static void fillCardsFromCSV(List<String> content) throws UnsupportedEncodingException, ArrayIndexOutOfBoundsException, InterruptedException {
 
         int i = 0;
-        if (content.size() > 0) {
+        if (content != null && content.size() > 0) {
             final Session session = DBService.sessionFactory.getCurrentSession();
 
             StringBuilder insertString = null;

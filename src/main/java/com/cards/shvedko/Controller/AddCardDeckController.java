@@ -51,6 +51,8 @@ public class AddCardDeckController extends A_Controller {
 
     public void handleSaveButton(ActionEvent actionEvent) {
         String name = nameDeck.getText();
+        String errorMessageValue = "";
+
         boolean ifAllSpeechPart = allSpeechPart.isSelected();
         boolean ifAllTopic = allTopic.isSelected();
         A_Models userObject = globalUserModel;
@@ -59,6 +61,11 @@ public class AddCardDeckController extends A_Controller {
         A_Models typeObject = null;
         if (!ifAllSpeechPart) {
             speechPartValue = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
+
+            if(speechPartValue == 0){
+                errorMessageValue += "Выберите чвсть речи!\n";
+            }
+
             CardTypesDAO cardTypesDAO = new CardTypesDAO();
 
             try {
@@ -78,6 +85,11 @@ public class AddCardDeckController extends A_Controller {
         A_Models categoryObject = null;
         if (!ifAllTopic) {
             topicValue = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex())) + 1;
+
+            if(topicValue == 0){
+                errorMessageValue += "Выберите тематику!\n";
+            }
+
             CardCategoriesDAO cardCategoriesDAO = new CardCategoriesDAO();
 
             try {
@@ -127,7 +139,7 @@ public class AddCardDeckController extends A_Controller {
             decksDAO.decks.setUser((Users) userObject);
         }
 
-        if (decksDAO.validate(decksDAO.decks)) {
+        if (decksDAO.validate(decksDAO.decks) && errorMessageValue.length() == 0) {
             try {
                 if (!decksDAO.save()) {
                     throw new Exception(decksDAO.errorMsg);
@@ -144,6 +156,7 @@ public class AddCardDeckController extends A_Controller {
             }
         } else {
             showErrors(decksDAO);
+            crashAppeared(errorMessageValue);
         }
     }
 

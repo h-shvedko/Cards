@@ -179,9 +179,9 @@ public class AddVerbCardDeckController extends A_Controller {
 
         int levelValue = 1;
         A_Models levelObject = null;
-        levelValue = Integer.parseInt(String.valueOf(level.getSelectionModel().getSelectedIndex()));
+        levelValue = Integer.parseInt(String.valueOf(level.getSelectionModel().getSelectedIndex())) + 1;
 
-        if(levelValue == -1){
+        if(levelValue == 0){
             levelValue = 1;
         }
 
@@ -301,6 +301,8 @@ public class AddVerbCardDeckController extends A_Controller {
             }
             if (!decksDAO.decks.getLevels().getName().equals(ModelsDAO.ALL_LEVELS)) {
                 queryString += " and level_id=" + levelId;
+            } else {
+                queryString += " and level_id>0";
             }
             cards = cardsDAO.selectAllBy(queryString);
         } catch (Exception e) {
@@ -336,17 +338,17 @@ public class AddVerbCardDeckController extends A_Controller {
 
     private String getPrepositionsQuery(DecksDAO decksDAO, String queryString) {
         if (decksDAO.decks.getPrepositionAkkusative() == 1 && decksDAO.decks.getPrepositionDative() == 1 && decksDAO.decks.getPrepositionGenetive() == 1) {
-            queryString += " and (preposition_akk>0 or preposition_dat>0 or preposition_gen!=NULL)";
+            queryString += " and (preposition_akk>1 or preposition_dat>1 or preposition_gen!=NULL)";
         } else if (decksDAO.decks.getPrepositionAkkusative() == 1 && decksDAO.decks.getPrepositionDative() == 1 && decksDAO.decks.getPrepositionGenetive() == 0) {
-            queryString += " and (preposition_akk>0 or preposition_dat>0)";
+            queryString += " and (preposition_akk>1 or preposition_dat>1)";
         } else if (decksDAO.decks.getPrepositionAkkusative() == 1 && decksDAO.decks.getPrepositionDative() == 0 && decksDAO.decks.getPrepositionGenetive() == 0) {
-            queryString += " and preposition_akk>0";
+            queryString += " and preposition_akk>1";
         } else if (decksDAO.decks.getPrepositionAkkusative() == 1 && decksDAO.decks.getPrepositionDative() == 0 && decksDAO.decks.getPrepositionGenetive() == 1) {
-            queryString += " and (preposition_akk>0 or preposition_gen!=NULL)";
+            queryString += " and (preposition_akk>1 or preposition_gen!=NULL)";
         } else if (decksDAO.decks.getPrepositionAkkusative() == 0 && decksDAO.decks.getPrepositionDative() == 1 && decksDAO.decks.getPrepositionGenetive() == 1) {
-            queryString += " and (preposition_dat>0 or preposition_gen!=NULL)";
+            queryString += " and (preposition_dat>1 or preposition_gen!=NULL)";
         } else if (decksDAO.decks.getPrepositionAkkusative() == 0 && decksDAO.decks.getPrepositionDative() == 1 && decksDAO.decks.getPrepositionGenetive() == 0) {
-            queryString += " and preposition_dat>0";
+            queryString += " and preposition_dat>1";
         } else if (decksDAO.decks.getPrepositionAkkusative() == 0 && decksDAO.decks.getPrepositionDative() == 0 && decksDAO.decks.getPrepositionGenetive() == 1) {
             queryString += " and preposition_gen!=NULL";
         } else if (decksDAO.decks.getPrepositionAkkusative() == 0 && decksDAO.decks.getPrepositionDative() == 0 && decksDAO.decks.getPrepositionGenetive() == 0) {

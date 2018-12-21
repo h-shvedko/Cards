@@ -241,7 +241,7 @@ public class TmpListOfCardsController extends A_Controller {
         tmpLevel.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TmpCards, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<TmpCards, String> p) {
-                if (p.getValue().getPrepositionAkk() != null) {
+                if (p.getValue().getLevel() != null) {
                     return new SimpleStringProperty(p.getValue().getLevel().getName());
                 }
                 return new SimpleStringProperty("");
@@ -332,6 +332,7 @@ public class TmpListOfCardsController extends A_Controller {
 
     public void importFileAction(ActionEvent actionEvent) {
         try {
+            //TODO: to export from Excel use option save as ->"Unicode text (*.txt)" and then rename file to .csv and convert to UTF-8
             ReadCSV.read();
 //            FillDatabase.validateData(ReadCSV.fileContent);
             FillDatabase.fillCardsFromCSV(ReadCSV.fileContent);
