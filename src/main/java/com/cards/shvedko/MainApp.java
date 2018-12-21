@@ -4,6 +4,7 @@ import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Helpers.FirstPreloader;
 import com.cards.shvedko.Helpers.Splash;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -65,6 +66,13 @@ public class MainApp extends Application {
         primaryStage.setTitle("Authentication");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
         primaryStage.sizeToScene();
         primaryStage.setResizable(false);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getClassLoader().getResource("css/style.css")).toExternalForm());
