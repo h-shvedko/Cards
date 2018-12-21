@@ -388,7 +388,8 @@ public class AddVerbCardDeckController extends A_Controller {
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
+        globalUserData = nameDeck;
+        goToPage("addDeck.fxml", "Создать колоду", globalUserData);
     }
 
     @Override

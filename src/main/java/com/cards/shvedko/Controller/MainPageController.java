@@ -4,6 +4,7 @@ import com.cards.shvedko.Helpers.Language.Language;
 import com.cards.shvedko.Helpers.Language.LanguageLabelsRu;
 import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.Users;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -42,6 +43,8 @@ public class MainPageController extends A_Controller {
     public void handleCloseButton(ActionEvent actionEvent) {
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
+        Platform.exit();
+        System.exit(0);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
