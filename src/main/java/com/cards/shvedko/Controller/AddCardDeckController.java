@@ -28,8 +28,6 @@ public class AddCardDeckController extends A_Controller {
     @FXML
     private Button save;
     @FXML
-    private TextField nameDeck;
-    @FXML
     private ToggleButton allTopic;
 
     @Override
@@ -37,11 +35,16 @@ public class AddCardDeckController extends A_Controller {
 
         super.initialize(location, resources);
 
+        if(globalUserData instanceof TextField){
+            nameDeck.setText(((TextField) globalUserData).getText());
+        }
+
         if (speechPart != null) {
             speechPart.valueProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
                     if (Objects.equals(newValue, ModelsDAO.VERB)) {
+                        globalUserData = nameDeck;
                         goToPage("addVerbDeck.fxml", "Создать колоду с глаголами", globalUserData);
                     }
                 }

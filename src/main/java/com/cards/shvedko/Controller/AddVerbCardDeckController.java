@@ -70,14 +70,15 @@ public class AddVerbCardDeckController extends A_Controller {
     @FXML
     private Button save;
     @FXML
-    private TextField nameDeck;
-    @FXML
     private ToggleButton allTopic;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
+        if(globalUserData instanceof TextField){
+            nameDeck.setText(((TextField) globalUserData).getText());
+        }
         trembareLabel.setWrapText(true);
 
         if (speechPart != null) {
@@ -85,6 +86,7 @@ public class AddVerbCardDeckController extends A_Controller {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
                     if (!Objects.equals(newValue, ModelsDAO.VERB)) {
+                        globalUserData = nameDeck;
                         goToPage("addDeck.fxml", "Создать колоду", globalUserData);
                     }
                 }
