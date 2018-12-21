@@ -5,6 +5,7 @@ import com.cards.shvedko.ModelDAO.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.hibernate.query.Query;
 
 import java.net.URL;
 import java.util.List;
@@ -12,12 +13,18 @@ import java.util.ResourceBundle;
 
 public class EditCardDeckController extends A_Controller {
 
+    public Label deckNameLabel;
+    private String nameDeckData;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
         startCards.setWrapText(true);
         if(A_Controller.globalDeckData != null){
+
+            deckNameLabel.setText(A_Controller.globalDeckData.getName());
+
             int isAnchorValue = A_Controller.globalDeckData.getIsAnchore();
 
             if(isAnchorValue == ModelsDAO.ANCHOR_OFF){
@@ -43,7 +50,7 @@ public class EditCardDeckController extends A_Controller {
             favoriteOn.setToggleGroup(groupFavorite);
             favoriteOff.setToggleGroup(groupFavorite);
 
-            nameDeck.setText(A_Controller.globalDeckData.getName());
+            nameDeckData = A_Controller.globalDeckData.getName();
 
             if(A_Controller.stage != null){
                 nameDeck.setDisable(true);
@@ -70,7 +77,7 @@ public class EditCardDeckController extends A_Controller {
     }
 
     public void handleSaveButton(ActionEvent actionEvent) {
-        String name = nameDeck.getText();
+        String name = nameDeckData;
         String isAnchor = groupAnchor.getSelectedToggle().getUserData().toString();
         String isFavorite = groupFavorite.getSelectedToggle().getUserData().toString();
         boolean ifAllSpeechPart = allSpeechPart.isSelected();
