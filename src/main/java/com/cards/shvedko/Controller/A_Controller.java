@@ -178,6 +178,13 @@ abstract public class A_Controller implements Initializable {
     protected TableColumn<Cards, String> tableForeignValue;
     //************************************************************************
 
+    //*********************PROGRESS BAR **************************************
+    @FXML
+    protected ProgressBar splash;
+    private Stage splashStage;
+
+    //************************************************************************
+
     public static String errorMsg;
     protected String nativeValueOld;
     protected String nativeValueNew;
@@ -195,6 +202,7 @@ abstract public class A_Controller implements Initializable {
     public static Decks globalDeckData;
     public static Object globalAudioFileData;
     public static Map<String, String> globalCardData = new HashMap<String, String>();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -410,6 +418,11 @@ abstract public class A_Controller implements Initializable {
     }
 
     protected boolean closeAdditionalStage(){
+
+        if(splashStage != null){
+            splashStage.close();
+        }
+
         if(A_Controller.stage != null){
             A_Controller.stage.close();
             A_Controller.stage = null;
@@ -514,6 +527,31 @@ abstract public class A_Controller implements Initializable {
             ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void showSplashProgress(ActionEvent event) {
+        try {
+            closeAdditionalStage();
+            splashStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("splashProgress.fxml"), null, new JavaFXBuilderFactory());
+            splashStage.setScene(new Scene(root));
+            splashStage.setTitle("In progress...");
+            splashStage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+            splashStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            splashStage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void closeSplashProgress(ActionEvent event) {
+        try {
+            closeAdditionalStage();
+            splashStage.close();
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }

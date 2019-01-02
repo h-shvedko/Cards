@@ -53,6 +53,9 @@ public class AddCardDeckController extends A_Controller {
     }
 
     public void handleSaveButton(ActionEvent actionEvent) {
+
+        showSplashProgress(actionEvent);
+
         String name = nameDeck.getText();
         String errorMessageValue = "";
 
