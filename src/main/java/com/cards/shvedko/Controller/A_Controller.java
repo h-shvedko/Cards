@@ -21,10 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Modality;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import javafx.stage.*;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
@@ -539,6 +536,7 @@ abstract public class A_Controller implements Initializable {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("splashProgress.fxml"), null, new JavaFXBuilderFactory());
             splashStage.setScene(new Scene(root));
             splashStage.setTitle("In progress...");
+            splashStage.initStyle(StageStyle.UNDECORATED);
             splashStage.initModality(Modality.WINDOW_MODAL);
             ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
             splashStage.initOwner(((Node) event.getSource()).getScene().getWindow());
