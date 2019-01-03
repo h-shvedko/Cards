@@ -8,9 +8,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane mouseTransparent="true" prefHeight="18.0" prefWidth="207.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.SplashProgressController">
+<AnchorPane mouseTransparent="true" prefHeight="18.0" prefWidth="207.0"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.SplashProgressController">
    <children>
-      <GridPane alignment="CENTER" prefHeight="17.0" prefWidth="207.0" style="-fx-background-color: trasparent;">
+      <GridPane alignment="CENTER" prefHeight="17.0" prefWidth="207.0" >
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>

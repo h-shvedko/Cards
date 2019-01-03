@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -54,8 +55,6 @@ public class AddCardDeckController extends A_Controller {
 
     public void handleSaveButton(ActionEvent actionEvent) {
 
-        showSplashProgress(actionEvent);
-
         String name = nameDeck.getText();
         String errorMessageValue = "";
 
@@ -69,7 +68,7 @@ public class AddCardDeckController extends A_Controller {
             speechPartValue = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex())) + 1;
 
             if(speechPartValue == 0){
-                errorMessageValue += "Выберите чвсть речи!\n";
+                errorMessageValue += "Выберите часть речи!\n";
             }
 
             CardTypesDAO cardTypesDAO = new CardTypesDAO();
@@ -155,8 +154,7 @@ public class AddCardDeckController extends A_Controller {
             }
 
             try {
-                saveDecksValues(decksDAO);
-                showSuccessStayOnPage(actionEvent);
+                saveDecksValues(decksDAO, actionEvent);
             } catch (Exception e) {
                 crashAppeared(e.getMessage());
             }
@@ -166,56 +164,73 @@ public class AddCardDeckController extends A_Controller {
         }
     }
 
-    private void saveDecksValues(DecksDAO decksDAO) throws Exception {
+    private void saveDecksValues(DecksDAO decksDAO, ActionEvent actionEvent) throws Exception {
         int categoryId = decksDAO.decks.getCategory().getId();
         int typeId = decksDAO.decks.getType().getId();
         int userId = decksDAO.decks.getUser().getId();
         int deckId = decksDAO.decks.getId();
         int levelId = decksDAO.decks.getLevels().getId();
 
-        CardsDAO cardsDAO = new CardsDAO();
-        List cards;
-        String queryString = "where user_id=" + userId + " and is_visible=1";
-        try {
-            if (!decksDAO.decks.getCategory().getName().equals(ModelsDAO.ALL_PART_OF_SPEECH)) {
-                queryString += " and category_id=" + categoryId;
-            }
-            if (!decksDAO.decks.getType().getName().equals(ModelsDAO.ALL_PART_OF_SPEECH)) {
-                queryString += " and type_id=" + typeId;
-            }
-            if (!decksDAO.decks.getLevels().getName().equals(ModelsDAO.ALL_LEVELS)) {
-                queryString += " and level_id=" + levelId;
-            }
-            cards = cardsDAO.selectAllBy(queryString);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-
-        if (cards.size() > 0) {
-            final Session session = DBService.sessionFactory.getCurrentSession();
-
-            try {
-                StringBuilder insertString = null;
-                DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
-
-                for (Object card : cards) {
-                    insertString = new StringBuilder("INSERT INTO DECKS_VALUES (cards_id, deck_id, is_favorite, is_anchor, is_ready, date_ready, order_in_card, count_of_appearence) VALUES ");
-                    insertString.append("(");
-                    insertString.append(((Cards) card).getId());
-                    insertString.append(",");
-                    insertString.append(deckId);
-                    insertString.append(",0,0,0,null,0,0)");
-                    insertString.append(";");
-                    decksValuesDAO.insert(insertString, session);
+        Task<Void> task = new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                CardsDAO cardsDAO = new CardsDAO();
+                List cards;
+                String queryString = "where user_id=" + userId + " and is_visible=1";
+                try {
+                    if (!decksDAO.decks.getCategory().getName().equals(ModelsDAO.ALL_PART_OF_SPEECH)) {
+                        queryString += " and category_id=" + categoryId;
+                    }
+                    if (!decksDAO.decks.getType().getName().equals(ModelsDAO.ALL_PART_OF_SPEECH)) {
+                        queryString += " and type_id=" + typeId;
+                    }
+                    if (!decksDAO.decks.getLevels().getName().equals(ModelsDAO.ALL_LEVELS)) {
+                        queryString += " and level_id=" + levelId;
+                    }
+                    cards = cardsDAO.selectAllBy(queryString);
+                } catch (Exception e) {
+                    throw new Exception(e.getMessage());
                 }
 
-                decksValuesDAO.commit();
-            } catch (Exception ex) {
-                if (session.getTransaction() != null) session.getTransaction().rollback();
-                throw new Exception(ex.getMessage());
-            }
-        }
+                if (cards.size() > 0) {
+                    final Session session = DBService.sessionFactory.getCurrentSession();
 
+                    try {
+                        StringBuilder insertString = null;
+                        DecksValuesDAO decksValuesDAO = new DecksValuesDAO();
+
+                        int i = 0;
+                        for (Object card : cards) {
+                            insertString = new StringBuilder("INSERT INTO DECKS_VALUES (cards_id, deck_id, is_favorite, is_anchor, is_ready, date_ready, order_in_card, count_of_appearence) VALUES ");
+                            insertString.append("(");
+                            insertString.append(((Cards) card).getId());
+                            insertString.append(",");
+                            insertString.append(deckId);
+                            insertString.append(",0,0,0,null,0,0)");
+                            insertString.append(";");
+                            decksValuesDAO.insert(insertString, session);
+
+                            updateProgress(i, cards.size());
+//                            Thread.sleep(200);
+
+                            i++;
+                        }
+
+                        decksValuesDAO.commit();
+                    } catch (Exception ex) {
+                        if (session.getTransaction() != null) session.getTransaction().rollback();
+                        throw new Exception(ex.getMessage());
+                    }
+                }
+                updateProgress(10, 10);
+                return null ;
+            }
+        };
+
+        showSplashProgress(actionEvent, task);
+
+        Thread thread = new Thread(task);
+        thread.start();
     }
 
     private A_Models getTopicAll() throws Exception {
