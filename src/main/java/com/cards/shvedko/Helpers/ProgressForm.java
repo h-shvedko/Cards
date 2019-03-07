@@ -24,9 +24,9 @@ public class ProgressForm {
 
         // PROGRESS BAR
         final Label label = new Label();
-        label.setText("alerto");
+        label.setText("alert");
 
-        pb.setProgress(-1F);
+//        pb.setProgress(-1F);
         pin.setProgress(-1F);
 
         final HBox hb = new HBox();
