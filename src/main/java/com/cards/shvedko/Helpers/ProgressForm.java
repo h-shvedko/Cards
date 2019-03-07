@@ -18,7 +18,7 @@ public class ProgressForm {
 
     public ProgressForm() {
         dialogStage = new Stage();
-        dialogStage.initStyle(StageStyle.UTILITY);
+        dialogStage.initStyle(StageStyle.TRANSPARENT);
         dialogStage.setResizable(false);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
 
@@ -32,14 +32,14 @@ public class ProgressForm {
         final HBox hb = new HBox();
         hb.setSpacing(5);
         hb.setAlignment(Pos.CENTER);
-        hb.getChildren().addAll(pb, pin);
+        hb.getChildren().addAll(pin);
 
         Scene scene = new Scene(hb);
         dialogStage.setScene(scene);
     }
 
     public void activateProgressBar(final Task<?> task)  {
-        pb.progressProperty().bind(task.progressProperty());
+//        pb.progressProperty().bind(task.progressProperty());
         pin.progressProperty().bind(task.progressProperty());
         dialogStage.show();
     }

@@ -539,6 +539,7 @@ abstract public class A_Controller implements Initializable {
 
             ProgressForm pForm = new ProgressForm();
 
+            ((Node) actionEvent.getSource()).getScene().getWindow().setOpacity(0.7);
             pForm.activateProgressBar(task);
 
             task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
