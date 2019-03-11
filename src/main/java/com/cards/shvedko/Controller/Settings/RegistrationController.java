@@ -1,12 +1,10 @@
 package com.cards.shvedko.Controller.Settings;
 
 import com.cards.shvedko.Controller.A_Controller;
-import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.ModelDAO.UsersDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -61,7 +59,7 @@ public class RegistrationController extends A_Controller {
                     }
                     showSuccessRegistration(actionEvent, usersDAO.user);
                 } catch (Exception e){
-                    crashAppeared(e.getMessage());
+                    crashAppeared(e.getMessage(), actionEvent);
                 }
             } else{
                 showErrors(usersDAO);
@@ -70,7 +68,7 @@ public class RegistrationController extends A_Controller {
     }
 
     public void handleCancelButtonAction(ActionEvent actionEvent) {
-        this.goToPage("authentication.fxml", A_Controller.LOGIN_PAGE_TITLE, "");
+        this.goToPage("Settings/authentication.fxml", A_Controller.LOGIN_PAGE_TITLE, "");
     }
 
     public void initialize(URL location, ResourceBundle resources) {

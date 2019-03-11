@@ -62,7 +62,7 @@ public class MainApp extends Application {
 
             }
         });
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("authentication.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Settings/authentication.fxml"));
         primaryStage.setTitle("Authentication");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

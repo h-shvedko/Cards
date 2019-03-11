@@ -130,7 +130,7 @@ public class EditCardNounController extends A_Controller {
                     }
                     showSuccessEditCard(actionEvent);
                 } catch (Exception ex) {
-                    crashAppeared(ex.getMessage());
+                    crashAppeared(ex.getMessage(), actionEvent);
                 }
             } else {
                 showErrors(cardsDAO);

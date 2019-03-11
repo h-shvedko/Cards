@@ -61,7 +61,7 @@ public class AuthenticationController extends A_Controller {
     }
 
     public void createAccount(ActionEvent actionEvent) throws Exception {
-        this.goToPage("registration.fxml", A_Controller.REGISTRATION_PAGE_TITLE, "");
+        this.goToPage("Settings/registration.fxml", A_Controller.REGISTRATION_PAGE_TITLE, "");
     }
 
     public void initialize(URL location, ResourceBundle resources) {

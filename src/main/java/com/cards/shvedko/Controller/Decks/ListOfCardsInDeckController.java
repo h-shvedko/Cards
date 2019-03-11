@@ -131,9 +131,9 @@ public class ListOfCardsInDeckController extends A_Controller {
                 try {
                     RemoveIsLearntController.deckValueId = getSelectedDeckValue(selectedItem.getId());
                 } catch (Exception e) {
-                    crashAppeared(e.getMessage());
+                    crashAppeared(e.getMessage(), new ActionEvent());
                 }
-                goToPage("modalRemoveIsLearnt.fxml", "Учить заново/Готово", selectedItem);
+                goToPage("Modals/modalRemoveIsLearnt.fxml", "Учить заново/Готово", selectedItem);
             }
         });
 
@@ -146,9 +146,9 @@ public class ListOfCardsInDeckController extends A_Controller {
                 try {
                     RemoveIsAnchorController.deckValueId = getSelectedDeckValue(selectedItem.getId());
                 } catch (Exception e) {
-                    crashAppeared(e.getMessage());
+                    crashAppeared(e.getMessage(), new ActionEvent());
                 }
-                goToPage("modalRemoveIsAnchor.fxml", "Сделать первой/Убрать из первой", selectedItem);
+                goToPage("Modals/modalRemoveIsAnchor.fxml", "Сделать первой/Убрать из первой", selectedItem);
             }
         });
 

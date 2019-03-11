@@ -6,10 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -21,7 +19,7 @@ public class FirstPreloader extends Preloader {
     private Scene createPreloaderScene() {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("splash.fxml"));
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("Settings/splash.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,7 +45,7 @@ public class FirstPreloader extends Preloader {
         Platform.setImplicitExit(false);
         try {
             stage.setTitle("Splash");
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("splash.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Settings/splash.fxml"));
             Scene scene = new Scene(root, Color.TRANSPARENT);
             stage.setScene(scene);
             stage.show();

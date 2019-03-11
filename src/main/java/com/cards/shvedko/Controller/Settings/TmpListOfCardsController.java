@@ -100,7 +100,7 @@ public class TmpListOfCardsController extends A_Controller {
         try {
             tmpCards = tmpCardsDAO.selectAll();
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), new ActionEvent());
         }
 
         if (tmpCards.size() > 0) {
@@ -189,7 +189,7 @@ public class TmpListOfCardsController extends A_Controller {
             @Override
             public void handle(ActionEvent event) {
                 TmpCards selectedItem = tmpCardsTable.getSelectionModel().getSelectedItem();
-                goToPage("modalRemoveCard.fxml", "Удаление/восстановление карточки", selectedItem);
+                goToPage("Modals/modalRemoveCard.fxml", "Удаление/восстановление карточки", selectedItem);
             }
         });
 
@@ -328,7 +328,7 @@ public class TmpListOfCardsController extends A_Controller {
     }
 
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("settings.fxml", A_Controller.SETTINGS_PAGE_TITLE, "");
+        this.goToPage("Settings/settings.fxml", A_Controller.SETTINGS_PAGE_TITLE, "");
     }
 
     public void importFileAction(ActionEvent actionEvent) {
@@ -352,7 +352,7 @@ public class TmpListOfCardsController extends A_Controller {
             try{
                 fillDatabase.fillMainTableFromTmpTable(values, actionEvent);
             } catch (Exception e){
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         }
     }

@@ -111,7 +111,7 @@ public class AddCardNounController extends A_Controller {
                     }
                     showSuccess(actionEvent);
                 } catch (Exception ex) {
-                    crashAppeared(ex.getMessage());
+                    crashAppeared(ex.getMessage(), actionEvent);
                 }
             } else {
                 showErrors(cardsDAO);

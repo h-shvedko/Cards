@@ -73,7 +73,7 @@ public class RemoveCardController extends A_Controller {
                         throw new Exception(cardsDAO.errorMsg);
                     }
                 } catch (Exception ex) {
-                    crashAppeared(ex.getMessage());
+                    crashAppeared(ex.getMessage(), actionEvent);
                 }
             } else {
                 showErrors(cardsDAO);

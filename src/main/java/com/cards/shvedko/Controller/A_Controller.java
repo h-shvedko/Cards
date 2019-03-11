@@ -24,7 +24,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.TilePane;
 import javafx.stage.*;
 
 import javax.validation.ConstraintViolation;
@@ -214,7 +213,7 @@ abstract public class A_Controller implements Initializable {
             try {
                 dataSpeech = CardTypesDAO.setAllTypes(dataSpeech);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), new ActionEvent());
             }
             speechPart.setItems(dataSpeech);
 
@@ -234,7 +233,7 @@ abstract public class A_Controller implements Initializable {
             try {
                 dataTopic = CardCategoriesDAO.setAllTypes(dataTopic);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), new ActionEvent());
             }
             topic.setItems(dataTopic);
 
@@ -254,7 +253,7 @@ abstract public class A_Controller implements Initializable {
             try {
                 dataLevel = CardLevelsDAO.setAllLevels(dataLevel);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), new ActionEvent());
             }
             level.setItems(dataLevel);
 
@@ -472,14 +471,31 @@ abstract public class A_Controller implements Initializable {
         closeAdditionalStage();
     }
 
-    public void crashAppeared(String message) {
+    /**
+     * @param message
+     */
+    public void crashAppeared(String message, ActionEvent event) {
         MainPageController.errorStringMsg = message;
         System.out.println(message);
 
-        //TODO : add some modal window with message
-        goToPage("mainPage.fxml", "Main page", "");
+        try {
+            closeAdditionalStage();
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalError.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Error!");
+            stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    /**
+     * @param modelsDAO
+     */
     protected void showErrors(ModelsDAO modelsDAO) {
         if (modelsDAO.errorSet != null) {
             for (ConstraintViolation violation : modelsDAO.errorSet) {
@@ -523,7 +539,7 @@ abstract public class A_Controller implements Initializable {
         try {
             closeAdditionalStage();
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccessStayOnThePage.fxml"), null, new JavaFXBuilderFactory());
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalSuccessStayOnThePage.fxml"), null, new JavaFXBuilderFactory());
             stage.setScene(new Scene(root));
             stage.setTitle("Success!");
             stage.initModality(Modality.WINDOW_MODAL);
@@ -619,7 +635,7 @@ abstract public class A_Controller implements Initializable {
         try {
             closeAdditionalStage();
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccessAfterDeletionStayOnThePage.fxml"), null, new JavaFXBuilderFactory());
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalSuccessAfterDeletionStayOnThePage.fxml"), null, new JavaFXBuilderFactory());
             stage.setScene(new Scene(root));
             stage.setTitle("Success!");
             stage.initModality(Modality.WINDOW_MODAL);
@@ -635,7 +651,7 @@ abstract public class A_Controller implements Initializable {
         try {
             closeAdditionalStage();
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccess.fxml"), null, new JavaFXBuilderFactory());
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalSuccess.fxml"), null, new JavaFXBuilderFactory());
             stage.setScene(new Scene(root));
             stage.setTitle("Success!");
             stage.initModality(Modality.WINDOW_MODAL);
@@ -651,7 +667,7 @@ abstract public class A_Controller implements Initializable {
         try {
             closeAdditionalStage();
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccessEditCard.fxml"), null, new JavaFXBuilderFactory());
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalSuccessEditCard.fxml"), null, new JavaFXBuilderFactory());
             stage.setScene(new Scene(root));
             stage.setTitle("Success!");
             stage.initModality(Modality.WINDOW_MODAL);
@@ -666,7 +682,7 @@ abstract public class A_Controller implements Initializable {
     protected void showSuccessProfile(ActionEvent event) {
         try {
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccessProfile.fxml"), null, new JavaFXBuilderFactory());
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalSuccessProfile.fxml"), null, new JavaFXBuilderFactory());
             stage.setScene(new Scene(root));
             stage.setTitle("Success!");
             stage.initModality(Modality.WINDOW_MODAL);
@@ -682,7 +698,7 @@ abstract public class A_Controller implements Initializable {
         try {
             globalUserData = user;
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalSuccessRegistration.fxml"), null, new JavaFXBuilderFactory());
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalSuccessRegistration.fxml"), null, new JavaFXBuilderFactory());
             stage.setScene(new Scene(root));
             stage.setTitle("Registration is success!");
             stage.initModality(Modality.WINDOW_MODAL);
@@ -697,7 +713,7 @@ abstract public class A_Controller implements Initializable {
     protected void showQuiestion(ActionEvent event, String text) {
         try {
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("modalQuestion.fxml"), null, new JavaFXBuilderFactory());
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalQuestion.fxml"), null, new JavaFXBuilderFactory());
             stage.setScene(new Scene(root));
             stage.setTitle("Warning!");
             stage.setUserData(text);
@@ -742,7 +758,7 @@ abstract public class A_Controller implements Initializable {
         try {
             categoryObject = cardCategoriesDAO.select("where id=" + category);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
 
         A_Models userObject = globalUserModel;
@@ -752,7 +768,7 @@ abstract public class A_Controller implements Initializable {
         try {
             typeObject = cardTypesDAO.select("where id=" + type);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
 
         CardLevelsDAO cardLevels = new CardLevelsDAO();
@@ -760,7 +776,7 @@ abstract public class A_Controller implements Initializable {
         try {
             levelObject = cardLevels.select("where id=" + type);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
 
         CardsDAO cardsDAO = new CardsDAO();
@@ -837,7 +853,7 @@ abstract public class A_Controller implements Initializable {
         try {
             categoryObject = cardCategoriesDAO.select("where id=" + category);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
 
         A_Models userObject = globalUserModel;
@@ -847,7 +863,7 @@ abstract public class A_Controller implements Initializable {
         try {
             typeObject = cardTypesDAO.select("where id=" + type);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
 
         CardLevelsDAO cardLevelsDAO = new CardLevelsDAO();
@@ -855,7 +871,7 @@ abstract public class A_Controller implements Initializable {
         try {
             levelObject = cardLevelsDAO.select("where id=" + type);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
 
         int cardId = ((Cards) A_Controller.globalCardSavedData).getId();

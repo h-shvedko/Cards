@@ -6,17 +6,13 @@ import com.cards.shvedko.ModelDAO.*;
 import com.cards.shvedko.Services.DBService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.hibernate.Session;
-import org.hibernate.internal.SessionImpl;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -47,7 +43,7 @@ public class AddCardDeckController extends A_Controller {
                 public void changed(ObservableValue value, String oldValue, String newValue) {
                     if (Objects.equals(newValue, ModelsDAO.VERB)) {
                         globalUserData = nameDeck;
-                        goToPage("addVerbDeck.fxml", "Создать колоду с глаголами", globalUserData);
+                        goToPage("Decks/addVerbDeck.fxml", "Создать колоду с глаголами", globalUserData);
                     }
                 }
             });
@@ -77,13 +73,13 @@ public class AddCardDeckController extends A_Controller {
             try {
                 typeObject = cardTypesDAO.select("where id=" + speechPartValue);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             try {
                 typeObject = getCategoryAll();
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         }
 
@@ -101,13 +97,13 @@ public class AddCardDeckController extends A_Controller {
             try {
                 categoryObject = cardCategoriesDAO.select("where id=" + topicValue);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             try {
                 categoryObject = getTopicAll();
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         }
 
@@ -124,7 +120,7 @@ public class AddCardDeckController extends A_Controller {
         try {
             levelObject = cardLevelsDAO.select("where id=" + levelValue);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
 
          DecksDAO decksDAO = new DecksDAO();
@@ -151,17 +147,17 @@ public class AddCardDeckController extends A_Controller {
                     throw new Exception(decksDAO.errorMsg);
                 }
             } catch (Exception ex) {
-                crashAppeared(ex.getMessage());
+                crashAppeared(ex.getMessage(), actionEvent);
             }
 
             try {
                 saveDecksValues(decksDAO, actionEvent);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             showErrors(decksDAO);
-            crashAppeared(errorMessageValue);
+            crashAppeared(errorMessageValue, actionEvent);
         }
     }
 
@@ -262,7 +258,7 @@ public class AddCardDeckController extends A_Controller {
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
+        this.goToPage("Decks/chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
     }
 
     @Override

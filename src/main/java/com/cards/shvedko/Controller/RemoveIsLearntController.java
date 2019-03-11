@@ -97,7 +97,7 @@ public class RemoveIsLearntController extends A_Controller {
                     }
                     A_Controller.updateGlobalDeckData();
                 } catch (Exception ex) {
-                    crashAppeared(ex.getMessage());
+                    crashAppeared(ex.getMessage(), actionEvent);
                 }
             } else {
                 showErrors(decksValuesDAO);

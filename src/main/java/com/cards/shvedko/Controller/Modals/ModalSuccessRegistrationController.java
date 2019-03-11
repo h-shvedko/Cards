@@ -33,6 +33,6 @@ public class ModalSuccessRegistrationController extends A_Controller {
 
     public void handleCloseButton(ActionEvent actionEvent) {
         closeWindow(close);
-        this.goToPage("authentication.fxml", A_Controller.LOGIN_PAGE_TITLE, "");
+        this.goToPage("Settings/authentication.fxml", A_Controller.LOGIN_PAGE_TITLE, "");
     }
 }

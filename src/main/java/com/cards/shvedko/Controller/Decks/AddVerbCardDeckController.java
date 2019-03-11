@@ -88,7 +88,7 @@ public class AddVerbCardDeckController extends A_Controller {
                 public void changed(ObservableValue value, String oldValue, String newValue) {
                     if (!Objects.equals(newValue, ModelsDAO.VERB)) {
                         globalUserData = nameDeck;
-                        goToPage("addDeck.fxml", "Создать колоду", globalUserData);
+                        goToPage("Decks/addDeck.fxml", "Создать колоду", globalUserData);
                     }
                 }
             });
@@ -136,7 +136,7 @@ public class AddVerbCardDeckController extends A_Controller {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    goToPage("addDeck.fxml", "Создать колоду", globalUserData);
+                    goToPage("Decks/addDeck.fxml", "Создать колоду", globalUserData);
                 }
             }
         });
@@ -158,7 +158,7 @@ public class AddVerbCardDeckController extends A_Controller {
         try {
             typeObject = cardTypesDAO.select("where id=" + speechPartValue);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
 
         int topicValue = 0;
@@ -170,13 +170,13 @@ public class AddVerbCardDeckController extends A_Controller {
             try {
                 categoryObject = cardCategoriesDAO.select("where id=" + topicValue);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             try {
                 categoryObject = getTopicAll();
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         }
 
@@ -193,7 +193,7 @@ public class AddVerbCardDeckController extends A_Controller {
         try {
             levelObject = cardLevelsDAO.select("where id=" + levelValue);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
 
         DecksDAO decksDAO = new DecksDAO();
@@ -245,14 +245,14 @@ public class AddVerbCardDeckController extends A_Controller {
                     throw new Exception(decksDAO.errorMsg);
                 }
             } catch (Exception ex) {
-                crashAppeared(ex.getMessage());
+                crashAppeared(ex.getMessage(), actionEvent);
             }
 
             try {
                 saveDecksValues(decksDAO);
                 showSuccessStayOnPage(actionEvent);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             showErrors(decksDAO);
@@ -390,7 +390,7 @@ public class AddVerbCardDeckController extends A_Controller {
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
         globalUserData = nameDeck;
-        goToPage("addDeck.fxml", "Создать колоду", globalUserData);
+        goToPage("Decks/addDeck.fxml", "Создать колоду", globalUserData);
     }
 
     @Override

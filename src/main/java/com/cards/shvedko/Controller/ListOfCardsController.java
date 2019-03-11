@@ -19,7 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.util.Callback;
 
-import javax.smartcardio.Card;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +49,7 @@ public class ListOfCardsController extends A_Controller {
                 try {
                     cards = cardsDAO.selectAll();
                 } catch (Exception e) {
-                    crashAppeared(e.getMessage());
+                    crashAppeared(e.getMessage(), new ActionEvent());
                 }
 
                 if (cards.size() > 0) {
@@ -166,7 +165,7 @@ public class ListOfCardsController extends A_Controller {
             @Override
             public void handle(ActionEvent event) {
                 Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
-                goToPage("modalRemoveCard.fxml", "Удаление/восстановление карточки", selectedItem);
+                goToPage("Modals/modalRemoveCard.fxml", "Удаление/восстановление карточки", selectedItem);
             }
         });
 

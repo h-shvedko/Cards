@@ -36,7 +36,7 @@ public class SettingsController extends A_Controller {
     }
 
     public void handleImportFromCSV(ActionEvent actionEvent) {
-        this.goToPage("tmpListOfCards.fxml", A_Controller.IMPORT_FROM_CSV, "");
+        this.goToPage("Settings/tmpListOfCards.fxml", A_Controller.IMPORT_FROM_CSV, "");
     }
 
     public void handleCleanDB(ActionEvent actionEvent) {

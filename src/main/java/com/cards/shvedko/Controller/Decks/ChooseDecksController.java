@@ -13,7 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class ChooseDecksController extends A_Controller {
         try {
             decks = DecksDAO.setAllDecks(decks);
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), new ActionEvent());
         }
         decksCombo.setItems(decks);
 
@@ -68,27 +67,27 @@ public class ChooseDecksController extends A_Controller {
     }
 
     public void handleCreateButton(ActionEvent actionEvent) {
-        this.goToPage("addDeck.fxml", A_Controller.ADD_DECK_PAGE_TITLE, "");
+        this.goToPage("Decks/addDeck.fxml", A_Controller.ADD_DECK_PAGE_TITLE, "");
     }
 
     public void handleStartButton(ActionEvent actionEvent) {
-        this.setDeck();
+        this.setDeck(actionEvent);
         if(A_Controller.globalDeckData.getDecksValues() != null && A_Controller.globalDeckData.getDecksValues().size() > 0){
             this.goToPage("card.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
         } else {
-            this.openOneMoreWindow("emptyDeck.fxml", A_Controller.EMPTY_DECK_TITLE, A_Controller.globalDeckData, actionEvent);
+            this.openOneMoreWindow("Decks/emptyDeck.fxml", A_Controller.EMPTY_DECK_TITLE, A_Controller.globalDeckData, actionEvent);
         }
 
     }
 
-    private void setDeck() {
+    private void setDeck(ActionEvent actionEvent) {
         String deckValue = String.valueOf(decksCombo.getSelectionModel().getSelectedItem());
         DecksDAO decksDAO = new DecksDAO();
         A_Models deck = null;
         try {
             deck = decksDAO.select("where name='" + deckValue + "' and is_visible=1");
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), actionEvent);
         }
         if (deck != null) {
             A_Controller.globalDeckData = (Decks) deck;
@@ -97,7 +96,7 @@ public class ChooseDecksController extends A_Controller {
             try {
                 decksValues = decksValuesDAO.selectAllBy("where deck_id=" + deck.getId());
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
 
             if(!decksValues.isEmpty()){
@@ -111,12 +110,12 @@ public class ChooseDecksController extends A_Controller {
 
     public void handleSettingsButton(ActionEvent actionEvent) {
 
-        this.setDeck();
+        this.setDeck(actionEvent);
 
         if(A_Controller.globalDeckData.getType() != null && !A_Controller.globalDeckData.getType().getName().equals(ModelsDAO.VERB)){
-            this.goToPage("editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
+            this.goToPage("Decks/editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
         } else {
-            this.goToPage("editVerbDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
+            this.goToPage("Decks/editVerbDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
         }
     }
 }

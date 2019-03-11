@@ -50,7 +50,7 @@ public class ProfileController extends A_Controller {
                 A_Controller.globalUserModel = usersDAO.user;
                 showSuccessProfile(actionEvent);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             showErrors(usersDAO);

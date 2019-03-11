@@ -15,7 +15,7 @@ public class ModalSuccessStayOnPageController extends A_Controller {
     public void handleCloseButton(ActionEvent actionEvent) {
         closeWindow(createNew);
         MainApp.stage.setOpacity(1);
-        this.goToPage("chooseDecks.fxml", A_Controller.MAIN_PAGE_TITLE, "");
+        this.goToPage("Decks/chooseDecks.fxml", A_Controller.MAIN_PAGE_TITLE, "");
     }
 
     @Override

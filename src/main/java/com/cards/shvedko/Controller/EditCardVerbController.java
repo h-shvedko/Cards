@@ -101,7 +101,7 @@ public class EditCardVerbController extends A_Controller {
             try {
                 dataAkk = CardsPrepositionAkkusativDAO.setAllPrepositions(dataAkk);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), new ActionEvent());
             }
             pronomenAkk.setItems(dataAkk);
 
@@ -119,7 +119,7 @@ public class EditCardVerbController extends A_Controller {
             try {
                 dataDat = CardsPrepositionDativDAO.setAllPrepositions(dataDat);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), new ActionEvent());
             }
             pronomenDat.setItems(dataDat);
 
@@ -218,7 +218,7 @@ public class EditCardVerbController extends A_Controller {
             try {
                 dativObject = cardsPrepositionDativDAO.select("where id=" + prepositionDat);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
             if (dativObject != null) {
                 cardsDAO.cards.setPrepositionDativ((CardsPrepositionDativ) dativObject);
@@ -231,7 +231,7 @@ public class EditCardVerbController extends A_Controller {
             try {
                 akkObject = cardsPrepositionAkkusativDAO.select("where id=" + prepositionAkk);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
             if (akkObject != null) {
                 cardsDAO.cards.setPrepositionAkk((CardsPrepositionAkkusativ) akkObject);
@@ -248,7 +248,7 @@ public class EditCardVerbController extends A_Controller {
                     }
                     showSuccessEditCard(actionEvent);
                 } catch (Exception ex) {
-                    crashAppeared(ex.getMessage());
+                    crashAppeared(ex.getMessage(), actionEvent);
                 }
             } else {
                 showErrors(cardsDAO);

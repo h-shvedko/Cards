@@ -121,7 +121,7 @@ public class A_CardController extends A_Controller {
         try {
             setValuesOfCard();
         } catch (Exception e) {
-            crashAppeared(e.getMessage());
+            crashAppeared(e.getMessage(), new ActionEvent());
         }
     }
 
@@ -307,7 +307,7 @@ public class A_CardController extends A_Controller {
                     throw new Exception(decksValuesDAO.errorMsg);
                 }
             } catch (Exception ex) {
-                crashAppeared(ex.getMessage());
+                crashAppeared(ex.getMessage(), new ActionEvent());
             }
         } else {
             showErrors(decksValuesDAO);
@@ -316,7 +316,7 @@ public class A_CardController extends A_Controller {
 
     public void handleSettingsButton(ActionEvent actionEvent) {
         A_Controller.globalDeckData = ((DecksValues) decksValues).getDecks();
-        this.openOneMoreWindow("editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, "", actionEvent);
+        this.openOneMoreWindow("Decks/editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, "", actionEvent);
     }
 
     public void handleEditCardButton(ActionEvent actionEvent) {
@@ -366,7 +366,7 @@ public class A_CardController extends A_Controller {
                     throw new Exception(decksValuesDAO.errorMsg);
                 }
             } catch (Exception ex) {
-                crashAppeared(ex.getMessage());
+                crashAppeared(ex.getMessage(), actionEvent);
             }
         } else {
             showErrors(decksValuesDAO);
@@ -388,7 +388,7 @@ public class A_CardController extends A_Controller {
                             throw new Exception(decksValuesDAO.errorMsg);
                         }
                     } catch (Exception ex) {
-                        crashAppeared(ex.getMessage());
+                        crashAppeared(ex.getMessage(), new ActionEvent());
                     }
                 } else {
                     showErrors(decksValuesDAO);
@@ -426,7 +426,7 @@ public class A_CardController extends A_Controller {
                     throw new Exception(decksValuesDAO.errorMsg);
                 }
             } catch (Exception ex) {
-                crashAppeared(ex.getMessage());
+                crashAppeared(ex.getMessage(), actionEvent);
             }
         } else {
             showErrors(decksValuesDAO);
@@ -449,7 +449,7 @@ public class A_CardController extends A_Controller {
                     throw new Exception(decksValuesDAO.errorMsg);
                 }
             } catch (Exception ex) {
-                crashAppeared(ex.getMessage());
+                crashAppeared(ex.getMessage(), actionEvent);
             }
         } else {
             showErrors(decksValuesDAO);
@@ -467,7 +467,7 @@ public class A_CardController extends A_Controller {
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
+        this.goToPage("Decks/chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
     }
 
     public void handlePlayAction(ActionEvent actionEvent) {

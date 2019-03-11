@@ -3,15 +3,12 @@ package com.cards.shvedko.Controller.Decks;
 import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class EditVerbCardDeckController extends A_Controller {
@@ -234,7 +231,7 @@ public class EditVerbCardDeckController extends A_Controller {
                 topic.setValue(allTopicValue);
             }
         } else {
-            crashAppeared("Deck is not chosen!");
+            crashAppeared("Deck is not chosen!", new ActionEvent());
         }
     }
 
@@ -255,13 +252,13 @@ public class EditVerbCardDeckController extends A_Controller {
             try {
                 typeObject = cardTypesDAO.select("where id=" + speechPartValue);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             try {
                 typeObject = getCategoryAll();
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         }
 
@@ -274,13 +271,13 @@ public class EditVerbCardDeckController extends A_Controller {
             try {
                 categoryObject = cardCategoriesDAO.select("where id=" + topicValue);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             try {
                 categoryObject = getTopicAll();
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         }
 
@@ -332,14 +329,14 @@ public class EditVerbCardDeckController extends A_Controller {
                     throw new Exception(decksDAO.errorMsg);
                 }
             } catch (Exception ex) {
-                crashAppeared(ex.getMessage());
+                crashAppeared(ex.getMessage(), actionEvent);
             }
 
             try {
                 updateDecksValues(decksDAO);
                 showSuccess(actionEvent);
             } catch (Exception e) {
-                crashAppeared(e.getMessage());
+                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             showErrors(decksDAO);
@@ -471,7 +468,7 @@ public class EditVerbCardDeckController extends A_Controller {
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
+        this.goToPage("Decks/chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
     }
 
     @Override
@@ -504,7 +501,7 @@ public class EditVerbCardDeckController extends A_Controller {
                 }
                 showSuccessAfterDeleteStayOnPage(actionEvent);
             } catch (Exception ex) {
-                crashAppeared(ex.getMessage());
+                crashAppeared(ex.getMessage(), actionEvent);
             }
         } else {
             showErrors(decksDAO);
