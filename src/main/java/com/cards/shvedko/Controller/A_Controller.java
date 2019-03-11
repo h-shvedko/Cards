@@ -183,6 +183,7 @@ abstract public class A_Controller implements Initializable {
     @FXML
     protected ProgressBar splash;
     private Stage splashStage;
+    protected static ProgressForm pForm;
 
     //************************************************************************
 
@@ -544,7 +545,7 @@ abstract public class A_Controller implements Initializable {
         try {
 //            closeAdditionalStage();
 
-            ProgressForm pForm = new ProgressForm();
+            pForm = new ProgressForm();
 
             ((Node) actionEvent.getSource()).getScene().getWindow().setOpacity(0.7);
             pForm.activateProgressBar(task);
@@ -554,7 +555,6 @@ abstract public class A_Controller implements Initializable {
                 public void handle(WorkerStateEvent event) {
                     pForm.getDialogStage().close();
                     showSuccessStayOnPage(actionEvent);
-
                 }
             });
 
@@ -568,9 +568,9 @@ abstract public class A_Controller implements Initializable {
     /**
      * @param task
      */
-    protected void showLoadingSplashProgress(final Task<?> task) {
+    public static void showLoadingSplashProgress(final Task<?> task) {
         try {
-            ProgressForm pForm = new ProgressForm();
+            pForm = new ProgressForm();
 
             pForm.activateProgressBar(task);
 
