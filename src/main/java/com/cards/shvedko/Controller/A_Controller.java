@@ -475,7 +475,7 @@ abstract public class A_Controller implements Initializable {
      * @param message
      */
     public void crashAppeared(String message, ActionEvent event) {
-        MainPageController.errorStringMsg = message;
+        globalUserData = message;
         System.out.println(message);
 
         try {
