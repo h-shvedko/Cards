@@ -474,6 +474,9 @@ abstract public class A_Controller implements Initializable {
     public void crashAppeared(String message) {
         MainPageController.errorStringMsg = message;
         System.out.println(message);
+
+
+
         //TODO : add some modal window with message
         goToPage("mainPage.fxml", "Main page", "");
     }
@@ -533,6 +536,10 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    /**
+     * @param actionEvent
+     * @param task
+     */
     protected void showSplashProgress(ActionEvent actionEvent, final Task<?> task) {
         try {
 //            closeAdditionalStage();
@@ -548,6 +555,29 @@ abstract public class A_Controller implements Initializable {
                     pForm.getDialogStage().close();
                     showSuccessStayOnPage(actionEvent);
 
+                }
+            });
+
+            pForm.getDialogStage().show();
+
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * @param task
+     */
+    protected void showLoadingSplashProgress(final Task<?> task) {
+        try {
+            ProgressForm pForm = new ProgressForm();
+
+            pForm.activateProgressBar(task);
+
+            task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent event) {
+                    pForm.getDialogStage().close();
                 }
             });
 
@@ -584,6 +614,9 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    /**
+     * @param event
+     */
     protected void showSuccessAfterDeleteStayOnPage(ActionEvent event) {
         try {
             closeAdditionalStage();
