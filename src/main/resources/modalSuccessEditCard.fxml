@@ -9,7 +9,7 @@
 
 
 <AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.cards.shvedko.Controller.ModalSuccessEditCardController">
+            fx:controller="com.cards.shvedko.Controller.Modals.ModalSuccessEditCardController">
     <children>
         <GridPane alignment="CENTER" prefHeight="300.0" prefWidth="400.0">
             <columnConstraints>

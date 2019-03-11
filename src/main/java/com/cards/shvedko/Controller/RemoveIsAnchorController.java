@@ -24,7 +24,7 @@ public class RemoveIsAnchorController extends A_Controller {
 
     private boolean deleteAction = false;
 
-    protected static int deckValueId;
+    public static int deckValueId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

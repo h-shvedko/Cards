@@ -1,5 +1,6 @@
-package com.cards.shvedko.Controller;
+package com.cards.shvedko.Controller.Modals;
 
+import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Model.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

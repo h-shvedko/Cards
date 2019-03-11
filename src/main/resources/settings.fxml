@@ -10,7 +10,7 @@
 <?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.cards.shvedko.Controller.SettingsController">
+            fx:controller="com.cards.shvedko.Controller.Settings.SettingsController">
     <children>
         <GridPane fx:id="grid" alignment="CENTER" layoutY="-3.0" prefHeight="400.0" prefWidth="600.0">
             <columnConstraints>

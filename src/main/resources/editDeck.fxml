@@ -11,7 +11,7 @@
 
 <?import com.cathive.fonts.fontawesome.FontAwesomeIconView?>
 
-<AnchorPane maxHeight="600.0" maxWidth="600.0" minHeight="600.0" minWidth="600.0" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.EditCardDeckController">
+<AnchorPane maxHeight="600.0" maxWidth="600.0" minHeight="600.0" minWidth="600.0" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.Decks.EditCardDeckController">
     <children>
         <GridPane layoutX="-5.0" layoutY="-7.0" prefHeight="610.0" prefWidth="609.0">
             <columnConstraints>

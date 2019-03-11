@@ -1,4 +1,6 @@
-package com.cards.shvedko.Controller;
+package com.cards.shvedko.Controller.Settings;
+
+import com.cards.shvedko.Controller.A_Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;

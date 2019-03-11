@@ -476,8 +476,6 @@ abstract public class A_Controller implements Initializable {
         MainPageController.errorStringMsg = message;
         System.out.println(message);
 
-
-
         //TODO : add some modal window with message
         goToPage("mainPage.fxml", "Main page", "");
     }

@@ -1,5 +1,6 @@
-package com.cards.shvedko.Controller;
+package com.cards.shvedko.Controller.Decks;
 
+import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Helpers.Language.LanguageLabelsRu;
 import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.Model.Decks;

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="443.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.cards.shvedko.Controller.ModalSuccessRegistrationController">
+            fx:controller="com.cards.shvedko.Controller.Modals.ModalSuccessRegistrationController">
     <children>
         <GridPane alignment="CENTER" prefHeight="443.0" prefWidth="400.0">
             <columnConstraints>

@@ -1,5 +1,8 @@
-package com.cards.shvedko.Controller;
+package com.cards.shvedko.Controller.Decks;
 
+import com.cards.shvedko.Controller.A_Controller;
+import com.cards.shvedko.Controller.RemoveIsAnchorController;
+import com.cards.shvedko.Controller.RemoveIsLearntController;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.Model.Decks;
 import com.cards.shvedko.Model.DecksValues;

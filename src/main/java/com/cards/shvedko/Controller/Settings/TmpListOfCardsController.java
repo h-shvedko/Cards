@@ -1,5 +1,6 @@
-package com.cards.shvedko.Controller;
+package com.cards.shvedko.Controller.Settings;
 
+import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Helpers.FillDatabase;
 import com.cards.shvedko.Helpers.ReadCSV;
 import com.cards.shvedko.Model.TmpCards;

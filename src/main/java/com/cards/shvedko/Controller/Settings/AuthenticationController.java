@@ -1,5 +1,6 @@
-package com.cards.shvedko.Controller;
+package com.cards.shvedko.Controller.Settings;
 
+import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.ModelDAO.UsersDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +10,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AuthenticationController extends A_Controller{
+public class AuthenticationController extends A_Controller {
     @FXML
     public Label errorAuth;
     @FXML
