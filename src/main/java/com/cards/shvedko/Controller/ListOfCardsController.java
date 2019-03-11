@@ -10,6 +10,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -37,73 +38,85 @@ public class ListOfCardsController extends A_Controller {
 
     public void initialize(URL location, ResourceBundle resources) {
 
-        linkToColumns();
-        makeTitleOfColumns();
-
-        CardsDAO cardsDAO = new CardsDAO();
-
-        List cards = new ArrayList();
-        try {
-            cards = cardsDAO.selectAll();
-        } catch (Exception e) {
-            crashAppeared(e.getMessage());
-        }
-
-        if (cards.size() > 0) {
-            for (Object card : cards) {
-                cardsData.add((Cards) card);
-            }
-        }
-
-        cardsTable.setItems(getCardsData());
-
-        cardsTable.setRowFactory(new Callback<TableView<Cards>, TableRow<Cards>>() {
+        Task<Void> task = new Task<Void>() {
             @Override
-            public TableRow<Cards> call(TableView<Cards> tv) {
-                final TableRow<Cards> row = new TableRow<>();
-                row.itemProperty().addListener(new ChangeListener<Cards>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Cards> obs, Cards oldItem, Cards newItem) {
-                        if (newItem != null) {
-                            if (newItem.getIsVisible() != ModelsDAO.READY_ON) {
-                                row.setStyle("-fx-background-color: indianred");
-                                Tooltip tooltip = new Tooltip("Эта карточка удалена");
-                                tooltip.setStyle("-fx-font-size: 16px;");
-                                row.setTooltip(tooltip);
-                            } else {
-                                row.setStyle("");
-                                Tooltip tooltip = new Tooltip("Эта карточка активна");
-                                tooltip.setStyle("-fx-font-size: 16px;");
-                                row.setTooltip(tooltip);
-                            }
-                        }
-                    }
-                });
+            public Void call() throws Exception {
+                linkToColumns();
+                makeTitleOfColumns();
 
-                row.hoverProperty().addListener(new InvalidationListener() {
+                CardsDAO cardsDAO = new CardsDAO();
+
+                List cards = new ArrayList();
+                try {
+                    cards = cardsDAO.selectAll();
+                } catch (Exception e) {
+                    crashAppeared(e.getMessage());
+                }
+
+                if (cards.size() > 0) {
+                    for (Object card : cards) {
+                        cardsData.add((Cards) card);
+                    }
+                }
+
+                cardsTable.setItems(getCardsData());
+
+                cardsTable.setRowFactory(new Callback<TableView<Cards>, TableRow<Cards>>() {
                     @Override
-                    public void invalidated(Observable observable) {
-                        Cards cardsValue = row.getItem();
-                        if (row.isHover()) {
-                            if (cardsValue != null) {
-                                row.setStyle("-fx-background-color: cornflowerblue");
-                            }
-                        } else {
-                            if (cardsValue != null) {
-                                if (cardsValue.getIsVisible() == ModelsDAO.READY_ON) {
-                                    row.setStyle("");
-                                } else {
-                                    row.setStyle("-fx-background-color: indianred");
+                    public TableRow<Cards> call(TableView<Cards> tv) {
+                        final TableRow<Cards> row = new TableRow<>();
+                        row.itemProperty().addListener(new ChangeListener<Cards>() {
+                            @Override
+                            public void changed(ObservableValue<? extends Cards> obs, Cards oldItem, Cards newItem) {
+                                if (newItem != null) {
+                                    if (newItem.getIsVisible() != ModelsDAO.READY_ON) {
+                                        row.setStyle("-fx-background-color: indianred");
+                                        Tooltip tooltip = new Tooltip("Эта карточка удалена");
+                                        tooltip.setStyle("-fx-font-size: 16px;");
+                                        row.setTooltip(tooltip);
+                                    } else {
+                                        row.setStyle("");
+                                        Tooltip tooltip = new Tooltip("Эта карточка активна");
+                                        tooltip.setStyle("-fx-font-size: 16px;");
+                                        row.setTooltip(tooltip);
+                                    }
                                 }
                             }
-                        }
+                        });
+
+                        row.hoverProperty().addListener(new InvalidationListener() {
+                            @Override
+                            public void invalidated(Observable observable) {
+                                Cards cardsValue = row.getItem();
+                                if (row.isHover()) {
+                                    if (cardsValue != null) {
+                                        row.setStyle("-fx-background-color: cornflowerblue");
+                                    }
+                                } else {
+                                    if (cardsValue != null) {
+                                        if (cardsValue.getIsVisible() == ModelsDAO.READY_ON) {
+                                            row.setStyle("");
+                                        } else {
+                                            row.setStyle("-fx-background-color: indianred");
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        return row;
                     }
                 });
-                return row;
-            }
-        });
 
-        initializeContentMenu();
+                initializeContentMenu();
+
+                return null;
+            }
+        };
+
+        showLoadingSplashProgress(task);
+
+        Thread thread = new Thread(task);
+        thread.start();
 
     }
 

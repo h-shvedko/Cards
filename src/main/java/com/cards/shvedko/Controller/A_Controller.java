@@ -1,5 +1,6 @@
 package com.cards.shvedko.Controller;
 
+import com.cards.shvedko.Helpers.ProgressForm;
 import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
@@ -7,6 +8,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,10 +24,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Modality;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import javafx.scene.layout.TilePane;
+import javafx.stage.*;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
@@ -178,6 +179,14 @@ abstract public class A_Controller implements Initializable {
     protected TableColumn<Cards, String> tableForeignValue;
     //************************************************************************
 
+    //*********************PROGRESS BAR **************************************
+    @FXML
+    protected ProgressBar splash;
+    private Stage splashStage;
+    protected static ProgressForm pForm;
+
+    //************************************************************************
+
     public static String errorMsg;
     protected String nativeValueOld;
     protected String nativeValueNew;
@@ -195,6 +204,7 @@ abstract public class A_Controller implements Initializable {
     public static Decks globalDeckData;
     public static Object globalAudioFileData;
     public static Map<String, String> globalCardData = new HashMap<String, String>();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -260,7 +270,7 @@ abstract public class A_Controller implements Initializable {
         }
 
         if (nativeValue != null) {
-            if(nativeVoice != null){
+            if (nativeVoice != null) {
                 nativeVoice.setDisable(true);
             }
             nativeValue.textProperty().addListener(new ChangeListener<String>() {
@@ -272,7 +282,7 @@ abstract public class A_Controller implements Initializable {
                     nativeValueOld = oldValue;
                     nativeValueNew = newValue;
                     if (!Objects.equals(newValue, "")) {
-                        if(nativeVoice != null){
+                        if (nativeVoice != null) {
                             nativeVoice.setDisable(false);
                         }
                     }
@@ -281,7 +291,7 @@ abstract public class A_Controller implements Initializable {
         }
 
         if (foreignValue != null) {
-            if(foreignValueVoice != null){
+            if (foreignValueVoice != null) {
                 foreignValueVoice.setDisable(true);
             }
 
@@ -294,7 +304,7 @@ abstract public class A_Controller implements Initializable {
                     foreignValueOld = oldValue;
                     foreignValueNew = newValue;
                     if (!Objects.equals(newValue, "")) {
-                        if(foreignValueVoice != null){
+                        if (foreignValueVoice != null) {
                             foreignValueVoice.setDisable(false);
                         }
                     }
@@ -303,7 +313,7 @@ abstract public class A_Controller implements Initializable {
         }
 
         if (foreignExample != null) {
-            if(foreignExampleVoice != null){
+            if (foreignExampleVoice != null) {
                 foreignExampleVoice.setDisable(true);
             }
 
@@ -311,7 +321,7 @@ abstract public class A_Controller implements Initializable {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
                     if (!Objects.equals(newValue, "")) {
-                        if(foreignExampleVoice != null){
+                        if (foreignExampleVoice != null) {
                             foreignExampleVoice.setDisable(false);
                         }
                     }
@@ -320,7 +330,7 @@ abstract public class A_Controller implements Initializable {
         }
 
         if (nativeExample != null) {
-            if(nativeExampleVoice != null){
+            if (nativeExampleVoice != null) {
                 nativeExampleVoice.setDisable(true);
             }
 
@@ -328,7 +338,7 @@ abstract public class A_Controller implements Initializable {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
                     if (!Objects.equals(newValue, "")) {
-                        if(nativeExampleVoice != null){
+                        if (nativeExampleVoice != null) {
                             nativeExampleVoice.setDisable(false);
                         }
                     }
@@ -361,7 +371,7 @@ abstract public class A_Controller implements Initializable {
 
         }
 
-        if(A_Controller.globalUserData != null){
+        if (A_Controller.globalUserData != null) {
             A_Controller.globalCardSavedData = A_Controller.globalUserData;
         }
     }
@@ -384,7 +394,7 @@ abstract public class A_Controller implements Initializable {
 
     public void goToPage(String fxml, String title, Object userData) {
         try {
-            if(closeAdditionalStage()){
+            if (closeAdditionalStage()) {
                 MainApp.stage.setOpacity(1);
                 return;
             }
@@ -409,8 +419,13 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
-    protected boolean closeAdditionalStage(){
-        if(A_Controller.stage != null){
+    protected boolean closeAdditionalStage() {
+
+        if (splashStage != null) {
+            splashStage.close();
+        }
+
+        if (A_Controller.stage != null) {
             A_Controller.stage.close();
             A_Controller.stage = null;
             MainApp.stage.setOpacity(1);
@@ -422,14 +437,14 @@ abstract public class A_Controller implements Initializable {
 
     public void openOneMoreWindow(String fxml, String title, Object userData, ActionEvent event) {
         try {
-            if(closeAdditionalStage()){
+            if (closeAdditionalStage()) {
                 return;
             }
             globalUserData = userData;
             A_Controller.stage = new Stage();
             A_Controller.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
-                    if(A_Controller.stage != null){
+                    if (A_Controller.stage != null) {
                         A_Controller.stage.close();
                         A_Controller.stage = null;
                         MainApp.stage.setOpacity(1);
@@ -460,6 +475,9 @@ abstract public class A_Controller implements Initializable {
     public void crashAppeared(String message) {
         MainPageController.errorStringMsg = message;
         System.out.println(message);
+
+
+
         //TODO : add some modal window with message
         goToPage("mainPage.fxml", "Main page", "");
     }
@@ -519,6 +537,86 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    /**
+     * @param actionEvent
+     * @param task
+     */
+    protected void showSplashProgress(ActionEvent actionEvent, final Task<?> task) {
+        try {
+//            closeAdditionalStage();
+
+            pForm = new ProgressForm();
+
+            ((Node) actionEvent.getSource()).getScene().getWindow().setOpacity(0.7);
+            pForm.activateProgressBar(task);
+
+            task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent event) {
+                    pForm.getDialogStage().close();
+                    showSuccessStayOnPage(actionEvent);
+                }
+            });
+
+            pForm.getDialogStage().show();
+
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * @param task
+     */
+    public static void showLoadingSplashProgress(final Task<?> task) {
+        try {
+            pForm = new ProgressForm();
+
+            pForm.activateProgressBar(task);
+
+            task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent event) {
+                    pForm.getDialogStage().close();
+                }
+            });
+
+            pForm.getDialogStage().show();
+
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+//    protected void showSplashProgress(ActionEvent event) {
+//        try {
+//            closeAdditionalStage();
+//            splashStage = new Stage();
+//            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("splashProgress.fxml"), null, new JavaFXBuilderFactory());
+//            splashStage.setScene(new Scene(root));
+//            splashStage.setTitle("In progress...");
+//            splashStage.initStyle(StageStyle.UNDECORATED);
+//            splashStage.initModality(Modality.WINDOW_MODAL);
+//            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.3);
+//            splashStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+//            splashStage.show();
+//        } catch (Exception ex) {
+//            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+
+    protected void closeSplashProgress(ActionEvent event) {
+        try {
+            closeAdditionalStage();
+            splashStage.close();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * @param event
+     */
     protected void showSuccessAfterDeleteStayOnPage(ActionEvent event) {
         try {
             closeAdditionalStage();
@@ -654,7 +752,7 @@ abstract public class A_Controller implements Initializable {
         CardTypesDAO cardTypesDAO = new CardTypesDAO();
         A_Models typeObject = null;
         try {
-                typeObject = cardTypesDAO.select("where id=" + type);
+            typeObject = cardTypesDAO.select("where id=" + type);
         } catch (Exception e) {
             crashAppeared(e.getMessage());
         }
@@ -662,7 +760,7 @@ abstract public class A_Controller implements Initializable {
         CardLevelsDAO cardLevels = new CardLevelsDAO();
         A_Models levelObject = null;
         try {
-                levelObject = cardLevels.select("where id=" + type);
+            levelObject = cardLevels.select("where id=" + type);
         } catch (Exception e) {
             crashAppeared(e.getMessage());
         }
@@ -689,32 +787,32 @@ abstract public class A_Controller implements Initializable {
             cardsDAO.cards.setLevels((CardLevels) levelObject);
         }
 
-        if(A_Controller.globalCardData != null){
+        if (A_Controller.globalCardData != null) {
             Iterator it = A_Controller.globalCardData.entrySet().iterator();
             while (it.hasNext()) {
-                Map.Entry pair = (Map.Entry)it.next();
-                if(pair.getKey().equals("nativeVoice")){
+                Map.Entry pair = (Map.Entry) it.next();
+                if (pair.getKey().equals("nativeVoice")) {
                     cardsDAO.cards.setNameVoice((String) pair.getValue());
                 }
-                if(pair.getKey().equals("nativeExampleVoice")){
+                if (pair.getKey().equals("nativeExampleVoice")) {
                     cardsDAO.cards.setExampleVoice((String) pair.getValue());
                 }
-                if(pair.getKey().equals("foreignExampleVoice")){
+                if (pair.getKey().equals("foreignExampleVoice")) {
                     cardsDAO.cards.setForeignExampleVoice((String) pair.getValue());
                 }
-                if(pair.getKey().equals("foreignValueVoice")){
+                if (pair.getKey().equals("foreignValueVoice")) {
                     cardsDAO.cards.setForeignNameVoice((String) pair.getValue());
                 }
-                if(pair.getKey().equals("foreignValueVoicePlural")){
+                if (pair.getKey().equals("foreignValueVoicePlural")) {
                     cardsDAO.cards.setForeignValuePluralVoice((String) pair.getValue());
                 }
-                if(pair.getKey().equals("foreignValueVoicePreteriturm")){
+                if (pair.getKey().equals("foreignValueVoicePreteriturm")) {
                     cardsDAO.cards.setForeignValuePreteriturmVoice((String) pair.getValue());
                 }
-                if(pair.getKey().equals("foreignValueVoicePresence")){
+                if (pair.getKey().equals("foreignValueVoicePresence")) {
                     cardsDAO.cards.setForeignValuePresenceVoice((String) pair.getValue());
                 }
-                if(pair.getKey().equals("foreignValueVoicePerfect")){
+                if (pair.getKey().equals("foreignValueVoicePerfect")) {
                     cardsDAO.cards.setForeignValuePerfectVoice((String) pair.getValue());
                 }
                 it.remove();
@@ -762,7 +860,7 @@ abstract public class A_Controller implements Initializable {
             crashAppeared(e.getMessage());
         }
 
-        int cardId = ((Cards)A_Controller.globalCardSavedData).getId();
+        int cardId = ((Cards) A_Controller.globalCardSavedData).getId();
         CardsDAO cardsDAO = new CardsDAO(cardId);
         cardsDAO.cards.setName(name);
         cardsDAO.cards.setForeignName(value);
@@ -785,33 +883,33 @@ abstract public class A_Controller implements Initializable {
             cardsDAO.cards.setLevels((CardLevels) levelObject);
         }
 
-        if(A_Controller.globalCardData != null){
+        if (A_Controller.globalCardData != null) {
             Iterator it = A_Controller.globalCardData.entrySet().iterator();
             while (it.hasNext()) {
-                Map.Entry pair = (Map.Entry)it.next();
-                if(!pair.getValue().equals("")){
-                    if(pair.getKey().equals("nativeVoice")){
+                Map.Entry pair = (Map.Entry) it.next();
+                if (!pair.getValue().equals("")) {
+                    if (pair.getKey().equals("nativeVoice")) {
                         cardsDAO.cards.setNameVoice((String) pair.getValue());
                     }
-                    if(pair.getKey().equals("nativeExampleVoice")){
+                    if (pair.getKey().equals("nativeExampleVoice")) {
                         cardsDAO.cards.setExampleVoice((String) pair.getValue());
                     }
-                    if(pair.getKey().equals("foreignExampleVoice")){
+                    if (pair.getKey().equals("foreignExampleVoice")) {
                         cardsDAO.cards.setForeignExampleVoice((String) pair.getValue());
                     }
-                    if(pair.getKey().equals("foreignValueVoice")){
+                    if (pair.getKey().equals("foreignValueVoice")) {
                         cardsDAO.cards.setForeignNameVoice((String) pair.getValue());
                     }
-                    if(pair.getKey().equals("foreignValueVoicePlural")){
+                    if (pair.getKey().equals("foreignValueVoicePlural")) {
                         cardsDAO.cards.setForeignValuePluralVoice((String) pair.getValue());
                     }
-                    if(pair.getKey().equals("foreignValueVoicePreteriturm")){
+                    if (pair.getKey().equals("foreignValueVoicePreteriturm")) {
                         cardsDAO.cards.setForeignValuePreteriturmVoice((String) pair.getValue());
                     }
-                    if(pair.getKey().equals("foreignValueVoicePresence")){
+                    if (pair.getKey().equals("foreignValueVoicePresence")) {
                         cardsDAO.cards.setForeignValuePresenceVoice((String) pair.getValue());
                     }
-                    if(pair.getKey().equals("foreignValueVoicePerfect")){
+                    if (pair.getKey().equals("foreignValueVoicePerfect")) {
                         cardsDAO.cards.setForeignValuePerfectVoice((String) pair.getValue());
                     }
                 }
@@ -827,11 +925,11 @@ abstract public class A_Controller implements Initializable {
 
 
     public void handleEnterKey(KeyEvent keyEvent) {
-        if(keyEvent.getCode().equals(KeyCode.ENTER)){
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             handleSubmitButtonAction();
         }
 
-        if(keyEvent.getCode().equals(KeyCode.ESCAPE)){
+        if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
             handleCancelButtonAction();
         }
     }
@@ -855,7 +953,7 @@ abstract public class A_Controller implements Initializable {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
-        if(decksValues != null){
+        if (decksValues != null) {
             globalDeckData.setDecksValues(decksValues);
         }
     }
