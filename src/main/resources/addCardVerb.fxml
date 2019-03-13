@@ -49,7 +49,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Label prefHeight="82.0" prefWidth="298.0" text="Choose part of speech:" GridPane.columnIndex="1">
+                                        <Label prefHeight="82.0" prefWidth="298.0" text="Часть речи:" GridPane.columnIndex="1">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
@@ -69,7 +69,7 @@
                                 </Label>
                                 <GridPane layoutX="10.0" layoutY="90.0" style="-fx-background-color: #deede9;" GridPane.rowIndex="2">
                                     <children>
-                                        <Label prefHeight="82.0" prefWidth="298.0" text="Choose topic:" GridPane.columnIndex="1">
+                                        <Label prefHeight="82.0" prefWidth="298.0" text="Тема:" GridPane.columnIndex="1">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
@@ -93,7 +93,7 @@
                                 </GridPane>
                                 <GridPane layoutX="10.0" layoutY="170.0" style="-fx-background-color: #24b7c1;" GridPane.rowIndex="5">
                                     <children>
-                                        <Label prefHeight="82.0" prefWidth="298.0" text="Put down russian variant:" GridPane.columnIndex="1">
+                                        <Label prefHeight="82.0" prefWidth="298.0" text="Русский вариант:" GridPane.columnIndex="1">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
@@ -138,7 +138,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Label prefHeight="59.0" prefWidth="458.0" text="Example of using (russian variant):" GridPane.columnIndex="1">
+                                        <Label prefHeight="59.0" prefWidth="458.0" text="Пример использования (рус):" GridPane.columnIndex="1">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
@@ -199,7 +199,7 @@
                                 </GridPane>
                                 <GridPane layoutX="10.0" layoutY="330.0" style="-fx-background-color: #5bf765;" GridPane.rowIndex="12">
                                     <children>
-                                        <Label prefHeight="59.0" prefWidth="458.0" text="Example of using (german variant):" GridPane.columnIndex="1">
+                                        <Label prefHeight="59.0" prefWidth="458.0" text="Пример использования (нем):" GridPane.columnIndex="1">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
