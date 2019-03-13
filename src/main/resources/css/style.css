@@ -13,3 +13,10 @@
 #addWord icon{
     -fx-font-size: 40px;
 }
+
+#nativeValue,
+#foreignValue,
+#nativeExample,
+#foreignExample{
+    -fx-font-size: 20px
+}

@@ -14,9 +14,7 @@ public class EditCardPronounController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Редактировать местоимение:");
         speechPart.setValue(ModelsDAO.PRONOUN);
-        speechPart.setDisable(true);
         setData();
     }
 

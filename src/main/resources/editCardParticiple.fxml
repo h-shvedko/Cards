@@ -42,7 +42,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="82.0" prefWidth="298.0" text="Choose part of speech:"
+                        <Label prefHeight="82.0" prefWidth="298.0" text="Часть речи:"
                                GridPane.columnIndex="1">
                             <font>
                                 <Font size="20.0"/>
@@ -66,7 +66,7 @@
                 </Label>
                 <GridPane layoutX="10.0" layoutY="90.0" style="-fx-background-color: #deede9;" GridPane.rowIndex="2">
                     <children>
-                        <Label prefHeight="82.0" prefWidth="298.0" text="Choose topic:" GridPane.columnIndex="1">
+                        <Label prefHeight="82.0" prefWidth="298.0" text="Тема:" GridPane.columnIndex="1">
                             <font>
                                 <Font size="20.0"/>
                             </font>
@@ -92,13 +92,17 @@
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="170.0" style="-fx-background-color: #24b7c1;" GridPane.rowIndex="3">
                     <children>
-                        <Label prefHeight="82.0" prefWidth="298.0" text="Put down russian variant:"
+                        <Label prefHeight="82.0" prefWidth="298.0" text="Русский вариант:"
                                GridPane.columnIndex="1">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </Label>
-                        <TextField fx:id="nativeValue" prefHeight="40.0" prefWidth="255.0" GridPane.columnIndex="2"/>
+                        <TextField fx:id="nativeValue" prefHeight="40.0" prefWidth="255.0" GridPane.columnIndex="2">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </TextField>
                         <Hyperlink fx:id="nativeConjunctions" prefHeight="23.0" prefWidth="255.0"
                                    text="Found 2 conjunctions" textFill="#d03f3f" GridPane.columnIndex="2"
                                    GridPane.halignment="LEFT" GridPane.valignment="BOTTOM"/>
@@ -141,7 +145,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="59.0" prefWidth="458.0" text="Example of using (russian variant):"
+                        <Label prefHeight="59.0" prefWidth="458.0" text="Пример использования (рус):"
                                GridPane.columnIndex="1">
                             <font>
                                 <Font size="20.0"/>
@@ -160,7 +164,11 @@
                         <RowConstraints maxHeight="34.0" minHeight="8.0" prefHeight="17.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <TextArea fx:id="nativeExample" prefHeight="111.0" prefWidth="522.0" GridPane.columnIndex="1"/>
+                        <TextArea fx:id="nativeExample" prefHeight="111.0" prefWidth="522.0" GridPane.columnIndex="1">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </TextArea>
                         <Button fx:id="nativeExampleVoice" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handleAudioCaption"
                                 GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <tooltip>
@@ -177,7 +185,11 @@
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="410.0" style="-fx-background-color: #5bf765;" GridPane.rowIndex="8">
                     <children>
-                        <TextArea fx:id="foreignExample" prefHeight="80.0" prefWidth="509.0" GridPane.columnIndex="1"/>
+                        <TextArea fx:id="foreignExample" prefHeight="80.0" prefWidth="509.0" GridPane.columnIndex="1">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </TextArea>
                         <Button fx:id="foreignExampleVoice" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" onAction="#handleAudioCaption"
                                 GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <tooltip>
@@ -203,7 +215,7 @@
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="330.0" style="-fx-background-color: #5bf765;" GridPane.rowIndex="7">
                     <children>
-                        <Label prefHeight="59.0" prefWidth="458.0" text="Example of using (german variant):"
+                        <Label prefHeight="59.0" prefWidth="458.0" text="Пример использования (нем):"
                                GridPane.columnIndex="1">
                             <font>
                                 <Font size="20.0"/>
@@ -221,13 +233,17 @@
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="250.0" style="-fx-background-color: #5bf765;" GridPane.rowIndex="6">
                     <children>
-                        <Label prefHeight="82.0" prefWidth="298.0" text="Put down german variant:"
+                        <Label prefHeight="82.0" prefWidth="298.0" text="Немекий вариант:"
                                GridPane.columnIndex="1">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </Label>
-                        <TextField fx:id="foreignValue" prefHeight="40.0" prefWidth="252.0" GridPane.columnIndex="2"/>
+                        <TextField fx:id="foreignValue" prefHeight="40.0" prefWidth="252.0" GridPane.columnIndex="2">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </TextField>
                         <Hyperlink fx:id="foreignConjunctions" prefHeight="23.0" prefWidth="255.0"
                                    text="Found 2 conjunctions" textFill="#d03f3f" GridPane.columnIndex="2"
                                    GridPane.valignment="BOTTOM"/>
