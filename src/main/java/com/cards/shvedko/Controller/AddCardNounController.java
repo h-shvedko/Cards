@@ -2,16 +2,11 @@ package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.Objects;
@@ -28,9 +23,12 @@ public class AddCardNounController extends A_Controller {
     @FXML
     public TextField foreignValuePlural;
     @FXML
+    public Label errorTypeOfNone;
+    @FXML
     public Button foreignValueVoicePlural;
 
     private final ToggleGroup group = new ToggleGroup();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,6 +45,8 @@ public class AddCardNounController extends A_Controller {
 
         neutrum.setUserData(ModelsDAO.NEUTRUM);
         neutrum.setToggleGroup(group);
+
+        errorTypeOfNone.setVisible(false);
 
         if (foreignValuePlural != null) {
             if(foreignValueVoicePlural != null){
