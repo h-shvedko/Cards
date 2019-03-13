@@ -78,7 +78,6 @@ public class EditCardVerbController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         speechPart.setValue(ModelsDAO.VERB);
-        speechPart.setDisable(true);
 
         regelmassigVerb.setUserData(ModelsDAO.REGELMESSIG_VERB);
         regelmassigVerb.setToggleGroup(verbType);

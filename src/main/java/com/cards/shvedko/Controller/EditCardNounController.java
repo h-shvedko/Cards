@@ -35,7 +35,6 @@ public class EditCardNounController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         speechPart.setValue(ModelsDAO.NOUN);
-        speechPart.setDisable(true);
 
         maskulinum.setUserData(ModelsDAO.MUSKULINUM);
         maskulinum.setToggleGroup(group);

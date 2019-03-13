@@ -15,7 +15,6 @@ public class EditCardOtherController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         speechPart.setValue(ModelsDAO.OTHER_PART_OF_SPEECH);
-        speechPart.setDisable(true);
         setData();
     }
 

@@ -15,7 +15,6 @@ public class EditCardNumeralController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         speechPart.setValue(ModelsDAO.NUMERAL);
-        speechPart.setDisable(true);
         setData();
     }
 

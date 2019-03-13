@@ -15,7 +15,6 @@ public class EditCardParticipleController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         speechPart.setValue(ModelsDAO.PARTICIPLE);
-        speechPart.setDisable(true);
         setData();
     }
 

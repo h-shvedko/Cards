@@ -15,7 +15,6 @@ public class EditCardAdverbController extends A_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
         speechPart.setValue(ModelsDAO.ADVERB);
-        speechPart.setDisable(true);
         setData();
     }
 
