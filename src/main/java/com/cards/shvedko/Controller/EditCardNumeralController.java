@@ -14,7 +14,6 @@ public class EditCardNumeralController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Редактировать числительное:");
         speechPart.setValue(ModelsDAO.NUMERAL);
         speechPart.setDisable(true);
         setData();

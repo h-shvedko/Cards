@@ -34,7 +34,6 @@ public class EditCardNounController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Редактировать существительное:");
         speechPart.setValue(ModelsDAO.NOUN);
         speechPart.setDisable(true);
 

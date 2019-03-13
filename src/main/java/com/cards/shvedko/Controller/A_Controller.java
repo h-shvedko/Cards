@@ -373,6 +373,10 @@ abstract public class A_Controller implements Initializable {
         if (A_Controller.globalUserData != null) {
             A_Controller.globalCardSavedData = A_Controller.globalUserData;
         }
+
+        if(titleOfAddCard != null){
+            titleOfAddCard.setText("Редактировать карточку:");
+        }
     }
 
     public boolean compareNativeValue() {

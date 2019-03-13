@@ -14,7 +14,6 @@ public class EditCardOtherController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Редактировать другую часть речи:");
         speechPart.setValue(ModelsDAO.OTHER_PART_OF_SPEECH);
         speechPart.setDisable(true);
         setData();

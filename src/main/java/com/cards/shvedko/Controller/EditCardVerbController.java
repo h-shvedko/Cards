@@ -77,7 +77,6 @@ public class EditCardVerbController extends A_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-        titleOfAddCard.setText("Редактировать глагол:");
         speechPart.setValue(ModelsDAO.VERB);
         speechPart.setDisable(true);
 
