@@ -277,10 +277,18 @@ public class AddCardDeckController extends A_Controller {
     public void handleDisableSpeechPartCombo(ActionEvent actionEvent) {
         boolean isDisabled = speechPart.isDisabled();
         speechPart.setDisable(!isDisabled);
+        setTextToSelectedSpeechPart(ModelsDAO.ALL_PART_OF_SPEECH);
+        if(selectedSpeechPart != null && selectedSpeechPart.size() > 0){
+            selectedSpeechPart.clear();
+        }
     }
 
     public void handleDisableTopicCombo(ActionEvent actionEvent) {
         boolean isDisabled = topic.isDisabled();
         topic.setDisable(!isDisabled);
+        setTextToSelectedTopics(ModelsDAO.ALL_PART_OF_SPEECH);
+        if(selectedTopics != null && selectedTopics.size() > 0){
+            selectedTopics.clear();
+        }
     }
 }

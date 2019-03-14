@@ -244,7 +244,7 @@ abstract public class A_Controller implements Initializable {
         }
 
         if (selectedInformation != null) {
-            selectedInformation.setDisable(true);
+            selectedInformation.setVisible(false);
         }
 
 
@@ -406,16 +406,16 @@ abstract public class A_Controller implements Initializable {
     /**
      * @param newValue
      */
-    private void setTextToSelectedSpeechPart(String newValue) {
-        if(speechPartSelected != null){
+    protected void setTextToSelectedSpeechPart(String newValue) {
+        if (speechPartSelected != null) {
+            if (selectedInformation != null && !selectedInformation.isVisible()) {
+                selectedInformation.setVisible(true);
+            }
+
             String oldText = speechPartSelected.getText();
             String newText;
 
-            if (oldText.equals("")) {
-                newText = oldText + ", " + newValue;
-            } else {
-                newText = newValue;
-            }
+            newText = getTextForSelectedInfo(newValue, oldText);
 
             speechPartSelected.setText(newText);
         }
@@ -424,15 +424,15 @@ abstract public class A_Controller implements Initializable {
     /**
      *
      */
-    private void setIndexSelectedSpeechPart() {
+    protected void setIndexSelectedSpeechPart() {
 
-        if(selectedSpeechPart == null){
+        if (selectedSpeechPart == null) {
             selectedSpeechPart = FXCollections.observableArrayList();
         }
 
         Integer selectedIndex = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex()));
 
-        if(!selectedSpeechPart.isEmpty() && !selectedSpeechPart.contains(selectedIndex)){
+        if (!selectedSpeechPart.isEmpty() && !selectedSpeechPart.contains(selectedIndex)) {
             selectedSpeechPart.add(selectedIndex);
         }
     }
@@ -440,16 +440,16 @@ abstract public class A_Controller implements Initializable {
     /**
      * @param newValue
      */
-    private void setTextToSelectedTopics(String newValue) {
-        if(topicSelected != null) {
+    protected void setTextToSelectedTopics(String newValue) {
+        if (topicSelected != null) {
+            if (selectedInformation != null && !selectedInformation.isVisible()) {
+                selectedInformation.setVisible(true);
+            }
+
             String oldText = topicSelected.getText();
             String newText;
 
-            if (oldText.equals("")) {
-                newText = oldText + ", " + newValue;
-            } else {
-                newText = newValue;
-            }
+            newText = getTextForSelectedInfo(newValue, oldText);
 
             topicSelected.setText(newText);
         }
@@ -458,14 +458,14 @@ abstract public class A_Controller implements Initializable {
     /**
      *
      */
-    private void setIndexSelectedTopics() {
-        if(selectedTopics == null){
+    protected void setIndexSelectedTopics() {
+        if (selectedTopics == null) {
             selectedTopics = FXCollections.observableArrayList();
         }
 
         Integer selectedIndex = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex()));
 
-        if(!selectedTopics.contains(selectedIndex)){
+        if (!selectedTopics.contains(selectedIndex)) {
             selectedTopics.add(selectedIndex);
         }
     }
@@ -473,33 +473,60 @@ abstract public class A_Controller implements Initializable {
     /**
      * @param newValue
      */
-    private void setTextToSelectedLevels(String newValue) {
-        if(levelsSelected != null) {
+    protected void setTextToSelectedLevels(String newValue) {
+        if (levelsSelected != null) {
+            if (selectedInformation != null && !selectedInformation.isVisible()) {
+                selectedInformation.setVisible(true);
+            }
+
             String oldText = levelsSelected.getText();
             String newText;
+            if (!newValue.equals(ModelsDAO.ALL_LEVELS)) {
+                newText = getTextForSelectedInfo(newValue, oldText);
+            } else {
+                newText = newValue;
+            }
+            levelsSelected.setText(newText);
 
-            if (oldText.equals("")) {
+        }
+    }
+
+    protected String getTextForSelectedInfo(String newValue, String oldText) {
+        String newText;
+
+        if (newValue.equals(ModelsDAO.ALL_PART_OF_SPEECH) || oldText.equals(ModelsDAO.ALL_PART_OF_SPEECH)) {
+            return newValue;
+        }
+
+        if (!oldText.contains(newValue)) {
+            if (!oldText.equals("")) {
                 newText = oldText + ", " + newValue;
             } else {
                 newText = newValue;
             }
-
-            levelsSelected.setText(newText);
+        } else {
+            newText = oldText;
         }
+        return newText;
     }
 
     /**
      *
      */
     private void setIndexSelectedLevels() {
-        if(selectedLevels == null){
+        if (selectedLevels == null) {
             selectedLevels = FXCollections.observableArrayList();
         }
 
         Integer selectedIndex = Integer.parseInt(String.valueOf(level.getSelectionModel().getSelectedIndex()));
 
-        if(!selectedLevels.contains(selectedIndex)){
+        if (selectedIndex == 0) {
+            selectedLevels.clear();
             selectedLevels.add(selectedIndex);
+        } else {
+            if (!selectedLevels.contains(selectedIndex)) {
+                selectedLevels.add(selectedIndex);
+            }
         }
     }
 
