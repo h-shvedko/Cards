@@ -176,6 +176,19 @@ abstract public class A_Controller implements Initializable {
     protected TableColumn<Cards, Integer> active;
     @FXML
     protected TableColumn<Cards, String> tableForeignValue;
+
+    @FXML
+    public GridPane selectedInformation;
+    @FXML
+    public Label speechPartSelected;
+    @FXML
+    public Label topicSelected;
+    @FXML
+    public Label levelsSelected;
+
+    public ObservableList<Integer> selectedSpeechPart;
+    public ObservableList<Integer> selectedTopics;
+    public ObservableList<Integer> selectedLevels;
     //************************************************************************
 
     //*********************PROGRESS BAR **************************************
@@ -224,9 +237,16 @@ abstract public class A_Controller implements Initializable {
                         errorPartOfSpeech.setText("");
                         errorPartOfSpeech.setVisible(false);
                     }
+                    setTextToSelectedSpeechPart(newValue);
+                    setIndexSelectedSpeechPart();
                 }
             });
         }
+
+        if (selectedInformation != null) {
+            selectedInformation.setDisable(true);
+        }
+
 
         if (topic != null) {
             ObservableList<String> dataTopic = FXCollections.observableArrayList();
@@ -244,6 +264,8 @@ abstract public class A_Controller implements Initializable {
                         errorTopic.setText("");
                         errorTopic.setVisible(false);
                     }
+                    setTextToSelectedTopics(newValue);
+                    setIndexSelectedTopics();
                 }
             });
         }
@@ -264,6 +286,8 @@ abstract public class A_Controller implements Initializable {
                         errorLevel.setText("");
                         errorLevel.setVisible(false);
                     }
+                    setTextToSelectedLevels(newValue);
+                    setIndexSelectedLevels();
                 }
             });
         }
@@ -374,8 +398,108 @@ abstract public class A_Controller implements Initializable {
             A_Controller.globalCardSavedData = A_Controller.globalUserData;
         }
 
-        if(titleOfAddCard != null){
+        if (titleOfAddCard != null) {
             titleOfAddCard.setText("Редактировать карточку:");
+        }
+    }
+
+    /**
+     * @param newValue
+     */
+    private void setTextToSelectedSpeechPart(String newValue) {
+        if(speechPartSelected != null){
+            String oldText = speechPartSelected.getText();
+            String newText;
+
+            if (oldText.equals("")) {
+                newText = oldText + ", " + newValue;
+            } else {
+                newText = newValue;
+            }
+
+            speechPartSelected.setText(newText);
+        }
+    }
+
+    /**
+     *
+     */
+    private void setIndexSelectedSpeechPart() {
+
+        if(selectedSpeechPart == null){
+            selectedSpeechPart = FXCollections.observableArrayList();
+        }
+
+        Integer selectedIndex = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex()));
+
+        if(!selectedSpeechPart.isEmpty() && !selectedSpeechPart.contains(selectedIndex)){
+            selectedSpeechPart.add(selectedIndex);
+        }
+    }
+
+    /**
+     * @param newValue
+     */
+    private void setTextToSelectedTopics(String newValue) {
+        if(topicSelected != null) {
+            String oldText = topicSelected.getText();
+            String newText;
+
+            if (oldText.equals("")) {
+                newText = oldText + ", " + newValue;
+            } else {
+                newText = newValue;
+            }
+
+            topicSelected.setText(newText);
+        }
+    }
+
+    /**
+     *
+     */
+    private void setIndexSelectedTopics() {
+        if(selectedTopics == null){
+            selectedTopics = FXCollections.observableArrayList();
+        }
+
+        Integer selectedIndex = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex()));
+
+        if(!selectedTopics.contains(selectedIndex)){
+            selectedTopics.add(selectedIndex);
+        }
+    }
+
+    /**
+     * @param newValue
+     */
+    private void setTextToSelectedLevels(String newValue) {
+        if(levelsSelected != null) {
+            String oldText = levelsSelected.getText();
+            String newText;
+
+            if (oldText.equals("")) {
+                newText = oldText + ", " + newValue;
+            } else {
+                newText = newValue;
+            }
+
+            levelsSelected.setText(newText);
+        }
+    }
+
+    /**
+     *
+     */
+    private void setIndexSelectedLevels() {
+        if(selectedLevels == null){
+            selectedLevels = FXCollections.observableArrayList();
+        }
+
+        Integer selectedIndex = Integer.parseInt(String.valueOf(level.getSelectionModel().getSelectedIndex()));
+
+        if(!selectedLevels.contains(selectedIndex)){
+            selectedLevels.add(selectedIndex);
         }
     }
 

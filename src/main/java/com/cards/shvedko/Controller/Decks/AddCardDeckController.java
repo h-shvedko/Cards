@@ -6,10 +6,12 @@ import com.cards.shvedko.ModelDAO.*;
 import com.cards.shvedko.Services.DBService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import org.hibernate.Session;
 
 import java.net.URL;
@@ -41,6 +43,7 @@ public class AddCardDeckController extends A_Controller {
             speechPart.valueProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
+
                     if (Objects.equals(newValue, ModelsDAO.VERB)) {
                         globalUserData = nameDeck;
                         goToPage("Decks/addVerbDeck.fxml", "Создать колоду с глаголами", globalUserData);
