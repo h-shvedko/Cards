@@ -26,6 +26,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.*;
 import com.cathive.fonts.fontawesome.FontAwesomeIconView;
@@ -422,7 +423,7 @@ abstract public class A_Controller implements Initializable {
             newText = getTextForSelectedInfo(newValue, oldText);
 
             speechPartSelected.setText(newText);
-            attachRemoveIcon(speechPartSelected);
+            attachRemoveIcon(speechPartSelected, selectedSpeechPart);
             speechPartSelected.setContentDisplay(ContentDisplay.RIGHT);
         }
     }
@@ -430,10 +431,22 @@ abstract public class A_Controller implements Initializable {
     /**
      * @param label
      */
-    private void attachRemoveIcon(Label label) {
+    private void attachRemoveIcon(Label label, ObservableList<?> list) {
         FontAwesomeIconView fontAwesome = new FontAwesomeIconView();
         fontAwesome.setIcon(FontAwesomeIcon.ICON_TRASH);
         label.setGraphic(fontAwesome);
+
+        fontAwesome.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(list != null){
+                    list.clear();
+                }
+                label.setText("");
+                label.setGraphic(null);
+
+            }
+        });
     }
 
     /**
@@ -467,7 +480,7 @@ abstract public class A_Controller implements Initializable {
             newText = getTextForSelectedInfo(newValue, oldText);
 
             topicSelected.setText(newText);
-            attachRemoveIcon(topicSelected);
+            attachRemoveIcon(topicSelected, selectedTopics);
             topicSelected.setContentDisplay(ContentDisplay.RIGHT);
         }
     }
@@ -505,7 +518,7 @@ abstract public class A_Controller implements Initializable {
             }
             levelsSelected.setText(newText);
 
-            attachRemoveIcon(levelsSelected);
+            attachRemoveIcon(levelsSelected, selectedLevels);
             levelsSelected.setContentDisplay(ContentDisplay.RIGHT);
 
         }
