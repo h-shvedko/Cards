@@ -4,6 +4,7 @@ import com.cards.shvedko.Helpers.ProgressForm;
 import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
+import com.cathive.fonts.fontawesome.FontAwesomeIcon;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,10 +22,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.*;
+import com.cathive.fonts.fontawesome.FontAwesomeIconView;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
@@ -418,7 +422,18 @@ abstract public class A_Controller implements Initializable {
             newText = getTextForSelectedInfo(newValue, oldText);
 
             speechPartSelected.setText(newText);
+            attachRemoveIcon(speechPartSelected);
+            speechPartSelected.setContentDisplay(ContentDisplay.RIGHT);
         }
+    }
+
+    /**
+     * @param label
+     */
+    private void attachRemoveIcon(Label label) {
+        FontAwesomeIconView fontAwesome = new FontAwesomeIconView();
+        fontAwesome.setIcon(FontAwesomeIcon.ICON_TRASH);
+        label.setGraphic(fontAwesome);
     }
 
     /**
@@ -452,6 +467,8 @@ abstract public class A_Controller implements Initializable {
             newText = getTextForSelectedInfo(newValue, oldText);
 
             topicSelected.setText(newText);
+            attachRemoveIcon(topicSelected);
+            topicSelected.setContentDisplay(ContentDisplay.RIGHT);
         }
     }
 
@@ -487,6 +504,9 @@ abstract public class A_Controller implements Initializable {
                 newText = newValue;
             }
             levelsSelected.setText(newText);
+
+            attachRemoveIcon(levelsSelected);
+            levelsSelected.setContentDisplay(ContentDisplay.RIGHT);
 
         }
     }

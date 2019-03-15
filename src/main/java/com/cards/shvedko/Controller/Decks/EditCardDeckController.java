@@ -5,6 +5,7 @@ import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import com.cathive.fonts.fontawesome.FontAwesomeIconView;
 
 import java.net.URL;
 import java.util.List;

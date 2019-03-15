@@ -6,12 +6,10 @@ import com.cards.shvedko.ModelDAO.*;
 import com.cards.shvedko.Services.DBService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import org.hibernate.Session;
 
 import java.net.URL;
