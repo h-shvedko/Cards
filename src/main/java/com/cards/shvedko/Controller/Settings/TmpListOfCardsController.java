@@ -12,6 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -331,17 +332,32 @@ public class TmpListOfCardsController extends A_Controller {
         this.goToPage("Settings/settings.fxml", A_Controller.SETTINGS_PAGE_TITLE, "");
     }
 
+    /**
+     * @param actionEvent
+     */
     public void importFileAction(ActionEvent actionEvent) {
         try {
             //TODO: to export from Excel use option save as ->"Unicode text (*.txt)" and then rename file to .csv and convert to UTF-8
             ReadCSV.read();
-//            FillDatabase.validateData(ReadCSV.fileContent);
-            FillDatabase.fillCardsFromCSV(ReadCSV.fileContent);
-            fulfilTableWithData();
+            //FillDatabase.validateData(ReadCSV.fileContent);
+
+            Task<Void> task = new Task<Void>() {
+                @Override
+                public Void call() throws Exception {
+                    FillDatabase.fillCardsFromCSV(ReadCSV.fileContent);
+                    fulfilTableWithData();
+                    return null ;
+                }
+            };
+            showSplashProgressFoImport(actionEvent, task);
+
+            Thread thread = new Thread(task);
+            thread.start();
         } catch (Exception e) {
-            e.printStackTrace();
+            crashAppeared(e.getMessage(), actionEvent);
         }
         fileName.setText(ReadCSV.fileNameValue);
+
     }
 
     public void handleImportFinalButton(ActionEvent actionEvent) throws UnsupportedEncodingException {

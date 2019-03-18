@@ -55,8 +55,7 @@ create table DECKS
 	is_anchor integer,
 	is_favorite integer,
 	is_visible integer,
-	name varchar(255) not null
-		unique,
+	name varchar(255) not null,
 	perfect integer,
 	preposition_akkusative integer,
 	preposition_dative integer,

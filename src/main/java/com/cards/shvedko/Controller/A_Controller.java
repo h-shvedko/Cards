@@ -654,8 +654,10 @@ abstract public class A_Controller implements Initializable {
 
     public void closeWindow(Button btn) {
         Stage stage = (Stage) btn.getScene().getWindow();
+        if(MainApp.stage != null){
+            MainApp.stage.setOpacity(1);
+        }
         stage.close();
-
         closeAdditionalStage();
     }
 
@@ -739,6 +741,22 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    protected void showSuccessImport(ActionEvent event) {
+        try {
+            closeAdditionalStage();
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalQuestionImport.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Success!");
+            stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * @param actionEvent
      * @param task
@@ -757,6 +775,32 @@ abstract public class A_Controller implements Initializable {
                 public void handle(WorkerStateEvent event) {
                     pForm.getDialogStage().close();
                     showSuccessStayOnPage(actionEvent);
+                }
+            });
+
+            pForm.getDialogStage().show();
+
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * @param actionEvent
+     * @param task
+     */
+    protected void showSplashProgressFoImport(ActionEvent actionEvent, final Task<?> task) {
+        try {
+            pForm = new ProgressForm();
+
+            ((Node) actionEvent.getSource()).getScene().getWindow().setOpacity(0.7);
+            pForm.activateProgressBar(task);
+
+            task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent event) {
+                    pForm.getDialogStage().close();
+                    showSuccessImport(actionEvent);
                 }
             });
 
