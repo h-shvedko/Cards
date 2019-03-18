@@ -91,6 +91,9 @@ public class TmpListOfCardsController extends A_Controller {
         fulfilTableWithData();
     }
 
+    /**
+     *
+     */
     private void fulfilTableWithData() {
 
         clearData();
@@ -100,6 +103,7 @@ public class TmpListOfCardsController extends A_Controller {
         List tmpCards = new ArrayList();
         try {
             tmpCards = tmpCardsDAO.selectAll();
+            tmpCardsDAO.closeSession();
         } catch (Exception e) {
             crashAppeared(e.getMessage(), new ActionEvent());
         }
@@ -366,7 +370,18 @@ public class TmpListOfCardsController extends A_Controller {
         if(values.size() > 0){
             FillDatabase fillDatabase = new FillDatabase();
             try{
-                fillDatabase.fillMainTableFromTmpTable(values, actionEvent);
+                Task<Void> task = new Task<Void>() {
+                    @Override
+                    public Void call() throws Exception {
+
+                        fillDatabase.fillMainTableFromTmpTable(values, actionEvent);
+                        return null ;
+                    }
+                };
+                showSplashProgressFoImport(actionEvent, task);
+
+                Thread thread = new Thread(task);
+                thread.start();
             } catch (Exception e){
                 crashAppeared(e.getMessage(), actionEvent);
             }
