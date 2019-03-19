@@ -147,14 +147,13 @@ public class AddCardDeckController extends A_Controller {
                 if (!decksDAO.save()) {
                     throw new Exception(decksDAO.errorMsg);
                 }
+                try {
+                    saveDecksValues(decksDAO, actionEvent);
+                } catch (Exception e) {
+                    crashAppeared(e.getMessage(), actionEvent);
+                }
             } catch (Exception ex) {
                 crashAppeared(ex.getMessage(), actionEvent);
-            }
-
-            try {
-                saveDecksValues(decksDAO, actionEvent);
-            } catch (Exception e) {
-                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             showErrors(decksDAO);
