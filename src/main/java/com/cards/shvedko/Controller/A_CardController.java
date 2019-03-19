@@ -56,7 +56,8 @@ public class A_CardController extends A_Controller {
     @FXML
     public Label categoryLabel;
 
-    private int numberOfElement = 1;
+    private static int numberOfElement = 1;
+    public static int numberOfElementSelected = 1;
     private int cardId = 0;
     private int deckId = 0;
     private int numberOfActiveCards = 0;
@@ -127,6 +128,11 @@ public class A_CardController extends A_Controller {
 
     protected void setValuesOfCard() throws Exception {
         int numberOfCurrentElement = getNumberOfElement() - 1;
+
+        if(numberOfElementSelected != 1){
+            numberOfCurrentElement = numberOfElementSelected;
+        }
+
         decksValues = decksValuesTable.get(numberOfCurrentElement);
 
         word.setText(cardsTable.get(numberOfCurrentElement).getName());
@@ -254,12 +260,12 @@ public class A_CardController extends A_Controller {
         translatedWord.setText(value);
     }
 
-    public int getNumberOfElement() {
+    public static int getNumberOfElement() {
         return numberOfElement;
     }
 
-    public void setNumberOfElement(int numberOfElement) {
-        this.numberOfElement = numberOfElement;
+    public static void setNumberOfElement(int numberOfElementValue) {
+        numberOfElement = numberOfElementValue;
     }
 
     public void handlePreviousButton(ActionEvent actionEvent) throws Exception {

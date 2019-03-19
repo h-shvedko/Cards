@@ -1,5 +1,6 @@
 package com.cards.shvedko.Controller.Decks;
 
+import com.cards.shvedko.Controller.A_CardController;
 import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.Controller.RemoveIsAnchorController;
 import com.cards.shvedko.Controller.RemoveIsLearntController;
@@ -14,6 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,46 +40,56 @@ public class ListOfCardsInDeckController extends A_Controller {
     private ObservableList<Cards> decksValues = FXCollections.observableArrayList();
 
     public void initialize(URL location, ResourceBundle resources) {
-
-        linkToColumns();
-        makeTitleOfColumns();
-
-        Decks deck = globalDeckData;
-
-        List<DecksValues> decksValuesFromDeck = deck.getDecksValues();
-
-        if (decksValuesFromDeck.size() > 0) {
-            for (Object deckValue : decksValuesFromDeck) {
-                this.decksValues.add(((DecksValues) deckValue).getCards());
-            }
-        }
-
-        cardsTable.setItems(getDecksValues());
-
-        cardsTable.setRowFactory(new Callback<TableView<Cards>, TableRow<Cards>>() {
+        Task<Void> task = new Task<Void>() {
             @Override
-            public TableRow<Cards> call(TableView<Cards> tv) {
-                final TableRow<Cards> row = new TableRow<>();
-                row.hoverProperty().addListener(new InvalidationListener() {
+            public Void call() throws Exception {
+                linkToColumns();
+                makeTitleOfColumns();
+
+                Decks deck = globalDeckData;
+
+                List<DecksValues> decksValuesFromDeck = deck.getDecksValues();
+
+                if (decksValuesFromDeck.size() > 0) {
+                    for (Object deckValue : decksValuesFromDeck) {
+                        decksValues.add(((DecksValues) deckValue).getCards());
+                    }
+                }
+
+                cardsTable.setItems(getDecksValues());
+
+                cardsTable.setRowFactory(new Callback<TableView<Cards>, TableRow<Cards>>() {
                     @Override
-                    public void invalidated(Observable observable) {
-                        Cards cardsValue = row.getItem();
-                        if (row.isHover()) {
-                            if (cardsValue != null) {
-                                row.setStyle("-fx-background-color: cornflowerblue");
+                    public TableRow<Cards> call(TableView<Cards> tv) {
+                        final TableRow<Cards> row = new TableRow<>();
+                        row.hoverProperty().addListener(new InvalidationListener() {
+                            @Override
+                            public void invalidated(Observable observable) {
+                                Cards cardsValue = row.getItem();
+                                if (row.isHover()) {
+                                    if (cardsValue != null) {
+                                        row.setStyle("-fx-background-color: cornflowerblue");
+                                    }
+                                } else {
+                                    if (cardsValue != null) {
+                                        row.setStyle("");
+                                    }
+                                }
                             }
-                        } else {
-                            if (cardsValue != null) {
-                                row.setStyle("");
-                            }
-                        }
+                        });
+                        return row;
                     }
                 });
-                return row;
-            }
-        });
 
-        initializeContentMenu();
+                initializeContentMenu();
+                return null;
+            }
+        };
+
+        showLoadingSplashProgress(task);
+
+        Thread thread = new Thread(task);
+        thread.start();
 
     }
 
@@ -175,7 +187,7 @@ public class ListOfCardsInDeckController extends A_Controller {
             throw new Exception(e.getMessage());
         }
 
-        if(deckValuesList != null){
+        if (deckValuesList != null) {
             return deckValuesList.getId();
         }
 
@@ -314,6 +326,7 @@ public class ListOfCardsInDeckController extends A_Controller {
     }
 
     public void handleReturnButton(ActionEvent actionEvent) {
+        A_CardController.numberOfElementSelected = cardsTable.getSelectionModel().getSelectedIndex();
         goToPage("card.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
     }
 }
