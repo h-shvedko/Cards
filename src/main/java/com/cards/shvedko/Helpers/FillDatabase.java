@@ -417,9 +417,8 @@ public class FillDatabase extends A_Controller {
                 if (session.getTransaction() != null) session.getTransaction().rollback();
             }
 
+            cardsDAO.closeSession();
             clearTmpData(content);
-
-            showSuccessProfile(actionEvent);
         }
     }
 

@@ -3,6 +3,7 @@ package com.cards.shvedko.Controller;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
@@ -40,6 +41,7 @@ public class ListOfCardsController extends A_Controller {
         Task<Void> task = new Task<Void>() {
             @Override
             public Void call() throws Exception {
+
                 linkToColumns();
                 makeTitleOfColumns();
 
@@ -105,9 +107,7 @@ public class ListOfCardsController extends A_Controller {
                         return row;
                     }
                 });
-
                 initializeContentMenu();
-
                 return null;
             }
         };

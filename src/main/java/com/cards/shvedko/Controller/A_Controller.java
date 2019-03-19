@@ -4,6 +4,7 @@ import com.cards.shvedko.Helpers.ProgressForm;
 import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
+import com.cathive.fonts.fontawesome.FontAwesomeIcon;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,10 +22,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.*;
+import com.cathive.fonts.fontawesome.FontAwesomeIconView;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
@@ -176,6 +181,19 @@ abstract public class A_Controller implements Initializable {
     protected TableColumn<Cards, Integer> active;
     @FXML
     protected TableColumn<Cards, String> tableForeignValue;
+
+    @FXML
+    public GridPane selectedInformation;
+    @FXML
+    public Label speechPartSelected;
+    @FXML
+    public Label topicSelected;
+    @FXML
+    public Label levelsSelected;
+
+    public ObservableList<Integer> selectedSpeechPart;
+    public ObservableList<Integer> selectedTopics;
+    public ObservableList<Integer> selectedLevels;
     //************************************************************************
 
     //*********************PROGRESS BAR **************************************
@@ -224,9 +242,16 @@ abstract public class A_Controller implements Initializable {
                         errorPartOfSpeech.setText("");
                         errorPartOfSpeech.setVisible(false);
                     }
+                    setTextToSelectedSpeechPart(newValue);
+                    setIndexSelectedSpeechPart();
                 }
             });
         }
+
+        if (selectedInformation != null) {
+            selectedInformation.setVisible(false);
+        }
+
 
         if (topic != null) {
             ObservableList<String> dataTopic = FXCollections.observableArrayList();
@@ -244,6 +269,8 @@ abstract public class A_Controller implements Initializable {
                         errorTopic.setText("");
                         errorTopic.setVisible(false);
                     }
+                    setTextToSelectedTopics(newValue);
+                    setIndexSelectedTopics();
                 }
             });
         }
@@ -264,6 +291,8 @@ abstract public class A_Controller implements Initializable {
                         errorLevel.setText("");
                         errorLevel.setVisible(false);
                     }
+                    setTextToSelectedLevels(newValue);
+                    setIndexSelectedLevels();
                 }
             });
         }
@@ -374,8 +403,163 @@ abstract public class A_Controller implements Initializable {
             A_Controller.globalCardSavedData = A_Controller.globalUserData;
         }
 
-        if(titleOfAddCard != null){
+        if (titleOfAddCard != null) {
             titleOfAddCard.setText("Редактировать карточку:");
+        }
+    }
+
+    /**
+     * @param newValue
+     */
+    protected void setTextToSelectedSpeechPart(String newValue) {
+        if (speechPartSelected != null) {
+            if (selectedInformation != null && !selectedInformation.isVisible()) {
+                selectedInformation.setVisible(true);
+            }
+
+            String oldText = speechPartSelected.getText();
+            String newText;
+
+            newText = getTextForSelectedInfo(newValue, oldText);
+
+            speechPartSelected.setText(newText);
+            attachRemoveIcon(speechPartSelected, selectedSpeechPart);
+            speechPartSelected.setContentDisplay(ContentDisplay.RIGHT);
+        }
+    }
+
+    /**
+     * @param label
+     */
+    private void attachRemoveIcon(Label label, ObservableList<?> list) {
+        FontAwesomeIconView fontAwesome = new FontAwesomeIconView();
+        fontAwesome.setIcon(FontAwesomeIcon.ICON_TRASH);
+        label.setGraphic(fontAwesome);
+
+        fontAwesome.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(list != null){
+                    list.clear();
+                }
+                label.setText("");
+                label.setGraphic(null);
+
+            }
+        });
+    }
+
+    /**
+     *
+     */
+    protected void setIndexSelectedSpeechPart() {
+
+        if (selectedSpeechPart == null) {
+            selectedSpeechPart = FXCollections.observableArrayList();
+        }
+
+        Integer selectedIndex = Integer.parseInt(String.valueOf(speechPart.getSelectionModel().getSelectedIndex()));
+
+        if (!selectedSpeechPart.isEmpty() && !selectedSpeechPart.contains(selectedIndex)) {
+            selectedSpeechPart.add(selectedIndex);
+        }
+    }
+
+    /**
+     * @param newValue
+     */
+    protected void setTextToSelectedTopics(String newValue) {
+        if (topicSelected != null) {
+            if (selectedInformation != null && !selectedInformation.isVisible()) {
+                selectedInformation.setVisible(true);
+            }
+
+            String oldText = topicSelected.getText();
+            String newText;
+
+            newText = getTextForSelectedInfo(newValue, oldText);
+
+            topicSelected.setText(newText);
+            attachRemoveIcon(topicSelected, selectedTopics);
+            topicSelected.setContentDisplay(ContentDisplay.RIGHT);
+        }
+    }
+
+    /**
+     *
+     */
+    protected void setIndexSelectedTopics() {
+        if (selectedTopics == null) {
+            selectedTopics = FXCollections.observableArrayList();
+        }
+
+        Integer selectedIndex = Integer.parseInt(String.valueOf(topic.getSelectionModel().getSelectedIndex()));
+
+        if (!selectedTopics.contains(selectedIndex)) {
+            selectedTopics.add(selectedIndex);
+        }
+    }
+
+    /**
+     * @param newValue
+     */
+    protected void setTextToSelectedLevels(String newValue) {
+        if (levelsSelected != null) {
+            if (selectedInformation != null && !selectedInformation.isVisible()) {
+                selectedInformation.setVisible(true);
+            }
+
+            String oldText = levelsSelected.getText();
+            String newText;
+            if (!newValue.equals(ModelsDAO.ALL_LEVELS)) {
+                newText = getTextForSelectedInfo(newValue, oldText);
+            } else {
+                newText = newValue;
+            }
+            levelsSelected.setText(newText);
+
+            attachRemoveIcon(levelsSelected, selectedLevels);
+            levelsSelected.setContentDisplay(ContentDisplay.RIGHT);
+
+        }
+    }
+
+    protected String getTextForSelectedInfo(String newValue, String oldText) {
+        String newText;
+
+        if (newValue.equals(ModelsDAO.ALL_PART_OF_SPEECH) || oldText.equals(ModelsDAO.ALL_PART_OF_SPEECH)) {
+            return newValue;
+        }
+
+        if (!oldText.contains(newValue)) {
+            if (!oldText.equals("")) {
+                newText = oldText + ", " + newValue;
+            } else {
+                newText = newValue;
+            }
+        } else {
+            newText = oldText;
+        }
+        return newText;
+    }
+
+    /**
+     *
+     */
+    private void setIndexSelectedLevels() {
+        if (selectedLevels == null) {
+            selectedLevels = FXCollections.observableArrayList();
+        }
+
+        Integer selectedIndex = Integer.parseInt(String.valueOf(level.getSelectionModel().getSelectedIndex()));
+
+        if (selectedIndex == 0) {
+            selectedLevels.clear();
+            selectedLevels.add(selectedIndex);
+        } else {
+            if (!selectedLevels.contains(selectedIndex)) {
+                selectedLevels.add(selectedIndex);
+            }
         }
     }
 
@@ -470,8 +654,10 @@ abstract public class A_Controller implements Initializable {
 
     public void closeWindow(Button btn) {
         Stage stage = (Stage) btn.getScene().getWindow();
+        if(MainApp.stage != null){
+            MainApp.stage.setOpacity(1);
+        }
         stage.close();
-
         closeAdditionalStage();
     }
 
@@ -555,6 +741,22 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    protected void showSuccessImport(ActionEvent event) {
+        try {
+            closeAdditionalStage();
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalQuestionImport.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Success!");
+            stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * @param actionEvent
      * @param task
@@ -573,6 +775,32 @@ abstract public class A_Controller implements Initializable {
                 public void handle(WorkerStateEvent event) {
                     pForm.getDialogStage().close();
                     showSuccessStayOnPage(actionEvent);
+                }
+            });
+
+            pForm.getDialogStage().show();
+
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * @param actionEvent
+     * @param task
+     */
+    protected void showSplashProgressFoImport(ActionEvent actionEvent, final Task<?> task) {
+        try {
+            pForm = new ProgressForm();
+
+            ((Node) actionEvent.getSource()).getScene().getWindow().setOpacity(0.7);
+            pForm.activateProgressBar(task);
+
+            task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent event) {
+                    pForm.getDialogStage().close();
+                    showSuccessImport(actionEvent);
                 }
             });
 

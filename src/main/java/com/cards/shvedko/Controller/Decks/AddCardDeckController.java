@@ -41,6 +41,7 @@ public class AddCardDeckController extends A_Controller {
             speechPart.valueProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue value, String oldValue, String newValue) {
+
                     if (Objects.equals(newValue, ModelsDAO.VERB)) {
                         globalUserData = nameDeck;
                         goToPage("Decks/addVerbDeck.fxml", "Создать колоду с глаголами", globalUserData);
@@ -146,14 +147,13 @@ public class AddCardDeckController extends A_Controller {
                 if (!decksDAO.save()) {
                     throw new Exception(decksDAO.errorMsg);
                 }
+                try {
+                    saveDecksValues(decksDAO, actionEvent);
+                } catch (Exception e) {
+                    crashAppeared(e.getMessage(), actionEvent);
+                }
             } catch (Exception ex) {
                 crashAppeared(ex.getMessage(), actionEvent);
-            }
-
-            try {
-                saveDecksValues(decksDAO, actionEvent);
-            } catch (Exception e) {
-                crashAppeared(e.getMessage(), actionEvent);
             }
         } else {
             showErrors(decksDAO);
@@ -274,10 +274,18 @@ public class AddCardDeckController extends A_Controller {
     public void handleDisableSpeechPartCombo(ActionEvent actionEvent) {
         boolean isDisabled = speechPart.isDisabled();
         speechPart.setDisable(!isDisabled);
+        setTextToSelectedSpeechPart(ModelsDAO.ALL_PART_OF_SPEECH);
+        if(selectedSpeechPart != null && selectedSpeechPart.size() > 0){
+            selectedSpeechPart.clear();
+        }
     }
 
     public void handleDisableTopicCombo(ActionEvent actionEvent) {
         boolean isDisabled = topic.isDisabled();
         topic.setDisable(!isDisabled);
+        setTextToSelectedTopics(ModelsDAO.ALL_PART_OF_SPEECH);
+        if(selectedTopics != null && selectedTopics.size() > 0){
+            selectedTopics.clear();
+        }
     }
 }

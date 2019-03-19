@@ -12,7 +12,7 @@ create table CARDS
 	foreign_nama_infinitive varchar(255),
 	foreign_name_perfect varchar(255),
 	foreign_name_preteritum varchar(255),
-	foreign_name_voice varchar(255) not null,
+	foreign_name_voice varchar(255),
 	foreign_value_perfect_voice varchar(255),
 	foreign_value_plural_voice varchar(255),
 	foreign_value_presense_voice varchar(255),
@@ -24,13 +24,13 @@ create table CARDS
 	is_visible integer not null,
 	kind_of_noun integer,
 	name varchar(255) not null,
-	name_voice varchar(255) not null,
+	name_voice varchar(255),
 	plural_endung varchar(255),
 	preposition_gen varchar(255),
 	category_id integer not null,
 	level_id integer not null,
-	preposition_akk integer not null,
-	preposition_dat integer not null,
+	preposition_akk integer,
+	preposition_dat integer,
 	type_id integer not null,
 	user_id integer not null
 )
@@ -55,8 +55,7 @@ create table DECKS
 	is_anchor integer,
 	is_favorite integer,
 	is_visible integer,
-	name varchar(255) not null
-		unique,
+	name varchar(255) not null,
 	perfect integer,
 	preposition_akkusative integer,
 	preposition_dative integer,
@@ -220,7 +219,8 @@ create table TMP_CARDS
 	category_id integer not null,
 	preposition_akk integer,
 	preposition_dat integer,
-	type_id integer not null
+	type_id integer not null,
+	level_id integer
 )
 ;
 
