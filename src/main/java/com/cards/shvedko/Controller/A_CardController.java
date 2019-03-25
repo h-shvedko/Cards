@@ -135,6 +135,8 @@ public class A_CardController extends A_Controller {
 
         decksValues = decksValuesTable.get(numberOfCurrentElement);
 
+        setTypeAndCategory(numberOfCurrentElement);
+
         word.setText(cardsTable.get(numberOfCurrentElement).getName());
         word.setWrapText(true);
 
@@ -169,6 +171,18 @@ public class A_CardController extends A_Controller {
         } else {
             trophyButton.setSelected(false);
         }
+    }
+
+    /**
+     *
+     * @param numberOfCurrentElement
+     */
+    private void setTypeAndCategory(int numberOfCurrentElement) {
+        typeLabel.setText(cardsTable.get(numberOfCurrentElement).getType().getName());
+        typeLabel.setWrapText(true);
+
+        categoryLabel.setText(cardsTable.get(numberOfCurrentElement).getCategory().getName());
+        categoryLabel.setWrapText(true);
     }
 
     private void setTranslatedWordValue(Cards cards) {
