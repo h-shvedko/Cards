@@ -237,26 +237,26 @@ public class A_CardController extends A_Controller {
             genetive = cards.getPrepositionGen();
         }
 
+        if (cards.getIsReflexiveVerb() != 0) {
+            sich = " sich ";
+        }
+
         if (cards.getIsPerfectWithHaben() != 0) {
-            haben = " /hat ";
+            haben = " / hat " + sich;
         } else {
-            haben = " /ist ";
+            haben = " / ist " + sich;
         }
 
         if (cards.getForeignNamePreteritum() != null && !cards.getForeignNamePreteritum().equals("")) {
-            preteritum = " /" + cards.getForeignNamePreteritum();
+            preteritum = " / " + sich + cards.getForeignNamePreteritum();
         }
 
         if (cards.getForeignNameInfinitive() != null && !cards.getForeignNameInfinitive().equals("")) {
-            infinitive3 = " /" + cards.getForeignNameInfinitive();
+            infinitive3 = " / " + sich + cards.getForeignNameInfinitive();
         }
 
         if (cards.getForeignNamePerfect() != null && !cards.getForeignNamePerfect().equals("")) {
             perfect = " " + cards.getForeignNamePerfect();
-        }
-
-        if (cards.getIsReflexiveVerb() != 0) {
-            sich += " sich ";
         }
 
         infinitive = cards.getForeignName();
