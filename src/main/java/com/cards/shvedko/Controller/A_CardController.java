@@ -145,7 +145,6 @@ public class A_CardController extends A_Controller {
             translatedWord.setWrapText(true);
         }
 
-
         example.setText(cardsTable.get(numberOfCurrentElement).getExample());
         example.setWrapText(true);
 
@@ -224,6 +223,7 @@ public class A_CardController extends A_Controller {
         String dative = "";
         String genetive = "";
         String infinitive = "";
+        String infinitive3 = "";
 
         if (!cards.getPrepositionAkk().getName().equals(CardsPrepositionAkkusativ.PREPOSITION_AKKUSATIVE_NO)) {
             akkusative = cards.getPrepositionAkk().getName();
@@ -245,6 +245,10 @@ public class A_CardController extends A_Controller {
 
         if (cards.getForeignNamePreteritum() != null && !cards.getForeignNamePreteritum().equals("")) {
             preteritum = " /" + cards.getForeignNamePreteritum();
+        }
+
+        if (cards.getForeignNameInfinitive() != null && !cards.getForeignNameInfinitive().equals("")) {
+            infinitive3 = " /" + cards.getForeignNameInfinitive();
         }
 
         if (cards.getForeignNamePerfect() != null && !cards.getForeignNamePerfect().equals("")) {
@@ -269,7 +273,7 @@ public class A_CardController extends A_Controller {
             infinitive += " (" + genetive + " etw. Gen.)";
         }
 
-        value = sich + infinitive + preteritum + haben + perfect;
+        value = sich + infinitive + infinitive3 + preteritum + haben + perfect;
 
         translatedWord.setText(value);
     }
