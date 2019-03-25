@@ -206,6 +206,18 @@ public class A_CardController extends A_Controller {
 
         value = cards.getForeignName();
 
+        if (cards.getKindOfNoun() == ModelsDAO.MUSKULINUM_INTO_DB) {
+            value = "der " + value;
+        }
+
+        if (cards.getKindOfNoun() == ModelsDAO.FEMININUM_INTO_DB) {
+            value = "die " + value;
+        }
+
+        if (cards.getKindOfNoun() == ModelsDAO.NEUTRUM_INTO_DB) {
+            value = "das " + value;
+        }
+
         if (cards.getPluralEndung() != null && !cards.getPluralEndung().equals("")) {
             value += " (-" + cards.getPluralEndung() + ")";
         }
