@@ -135,6 +135,8 @@ public class A_CardController extends A_Controller {
 
         decksValues = decksValuesTable.get(numberOfCurrentElement);
 
+        setTypeAndCategory(numberOfCurrentElement);
+
         word.setText(cardsTable.get(numberOfCurrentElement).getName());
         word.setWrapText(true);
 
@@ -142,7 +144,6 @@ public class A_CardController extends A_Controller {
             setTranslatedWordValue(cardsTable.get(numberOfCurrentElement));
             translatedWord.setWrapText(true);
         }
-
 
         example.setText(cardsTable.get(numberOfCurrentElement).getExample());
         example.setWrapText(true);
@@ -169,6 +170,18 @@ public class A_CardController extends A_Controller {
         } else {
             trophyButton.setSelected(false);
         }
+    }
+
+    /**
+     *
+     * @param numberOfCurrentElement
+     */
+    private void setTypeAndCategory(int numberOfCurrentElement) {
+        typeLabel.setText(cardsTable.get(numberOfCurrentElement).getType().getName());
+        typeLabel.setWrapText(true);
+
+        categoryLabel.setText(cardsTable.get(numberOfCurrentElement).getCategory().getName());
+        categoryLabel.setWrapText(true);
     }
 
     private void setTranslatedWordValue(Cards cards) {
@@ -210,6 +223,7 @@ public class A_CardController extends A_Controller {
         String dative = "";
         String genetive = "";
         String infinitive = "";
+        String infinitive3 = "";
 
         if (!cards.getPrepositionAkk().getName().equals(CardsPrepositionAkkusativ.PREPOSITION_AKKUSATIVE_NO)) {
             akkusative = cards.getPrepositionAkk().getName();
@@ -231,6 +245,10 @@ public class A_CardController extends A_Controller {
 
         if (cards.getForeignNamePreteritum() != null && !cards.getForeignNamePreteritum().equals("")) {
             preteritum = " /" + cards.getForeignNamePreteritum();
+        }
+
+        if (cards.getForeignNameInfinitive() != null && !cards.getForeignNameInfinitive().equals("")) {
+            infinitive3 = " /" + cards.getForeignNameInfinitive();
         }
 
         if (cards.getForeignNamePerfect() != null && !cards.getForeignNamePerfect().equals("")) {
@@ -255,7 +273,7 @@ public class A_CardController extends A_Controller {
             infinitive += " (" + genetive + " etw. Gen.)";
         }
 
-        value = sich + infinitive + preteritum + haben + perfect;
+        value = sich + infinitive + infinitive3 + preteritum + haben + perfect;
 
         translatedWord.setText(value);
     }
