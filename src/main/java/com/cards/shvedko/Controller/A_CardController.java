@@ -238,9 +238,9 @@ public class A_CardController extends A_Controller {
         }
 
         if (cards.getIsPerfectWithHaben() != 0) {
-            haben = " /haben ";
+            haben = " /hat ";
         } else {
-            haben = " /sein ";
+            haben = " /ist ";
         }
 
         if (cards.getForeignNamePreteritum() != null && !cards.getForeignNamePreteritum().equals("")) {
