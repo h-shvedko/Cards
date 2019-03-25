@@ -53,7 +53,9 @@ public class EditCardDeckController extends A_Controller {
             nameDeckData = A_Controller.globalDeckData.getName();
 
             if(A_Controller.stage != null){
-                nameDeck.setDisable(true);
+                if(nameDeck != null){
+                    nameDeck.setDisable(true);
+                }
             }
 
             String allSpeechPartValue = A_Controller.globalDeckData.getType().getName();

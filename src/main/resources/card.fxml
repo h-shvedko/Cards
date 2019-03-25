@@ -39,17 +39,17 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Button fx:id="editDeck" mnemonicParsing="false" onAction="#handleSettingsButton" prefHeight="48.0" prefWidth="266.0" GridPane.columnIndex="1">
+                        <Button fx:id="editDeck" mnemonicParsing="false" onAction="#handleSettingsButton" prefHeight="48.0" prefWidth="266.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <font>
                                 <Font size="21.0" />
                             </font>
                         </Button>
-                        <Button layoutX="10.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="48.0" prefWidth="252.0" text="Назад" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Button layoutX="10.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="48.0" prefWidth="252.0" text="Назад" GridPane.columnIndex="1">
                             <font>
                                 <Font size="20.0" />
                             </font>
                         </Button>
-                        <Button fx:id="editCard" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleEditCardButton" prefHeight="48.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="editCard" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleEditCardButton" prefHeight="48.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <font>
                                 <Font size="20.0" />
                             </font>
