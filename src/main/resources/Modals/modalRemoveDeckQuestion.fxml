@@ -33,14 +33,14 @@
                     </rowConstraints>
                     <children>
                         <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="149.0" text="Отменить"
-                                GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="close" onAction="#handleCloseButton">
+                                GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="cancelRemoving" onAction="#handleCloseButton">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </Button>
                         <Button layoutX="10.0" layoutY="16.0" mnemonicParsing="false" prefHeight="63.0"
                                 prefWidth="149.0" text="Удалить" GridPane.columnIndex="1"
-                                GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="agree" onAction="#handleAgreeButton">
+                                GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="remove" onAction="#handleAgreeButton">
                             <font>
                                 <Font size="20.0"/>
                             </font>

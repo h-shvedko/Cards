@@ -276,7 +276,6 @@ public class EditCardDeckController extends A_Controller {
     public void handleDeleteButton(ActionEvent actionEvent) {
         DecksDAO decksDAO = new DecksDAO(A_Controller.globalDeckData.getId());
         decksDAO.decks.setIsVisible(Integer.parseInt(String.valueOf(0)));
-
         globalDeckData = decksDAO.decks;
         showRemoveDeckQuestion(actionEvent, decksDAO.decks.getName());
 

@@ -1,7 +1,6 @@
 package com.cards.shvedko.Controller.Modals;
 
 import com.cards.shvedko.Controller.A_Controller;
-import com.cards.shvedko.Model.Decks;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,25 +13,25 @@ public class ModalRemoveDeckQuestionController extends A_Controller {
     @FXML
     public Label labelWithQuestion;
     @FXML
-    protected Button agree;
+    public Button remove;
     @FXML
-    protected Button close;
+    public Button cancelRemoving;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-
-        labelWithQuestion.setText("Вы действительно хотите удалить колоду " + ((Decks)globalUserData).getName());
+        String textForLabel = globalDeckData.getName();
+        labelWithQuestion.setText("Вы действительно хотите удалить колоду " + textForLabel);
     }
 
     public void handleCloseButton(ActionEvent actionEvent) {
         answer = false;
-        closeWindow(close);
+        closeWindow(remove);
     }
 
     public void handleAgreeButton(ActionEvent actionEvent) {
         answer = true;
-        closeWindow(agree);
+        closeWindow(remove);
     }
 
     @Override
