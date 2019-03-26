@@ -958,6 +958,23 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    protected void showRemoveDeckQuestion(ActionEvent event, String text) {
+        try {
+            answer = false;
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalRemoveDeckQuestion.fxml"), null, new JavaFXBuilderFactory());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Warning!");
+            stage.setUserData(text);
+            stage.initModality(Modality.WINDOW_MODAL);
+            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     protected void clear() {
         nativeValue.setText("");
         foreignValue.setText("");

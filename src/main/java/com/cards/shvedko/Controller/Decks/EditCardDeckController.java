@@ -276,17 +276,24 @@ public class EditCardDeckController extends A_Controller {
     public void handleDeleteButton(ActionEvent actionEvent) {
         DecksDAO decksDAO = new DecksDAO(A_Controller.globalDeckData.getId());
         decksDAO.decks.setIsVisible(Integer.parseInt(String.valueOf(0)));
-        if (decksDAO.validate(decksDAO.decks)) {
-            try {
-                if(!decksDAO.saveOrUpdate()){
-                    throw new Exception(decksDAO.errorMsg);
+
+        globalDeckData = decksDAO.decks;
+        showRemoveDeckQuestion(actionEvent, decksDAO.decks.getName());
+
+        if(answer){
+            if (decksDAO.validate(decksDAO.decks)) {
+                try {
+                    if(!decksDAO.saveOrUpdate()){
+                        throw new Exception(decksDAO.errorMsg);
+                    }
+                    showSuccess(actionEvent);
+                } catch (Exception ex) {
+                    crashAppeared(ex.getMessage(), actionEvent);
                 }
-                showSuccessAfterDeleteStayOnPage(actionEvent);
-            } catch (Exception ex) {
-                crashAppeared(ex.getMessage(), actionEvent);
+            } else {
+                showErrors(decksDAO);
             }
-        } else {
-            showErrors(decksDAO);
         }
+
     }
 }
