@@ -668,7 +668,7 @@ abstract public class A_Controller implements Initializable {
         System.out.println(message);
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Огибка в работе программы!");
+        alert.setTitle("Ошибка в работе программы!");
         alert.setHeaderText(null);
         alert.setContentText("Направьте следующий текст разработчику.");
 
@@ -977,9 +977,9 @@ abstract public class A_Controller implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == buttonTypeBack){
-            goToPage();
+            this.goToPage("Decks/chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
         } else {
-            goToPage();
+            this.goToPage("card.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
         }
     }
 
@@ -997,6 +997,15 @@ abstract public class A_Controller implements Initializable {
         alert.setTitle("Выбор клолоды");
         alert.setHeaderText(null);
         alert.setContentText("Вы забыли выбрать колоду для изучения.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    protected void showAlertEmptyDeckSelected() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Выбор клолоды");
+        alert.setHeaderText(null);
+        alert.setContentText("Данная колода не содержит карточек. Выберите другу колоду для изучения");
 
         Optional<ButtonType> result = alert.showAndWait();
     }

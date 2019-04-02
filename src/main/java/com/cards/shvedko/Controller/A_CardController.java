@@ -133,42 +133,44 @@ public class A_CardController extends A_Controller {
             numberOfCurrentElement = numberOfElementSelected;
         }
 
-        decksValues = decksValuesTable.get(numberOfCurrentElement);
+        if(decksValuesTable != null && decksValuesTable.size() > 0){
+            decksValues = decksValuesTable.get(numberOfCurrentElement);
 
-        setTypeAndCategory(numberOfCurrentElement);
+            setTypeAndCategory(numberOfCurrentElement);
 
-        word.setText(cardsTable.get(numberOfCurrentElement).getName());
-        word.setWrapText(true);
+            word.setText(cardsTable.get(numberOfCurrentElement).getName());
+            word.setWrapText(true);
 
-        if (translatedWord != null) {
-            setTranslatedWordValue(cardsTable.get(numberOfCurrentElement));
-            translatedWord.setWrapText(true);
-        }
+            if (translatedWord != null) {
+                setTranslatedWordValue(cardsTable.get(numberOfCurrentElement));
+                translatedWord.setWrapText(true);
+            }
 
-        example.setText(cardsTable.get(numberOfCurrentElement).getExample());
-        example.setWrapText(true);
+            example.setText(cardsTable.get(numberOfCurrentElement).getExample());
+            example.setWrapText(true);
 
-        translatedExample.setText(cardsTable.get(numberOfCurrentElement).getForeignExample());
-        translatedExample.setWrapText(true);
+            translatedExample.setText(cardsTable.get(numberOfCurrentElement).getForeignExample());
+            translatedExample.setWrapText(true);
 
-        numberOfCards.setWrapText(true);
+            numberOfCards.setWrapText(true);
 
-        if (((DecksValues) decksValues).getIsFavorite() == 1) {
-            favoriteButton.setSelected(true);
-        } else {
-            favoriteButton.setSelected(false);
-        }
+            if (((DecksValues) decksValues).getIsFavorite() == 1) {
+                favoriteButton.setSelected(true);
+            } else {
+                favoriteButton.setSelected(false);
+            }
 
-        if (((DecksValues) decksValues).getIsAnchor() == 1) {
-            anchorButton.setSelected(true);
-        } else {
-            anchorButton.setSelected(false);
-        }
+            if (((DecksValues) decksValues).getIsAnchor() == 1) {
+                anchorButton.setSelected(true);
+            } else {
+                anchorButton.setSelected(false);
+            }
 
-        if (((DecksValues) decksValues).getIsReady() == 1) {
-            trophyButton.setSelected(true);
-        } else {
-            trophyButton.setSelected(false);
+            if (((DecksValues) decksValues).getIsReady() == 1) {
+                trophyButton.setSelected(true);
+            } else {
+                trophyButton.setSelected(false);
+            }
         }
     }
 

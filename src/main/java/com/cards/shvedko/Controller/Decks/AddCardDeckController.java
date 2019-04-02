@@ -220,17 +220,29 @@ public class AddCardDeckController extends A_Controller {
                     }
                 }
                 updateProgress(10, 10);
+                setDeckValues(decksDAO.decks.getId(), actionEvent);
                 return null ;
             }
         };
 
         String deckName = decksDAO.decks.getName();
-        A_Controller.globalDeckData = decksDAO.decks;
-
         showSplashProgress(actionEvent, task, deckName);
 
         Thread thread = new Thread(task);
         thread.start();
+    }
+
+    private void setDeckValues(int deckId, ActionEvent actionEvent) {
+        DecksDAO decksDAO = new DecksDAO();
+        A_Models deck = null;
+        try {
+            deck = decksDAO.select("where id='" + deckId + "' and is_visible=1");
+        } catch (Exception e) {
+            crashAppeared(e.getMessage(), actionEvent);
+        }
+        if (deck != null) {
+            A_Controller.globalDeckData = (Decks) deck;
+        }
     }
 
     private A_Models getTopicAll() throws Exception {

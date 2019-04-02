@@ -25,6 +25,7 @@ public class DecksDAO extends ModelsDAO {
     public DecksDAO(int id) {
         super();
         decks = (Decks) session.get(Decks.class, id);
+        session.close();
     }
 
     public Decks getDeckById(int id) throws HibernateException {

@@ -74,8 +74,10 @@ public class ChooseDecksController extends A_Controller {
         this.setDeck(actionEvent);
         if(A_Controller.globalDeckData != null && A_Controller.globalDeckData.getDecksValues() != null && A_Controller.globalDeckData.getDecksValues().size() > 0){
             this.goToPage("card.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
-        } else {
+        } else if(A_Controller.globalDeckData == null) {
             showAlertNoDeckSelected();
+        } else if(A_Controller.globalDeckData != null && A_Controller.globalDeckData.getDecksValues() != null && A_Controller.globalDeckData.getDecksValues().size() == 0) {
+            showAlertEmptyDeckSelected();
         }
 
     }
