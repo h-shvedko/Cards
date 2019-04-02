@@ -92,7 +92,7 @@
                         </Button>
                     </children>
                 </GridPane>
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" onAction="#handleSettingsButton"
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" fx:id="settingsButton" onAction="#handleSettingsButton"
                         GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1"
                         GridPane.valignment="CENTER">
                     <tooltip>

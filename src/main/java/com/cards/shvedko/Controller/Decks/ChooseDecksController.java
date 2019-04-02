@@ -28,11 +28,14 @@ public class ChooseDecksController extends A_Controller {
     @FXML
     public Button start;
     public Label chooseDeckMainLabel;
+    @FXML
+    public Button settingsButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
 
+        settingsButton.setDisable(true);
         chooseDeckMainLabel.setText(LanguageLabelsRu.CHOOSE_DECK_HEADER);
 
         ObservableList<String> decks = FXCollections.observableArrayList();
@@ -51,6 +54,8 @@ public class ChooseDecksController extends A_Controller {
                     errorDecks.setText("");
                     errorDecks.setVisible(false);
                 }
+
+                    settingsButton.setDisable(false);
 
             }
         });
@@ -111,10 +116,14 @@ public class ChooseDecksController extends A_Controller {
 
         this.setDeck(actionEvent);
 
-        if(A_Controller.globalDeckData.getType() != null && !A_Controller.globalDeckData.getType().getName().equals(ModelsDAO.VERB)){
-            this.goToPage("Decks/editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
+        if(A_Controller.globalDeckData == null) {
+            showAlertNoDeckSelected();
         } else {
-            this.goToPage("Decks/editVerbDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
+            if(A_Controller.globalDeckData.getType() != null && !A_Controller.globalDeckData.getType().getName().equals(ModelsDAO.VERB)){
+                this.goToPage("Decks/editDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
+            } else {
+                this.goToPage("Decks/editVerbDeck.fxml", A_Controller.EDIT_DECK_PAGE_TITLE, A_Controller.globalDeckData);
+            }
         }
     }
 }
