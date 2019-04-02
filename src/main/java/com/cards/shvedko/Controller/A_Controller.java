@@ -785,7 +785,7 @@ abstract public class A_Controller implements Initializable {
      * @param actionEvent
      * @param task
      */
-    protected void showSplashProgress(ActionEvent actionEvent, final Task<?> task) {
+    protected void showSplashProgress(ActionEvent actionEvent, final Task<?> task, String deckName) {
         try {
 //            closeAdditionalStage();
 
@@ -798,7 +798,7 @@ abstract public class A_Controller implements Initializable {
                 @Override
                 public void handle(WorkerStateEvent event) {
                     pForm.getDialogStage().close();
-                    showSuccessStayOnPage(actionEvent);
+                    showAlertSuccessAfterCreateDeck(deckName);
                 }
             });
 
@@ -962,6 +962,24 @@ abstract public class A_Controller implements Initializable {
             stage.show();
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void showAlertSuccessAfterCreateDeck(String text) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Создание колоды");
+        alert.setHeaderText(null);
+        alert.setContentText("Колода " + text + " успешно создана.");
+        ButtonType buttonTypeBack = new ButtonType("Выбрать колоду");
+        ButtonType buttonTypeStart = new ButtonType("Начать учить колоду");
+        alert.getButtonTypes().setAll(buttonTypeBack, buttonTypeStart);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == buttonTypeBack){
+            goToPage();
+        } else {
+            goToPage();
         }
     }
 

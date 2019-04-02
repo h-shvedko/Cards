@@ -224,7 +224,10 @@ public class AddCardDeckController extends A_Controller {
             }
         };
 
-        showSplashProgress(actionEvent, task);
+        String deckName = decksDAO.decks.getName();
+        A_Controller.globalDeckData = decksDAO.decks;
+
+        showSplashProgress(actionEvent, task, deckName);
 
         Thread thread = new Thread(task);
         thread.start();
