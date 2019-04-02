@@ -22,12 +22,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.*;
 import com.cathive.fonts.fontawesome.FontAwesomeIconView;
 
@@ -668,19 +667,44 @@ abstract public class A_Controller implements Initializable {
         globalUserData = message;
         System.out.println(message);
 
-        try {
-            closeAdditionalStage();
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalError.fxml"), null, new JavaFXBuilderFactory());
-            stage.setScene(new Scene(root));
-            stage.setTitle("Error!");
-            stage.initModality(Modality.WINDOW_MODAL);
-            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
-            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            stage.show();
-        } catch (Exception ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Огибка в работе программы!");
+        alert.setHeaderText(null);
+        alert.setContentText("Направьте следующий текст разработчику.");
+
+        Label label = new Label("Текст ошибки:");
+
+        TextArea textArea = new TextArea(message);
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(label, 0, 0);
+        expContent.add(textArea, 0, 1);
+
+        alert.getDialogPane().setExpandableContent(expContent);
+
+        alert.showAndWait();
+
+//        try {
+//            closeAdditionalStage();
+//            Stage stage = new Stage();
+//            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalError.fxml"), null, new JavaFXBuilderFactory());
+//            stage.setScene(new Scene(root));
+//            stage.setTitle("Error!");
+//            stage.initModality(Modality.WINDOW_MODAL);
+//            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+//            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+//            stage.show();
+//        } catch (Exception ex) {
+//            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -834,23 +858,6 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
-//    protected void showSplashProgress(ActionEvent event) {
-//        try {
-//            closeAdditionalStage();
-//            splashStage = new Stage();
-//            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("splashProgress.fxml"), null, new JavaFXBuilderFactory());
-//            splashStage.setScene(new Scene(root));
-//            splashStage.setTitle("In progress...");
-//            splashStage.initStyle(StageStyle.UNDECORATED);
-//            splashStage.initModality(Modality.WINDOW_MODAL);
-//            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.3);
-//            splashStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-//            splashStage.show();
-//        } catch (Exception ex) {
-//            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-
     protected void closeSplashProgress(ActionEvent event) {
         try {
             closeAdditionalStage();
@@ -955,6 +962,29 @@ abstract public class A_Controller implements Initializable {
             stage.show();
         } catch (Exception ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void showAlertSuccessAfterDelete(String text, String type) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Удаление");
+        alert.setHeaderText(null);
+        alert.setContentText("Вы успешно удалили " + type + " " + text + ".");
+
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
+    protected Boolean showRemoveDeckQuestion(ActionEvent event, String text) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Удаление колоды");
+        alert.setHeaderText(null);
+        alert.setContentText("Вы собираетесь удалить колоду " + text + ". Вы хотите продолжить?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            return true;
+        } else {
+            return false;
         }
     }
 
