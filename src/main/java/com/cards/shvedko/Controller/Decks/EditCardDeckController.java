@@ -285,7 +285,8 @@ public class EditCardDeckController extends A_Controller {
                     if(!decksDAO.saveOrUpdate()){
                         throw new Exception(decksDAO.errorMsg);
                     }
-                    showSuccess(actionEvent);
+                    showAlertSuccessAfterDelete(decksDAO.decks.getName(), "колоду");
+                    goToPage("Decks/chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
                 } catch (Exception ex) {
                     crashAppeared(ex.getMessage(), actionEvent);
                 }

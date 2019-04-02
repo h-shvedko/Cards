@@ -965,6 +965,15 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
+    protected void showAlertSuccessAfterDelete(String text, String type) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Удаление");
+        alert.setHeaderText(null);
+        alert.setContentText("Вы успешно удалили " + type + " " + text + ".");
+
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
     protected Boolean showRemoveDeckQuestion(ActionEvent event, String text) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Удаление колоды");
