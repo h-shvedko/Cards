@@ -1,6 +1,5 @@
 package com.cards.shvedko.Controller;
 
-import com.cards.shvedko.Controller.Modals.ModalRemoveDeckQuestionController;
 import com.cards.shvedko.Helpers.ProgressForm;
 import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.*;
@@ -23,8 +22,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -959,22 +956,34 @@ abstract public class A_Controller implements Initializable {
         }
     }
 
-    protected void showRemoveDeckQuestion(ActionEvent event, String text) {
-        try {
-            answer = false;
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalRemoveDeckQuestion.fxml"), null, new JavaFXBuilderFactory());
-            stage.setScene(new Scene(root));
-            stage.setTitle("Warning!");
-            stage.setUserData(text);
-            stage.initModality(Modality.WINDOW_MODAL);
-            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
-            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            stage.show();
-        } catch (Exception ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+    protected Boolean showRemoveDeckQuestion(ActionEvent event, String text) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Удаление колоды");
+        alert.setHeaderText("Вы собираетесь удалить колоду " + text + ". Вы хотите продолжить?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            return true;
+        } else {
+            return false;
         }
     }
+//    protected void showRemoveDeckQuestion(ActionEvent event, String text) {
+//        try {
+//            answer = false;
+//            Stage stage = new Stage();
+//            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Modals/modalRemoveDeckQuestion.fxml"), null, new JavaFXBuilderFactory());
+//            stage.setScene(new Scene(root));
+//            stage.setTitle("Warning!");
+//            stage.setUserData(text);
+//            stage.initModality(Modality.WINDOW_MODAL);
+//            ((Node) event.getSource()).getScene().getWindow().setOpacity(0.7);
+//            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+//            stage.show();
+//        } catch (Exception ex) {
+//            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     protected void clear() {
         nativeValue.setText("");

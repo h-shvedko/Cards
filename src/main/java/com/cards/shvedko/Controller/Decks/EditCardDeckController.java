@@ -277,7 +277,7 @@ public class EditCardDeckController extends A_Controller {
         DecksDAO decksDAO = new DecksDAO(A_Controller.globalDeckData.getId());
         decksDAO.decks.setIsVisible(Integer.parseInt(String.valueOf(0)));
         globalDeckData = decksDAO.decks;
-        showRemoveDeckQuestion(actionEvent, decksDAO.decks.getName());
+        Boolean answer = showRemoveDeckQuestion(actionEvent, decksDAO.decks.getName());
 
         if(answer){
             if (decksDAO.validate(decksDAO.decks)) {
