@@ -503,6 +503,7 @@ public class A_CardController extends A_Controller {
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
+        A_Controller.globalDeckData = null;
         this.goToPage("Decks/chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
     }
 

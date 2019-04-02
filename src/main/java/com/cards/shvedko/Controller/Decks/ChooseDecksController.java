@@ -72,10 +72,10 @@ public class ChooseDecksController extends A_Controller {
 
     public void handleStartButton(ActionEvent actionEvent) {
         this.setDeck(actionEvent);
-        if(A_Controller.globalDeckData.getDecksValues() != null && A_Controller.globalDeckData.getDecksValues().size() > 0){
+        if(A_Controller.globalDeckData != null && A_Controller.globalDeckData.getDecksValues() != null && A_Controller.globalDeckData.getDecksValues().size() > 0){
             this.goToPage("card.fxml", A_Controller.CHOOSE_CARDS_TITLE, A_Controller.globalDeckData);
         } else {
-            this.openOneMoreWindow("Decks/emptyDeck.fxml", A_Controller.EMPTY_DECK_TITLE, A_Controller.globalDeckData, actionEvent);
+            showAlertNoDeckSelected();
         }
 
     }
@@ -102,9 +102,6 @@ public class ChooseDecksController extends A_Controller {
             if(!decksValues.isEmpty()){
                 A_Controller.globalDeckData.setDecksValues(decksValues);
             }
-        } else {
-            errorDecks.setText("Выберите колоду!");
-            errorDecks.setVisible(true);
         }
     }
 

@@ -974,6 +974,15 @@ abstract public class A_Controller implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
     }
 
+    protected void showAlertNoDeckSelected() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Выбор клолоды");
+        alert.setHeaderText(null);
+        alert.setContentText("Вы забыли выбрать колоду для изучения.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
     protected Boolean showRemoveDeckQuestion(ActionEvent event, String text) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Удаление колоды");
