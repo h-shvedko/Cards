@@ -79,7 +79,6 @@ public class A_CardController extends A_Controller {
         translatedExample.setVisible(false);
 
         //Disable buttons for foreign language sounds
-        exampleSound.setVisible(false);
         translatedWordSound.setVisible(false);
         translatedExampleSound.setVisible(false);
 
@@ -141,6 +140,7 @@ public class A_CardController extends A_Controller {
 
             word.setText(cardsTable.get(numberOfCurrentElement).getName());
             word.setWrapText(true);
+            wordSound.setVisible(true);
 
             if (translatedWord != null) {
                 setTranslatedWordValue(cardsTable.get(numberOfCurrentElement));
@@ -149,6 +149,12 @@ public class A_CardController extends A_Controller {
 
             example.setText(cardsTable.get(numberOfCurrentElement).getExample());
             example.setWrapText(true);
+
+            if(!cardsTable.get(numberOfCurrentElement).getExample().equals("")){
+                exampleSound.setVisible(true);
+            } else {
+                exampleSound.setVisible(false);
+            }
 
             translatedExample.setText(cardsTable.get(numberOfCurrentElement).getForeignExample());
             translatedExample.setWrapText(true);
@@ -303,8 +309,8 @@ public class A_CardController extends A_Controller {
 
     public void handlePreviousButton(ActionEvent actionEvent) throws Exception {
         int numberOfWord = getNumberOfElement();
-        translatedWord.setVisible(false);
-        translatedExample.setVisible(false);
+
+        hideForeignTextAndSounds();
 
         if (numberOfWord > 1) {
             --numberOfWord;
@@ -320,8 +326,8 @@ public class A_CardController extends A_Controller {
 
     public void handleNextButton(ActionEvent actionEvent) throws Exception {
         int numberOfWord = getNumberOfElement();
-        translatedWord.setVisible(false);
-        translatedExample.setVisible(false);
+
+        hideForeignTextAndSounds();
 
         if (numberOfWord < cardsTable.size()) {
             ++numberOfWord;
@@ -499,13 +505,27 @@ public class A_CardController extends A_Controller {
     }
 
     public void handleTranslationButton(ActionEvent actionEvent) {
+        showForeignTextAndSounds();
+    }
+
+    private void hideForeignTextAndSounds() {
+        translatedWord.setVisible(false);
+        translatedExample.setVisible(false);
+        translatedWordSound.setVisible(false);
+        translatedExampleSound.setVisible(false);
+    }
+
+    private void showForeignTextAndSounds() {
         translatedExample.setVisible(!translatedExample.isVisible());
         translatedWord.setVisible(!translatedWord.isVisible());
 
-        //Enable buttons for foreign language sounds
-        wordSound.setVisible(!wordSound.isVisible());
-        translatedWordSound.setVisible(!translatedWordSound.isVisible());
-        translatedExampleSound.setVisible(!translatedExampleSound.isVisible());
+        if(!translatedExample.getText().equals("")){
+            translatedExampleSound.setVisible(true);
+        } else {
+            translatedExampleSound.setVisible(false);
+        }
+
+        translatedWordSound.setVisible(translatedWord.isVisible());
     }
 
     @Override
