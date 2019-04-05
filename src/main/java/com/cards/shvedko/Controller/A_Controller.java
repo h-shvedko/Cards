@@ -69,6 +69,7 @@ abstract public class A_Controller implements Initializable {
     public static final String CHOOSE_DECKS_TITLE = "Учим немецкие слова! Выберите колоду";
     public static final String CHOOSE_CARDS_TITLE = "Учим немецкие слова!";
     public static final String LIST_OF_CARDS_TITLE = "Учим немецкие слова! Список карточек.";
+    public static final String PRVIEW_OF_CARDS_TITLE = "Учим немецкие слова! Список карточек.";
     public static final String AUDIO_CAPTURING_TITLE = "Учим немецкие слова! Запись аудио.";
     public static final String EMPTY_DECK_TITLE = "Учим немецкие слова! Пустая колода.";
     public static final String IMPORT_FROM_CSV = "Учим немецкие слова! Импорт слов из CSV файла.";
@@ -1040,10 +1041,18 @@ abstract public class A_Controller implements Initializable {
     }
 
     public void handlePreviewButton(ActionEvent actionEvent) {
+        goToPage("card.fxml", A_Controller.PRVIEW_OF_CARDS_TITLE , getCardsDAO(actionEvent));
     }
 
     public CardsDAO handleAddButton(ActionEvent actionEvent) {
 
+        CardsDAO cardsDAO = getCardsDAO(actionEvent);
+
+        return cardsDAO;
+
+    }
+
+    private CardsDAO getCardsDAO(ActionEvent actionEvent) {
         String name = nativeValue.getText();
         String value = foreignValue.getText();
         String nExample = nativeExample.getText();
@@ -1132,9 +1141,7 @@ abstract public class A_Controller implements Initializable {
         }
 
         cardsDAO.cards.setIsVisible(1);
-
         return cardsDAO;
-
     }
 
     public CardsDAO handleEditButton(ActionEvent actionEvent) {
