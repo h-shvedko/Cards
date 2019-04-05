@@ -47,9 +47,14 @@ public class ModelsDAO implements I_DAO {
     public static final String MUSKULINUM = "мужской";
     public static final String FEMININUM = "женский";
     public static final String NEUTRUM = "средний";
+
     public static final int MUSKULINUM_INTO_DB = 1;
     public static final int FEMININUM_INTO_DB= 2;
     public static final int NEUTRUM_INTO_DB = 3;
+
+    public static final String MUSKULINUM_STRING = "der";
+    public static final String FEMININUM_STRING= "die";
+    public static final String NEUTRUM_STRING = "das";
 
     public static final String HABEN_PERFECT = "haben";
     public static final int HABEN_PERFECT_TO_DB = 1;

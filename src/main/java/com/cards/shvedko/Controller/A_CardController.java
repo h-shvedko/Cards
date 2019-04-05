@@ -79,6 +79,7 @@ public class A_CardController extends A_Controller {
         translatedExample.setVisible(false);
 
         //Disable buttons for foreign language sounds
+        wordSound.setVisible(false);
         translatedWordSound.setVisible(false);
         translatedExampleSound.setVisible(false);
 
@@ -499,6 +500,7 @@ public class A_CardController extends A_Controller {
         translatedWord.setVisible(!translatedWord.isVisible());
 
         //Enable buttons for foreign language sounds
+        wordSound.setVisible(!wordSound.isVisible());
         translatedWordSound.setVisible(!translatedWordSound.isVisible());
         translatedExampleSound.setVisible(!translatedExampleSound.isVisible());
     }
