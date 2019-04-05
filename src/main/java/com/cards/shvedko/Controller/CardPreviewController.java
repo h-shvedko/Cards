@@ -10,22 +10,9 @@ import java.util.ResourceBundle;
 
 public class CardPreviewController extends A_CardPreviewController {
 
-    public Button editCard;
-    public Button editDeck;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
-
-        editCard.setText(LanguageLabelsRu.EDIT_CARD);
-        Tooltip editCardTooltip = new Tooltip();
-        editCardTooltip.setText(LanguageLabelsRu.EDIT_CARD);
-        editCard.setTooltip(editCardTooltip);
-
-        editDeck.setText(LanguageLabelsRu.EDIT_DECK);
-        Tooltip editDeckTooltip = new Tooltip();
-        editDeckTooltip.setText(LanguageLabelsRu.EDIT_DECK);
-        editDeck.setTooltip(editDeckTooltip);
 
         translation.setText(LanguageLabelsRu.SHOW_TRANSLATION);
         Tooltip translationTooltip = new Tooltip();

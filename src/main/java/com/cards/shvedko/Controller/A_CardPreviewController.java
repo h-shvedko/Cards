@@ -2,6 +2,7 @@ package com.cards.shvedko.Controller;
 
 import com.cards.shvedko.Helpers.AudioPlaying;
 import com.cards.shvedko.Model.*;
+import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.DecksValuesDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.collections.FXCollections;
@@ -69,10 +70,17 @@ public class A_CardPreviewController extends A_Controller {
         favoriteButton.setToggleGroup(groupFavorite);
         trophyButton.setToggleGroup(groupTrophy);
 
-        card = (Cards) globalUserData;
+        card = ((CardsDAO) globalUserData).cards;
 
-        typeLabel.setText(((Cards) card).getType().getName());
-        categoryLabel.setText(((Cards) card).getCategory().getName());
+        CardTypes types = ((Cards) card).getType();
+        if(types != null){
+            typeLabel.setText(types.getName());
+        }
+
+        CardCategories cardCategories = ((Cards) card).getCategory();
+        if(cardCategories != null){
+            categoryLabel.setText(cardCategories.getName());
+        }
 
         int numberOfActiveCards = 1;
         numberOfCards.setText("Карточка " + getNumberOfElement() + " / " + String.valueOf(numberOfActiveCards));
@@ -225,41 +233,10 @@ public class A_CardPreviewController extends A_Controller {
         return 1;
     }
 
-    public void handlePreviousButton(ActionEvent actionEvent) throws Exception {
-
-    }
-
-    public void handleNextButton(ActionEvent actionEvent) throws Exception {
-
-    }
-
-    private void markCardAsShown() throws Exception {
-
-    }
-
-    public void handleSettingsButton(ActionEvent actionEvent) {
-
-    }
-
-    public void handleEditCardButton(ActionEvent actionEvent) {
-    }
-
-    public void handleAnchorButton(ActionEvent actionEvent) throws Exception {
-
-    }
-
-    public void handleTrophyButton(ActionEvent actionEvent) throws Exception {
-
-    }
-
-    public void handleFavoriteButton(ActionEvent actionEvent) throws Exception {
-
-    }
-
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
         A_Controller.globalDeckData = null;
-        this.goToPage("Decks/chooseDecks.fxml", A_Controller.CHOOSE_DECKS_TITLE, "");
+        this.goToPage("", A_Controller.CHOOSE_DECKS_TITLE, "");
     }
 
     public void handlePlayAction(ActionEvent actionEvent) {

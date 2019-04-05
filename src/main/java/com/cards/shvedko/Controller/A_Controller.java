@@ -156,6 +156,8 @@ abstract public class A_Controller implements Initializable {
     protected ToggleButton allTopic;
     @FXML
     protected ToggleButton favoriteOn;
+    @FXML
+    private URL location;
 
     protected final ToggleGroup groupAnchor = new ToggleGroup();
     protected final ToggleGroup groupFavorite = new ToggleGroup();
@@ -1041,7 +1043,7 @@ abstract public class A_Controller implements Initializable {
     }
 
     public void handlePreviewButton(ActionEvent actionEvent) {
-        goToPage("card.fxml", A_Controller.PRVIEW_OF_CARDS_TITLE , getCardsDAO(actionEvent));
+        goToPage("cardPreview.fxml", A_Controller.PRVIEW_OF_CARDS_TITLE , getCardsDAO(actionEvent));
     }
 
     public CardsDAO handleAddButton(ActionEvent actionEvent) {

@@ -47,20 +47,13 @@
                         <Button layoutX="10.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleCancelButton"
                                 prefHeight="48.0" prefWidth="252.0" text="Назад" GridPane.columnIndex="1">
                             <tooltip>
-                                <Tooltip style="-fx-font-size: 16px;" text="Вернуться к колодам"/>
+                                <Tooltip style="-fx-font-size: 16px;" text="Выйти из режима просмотра"/>
                             </tooltip>
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </Button>
-                        <Button fx:id="editCard" layoutX="10.0" layoutY="81.0" mnemonicParsing="false"
-                                onAction="" prefHeight="48.0" prefWidth="258.0"
-                                GridPane.columnIndex="1" GridPane.rowIndex="2">
-                            <font>
-                                <Font size="20.0"/>
-                            </font>
-                        </Button>
-                        <ToggleButton fx:id="anchorButton" mnemonicParsing="false" onAction=""
+                        <ToggleButton fx:id="anchorButton" mnemonicParsing="false" 
                                       GridPane.columnIndex="1" GridPane.rowIndex="6">
                             <tooltip>
                                 <Tooltip style="-fx-font-size: 16px;" text="Продолжит обучение с этой карточки"/>
@@ -73,7 +66,7 @@
                             </font>
                         </ToggleButton>
                         <ToggleButton fx:id="trophyButton" layoutX="55.0" layoutY="343.0" mnemonicParsing="false"
-                                      onAction="" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                       GridPane.columnIndex="1" GridPane.rowIndex="7">
                             <tooltip>
                                 <Tooltip style="-fx-font-size: 16px;" text="Готово!"/>
                             </tooltip>
@@ -85,7 +78,7 @@
                             </font>
                         </ToggleButton>
                         <ToggleButton fx:id="favoriteButton" layoutX="55.0" layoutY="405.0" mnemonicParsing="false"
-                                      onAction="" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                       GridPane.columnIndex="1" GridPane.rowIndex="8">
                             <tooltip>
                                 <Tooltip style="-fx-font-size: 16px;" text="Изучить повторно (в избранное)"/>
                             </tooltip>
@@ -130,7 +123,7 @@
                                 <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                         </GridPane>
-                        <ToggleButton fx:id="displayList" mnemonicParsing="false" onAction=""
+                        <ToggleButton fx:id="displayList" mnemonicParsing="false" 
                                       GridPane.columnIndex="1" GridPane.rowIndex="5">
                             <tooltip>
                                 <Tooltip style="-fx-font-size: 16px;" text="Показать карточки списком"/>
@@ -158,7 +151,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Button fx:id="previous" mnemonicParsing="false" onAction="">
+                        <Button fx:id="previous" mnemonicParsing="false" >
                             <tooltip>
                                 <Tooltip style="-fx-font-size: 16px;" text="Предыдущая карточка"/>
                             </tooltip>
@@ -170,7 +163,7 @@
                             </font>
                         </Button>
                         <Button fx:id="translation" layoutX="10.0" layoutY="48.0" mnemonicParsing="false"
-                                onAction="" GridPane.columnIndex="2">
+                                 GridPane.columnIndex="2">
                             <graphic>
                                 <FontAwesomeIconView icon="ICON_UNDO"/>
                             </graphic>
@@ -188,7 +181,7 @@
                             </font>
                         </Button>
                         <Button fx:id="next" layoutX="10.0" layoutY="48.0" mnemonicParsing="false"
-                                onAction="" GridPane.columnIndex="3">
+                                 GridPane.columnIndex="3">
                             <tooltip>
                                 <Tooltip style="-fx-font-size: 16px;" text="Следующая карточка"/>
                             </tooltip>
