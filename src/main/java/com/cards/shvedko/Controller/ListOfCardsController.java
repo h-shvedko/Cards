@@ -3,7 +3,6 @@ package com.cards.shvedko.Controller;
 import com.cards.shvedko.Model.Cards;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
-import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
@@ -132,28 +131,28 @@ public class ListOfCardsController extends A_Controller {
                 Cards selectedItem = cardsTable.getSelectionModel().getSelectedItem();
                 switch (selectedItem.getType().getName()) {
                     case ModelsDAO.NOUN:
-                        goToPage("editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, selectedItem);
+                        goToPage("ManageCards/editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, selectedItem);
                         break;
                     case ModelsDAO.VERB:
-                        goToPage("editCardVerb.fxml", A_Controller.EDIT_VERB_PAGE, selectedItem);
+                        goToPage("ManageCards/editCardVerb.fxml", A_Controller.EDIT_VERB_PAGE, selectedItem);
                         break;
                     case ModelsDAO.ADJECTIVE:
-                        goToPage("editCardAdjective.fxml", A_Controller.EDIT_ADJECTIVE_PAGE, selectedItem);
+                        goToPage("ManageCards/editCardAdjective.fxml", A_Controller.EDIT_ADJECTIVE_PAGE, selectedItem);
                         break;
                     case ModelsDAO.ADVERB:
-                        goToPage("editCardAdverb.fxml", A_Controller.EDIT_ADVERB_PAGE, selectedItem);
+                        goToPage("ManageCards/editCardAdverb.fxml", A_Controller.EDIT_ADVERB_PAGE, selectedItem);
                         break;
                     case ModelsDAO.NUMERAL:
-                        goToPage("editCardNumeral.fxml", A_Controller.EDIT_NUMERAL_PAGE, selectedItem);
+                        goToPage("ManageCards/editCardNumeral.fxml", A_Controller.EDIT_NUMERAL_PAGE, selectedItem);
                         break;
                     case ModelsDAO.PARTICIPLE:
-                        goToPage("editCardParticiple.fxml", A_Controller.EDIT_PARTICIPLE_PAGE, selectedItem);
+                        goToPage("ManageCards/editCardParticiple.fxml", A_Controller.EDIT_PARTICIPLE_PAGE, selectedItem);
                         break;
                     case ModelsDAO.PRONOUN:
-                        goToPage("editCardPronoun.fxml", A_Controller.EDIT_PRONOUN_PAGE, selectedItem);
+                        goToPage("ManageCards/editCardPronoun.fxml", A_Controller.EDIT_PRONOUN_PAGE, selectedItem);
                         break;
                     default:
-                        goToPage("editCardOther.fxml", A_Controller.EDIT_OTHER_PAGE, selectedItem);
+                        goToPage("ManageCards/editCardOther.fxml", A_Controller.EDIT_OTHER_PAGE, selectedItem);
                         break;
                 }
             }
