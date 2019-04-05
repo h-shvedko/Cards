@@ -79,7 +79,7 @@ public class A_CardController extends A_Controller {
         translatedExample.setVisible(false);
 
         //Disable buttons for foreign language sounds
-        wordSound.setVisible(false);
+        exampleSound.setVisible(false);
         translatedWordSound.setVisible(false);
         translatedExampleSound.setVisible(false);
 
@@ -480,6 +480,8 @@ public class A_CardController extends A_Controller {
             decksValuesDAO.decksValues.setIsFavorite(0);
         } else {
             decksValuesDAO.decksValues.setIsFavorite(1);
+            decksValuesDAO.decksValues.setIsReady(0);
+
         }
 
         if (decksValuesDAO.validate(decksValuesDAO.decksValues)) {
@@ -487,6 +489,7 @@ public class A_CardController extends A_Controller {
                 if (!decksValuesDAO.saveOrUpdate()) {
                     throw new Exception(decksValuesDAO.errorMsg);
                 }
+                trophyButton.setSelected(false);
             } catch (Exception ex) {
                 crashAppeared(ex.getMessage(), actionEvent);
             }
