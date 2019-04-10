@@ -17,8 +17,8 @@ public class LanguageLabelsRu extends LanguageLabels {
     public static String CHOOSE_DECK_HEADER = "Карточки";
     public static String EDIT_CARD = "Редактировать карточку";
     public static String EDIT_DECK = "Редактировать колоду";
-    public static String SHOW_TRANSLATION = "Перевернуть карточку";
-    public static String SHOW_TRANSLATION_TOOLTIP = "Просмотр перевода";
+    public static String SHOW_TRANSLATION = "Показывать всё";
+    public static String SHOW_TRANSLATION_TOOLTIP = "При включении этой кнопки карточка содержит перевод и оригинал";
     public static String PLAY_SOUND = "Аудио";
     public static String PLAY_SOUND_TOOLTIP = "Включает автоматическое звучание";
 }

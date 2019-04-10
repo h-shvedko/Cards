@@ -22,7 +22,7 @@ public class A_CardController extends A_Controller {
     @FXML
     public Button previous;
     @FXML
-    public Button translation;
+    public ToggleButton translation;
     @FXML
     public Button sound;
     @FXML
@@ -58,14 +58,13 @@ public class A_CardController extends A_Controller {
 
     private static int numberOfElement = 1;
     public static int numberOfElementSelected = 1;
-    private int cardId = 0;
-    private int deckId = 0;
     private int numberOfActiveCards = 0;
     private A_Models decksValues;
 
     private final ToggleGroup groupAnchor = new ToggleGroup();
     private final ToggleGroup groupFavorite = new ToggleGroup();
     private final ToggleGroup groupTrophy = new ToggleGroup();
+    private final ToggleGroup groupShow = new ToggleGroup();
 
     public ObservableList<Cards> cardsTable = FXCollections.observableArrayList();
     public ObservableList<DecksValues> decksValuesTable = FXCollections.observableArrayList();
@@ -78,16 +77,20 @@ public class A_CardController extends A_Controller {
         translatedWord.setVisible(false);
         translatedExample.setVisible(false);
 
+        translation.setToggleGroup(groupShow);
+        translation.setSelected(false);
+
         //Disable buttons for foreign language sounds
         translatedWordSound.setVisible(false);
         translatedExampleSound.setVisible(false);
 
-        deckId = ((Decks) A_Controller.globalUserData).getId();
+        int deckId = ((Decks) A_Controller.globalUserData).getId();
         List deckValues = ((Decks) A_Controller.globalUserData).getDecksValues();
 
         typeLabel.setText(((Decks) A_Controller.globalUserData).getType().getName());
         categoryLabel.setText(((Decks) A_Controller.globalUserData).getCategory().getName());
 
+        int cardId = 0;
         if (((Decks) A_Controller.globalUserData).getIsFavorite() == 0) {
             for (Object deckValue : deckValues) {
                 if (((DecksValues) deckValue).getIsReady() == 0 && ((DecksValues) deckValue).getIsFavorite() == 0
@@ -509,6 +512,7 @@ public class A_CardController extends A_Controller {
     }
 
     private void hideForeignTextAndSounds() {
+        translation.setSelected(false);
         translatedWord.setVisible(false);
         translatedExample.setVisible(false);
         translatedWordSound.setVisible(false);
@@ -516,6 +520,7 @@ public class A_CardController extends A_Controller {
     }
 
     private void showForeignTextAndSounds() {
+        translation.setSelected(translation.isSelected());
         translatedExample.setVisible(!translatedExample.isVisible());
         translatedWord.setVisible(!translatedWord.isVisible());
 
