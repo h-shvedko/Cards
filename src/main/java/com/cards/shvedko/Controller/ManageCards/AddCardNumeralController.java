@@ -1,9 +1,6 @@
 package com.cards.shvedko.Controller.ManageCards;
 
-import com.cards.shvedko.Controller.A_Controller;
-import com.cards.shvedko.ModelDAO.CardsDAO;
 import com.cards.shvedko.ModelDAO.ModelsDAO;
-import javafx.event.ActionEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;

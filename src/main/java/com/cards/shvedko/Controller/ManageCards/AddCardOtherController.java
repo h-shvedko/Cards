@@ -12,6 +12,5 @@ public class AddCardOtherController extends AddCardController {
         super.initialize(location, resources);
         titleOfAddCard.setText("Создать другую часть речи:");
         speechPart.setValue(ModelsDAO.OTHER_PART_OF_SPEECH);
-        speechPart.setDisable(true);
     }
 }

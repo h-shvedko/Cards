@@ -12,6 +12,5 @@ public class AddCardParticipleController extends AddCardController {
         super.initialize(location, resources);
         titleOfAddCard.setText("Создать новое причастие:");
         speechPart.setValue(ModelsDAO.PARTICIPLE);
-        speechPart.setDisable(true);
     }
 }

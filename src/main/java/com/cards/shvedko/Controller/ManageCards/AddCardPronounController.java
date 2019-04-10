@@ -12,6 +12,5 @@ public class AddCardPronounController extends AddCardController {
         super.initialize(location, resources);
         titleOfAddCard.setText("Создать новое местоимение:");
         speechPart.setValue(ModelsDAO.PRONOUN);
-        speechPart.setDisable(true);
     }
 }
