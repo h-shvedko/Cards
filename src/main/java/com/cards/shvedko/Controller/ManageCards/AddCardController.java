@@ -2,42 +2,49 @@ package com.cards.shvedko.Controller.ManageCards;
 
 import com.cards.shvedko.Controller.A_Controller;
 import com.cards.shvedko.ModelDAO.CardsDAO;
-import com.cards.shvedko.ModelDAO.ModelsDAO;
 import javafx.event.ActionEvent;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class AddCardController extends A_Controller {
 
     @Override
-    public CardsDAO handleAddButton(ActionEvent actionEvent) {
-        String value = speechPart.getValue();
+    public void initialize(URL location, ResourceBundle resources) {
+        super.initialize(location, resources);
+    }
 
-        switch (value){
-            case ModelsDAO.NOUN:
-                goToPage("ManageCards/addCardNoun.fxml", A_Controller.ADD_NOUN_PAGE, "");
-                break;
-            case ModelsDAO.VERB:
-                goToPage("ManageCards/addCardVerb.fxml", A_Controller.ADD_VERB_PAGE, "");
-                break;
-            case ModelsDAO.ADJECTIVE:
-                goToPage("ManageCards/addCardAdjective.fxml", A_Controller.ADD_ADJECTIVE_PAGE, "");
-                break;
-            case ModelsDAO.ADVERB:
-                goToPage("ManageCards/addCardAdverb.fxml", A_Controller.ADD_ADVERB_PAGE, "");
-                break;
-            case ModelsDAO.NUMERAL:
-                goToPage("ManageCards/addCardNumeral.fxml", A_Controller.ADD_NUMERAL_PAGE, "");
-                break;
-            case ModelsDAO.PARTICIPLE:
-                goToPage("ManageCards/addCardParticiple.fxml", A_Controller.ADD_PARTICIPLE_PAGE, "");
-                break;
-            case ModelsDAO.PRONOUN:
-                goToPage("ManageCards/addCardPronoun.fxml", A_Controller.ADD_PRONOUN_PAGE, "");
-                break;
-            default:
-                goToPage("ManageCards/addCardOther.fxml", A_Controller.ADD_OTHER_PAGE, "");
-                break;
+    @Override
+    public void handleCancelButton(ActionEvent actionEvent) {
+        this.goToPage("ManageCards/addCardDialog.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
+    }
+
+    @Override
+    public CardsDAO handleAddButton(ActionEvent actionEvent) {
+
+        if (compareForeignValue() && compareNativeValue()) {
+            showQuiestion(actionEvent, "Do really want to save this card? You haven't changed anything in native and foreign words!");
         }
-        return null;
+
+        CardsDAO cardsDAO = null;
+        if (answer) {
+            cardsDAO = super.handleAddButton(actionEvent);
+
+            if (cardsDAO.validate(cardsDAO.cards)) {
+                try {
+                    if (!cardsDAO.save()) {
+                        throw new Exception(cardsDAO.errorMsg);
+                    }
+                    showSuccess(actionEvent);
+                } catch (Exception ex) {
+                    crashAppeared(ex.getMessage(), actionEvent);
+                }
+            } else {
+                showErrors(cardsDAO);
+            }
+        }
+
+        return cardsDAO;
     }
 
     @Override

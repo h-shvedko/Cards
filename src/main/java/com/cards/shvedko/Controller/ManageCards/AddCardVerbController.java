@@ -75,7 +75,6 @@ public class AddCardVerbController extends A_Controller {
         super.initialize(location, resources);
         titleOfAddCard.setText("Создать новый глагол:");
         speechPart.setValue(ModelsDAO.VERB);
-        speechPart.setDisable(true);
 
         regelmassigVerb.setUserData(ModelsDAO.REGELMESSIG_VERB);
         regelmassigVerb.setToggleGroup(verbType);
@@ -184,7 +183,7 @@ public class AddCardVerbController extends A_Controller {
 
     @Override
     public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("ManageCards/addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
+        this.goToPage("ManageCards/addCardDialog.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
     }
 
     @Override

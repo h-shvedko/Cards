@@ -36,7 +36,6 @@ public class AddCardNounController extends A_Controller {
         super.initialize(location, resources);
         titleOfAddCard.setText("Создать новое существительное:");
         speechPart.setValue(ModelsDAO.NOUN);
-        speechPart.setDisable(true);
 
         maskulinum.setUserData(ModelsDAO.MUSKULINUM);
         maskulinum.setToggleGroup(group);
@@ -65,11 +64,6 @@ public class AddCardNounController extends A_Controller {
                 }
             });
         }
-    }
-
-    @Override
-    public void handleCancelButton(ActionEvent actionEvent) {
-        this.goToPage("ManageCards/addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
     }
 
     @Override

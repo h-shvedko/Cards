@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="300.0" maxWidth="603.0" minHeight="300.0" minWidth="600.0" prefHeight="300.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.ManageCards.AddCardController">
+<AnchorPane maxHeight="300.0" maxWidth="603.0" minHeight="300.0" minWidth="600.0" prefHeight="300.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cards.shvedko.Controller.ManageCards.AddCardDialogController">
     <children>
         <GridPane layoutX="-6.0" prefHeight="300.0" prefWidth="608.0">
             <columnConstraints>

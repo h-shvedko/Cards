@@ -26,7 +26,7 @@ public class MainPageController extends A_Controller {
     public Label learnCardsTitle;
 
     public void handleAddWordButton(ActionEvent actionEvent) {
-        this.goToPage("ManageCards/addCard.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
+        this.goToPage("ManageCards/addCardDialog.fxml", A_Controller.CHOOSE_TYPE_OF_CARD_PAGE_TITLE, "");
     }
 
     public void handleSeeAllWordsButton(ActionEvent actionEvent) {
