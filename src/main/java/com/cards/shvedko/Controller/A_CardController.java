@@ -371,28 +371,28 @@ public class A_CardController extends A_Controller {
         Cards cards = cardsTable.get(getNumberOfElement() - 1);
         switch (cards.getType().getName()) {
             case ModelsDAO.NOUN:
-                openOneMoreWindow("ManageCards/editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, cards, actionEvent);
+                openOneMoreWindow("ManageCards/Edit/editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, cards, actionEvent);
                 break;
             case ModelsDAO.VERB:
-                openOneMoreWindow("ManageCards/editCardVerb.fxml", A_Controller.EDIT_VERB_PAGE, cards, actionEvent);
+                openOneMoreWindow("ManageCards/Edit/editCardVerb.fxml", A_Controller.EDIT_VERB_PAGE, cards, actionEvent);
                 break;
             case ModelsDAO.ADJECTIVE:
-                openOneMoreWindow("ManageCards/editCardAdjective.fxml", A_Controller.EDIT_ADJECTIVE_PAGE, cards, actionEvent);
+                openOneMoreWindow("ManageCards/Edit/editCardAdjective.fxml", A_Controller.EDIT_ADJECTIVE_PAGE, cards, actionEvent);
                 break;
             case ModelsDAO.ADVERB:
-                openOneMoreWindow("ManageCards/editCardAdverb.fxml", A_Controller.EDIT_ADVERB_PAGE, cards, actionEvent);
+                openOneMoreWindow("ManageCards/Edit/editCardAdverb.fxml", A_Controller.EDIT_ADVERB_PAGE, cards, actionEvent);
                 break;
             case ModelsDAO.NUMERAL:
-                openOneMoreWindow("ManageCards/editCardNumeral.fxml", A_Controller.EDIT_NUMERAL_PAGE, cards, actionEvent);
+                openOneMoreWindow("ManageCards/Edit/editCardNumeral.fxml", A_Controller.EDIT_NUMERAL_PAGE, cards, actionEvent);
                 break;
             case ModelsDAO.PARTICIPLE:
-                openOneMoreWindow("ManageCards/editCardParticiple.fxml", A_Controller.EDIT_PARTICIPLE_PAGE, cards, actionEvent);
+                openOneMoreWindow("ManageCards/Edit/editCardParticiple.fxml", A_Controller.EDIT_PARTICIPLE_PAGE, cards, actionEvent);
                 break;
             case ModelsDAO.PRONOUN:
-                openOneMoreWindow("ManageCards/editCardPronoun.fxml", A_Controller.EDIT_PRONOUN_PAGE, cards, actionEvent);
+                openOneMoreWindow("ManageCards/Edit/editCardPronoun.fxml", A_Controller.EDIT_PRONOUN_PAGE, cards, actionEvent);
                 break;
             default:
-                openOneMoreWindow("ManageCards/editCardOther.fxml", A_Controller.EDIT_OTHER_PAGE, cards, actionEvent);
+                openOneMoreWindow("ManageCards/Edit/editCardOther.fxml", A_Controller.EDIT_OTHER_PAGE, cards, actionEvent);
                 break;
         }
     }

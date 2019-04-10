@@ -161,28 +161,28 @@ public class TmpListOfCardsController extends A_Controller {
                 TmpCards selectedItem = tmpCardsTable.getSelectionModel().getSelectedItem();
                 switch (selectedItem.getType().getName()) {
                     case ModelsDAO.NOUN:
-                        goToPage("ManageCards/editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, selectedItem);
+                        goToPage("ManageCards/Edit/editCardNoun.fxml", A_Controller.EDIT_NOUN_PAGE, selectedItem);
                         break;
                     case ModelsDAO.VERB:
-                        goToPage("ManageCards/editCardVerb.fxml", A_Controller.EDIT_VERB_PAGE, selectedItem);
+                        goToPage("ManageCards/Edit/editCardVerb.fxml", A_Controller.EDIT_VERB_PAGE, selectedItem);
                         break;
                     case ModelsDAO.ADJECTIVE:
-                        goToPage("ManageCards/editCardAdjective.fxml", A_Controller.EDIT_ADJECTIVE_PAGE, selectedItem);
+                        goToPage("ManageCards/Edit/editCardAdjective.fxml", A_Controller.EDIT_ADJECTIVE_PAGE, selectedItem);
                         break;
                     case ModelsDAO.ADVERB:
-                        goToPage("ManageCards/editCardAdverb.fxml", A_Controller.EDIT_ADVERB_PAGE, selectedItem);
+                        goToPage("ManageCards/Edit/editCardAdverb.fxml", A_Controller.EDIT_ADVERB_PAGE, selectedItem);
                         break;
                     case ModelsDAO.NUMERAL:
-                        goToPage("ManageCards/editCardNumeral.fxml", A_Controller.EDIT_NUMERAL_PAGE, selectedItem);
+                        goToPage("ManageCards/Edit/editCardNumeral.fxml", A_Controller.EDIT_NUMERAL_PAGE, selectedItem);
                         break;
                     case ModelsDAO.PARTICIPLE:
-                        goToPage("ManageCards/editCardParticiple.fxml", A_Controller.EDIT_PARTICIPLE_PAGE, selectedItem);
+                        goToPage("ManageCards/Edit/editCardParticiple.fxml", A_Controller.EDIT_PARTICIPLE_PAGE, selectedItem);
                         break;
                     case ModelsDAO.PRONOUN:
-                        goToPage("ManageCards/editCardPronoun.fxml", A_Controller.EDIT_PRONOUN_PAGE, selectedItem);
+                        goToPage("ManageCards/Edit/editCardPronoun.fxml", A_Controller.EDIT_PRONOUN_PAGE, selectedItem);
                         break;
                     default:
-                        goToPage("ManageCards/editCardOther.fxml", A_Controller.EDIT_OTHER_PAGE, selectedItem);
+                        goToPage("ManageCards/Edit/editCardOther.fxml", A_Controller.EDIT_OTHER_PAGE, selectedItem);
                         break;
                 }
             }

@@ -85,7 +85,7 @@ abstract public class A_Controller implements Initializable {
     @FXML
     protected Label errorMessage;
     @FXML
-    protected Label titleOfAddCard;
+    public Label titleOfAddCard;
     @FXML
     protected Label errorNativeValue;
     @FXML
@@ -99,7 +99,7 @@ abstract public class A_Controller implements Initializable {
     @FXML
     protected Label errorForeignValue;
     @FXML
-    protected ComboBox<String> speechPart;
+    public ComboBox<String> speechPart;
     @FXML
     protected ComboBox<String> decksCombo;
     @FXML
