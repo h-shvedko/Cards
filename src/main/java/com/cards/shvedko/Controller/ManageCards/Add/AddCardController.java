@@ -1,10 +1,13 @@
 package com.cards.shvedko.Controller.ManageCards.Add;
 
 import com.cards.shvedko.Controller.A_Controller;
+import com.cards.shvedko.Model.A_Models;
 import com.cards.shvedko.ModelDAO.CardsDAO;
 import javafx.event.ActionEvent;
 
+import javax.persistence.PersistenceException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AddCardController extends A_Controller {
@@ -36,6 +39,8 @@ public class AddCardController extends A_Controller {
                         throw new Exception(cardsDAO.errorMsg);
                     }
                     showSuccess(actionEvent);
+                } catch (PersistenceException | SQLException pEx){
+                    checkAndResolvePrimaryKeyIssue(actionEvent, pEx);
                 } catch (Exception ex) {
                     crashAppeared(ex.getMessage(), actionEvent);
                 }

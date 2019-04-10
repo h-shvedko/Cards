@@ -4,6 +4,7 @@ import com.cards.shvedko.Helpers.ProgressForm;
 import com.cards.shvedko.MainApp;
 import com.cards.shvedko.Model.*;
 import com.cards.shvedko.ModelDAO.*;
+import com.cards.shvedko.Services.DBService;
 import com.cathive.fonts.fontawesome.FontAwesomeIcon;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,7 +30,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.*;
 import com.cathive.fonts.fontawesome.FontAwesomeIconView;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
+import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
 import java.net.URL;
@@ -1004,6 +1008,15 @@ abstract public class A_Controller implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
     }
 
+    protected void showAlertRepeatAction() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Сообщение");
+        alert.setHeaderText(null);
+        alert.setContentText("Ваша операция прошла с ошибкой. Попробуйте еще раз.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
     protected void showAlertEmptyDeckSelected() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Выбор клолоды");
@@ -1276,6 +1289,65 @@ abstract public class A_Controller implements Initializable {
         }
         if (decksValues != null) {
             globalDeckData.setDecksValues(decksValues);
+        }
+    }
+
+    protected void checkAndResolvePrimaryKeyIssue(ActionEvent actionEvent, Exception pEx) {
+        if(pEx.getCause().getCause().getMessage().contains("PRIMARY KEY")){
+            try {
+                final Session session = DBService.sessionFactory.getCurrentSession();
+                int id = 0;
+
+                try {
+                    StringBuilder query = null;
+                    query = new StringBuilder("SELECT MAX(id) AS id FROM CARDS");
+
+                    if(!session.getTransaction().isActive())
+                    {
+                        session.beginTransaction();
+                    }
+
+                    if(session.isConnected()){
+                        Query queryToInsert = session.createNativeQuery(String.valueOf(query));
+                        Object object = queryToInsert.getSingleResult();
+                        id = (Integer) object;
+                    }
+                } catch (Exception ex) {
+                    throw new Exception(ex.getMessage());
+                }
+
+                if(id != 0){
+                    id++;
+                    updateSequence(id);
+                }
+
+            } catch (Exception e) {
+                crashAppeared(e.getMessage(), actionEvent);
+            }
+        }
+    }
+
+    private void updateSequence(int i) throws Exception {
+        final Session session = DBService.sessionFactory.getCurrentSession();
+
+        try {
+            StringBuilder query = null;
+            query = new StringBuilder("UPDATE hibernate_sequence SET next_val=" + i + ";");
+
+            if(!session.getTransaction().isActive())
+            {
+                session.beginTransaction();
+            }
+
+            if(session.isConnected()){
+                Query queryToInsert = session.createNativeQuery(String.valueOf(query));
+                int result = queryToInsert.executeUpdate();
+                session.getTransaction().commit();
+            }
+            showAlertRepeatAction();
+        } catch (Exception ex) {
+            if (session.getTransaction() != null) session.getTransaction().rollback();
+            throw new Exception(ex.getMessage());
         }
     }
 }

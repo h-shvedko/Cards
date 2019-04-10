@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javax.persistence.PersistenceException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -110,6 +111,8 @@ public class AddCardNounController extends A_Controller {
                         throw new Exception(cardsDAO.errorMsg);
                     }
                     showSuccess(actionEvent);
+                } catch (PersistenceException pEx){
+                    checkAndResolvePrimaryKeyIssue(actionEvent, pEx);
                 } catch (Exception ex) {
                     crashAppeared(ex.getMessage(), actionEvent);
                 }

@@ -149,6 +149,19 @@ public class ModelsDAO implements I_DAO {
         return object;
     }
 
+    public A_Models getLastId() throws Exception {
+        A_Models object = null;
+        String table = this.getClassName();
+
+        Query result = session.createQuery("from " + table + " order by id desc");
+
+        if (result.list().size() > 0) {
+            object = (A_Models) result.list().get(0);
+        }
+        session.close();
+        return object;
+    }
+
     public A_Models selectWithoutClosingSession(String criteria, Session session) throws Exception {
         A_Models object = null;
         String table = this.getClassName();
